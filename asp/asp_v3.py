@@ -212,6 +212,7 @@ def curriculum_training(labeled_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=raw_pseudo_labeled_path)
         print('Round #{}: Predict on unlabeled data'.format(iteration))
+        print(script)
         subprocess.run(script, shell=True, check=True)
 
         # Step 3: For each sentence, verify and infer => list of answer sets (ASs)

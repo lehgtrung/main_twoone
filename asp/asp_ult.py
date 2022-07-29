@@ -2,12 +2,12 @@ import json
 import subprocess
 import ast
 
-clingo_path = '/home/thoang/anaconda3/bin/clingo'
+clingo_path = 'clingo'
 clingo_options = ['--outf=2', '-n 0']
 clingo_command = [clingo_path] + clingo_options
 
-drive_command = ['/home/thoang/anaconda3/bin/clingo', 'exp_area/drive55.py',
-                 'exp_area/p1.lp', 'exp_area/p3.lp', '--outf=3']
+drive_command = ['clingo', 'drive55.py',
+                 'p1.lp', 'p3.lp', '--outf=3']
 
 
 def solve(program):
