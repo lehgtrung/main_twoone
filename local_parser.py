@@ -198,6 +198,7 @@ def conll04_script():
     predict_script = """
             python -u ../main.py
             --mode predict \
+            --model_class JointModel \
             --model_read_ckpt {model_read_ckpt} \
             --predict_input_path {predict_input_path} \
             --predict_output_path {predict_output_path}
