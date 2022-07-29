@@ -2,7 +2,77 @@ import random
 from asp_ult import *
 from tqdm import tqdm
 import glob
-from .. import local_parser
+
+
+def conll04_script():
+    train_script = """
+        python -u ../main.py \
+        --mode train \
+        --num_layers 3 \
+        --batch_size 8  \
+        --evaluate_interval 500 \
+        --dataset CoNLL04 \
+        --pretrained_wv ../wv/glove.6B.100d.conll04.txt \
+        --max_epoches 2000 \
+        --max_steps 30000 \
+        --model_class JointModel \
+        --crf None  \
+        --optimizer adam \
+        --lr 0.001  \
+        --tag_form iob2 \
+        --cased 0  \
+        --token_emb_dim 100 \
+        --char_emb_dim 30 \
+        --char_encoder lstm  \
+        --lm_emb_dim 4096 \
+        --head_emb_dim 768 \
+        --lm_emb_path ../wv/albert.conll04_with_heads.pkl \
+        --hidden_dim 200     --ner_tag_vocab_size 9 \
+        --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
+        --grad_period 1 --warm_steps 1000 \
+        --model_write_ckpt {model_write_ckpt} \
+        --train_path {train_path}
+        """
+    predict_script = """
+            python -u ../main.py
+            --mode predict \
+            --model_read_ckpt {model_read_ckpt} \
+            --predict_input_path {predict_input_path} \
+            --predict_output_path {predict_output_path}
+            """
+    eval_script = """
+            python -u ../main.py \
+            --mode eval \
+            --num_layers 3 \
+            --batch_size 8  \
+            --evaluate_interval 500 \
+            --dataset CoNLL04 \
+            --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
+            --max_epoches 2000 \
+            --max_steps 30000 \
+            --model_class JointModel \
+            --crf None  \
+            --optimizer adam \
+            --lr 0.001  \
+            --tag_form iob2 \
+            --cased 0  \
+            --token_emb_dim 100 \
+            --char_emb_dim 30 \
+            --char_encoder lstm  \
+            --lm_emb_dim 4096 \
+            --head_emb_dim 768 \
+            --lm_emb_path ../wv/albert.conll04_with_heads.pkl \
+            --hidden_dim 200     --ner_tag_vocab_size 9 \
+            --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
+            --grad_period 1 --warm_steps 1000 \
+            --model_read_ckpt {model_read_ckpt}
+    """
+    CONLL04_SCRIPT = {
+        'train': train_script,
+        'eval': eval_script,
+        'predict': predict_script
+    }
+    return CONLL04_SCRIPT
 
 
 def convert_solution_to_data(tokens, solution):
@@ -121,7 +191,7 @@ def curriculum_training(labeled_path,
                         labeled_model_path,
                         intermediate_model_path
                         ):
-    SCRIPT = local_parser.conll04_script()
+    SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
 
