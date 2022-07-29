@@ -50,6 +50,8 @@ parser = argparse.ArgumentParser(description='Arguments for training.')
 parser = local_parse(parser)
 args = parser.parse_args()
 
+print(args)
+
 
 # Constraints
 assert args.mode == 'train' and args.train_path is None
