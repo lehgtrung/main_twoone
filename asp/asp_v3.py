@@ -189,10 +189,20 @@ def labeled_model_exists(path):
     return False
 
 
+def unify_two_datasets(first_path, second_path, output_path):
+    with open(first_path, 'r') as f:
+        first = json.load(f)
+    with open(second_path, 'r') as f:
+        second = json.load(f)
+    with open(output_path, 'w') as f:
+        json.dump(first + second, f)
+
+
 def curriculum_training(labeled_path,
                         unlabeled_path,
                         raw_pseudo_labeled_path,
                         selected_pseudo_labeled_path,
+                        unified_pseudo_labeled_path,
                         labeled_model_path,
                         intermediate_model_path
                         ):
@@ -223,6 +233,11 @@ def curriculum_training(labeled_path,
         verify_and_infer_file(input_path=raw_pseudo_labeled_path,
                               output_path=selected_pseudo_labeled_path)
 
+        # Step 3.5 Unify labeled and selected pseudo labels
+        unify_two_datasets(first_path=selected_pseudo_labeled_path,
+                           second_path=labeled_path,
+                           output_path=unified_pseudo_labeled_path)
+
         # Step 4: Retrain on labeled and pseudo-labeled data
         print('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=intermediate_model_path,
@@ -235,10 +250,11 @@ def curriculum_training(labeled_path,
 
 
 if __name__ == '__main__':
-    LABELED_PATH = '../datasets/unified/train.CoNLL04_30_labeled.bk.json'
-    UNLABELED_PATH = '../datasets/unified/train.CoNLL04_30_unlabeled.bk.json'
+    LABELED_PATH = '../datasets/unified/train.CoNLL04_30_labeled.json'
+    UNLABELED_PATH = '../datasets/unified/train.CoNLL04_30_unlabeled.json'
     RAW_PSEUDO_LABELED_PATH = '../datasets/pseudo/raw.CoNLL04_30.json'
     SELECTED_PSEUDO_LABELED_PATH = '../datasets/pseudo/selected.CoNLL04_30.json'
+    UNIFIED_PSEUDO_LABELED_PATH = '../datasets/pseudo/unified.CoNLL04_30.json'
     LABELED_MODEL_PATH = '../ckpts/pseudo/labeled/labeled'
     INTERMEDIATE_MODEL_PATH = '../ckpts/pseudo/intermediate/intermediate'
 
@@ -246,6 +262,7 @@ if __name__ == '__main__':
                         unlabeled_path=UNLABELED_PATH,
                         raw_pseudo_labeled_path=RAW_PSEUDO_LABELED_PATH,
                         selected_pseudo_labeled_path=SELECTED_PSEUDO_LABELED_PATH,
+                        unified_pseudo_labeled_path=UNIFIED_PSEUDO_LABELED_PATH,
                         labeled_model_path=LABELED_MODEL_PATH,
                         intermediate_model_path=INTERMEDIATE_MODEL_PATH)
 
