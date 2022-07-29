@@ -234,8 +234,8 @@ if __name__ == '__main__':
     UNLABELED_PATH = '../datasets/unified/train.CoNLL04_30_unlabeled.json'
     RAW_PSEUDO_LABELED_PATH = '../datasets/pseudo/datasets/raw.CoNLL04_30.json'
     SELECTED_PSEUDO_LABELED_PATH = '../datasets/pseudo/selected.CoNLL04_30.json'
-    LABELED_MODEL_PATH = '../ckpts/pseudo/labeled/labeled.CoNLL04_30'
-    INTERMEDIATE_MODEL_PATH = '../ckpts/pseudo/intermediate/intermediate.CoNLL04_30'
+    LABELED_MODEL_PATH = '../ckpts/pseudo/labeled/labeled'
+    INTERMEDIATE_MODEL_PATH = '../ckpts/pseudo/intermediate/intermediate'
 
     curriculum_training(labeled_path=LABELED_PATH,
                         unlabeled_path=UNLABELED_PATH,
