@@ -24,7 +24,7 @@ def solve(program):
 
 def solve_v2(program):
     # Write the program to a file
-    with open('exp_area/p3.lp', 'w') as f:
+    with open('p3.lp', 'w') as f:
         f.write(program)
     process = subprocess.Popen(drive_command, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = process.communicate()
