@@ -12,6 +12,7 @@ def make_prediction(model, input_path, output_path):
             'tokens': [tokens]
         }
         step_output = {
+            'tokens': [],
             'entity_preds': [],
             'relation_preds': [],
             'entity_gts': [],
@@ -40,6 +41,8 @@ def make_prediction(model, input_path, output_path):
             k.append(' '.join(tokens[r[0]: r[1]]))
             k.append(' '.join(tokens[r[2]: r[3]]))
             step_output['relation_preds'].append(k)
+
+        step_output['tokens'] = tokens
         outputs.append(step_output)
     with open(output_path, 'w') as f:
         json.dump(outputs, f)

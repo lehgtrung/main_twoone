@@ -1,5 +1,8 @@
 import random
 from asp_ult import *
+from tqdm import tqdm
+import glob
+from .. import local_parser
 
 
 def convert_solution_to_data(tokens, solution):
@@ -64,11 +67,32 @@ def verify_and_infer(entities, relations, inference_program):
 
 
 def verify_and_infer_file(input_path, output_path):
-    ...
+    with open(input_path, 'r') as f:
+        input_data = json.load(f)
+    data_points = []
+    for i, row in tqdm(enumerate(input_data), total=len(input_data)):
+        tokens = row['tokens']
+        entities = row['entity_preds']
+        relations = row['relation_preds']
 
+        e_atoms = convert_original_to_atoms(entities, 'entity')
+        r_atoms = convert_original_to_atoms(relations, 'relation')
+        atoms = e_atoms + r_atoms
 
-def select_answer_set_file(input_path, output_path):
-    ...
+        final_outputs = verify_and_infer(entities, relations, inference_program)
+        united_atoms = answer_sets_randomly_selection(final_outputs)
+
+        data_point = convert_solution_to_data(tokens, united_atoms)
+        data_point = {
+            'tokens': data_point['tokens'],
+            'entities': data_point['entities'],
+            'relations': data_point['relations'],
+            'id': i,
+            'atoms': atoms
+        }
+        data_points.append(data_point)
+    with open(output_path, 'w') as f:
+        json.dump(data_points, f)
 
 
 def answer_sets_randomly_selection(answer_sets):
@@ -76,63 +100,60 @@ def answer_sets_randomly_selection(answer_sets):
     return random.choice(answer_sets)
 
 
-def check_coverage():
+def check_coverage(iteration):
+    if iteration == 3:
+        return True
     return False
 
 
-def curriculum_training(labeled_path, labeled_model_path, unlabeled_path):
-    based_train_script = """
-        python -u ./train.py \
-        --num_layers 2 \
-        --batch_size 2  \
-        --dataset CoNLL04 \
-        --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-        --max_epoches 3000 \
-        --max_steps {} \
-        --model_class JointModel \
-        --crf None  \
-        --optimizer adam \
-        --lr 0.001  \
-        --tag_form iob2 \
-        --cased 0  \
-        --token_emb_dim 100 \
-        --char_emb_dim 30 \
-        --char_encoder lstm  \
-        --lm_emb_dim 4096 \
-        --head_emb_dim 768 \
-        --lm_emb_path ./wv/albert.conll04_with_heads.pkl \
-        --hidden_dim 200     --ner_tag_vocab_size 9 \
-        --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
-        --grad_period 1 --warm_steps 1000 \
-        --model_write_ckpt {} \
-        --train_path {}
-        """
-    predict_script = """python ../predict_script.py {} {} {}"""
+def labeled_model_exists(path):
+    if 'done.txt' in glob.glob(path):
+        return True
+    return False
+
+
+def curriculum_training(labeled_path,
+                        unlabeled_path,
+                        raw_pseudo_labeled_path,
+                        selected_pseudo_labeled_path,
+                        labeled_model_path,
+                        intermediate_model_path
+                        ):
+    SCRIPT = local_parser.conll04_script()
+    TRAIN_SCRIPT = SCRIPT['train']
+    PREDICT_SCRIPT = SCRIPT['predict']
 
     # Step 1: Train on labeled data
-    script = based_train_script.format(20000, labeled_model_path, labeled_path)
-    print('Train on labeled data')
-    subprocess.run(script, shell=True, check=True)
+    if not labeled_model_exists:
+        script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
+                                     train_path=labeled_path)
+        print('Train on labeled data')
+        subprocess.run(script, shell=True, check=True)
+    else:
+        print('Labeled model exists')
 
     iteration = 1
     while True:
         # Step 2: Predict on unlabeled data
-        script = predict_script.format('', '', '')
+        script = PREDICT_SCRIPT.format(model_read_ckpt=labeled_model_path,
+                                       predict_input_path=unlabeled_path,
+                                       predict_output_path=raw_pseudo_labeled_path)
         print('Round #{}: Predict on unlabeled data'.format(iteration))
         subprocess.run(script, shell=True, check=True)
 
         # Step 3: For each sentence, verify and infer => list of answer sets (ASs)
-        verify_and_infer_file('', '')
+        print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
+        verify_and_infer_file(input_path=raw_pseudo_labeled_path,
+                              output_path=selected_pseudo_labeled_path)
 
-        # Step 4: For each sentence, select 1 answer set from ASs (randomly or easiest first)
-        select_answer_set_file('', '')
-
-        # Step 5: Retrain on labeled and pseudo-labeled data
-        script = based_train_script.format(20000, labeled_model_path, labeled_path)
+        # Step 4: Retrain on labeled and pseudo-labeled data
+        print('Round #{}: Retrain on selected pseudo labels'.format(iteration))
+        script = TRAIN_SCRIPT.format(model_write_ckpt=intermediate_model_path,
+                                     train_path=selected_pseudo_labeled_path)
         subprocess.run(script, shell=True, check=True)
 
-        # Step 6: return to Step 2 while not converge
-        if check_coverage():
+        # Step 5: return to Step 2 while not converge
+        if check_coverage(iteration):
             break
 
 
@@ -149,42 +170,19 @@ if __name__ == '__main__':
     with open('../datasets/unified/train.CoNLL04_30_unlabeled.json') as f:
         gt_data = json.load(f)
 
-    assert len(pred_data) == len(gt_data)
-    print('Length: ', len(gt_data))
-    count_s_equal_t = 0
-    count_false_true = 0
-    count_p_equal_t = 0
-    pred_iou = []
-    solution_iou = []
-    data_points = []
-    for i, (pred_row, gt_row) in enumerate(zip(pred_data, gt_data)):
-        print('=============================')
-        print(i)
+    LABELED_PATH = '../datasets/unified/train.CoNLL04_30_labeled.json'
+    UNLABELED_PATH = '../datasets/unified/train.CoNLL04_30_unlabeled.json'
+    RAW_PSEUDO_LABELED_PATH = '../datasets/pseudo/datasets/raw.CoNLL04_30.json'
+    SELECTED_PSEUDO_LABELED_PATH = '../datasets/pseudo/selected.CoNLL04_30.json'
+    LABELED_MODEL_PATH = '../ckpts/pseudo/labeled/labeled.CoNLL04_30'
+    INTERMEDIATE_MODEL_PATH = '../ckpts/pseudo/intermediate/intermediate.CoNLL04_30'
 
-        tokens = gt_row['tokens']
-        entities = pred_row['entity_preds']
-        relations = pred_row['relation_preds']
+    curriculum_training(labeled_path=LABELED_PATH,
+                        unlabeled_path=UNLABELED_PATH,
+                        raw_pseudo_labeled_path=RAW_PSEUDO_LABELED_PATH,
+                        selected_pseudo_labeled_path=SELECTED_PSEUDO_LABELED_PATH,
+                        labeled_model_path=LABELED_MODEL_PATH,
+                        intermediate_model_path=INTERMEDIATE_MODEL_PATH)
 
-        print(convert_original_to_atoms(entities, 'entity'))
-        print(convert_original_to_atoms(relations, 'relation'))
 
-        final_outputs = verify_and_infer(entities, relations, inference_program)
 
-        united_atoms = answer_sets_randomly_selection(final_outputs)
-
-        print(final_outputs)
-        print(united_atoms)
-
-        data_point = convert_solution_to_data(tokens, united_atoms)
-
-        # Convert solution to new data
-        data_point = {
-            'tokens': data_point['tokens'],
-            'entities': data_point['entities'],
-            'relations': data_point['relations'],
-            'id': i
-        }
-        data_points.append(data_point)
-
-    # with open('../datasets/ssl_train_data/argmax_w_all_answersets_with_intersection_complete.json', 'w') as f:
-    #     json.dump(data_points, f)
