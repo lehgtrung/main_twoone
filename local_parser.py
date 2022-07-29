@@ -151,6 +151,18 @@ def local_parse(parser):
     parser.add_argument('--device',
                         default=None, type=none_or_str,
                         action='store', )
+
+    parser.add_argument('--train_path',
+                        default=None, type=none_or_str,
+                        action='store', )
+
+    parser.add_argument('--predict_input_path',
+                        default=None, type=none_or_str,
+                        action='store', )
+
+    parser.add_argument('--predict_output_path',
+                        default=None, type=none_or_str,
+                        action='store', )
     return parser
 
 

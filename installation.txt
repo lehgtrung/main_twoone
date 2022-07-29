@@ -23,6 +23,7 @@ python gens/gen_bert.py \
 
 # Train with labelled data
 python -u main.py \
+    --mode train \
     --num_layers 2 \
     --batch_size 8 \
     --evaluate_interval 1000 \
@@ -31,7 +32,6 @@ python -u main.py \
     --max_epoches 5000 \
     --max_steps 20000 \
     --model_class JointModel  \
-    --model_write_ckpt ./ckpts/conll04 \
     --crf None \
     --optimizer adam \
     --lr 0.001 \
@@ -48,12 +48,15 @@ python -u main.py \
     --re_tag_vocab_size 11 \
     --vocab_size 15000 \
     --dropout 0.5 \
-    --grad_period 1
+    --grad_period 1 \
+    --model_write_ckpt ./ckpts/conll04 \
+    --train_path ./datasets/unified/train.CoNLL04.json
 
 
 
 # Train with predicted data
 python -u main.py \
+    --mode predict \
     --model_read_ckpt ./ckpts/conll04_30 \
     --num_layers 3 \
     --batch_size 8 \
@@ -85,6 +88,7 @@ python -u main.py \
 
 # Evaluation
 python -u main.py \
+    --mode eval \
     --num_layers 3 \
     --batch_size 8 \
     --evaluate_interval 1000 \
