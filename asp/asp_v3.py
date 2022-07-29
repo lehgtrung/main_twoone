@@ -201,7 +201,7 @@ def curriculum_training(labeled_path,
     PREDICT_SCRIPT = SCRIPT['predict']
 
     # Step 1: Train on labeled data
-    if not labeled_model_exists:
+    if not labeled_model_exists(labeled_model_path):
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
