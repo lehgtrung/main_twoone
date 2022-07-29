@@ -151,10 +151,11 @@ def verify_and_infer_file(input_path, output_path):
         e_atoms = convert_original_to_atoms(entities, 'entity')
         r_atoms = convert_original_to_atoms(relations, 'relation')
         atoms = e_atoms + r_atoms
-        print(atoms)
 
         final_outputs = verify_and_infer(entities, relations, inference_program)
         united_atoms = answer_sets_randomly_selection(final_outputs)
+        if not united_atoms:
+            print('Empty selection: ', i)
 
         data_point = convert_solution_to_data(tokens, united_atoms)
         data_point = {
@@ -171,6 +172,8 @@ def verify_and_infer_file(input_path, output_path):
 
 def answer_sets_randomly_selection(answer_sets):
     # Number of times an atom appears in each answer_set / total number of answer sets
+    if not answer_sets:
+        return []
     return random.choice(answer_sets)
 
 
