@@ -155,7 +155,7 @@ def verify_and_infer_file(input_path, output_path):
         final_outputs = verify_and_infer(entities, relations, inference_program)
         united_atoms = answer_sets_randomly_selection(final_outputs)
         if not united_atoms:
-            print('Empty selection: ', i)
+            print('Empty selection: ', atoms)
 
         data_point = convert_solution_to_data(tokens, united_atoms)
         data_point = {
