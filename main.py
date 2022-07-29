@@ -51,9 +51,14 @@ parser = local_parse(parser)
 args = parser.parse_args()
 
 # Constants
-DEFAULT_TRAIN_PATH = f'./datasets/unified/train.{args.dataset}.json'
-DEFAULT_TEST_PATH = f'./datasets/unified/test.{args.dataset}.json'
-DEFAULT_VALID_PATH = f'./datasets/unified/valid.{args.dataset}.json'
+if os.path.exists(f'./datasets/unified/train.{args.dataset}.json'):
+    DEFAULT_TRAIN_PATH = f'./datasets/unified/train.{args.dataset}.json'
+    DEFAULT_TEST_PATH = f'./datasets/unified/test.{args.dataset}.json'
+    DEFAULT_VALID_PATH = f'./datasets/unified/valid.{args.dataset}.json'
+else:
+    DEFAULT_TRAIN_PATH = f'../datasets/unified/train.{args.dataset}.json'
+    DEFAULT_TEST_PATH = f'../datasets/unified/test.{args.dataset}.json'
+    DEFAULT_VALID_PATH = f'../datasets/unified/valid.{args.dataset}.json'
 
 
 if args.device is not None and args.device != 'cpu':
