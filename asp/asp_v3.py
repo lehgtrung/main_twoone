@@ -14,7 +14,7 @@ def conll04_script():
         --dataset CoNLL04 \
         --pretrained_wv ../wv/glove.6B.100d.conll04.txt \
         --max_epoches 2000 \
-        --max_steps 30000 \
+        --max_steps 20000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
