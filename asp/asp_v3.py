@@ -87,8 +87,8 @@ def convert_solution_to_data(tokens, solution):
             entity_type, word = extract_from_atom(atom, 'entity')
             start, end = word.split('+')
             data_point['entities'].append([
-                start,
-                end,
+                int(start),
+                int(end),
                 polish_type(entity_type)
             ])
         else:
@@ -96,10 +96,10 @@ def convert_solution_to_data(tokens, solution):
             hstart, hend = head_word.split('+')
             tstart, tend = tail_word.split('+')
             data_point['relations'].append([
-                hstart,
-                hend,
-                tstart,
-                tend,
+                int(hstart),
+                int(hend),
+                int(tstart),
+                int(tend),
                 polish_type(relation_type)
             ])
     return data_point

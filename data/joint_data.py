@@ -35,7 +35,6 @@ class JointDataLoader(DataLoader):
             tokens = item['tokens']
             tags = np.zeros(len(tokens), dtype='<U32')
             tags.fill('O')
-            print(item)
             for i_begin, i_end, etype in item['entities']:
                 tags[i_begin] = f'B-{etype}'
                 tags[i_begin+1 : i_end] = f'I-{etype}'
