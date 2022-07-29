@@ -41,7 +41,7 @@ def evaluate(args):
 
 
 def predict(args):
-    model = load_model(path=args.model_path)
+    model = load_model(path=args.model_read_ckpt)
     make_prediction(model=model, input_path=args.predict_input_path,
                     output_path=args.predict_output_path)
 
