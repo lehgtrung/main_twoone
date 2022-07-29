@@ -13,6 +13,7 @@ conda install pytorch cudatoolkit=11.3 -c pytorch
 pip install transformers
 pip install flair==0.4.5
 pip install gpustat
+conda install -c potassco clingo
 
 
 python gens/gen_bert.py \

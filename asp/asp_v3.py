@@ -151,6 +151,7 @@ def verify_and_infer_file(input_path, output_path):
         e_atoms = convert_original_to_atoms(entities, 'entity')
         r_atoms = convert_original_to_atoms(relations, 'relation')
         atoms = e_atoms + r_atoms
+        print(atoms)
 
         final_outputs = verify_and_infer(entities, relations, inference_program)
         united_atoms = answer_sets_randomly_selection(final_outputs)
@@ -213,7 +214,7 @@ def curriculum_training(labeled_path,
                                        predict_output_path=raw_pseudo_labeled_path)
         print('Round #{}: Predict on unlabeled data'.format(iteration))
         print(script)
-        subprocess.run(script, shell=True, check=True)
+        #subprocess.run(script, shell=True, check=True)
 
         # Step 3: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
