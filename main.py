@@ -54,13 +54,13 @@ print(args)
 
 
 # Constraints
-assert args.mode == 'train' and args.train_path is None
-assert args.mode == 'eval' and args.model_read_ckpt is None
-assert args.mode == 'predict' and args.train_path is not None
-assert args.mode == 'predict' and args.model_write_ckpt is not None
-assert args.mode == 'predict' and args.model_read_ckpt is None
-assert args.mode == 'predict' and args.predict_input_path is None
-assert args.mode == 'predict' and args.predict_output_path is None
+# assert args.mode == 'train' and not args.train_path
+# assert args.mode == 'eval' and not args.model_read_ckpt
+# assert args.mode == 'predict' and args.train_path is not None
+# assert args.mode == 'predict' and args.model_write_ckpt is not None
+# assert args.mode == 'predict' and args.model_read_ckpt is None
+# assert args.mode == 'predict' and args.predict_input_path is None
+# assert args.mode == 'predict' and args.predict_output_path is None
 
 # Constants
 DEFAULT_TRAIN_PATH = f'./datasets/unified/train.{args.dataset}.json'
