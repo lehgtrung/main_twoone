@@ -34,7 +34,7 @@ def conll04_script():
         --train_path {train_path}
         """
     predict_script = """
-            python -u ../main.py
+            python -u ../main.py \
             --mode predict \
             --model_read_ckpt {model_read_ckpt} \
             --predict_input_path {predict_input_path} \
