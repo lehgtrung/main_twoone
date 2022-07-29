@@ -69,6 +69,8 @@ def verify_and_infer(entities, relations, inference_program):
 def verify_and_infer_file(input_path, output_path):
     with open(input_path, 'r') as f:
         input_data = json.load(f)
+    with open('inference.lp') as f:
+        inference_program = f.read()
     data_points = []
     for i, row in tqdm(enumerate(input_data), total=len(input_data)):
         tokens = row['tokens']
@@ -158,18 +160,6 @@ def curriculum_training(labeled_path,
 
 
 if __name__ == '__main__':
-    with open('exp_area/p_star.lp') as f:
-        verification_program = f.read()
-
-    with open('inference.lp') as f:
-        inference_program = f.read()
-
-    with open('../datasets/ssl_outputs/argmax_predicted.CoNLL04_30_unlabeled.json') as f:
-        pred_data = json.load(f)
-
-    with open('../datasets/unified/train.CoNLL04_30_unlabeled.json') as f:
-        gt_data = json.load(f)
-
     LABELED_PATH = '../datasets/unified/train.CoNLL04_30_labeled.json'
     UNLABELED_PATH = '../datasets/unified/train.CoNLL04_30_unlabeled.json'
     RAW_PSEUDO_LABELED_PATH = '../datasets/pseudo/datasets/raw.CoNLL04_30.json'
