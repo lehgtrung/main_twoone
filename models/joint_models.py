@@ -51,10 +51,10 @@ class TabEncoding(nn.Module):
             masks = masks.unsqueeze(1) & masks.unsqueeze(2)
         
         X = self.seq2mat(S, S) # (B, N, N, H)
-        X = F.relu(X, inplace=True)
+        X = F.relu(X)
         if self.extra_hidden_dim > 0:
             X = self.reduce_X(torch.cat([X, Tlm], -1))
-            X = F.relu(X, inplace=True)
+            X = F.relu(X)
             
         T, Tstates = self.mdrnn(X, states=Tstates, masks=masks)
         
@@ -85,12 +85,12 @@ class SeqEncoding(nn.Module):
         self.ffn = nn.Sequential(
             nn.Linear(self.config.hidden_dim, self.config.hidden_dim*4),
             nn.ReLU(),
-            nn.Dropout(self.config.dropout, inplace=True),
+            nn.Dropout(self.config.dropout),
             nn.Linear(self.config.hidden_dim*4, self.config.hidden_dim),
         )
         self.norm1 = nn.LayerNorm(self.config.hidden_dim)
         
-        self.dropout_layer = nn.Dropout(self.config.dropout, inplace=True)
+        self.dropout_layer = nn.Dropout(self.config.dropout)
         
     def forward(
         self, 
@@ -122,7 +122,7 @@ class SeqEncoding(nn.Module):
         S = S.permute(0, 2, 1, 3).reshape(B, N, subH*n_heads)
         
         S = self.linear_o(S)
-        S = F.relu(S, inplace=False)
+        S = F.relu(S)
         S = self.dropout_layer(S)
         
         S = S_res + S
@@ -262,7 +262,7 @@ class JointModel(Tagger):
         
         self.bi_encoding = StackedTwoWayEncoding(self.config)
         
-        self.dropout_layer = nn.Dropout(self.config.dropout, inplace=True)
+        self.dropout_layer = nn.Dropout(self.config.dropout)
         
     def set_logits_layer(self):
         
