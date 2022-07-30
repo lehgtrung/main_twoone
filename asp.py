@@ -1,4 +1,4 @@
-from .asp.asp_main import curriculum_training
+from asp.asp_main import curriculum_training
 
 
 if __name__ == '__main__':
