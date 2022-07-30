@@ -178,7 +178,7 @@ def answer_sets_randomly_selection(answer_sets):
 
 
 def check_coverage(iteration):
-    if iteration == 3:
+    if iteration == 2:
         return True
     return False
 
@@ -243,6 +243,8 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=intermediate_model_path,
                                      train_path=unified_pseudo_labeled_path)
         subprocess.run(script, shell=True, check=True)
+
+        iteration += 1
 
         # Step 5: return to Step 2 while not converge
         if check_coverage(iteration):
