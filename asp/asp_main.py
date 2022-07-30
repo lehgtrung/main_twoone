@@ -1,5 +1,5 @@
 import random
-from asp_ult import *
+from .asp_ult import *
 from tqdm import tqdm
 import glob, os
 
