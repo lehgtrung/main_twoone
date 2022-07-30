@@ -1,7 +1,7 @@
 import random
 from asp_ult import *
 from tqdm import tqdm
-import glob
+import glob, os
 
 
 def conll04_script():
@@ -184,7 +184,7 @@ def check_coverage(iteration):
 
 
 def labeled_model_exists(path):
-    if 'done.txt' in glob.glob(path):
+    if 'done.txt' in glob.glob(os.path.dirname(path)):
         return True
     return False
 
@@ -215,7 +215,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        subprocess.run(script, shell=True, check=True)
+        #subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
@@ -241,7 +241,7 @@ def curriculum_training(labeled_path,
         # Step 4: Retrain on labeled and pseudo-labeled data
         print('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=intermediate_model_path,
-                                     train_path=selected_pseudo_labeled_path)
+                                     train_path=unified_pseudo_labeled_path)
         subprocess.run(script, shell=True, check=True)
 
         # Step 5: return to Step 2 while not converge
