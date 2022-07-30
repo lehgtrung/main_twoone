@@ -6,8 +6,8 @@ clingo_path = 'clingo'
 clingo_options = ['--outf=2', '-n 0']
 clingo_command = [clingo_path] + clingo_options
 
-drive_command = ['clingo', 'drive55.py',
-                 'p1.lp', 'p3.lp', '--outf=3']
+drive_command = ['clingo', 'asp/drive55.py',
+                 'asp/p1.lp', 'asp/p3.lp', '--outf=3']
 
 
 def solve(program):

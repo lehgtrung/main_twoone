@@ -6,15 +6,15 @@ import glob, os
 
 def conll04_script():
     train_script = """
-        python -u ../main.py \
+        python -u ./main.py \
         --mode train \
         --num_layers 3 \
         --batch_size 8  \
         --evaluate_interval 500 \
         --dataset CoNLL04 \
-        --pretrained_wv ../wv/glove.6B.100d.conll04.txt \
+        --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 2000 \
-        --max_steps 20000 \
+        --max_steps 10000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
@@ -26,7 +26,7 @@ def conll04_script():
         --char_encoder lstm  \
         --lm_emb_dim 4096 \
         --head_emb_dim 768 \
-        --lm_emb_path ../wv/albert.conll04_with_heads.pkl \
+        --lm_emb_path ./wv/albert.conll04_with_heads.pkl \
         --hidden_dim 200     --ner_tag_vocab_size 9 \
         --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
         --grad_period 1 --warm_steps 1000 \
@@ -34,7 +34,7 @@ def conll04_script():
         --train_path {train_path}
         """
     predict_script = """
-            python -u ../main.py \
+            python -u ./main.py \
             --mode predict \
             --model_class JointModel \
             --model_read_ckpt {model_read_ckpt} \
@@ -42,7 +42,7 @@ def conll04_script():
             --predict_output_path {predict_output_path}
             """
     eval_script = """
-            python -u ../main.py \
+            python -u ./main.py \
             --mode eval \
             --num_layers 3 \
             --batch_size 8  \
@@ -62,7 +62,7 @@ def conll04_script():
             --char_encoder lstm  \
             --lm_emb_dim 4096 \
             --head_emb_dim 768 \
-            --lm_emb_path ../wv/albert.conll04_with_heads.pkl \
+            --lm_emb_path ./wv/albert.conll04_with_heads.pkl \
             --hidden_dim 200     --ner_tag_vocab_size 9 \
             --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
             --grad_period 1 --warm_steps 1000 \
@@ -140,7 +140,7 @@ def verify_and_infer(entities, relations, inference_program):
 def verify_and_infer_file(input_path, output_path):
     with open(input_path, 'r') as f:
         input_data = json.load(f)
-    with open('inference.lp') as f:
+    with open('asp/inference.lp') as f:
         inference_program = f.read()
     data_points = []
     for i, row in tqdm(enumerate(input_data), total=len(input_data)):
@@ -153,7 +153,7 @@ def verify_and_infer_file(input_path, output_path):
         atoms = e_atoms + r_atoms
 
         final_outputs = verify_and_infer(entities, relations, inference_program)
-        united_atoms = answer_sets_randomly_selection(final_outputs)
+        united_atoms = answer_sets_intersection(final_outputs)
         if not united_atoms:
             print('Empty selection: ', atoms)
 
@@ -175,6 +175,16 @@ def answer_sets_randomly_selection(answer_sets):
     if not answer_sets:
         return []
     return random.choice(answer_sets)
+
+
+def answer_sets_intersection(answer_sets):
+    # Number of times an atom appears in each answer_set / total number of answer sets
+    if not answer_sets:
+        return []
+    inter = set(answer_sets[0])
+    for answer_set in answer_sets:
+        inter = inter.intersection(answer_set)
+    return inter
 
 
 def check_coverage(iteration):
@@ -215,7 +225,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        #subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
@@ -234,6 +244,7 @@ def curriculum_training(labeled_path,
                               output_path=selected_pseudo_labeled_path)
 
         # Step 3.5 Unify labeled and selected pseudo labels
+        print('Round #{}: Unify labels and pseudo labels'.format(iteration))
         unify_two_datasets(first_path=selected_pseudo_labeled_path,
                            second_path=labeled_path,
                            output_path=unified_pseudo_labeled_path)
@@ -250,23 +261,6 @@ def curriculum_training(labeled_path,
         if check_coverage(iteration):
             break
 
-
-if __name__ == '__main__':
-    LABELED_PATH = '../datasets/unified/train.CoNLL04_30_labeled.json'
-    UNLABELED_PATH = '../datasets/unified/train.CoNLL04_30_unlabeled.json'
-    RAW_PSEUDO_LABELED_PATH = '../datasets/pseudo/raw.CoNLL04_30.json'
-    SELECTED_PSEUDO_LABELED_PATH = '../datasets/pseudo/selected.CoNLL04_30.json'
-    UNIFIED_PSEUDO_LABELED_PATH = '../datasets/pseudo/unified.CoNLL04_30.json'
-    LABELED_MODEL_PATH = '../ckpts/pseudo/labeled/labeled'
-    INTERMEDIATE_MODEL_PATH = '../ckpts/pseudo/intermediate/intermediate'
-
-    curriculum_training(labeled_path=LABELED_PATH,
-                        unlabeled_path=UNLABELED_PATH,
-                        raw_pseudo_labeled_path=RAW_PSEUDO_LABELED_PATH,
-                        selected_pseudo_labeled_path=SELECTED_PSEUDO_LABELED_PATH,
-                        unified_pseudo_labeled_path=UNIFIED_PSEUDO_LABELED_PATH,
-                        labeled_model_path=LABELED_MODEL_PATH,
-                        intermediate_model_path=INTERMEDIATE_MODEL_PATH)
 
 
 
