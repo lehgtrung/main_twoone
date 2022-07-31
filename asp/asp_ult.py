@@ -24,7 +24,7 @@ def solve(program):
 
 def solve_v2(program):
     # Write the program to a file
-    with open('p3.lp', 'w') as f:
+    with open('asp/p3.lp', 'w') as f:
         f.write(program)
     process = subprocess.Popen(drive_command, stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     output, error = process.communicate()
@@ -126,3 +126,25 @@ def convert_original_to_atoms(data, dtype):
                                          str(d[0]) + '+' + str(d[1]), str(d[2]) + '+' + str(d[3]))
             result.append(r)
     return result
+
+
+def convert_position_to_word_atoms(tokens, atoms):
+    word_atoms = []
+    for atom in atoms:
+        print(atom)
+        if match_form(atom) == 'entity':
+            entity_type, word = extract_from_atom(atom, 'entity')
+            start, end = word.split('+')
+            word_atoms.append(
+                f'{entity_type}("{tokens[int(start):int(end)]}")'
+            )
+        else:
+            relation_type, head_word, tail_word = extract_from_atom(atom, 'relation')
+            hstart, hend = head_word.split('+')
+            tstart, tend = tail_word.split('+')
+            word_atoms.append(
+                f'{relation_type}("{tokens[int(hstart):int(hend)]}", "{tokens[int(tstart):int(tend)]}")'
+            )
+    return word_atoms
+
+

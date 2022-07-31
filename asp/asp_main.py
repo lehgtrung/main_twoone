@@ -154,8 +154,10 @@ def verify_and_infer_file(input_path, output_path):
 
         final_outputs = verify_and_infer(entities, relations, inference_program)
         united_atoms = answer_sets_intersection(final_outputs)
-        if not united_atoms:
+        if len(united_atoms) == 0:
             print('Empty selection: ', atoms)
+
+        # w_united_atoms = convert_position_to_word_atoms(tokens, united_atoms)
 
         data_point = convert_solution_to_data(tokens, united_atoms)
         data_point = {
@@ -240,14 +242,14 @@ def curriculum_training(labeled_path,
 
         # Step 3: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        # verify_and_infer_file(input_path=raw_pseudo_labeled_path,
-        #                       output_path=selected_pseudo_labeled_path)
+        verify_and_infer_file(input_path=raw_pseudo_labeled_path,
+                              output_path=selected_pseudo_labeled_path)
 
         # Step 3.5 Unify labeled and selected pseudo labels
         print('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        # unify_two_datasets(first_path=selected_pseudo_labeled_path,
-        #                    second_path=labeled_path,
-        #                    output_path=unified_pseudo_labeled_path)
+        unify_two_datasets(first_path=selected_pseudo_labeled_path,
+                           second_path=labeled_path,
+                           output_path=unified_pseudo_labeled_path)
 
         # Step 4: Retrain on labeled and pseudo-labeled data
         print('Round #{}: Retrain on selected pseudo labels'.format(iteration))
