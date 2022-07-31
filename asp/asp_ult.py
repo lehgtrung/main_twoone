@@ -131,7 +131,6 @@ def convert_original_to_atoms(data, dtype):
 def convert_position_to_word_atoms(tokens, atoms):
     word_atoms = []
     for atom in atoms:
-        print(atom)
         if match_form(atom) == 'entity':
             entity_type, word = extract_from_atom(atom, 'entity')
             start, end = word.split('+')
