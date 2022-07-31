@@ -14,7 +14,7 @@ def conll04_script():
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 2000 \
-        --max_steps 10000 \
+        --max_steps 20000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
@@ -153,7 +153,7 @@ def verify_and_infer_file(input_path, output_path):
         atoms = e_atoms + r_atoms
 
         final_outputs = verify_and_infer(entities, relations, inference_program)
-        united_atoms = answer_sets_intersection(final_outputs)
+        united_atoms = answer_sets_randomly_selection(final_outputs)
         if len(united_atoms) == 0:
             print('Empty selection: ', atoms)
 
@@ -227,7 +227,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        #subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
