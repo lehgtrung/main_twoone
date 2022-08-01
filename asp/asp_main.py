@@ -118,23 +118,17 @@ def convert_solutions_back(solution):
     return es, rs
 
 
-def verify_and_infer(entities, relations, inference_program):
+def verify(entities, relations):
     final_outputs = []
     # Remove connected components
-    es = convert_original_to_atoms(entities, 'entity')
-    rs = convert_original_to_atoms(relations, 'relation')
-    program = concat_facts(es, rs)
+    e_atoms = convert_original_to_atoms(entities, 'entity')
+    r_atoms = convert_original_to_atoms(relations, 'relation')
+    program = concat_facts(e_atoms, r_atoms)
     answer_sets = solve_v2(program)
     for answer_set in answer_sets:
         es, rs = convert_solutions_back(answer_set)
-        program = inference_program + '\n' + concat_facts(es, rs)
-        solution = solve(program)
-        if not solution:
-            continue
-        solution = ['ok(' + atom + ')' for atom in solution]
-        es, rs = convert_solutions_back(solution)
         final_outputs.append(es + rs)
-    return final_outputs
+    return final_outputs, e_atoms + r_atoms
 
 
 def verify_and_infer_file(input_path, output_path):
@@ -148,16 +142,15 @@ def verify_and_infer_file(input_path, output_path):
         entities = row['entity_preds']
         relations = row['relation_preds']
 
-        e_atoms = convert_original_to_atoms(entities, 'entity')
-        r_atoms = convert_original_to_atoms(relations, 'relation')
-        atoms = e_atoms + r_atoms
+        final_outputs, atoms = verify(entities, relations)
+        atoms = remove_wrap(atoms, wrap_type='atom')
+        word_atoms = convert_position_to_word_atoms(tokens, atoms)
 
-        final_outputs = verify_and_infer(entities, relations, inference_program)
-        united_atoms = answer_sets_randomly_selection(final_outputs)
+        # Unite atoms
+        united_atoms, eweights, rweights = unite_atoms(final_outputs, inference_program)
+
         if len(united_atoms) == 0:
-            print('Empty selection: ', atoms)
-
-        # w_united_atoms = convert_position_to_word_atoms(tokens, united_atoms)
+            print('Empty selection: ', word_atoms)
 
         data_point = convert_solution_to_data(tokens, united_atoms)
         data_point = {
@@ -165,11 +158,38 @@ def verify_and_infer_file(input_path, output_path):
             'entities': data_point['entities'],
             'relations': data_point['relations'],
             'id': i,
-            'atoms': atoms
+            'atoms': word_atoms,
+            'eweights': eweights,
+            'rweights': rweights
         }
         data_points.append(data_point)
     with open(output_path, 'w') as f:
         json.dump(data_points, f)
+
+
+def unite_atoms(outputs, inference_program):
+    # Select 1 answer set randomly
+    output = answer_sets_randomly_selection(outputs)
+    # Do inference on that answer set
+    program = inference_program + '\n' + '\n'.join(output)
+    solution = solve(program)
+    if len(solution) == 0:
+        return [], []
+    # Compute weight
+    eweights = []
+    rweights = []
+    for atom in solution:
+        weight = 0
+        for answer_set in outputs:
+            if atom + '.' in answer_set:
+                weight += 1
+        weight = weight / len(outputs)
+        if match_form(atom) == 'entity':
+            eweights.append(weight)
+        else:
+            rweights.append(weight)
+    assert len(solution) == len(eweights) + len(rweights)
+    return solution, eweights, rweights
 
 
 def answer_sets_randomly_selection(answer_sets):
@@ -227,7 +247,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        subprocess.run(script, shell=True, check=True)
+        # subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
