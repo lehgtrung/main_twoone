@@ -174,7 +174,7 @@ def unite_atoms(outputs, inference_program):
     program = inference_program + '\n' + '\n'.join(output)
     solution = solve(program)
     if len(solution) == 0:
-        return [], []
+        return [], [], []
     # Compute weight
     eweights = []
     rweights = []
