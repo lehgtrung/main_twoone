@@ -150,8 +150,8 @@ def verify_and_infer_file(input_path, output_path):
     answer_sets_per_sentences = []
     for i, row in tqdm(enumerate(input_data), total=len(input_data)):
         tokens = row['tokens']
-        entities = row['entity_preds']
-        relations = row['relation_preds']
+        entities = row['entities']
+        relations = row['relations']
 
         # First, check if the prediction satisfiable
         satisfiable = is_satisfiable(entities, relations, satisfiable_program)
