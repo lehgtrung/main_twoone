@@ -13,8 +13,8 @@ def make_prediction(model, input_path, output_path):
         }
         step_output = {
             'tokens': [],
-            'entity_preds': [],
-            'relation_preds': [],
+            'entities': [],
+            'relations': [],
             'entity_gts': [],
             'relation_gts': []
         }
@@ -35,12 +35,12 @@ def make_prediction(model, input_path, output_path):
         for e in rets['entity_preds']:
             k = list(e)
             k.append(' '.join(tokens[e[0]: e[1]]))
-            step_output['entity_preds'].append(k)
+            step_output['entities'].append(k)
         for r in rets['relation_preds']:
             k = list(r)
             k.append(' '.join(tokens[r[0]: r[1]]))
             k.append(' '.join(tokens[r[2]: r[3]]))
-            step_output['relation_preds'].append(k)
+            step_output['relations'].append(k)
 
         step_output['tokens'] = tokens
         outputs.append(step_output)
