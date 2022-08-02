@@ -18,6 +18,8 @@ def make_prediction(model, input_path, output_path):
             'entity_gts': [],
             'relation_gts': []
         }
+        print(step_output)
+        exit()
         rets = model.predict_step(step_input)
         rets = {k: list(v[0]) for k, v in rets.items() if k in kept_fields}
         # Append the gt

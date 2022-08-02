@@ -4,3 +4,12 @@
 asp/p3.lp
 asp/test.lp
 datasets/pseudo
+utils/__pycache__/
+models/__pycache__/
+wv/
+layers/__pycache__/
+functions/__pycache__/
+data/__pycache__/
+ckpts/
+asp/__pycache__/
+__pycache__/
