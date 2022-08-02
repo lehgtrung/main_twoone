@@ -10,7 +10,7 @@ def conll04_script():
         --mode train \
         --num_layers 3 \
         --batch_size 8  \
-        --evaluate_interval 100 \
+        --evaluate_interval 200 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 2000 \
@@ -289,7 +289,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        # subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
