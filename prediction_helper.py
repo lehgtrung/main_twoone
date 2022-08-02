@@ -2,9 +2,6 @@ from models import *
 
 
 def make_prediction(model, input_path, output_path):
-    print('=======================================')
-    print('output_path: ', output_path)
-    exit()
     kept_fields = ['entity_preds', 'relation_preds']
     with open(input_path, 'r') as f:
         input_data = json.load(f)
