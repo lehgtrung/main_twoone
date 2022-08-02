@@ -79,8 +79,7 @@ class JointDataLoader(DataLoader):
     def annotate_relation(self, matrix, i_begin, i_end, j_begin, j_end, rtype):
         matrix[i_begin:i_end, j_begin:j_end] = f"I:{rtype}"
         return matrix
-        
-        
+
     def _collect_fn(self, batch):
         tokens, ner_tags, re_tags, relations, entities = [], [], [], [], []
         for item in batch:
@@ -89,7 +88,7 @@ class JointDataLoader(DataLoader):
             re_tags.append(item['re_tags'])
             relations.append(item['relations'])
             entities.append(item['entities'])
-        
+
         rets = {
             'tokens': tokens,
             'ner_tags': ner_tags,
@@ -97,16 +96,44 @@ class JointDataLoader(DataLoader):
             'relations': relations,
             'entities': entities,
         }
-        
+
+        if 'eweights' in batch[0]:
+            eweights, rweights = [], []
+
+            max_num_tokens = max([len(item['tokens']) for item in batch])
+            for item in batch:
+                num_tokens = len(item['tokens'])
+                _eweights = np.zeros(max_num_tokens)
+                _rweights = np.zeros((max_num_tokens, max_num_tokens))
+                for _eweight, ent in zip(item['eweights'], item['entities']):
+                    start, end, _ = ent
+                    for i in range(num_tokens):
+                        _eweights[i] = 1.0
+                    for i in range(start, end):
+                        _eweights[i] = _eweight
+                for _rweight, rel in zip(item['rweights'], item['relations']):
+                    h_start, h_end, t_start, t_end, _ = rel
+                    for i in range(num_tokens):
+                        for j in range(num_tokens):
+                            _rweights[i][j] = 1.0
+                    for i in range(h_start, h_end):
+                        for j in range(t_start, t_end):
+                            _rweights[i][j] = _rweight
+                eweights.append(_eweights)
+                rweights.append(_rweights)
+
+            rets['eweights'] = eweights
+            rets['rweights'] = rweights
+
         if self.model is not None:
             tokens = self.model.token_indexing(tokens)
             ner_tags = self.model.ner_tag_indexing(ner_tags)
             re_tags = self.model.re_tag_indexing(re_tags)
-        
+
             rets['_tokens'] = tokens
             rets['_ner_tags'] = ner_tags
             rets['_re_tags'] = re_tags
-        
+
         return rets
     
     
