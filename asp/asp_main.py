@@ -10,11 +10,11 @@ def conll04_script():
         --mode train \
         --num_layers 3 \
         --batch_size 8  \
-        --evaluate_interval 500 \
+        --evaluate_interval 100 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 2000 \
-        --max_steps 20000 \
+        --max_steps 10000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
@@ -118,7 +118,7 @@ def convert_solutions_back(solution):
     return es, rs
 
 
-def verify(entities, relations):
+def verify_and_infer(entities, relations, inference_program):
     final_outputs = []
     # Remove connected components
     e_atoms = convert_original_to_atoms(entities, 'entity')
@@ -127,6 +127,14 @@ def verify(entities, relations):
     answer_sets = solve_v2(program)
     for answer_set in answer_sets:
         es, rs = convert_solutions_back(answer_set)
+        # Inference starts here
+        program = inference_program + '\n' + concat_facts(es, rs)
+        solution = solve(program)
+        if not solution:
+            continue
+        solution = ['ok(' + atom + ')' for atom in solution]
+        es, rs = convert_solutions_back(solution)
+        # Inference ends here
         final_outputs.append(es + rs)
     return final_outputs, len(answer_sets), e_atoms + r_atoms
 
@@ -136,6 +144,8 @@ def verify_and_infer_file(input_path, output_path):
         input_data = json.load(f)
     with open('asp/inference.lp') as f:
         inference_program = f.read()
+    with open('asp/satisfiable.lp') as f:
+        satisfiable_program = f.read()
     data_points = []
     answer_sets_per_sentences = []
     for i, row in tqdm(enumerate(input_data), total=len(input_data)):
@@ -143,28 +153,53 @@ def verify_and_infer_file(input_path, output_path):
         entities = row['entity_preds']
         relations = row['relation_preds']
 
-        final_outputs, answer_sets_per_sentence, atoms = verify(entities, relations)
-        answer_sets_per_sentences.append(answer_sets_per_sentence)
+        # First, check if the prediction satisfiable
+        satisfiable = is_satisfiable(entities, relations, satisfiable_program)
 
-        atoms = remove_wrap(atoms, wrap_type='atom')
-        word_atoms = convert_position_to_word_atoms(tokens, atoms)
+        # If NOT satisfiable
+        if not satisfiable:
+            print(f'{i}: unsatisfiable')
 
-        # Unite atoms
-        united_atoms, eweights, rweights = unite_atoms(final_outputs, inference_program)
+        if not satisfiable:
+            final_outputs, answer_sets_per_sentence, atoms = verify_and_infer(entities, relations, inference_program)
+            answer_sets_per_sentences.append(answer_sets_per_sentence)
 
-        if len(united_atoms) == 0:
-            print('Empty selection: ', word_atoms)
+            atoms = remove_wrap(atoms, wrap_type='atom')
+            word_atoms = convert_position_to_word_atoms(tokens, atoms)
 
-        data_point = convert_solution_to_data(tokens, united_atoms)
-        data_point = {
-            'tokens': data_point['tokens'],
-            'entities': data_point['entities'],
-            'relations': data_point['relations'],
-            'id': i,
-            'atoms': word_atoms,
-            'eweights': eweights,
-            'rweights': rweights
-        }
+            # Unite atoms
+            united_atoms, eweights, rweights = unite_atoms(final_outputs, inference_program)
+
+            if len(united_atoms) == 0:
+                print('Empty selection: ', word_atoms)
+
+            data_point = convert_solution_to_data(tokens, united_atoms)
+            data_point = {
+                'tokens': data_point['tokens'],
+                'entities': data_point['entities'],
+                'relations': data_point['relations'],
+                'id': i,
+                'satisfiable': 0,
+                'atoms': word_atoms,
+                'eweights': eweights,
+                'rweights': rweights
+            }
+        else:
+            e_atoms = convert_original_to_atoms(entities, 'entity')
+            r_atoms = convert_original_to_atoms(relations, 'relation')
+            atoms = e_atoms + r_atoms
+            atoms = remove_wrap(atoms, wrap_type='atom')
+            word_atoms = convert_position_to_word_atoms(tokens, atoms)
+            data_point = {
+                'tokens': tokens,
+                'entities': entities,
+                'relations': relations,
+                'id': i,
+                'satisfiable': 1,
+                'atoms': word_atoms,
+                'eweights': [1.0 for _ in range(len(entities))],
+                'rweights': [1.0 for _ in range(len(relations))]
+            }
         data_points.append(data_point)
     with open(output_path, 'w') as f:
         json.dump(data_points, f)
@@ -242,6 +277,7 @@ def curriculum_training(labeled_path,
                         selected_pseudo_labeled_path,
                         unified_pseudo_labeled_path,
                         labeled_model_path,
+                        raw_model_path,
                         intermediate_model_path
                         ):
     SCRIPT = conll04_script()
@@ -253,7 +289,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        # subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
@@ -264,14 +300,21 @@ def curriculum_training(labeled_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=raw_pseudo_labeled_path)
         print('Round #{}: Predict on unlabeled data'.format(iteration))
-        # subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
+
+        # Step 3: Train a model on raw prediction
+        if iteration == 1:
+            print('Round #{}: Retrain on raw pseudo labels'.format(iteration))
+            script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
+                                         train_path=raw_pseudo_labeled_path)
+            subprocess.run(script, shell=True, check=True)
 
         # Step 3: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        answer_sets_per_sentences = verify_and_infer_file(input_path=raw_pseudo_labeled_path,
-                              output_path=selected_pseudo_labeled_path)
-        print(answer_sets_per_sentences)
-        exit()
+        answer_sets_per_sentences = verify_and_infer_file(
+            input_path=raw_pseudo_labeled_path,
+            output_path=selected_pseudo_labeled_path
+        )
 
         # Step 3.5 Unify labeled and selected pseudo labels
         print('Round #{}: Unify labels and pseudo labels'.format(iteration))

@@ -114,16 +114,24 @@ def format_for_asp(s, type):
         return splits[0].lower()
 
 
-def convert_original_to_atoms(data, dtype):
+def convert_original_to_atoms(data, dtype, wrap=True):
     result = []
     for d in data:
         if dtype == 'entity':
-            e = 'atom({}("{}")).'.format(format_for_asp(d[2], 'entity'),
-                                         str(d[0]) + '+' + str(d[1]))
+            if wrap:
+                e = 'atom({}("{}")).'.format(format_for_asp(d[2], 'entity'),
+                                             str(d[0]) + '+' + str(d[1]))
+            else:
+                e = '{}("{}").'.format(format_for_asp(d[2], 'entity'),
+                                       str(d[0]) + '+' + str(d[1]))
             result.append(e)
         else:
-            r = 'atom({}("{}","{}")).'.format(format_for_asp(d[4], 'relation'),
-                                         str(d[0]) + '+' + str(d[1]), str(d[2]) + '+' + str(d[3]))
+            if wrap:
+                r = 'atom({}("{}","{}")).'.format(format_for_asp(d[4], 'relation'),
+                                             str(d[0]) + '+' + str(d[1]), str(d[2]) + '+' + str(d[3]))
+            else:
+                r = '{}("{}","{}").'.format(format_for_asp(d[4], 'relation'),
+                                            str(d[0]) + '+' + str(d[1]), str(d[2]) + '+' + str(d[3]))
             result.append(r)
     return result
 
@@ -163,5 +171,16 @@ def remove_wrap(atoms, wrap_type):
                 atom.replace('ok(', '')[:-1]
             )
     return new_atoms
+
+
+def is_satisfiable(entities, relations, satisfiable_program, wrap=False):
+    e_atoms = convert_original_to_atoms(entities, 'entity', wrap)
+    r_atoms = convert_original_to_atoms(relations, 'relation', wrap)
+    program = satisfiable_program + '\n' + concat_facts(e_atoms, r_atoms)
+    solution = solve(program)
+    if solution:
+        return True
+    return False
+
 
 
