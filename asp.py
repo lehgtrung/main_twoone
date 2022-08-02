@@ -8,7 +8,7 @@ if __name__ == '__main__':
     SELECTED_PSEUDO_LABELED_PATH = './datasets/pseudo/test_selected.CoNLL04_30.json'
     UNIFIED_PSEUDO_LABELED_PATH = './datasets/pseudo/unified.CoNLL04_30.json'
     LABELED_MODEL_PATH = './ckpts/pseudo/labeled/labeled'
-    RAW_MODEL_PATH = './ckpts/pseudo/labeled/raw'
+    RAW_MODEL_PATH = './ckpts/pseudo/raw/raw'
     INTERMEDIATE_MODEL_PATH = './ckpts/pseudo/intermediate/intermediate'
 
     curriculum_training(labeled_path=LABELED_PATH,
