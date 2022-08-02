@@ -2,6 +2,7 @@ from models import *
 
 
 def make_prediction(model, input_path, output_path):
+    print('output_path: ', output_path)
     kept_fields = ['entity_preds', 'relation_preds']
     with open(input_path, 'r') as f:
         input_data = json.load(f)
@@ -18,8 +19,6 @@ def make_prediction(model, input_path, output_path):
             'entity_gts': [],
             'relation_gts': []
         }
-        print(step_output)
-        exit()
         rets = model.predict_step(step_input)
         rets = {k: list(v[0]) for k, v in rets.items() if k in kept_fields}
         # Append the gt
