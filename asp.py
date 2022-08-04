@@ -39,10 +39,9 @@ def create_folder_for_ssl(dataset):
                                                                                              part=part,
                                                                                              aggregation=agg,
                                                                                              iteration=i),
-                    './logs/{dataset}/{part}/{aggregation}/{iteration}'.format(dataset=dataset,
-                                                                               part=part,
-                                                                               aggregation=agg,
-                                                                               iteration=i)
+                    './logs/{dataset}/{part}/{aggregation}/'.format(dataset=dataset,
+                                                                    part=part,
+                                                                    aggregation=agg)
                 ]
                 for _path in _paths:
                     os.makedirs(_path, exist_ok=True)
@@ -107,11 +106,10 @@ if __name__ == '__main__':
         aggregation=args.aggregation,
         iteration='{iteration}'
     )
-    LOG_PATH = './logs/{dataset}/{part}/{aggregation}/{iteration}/log.txt'.format(
+    LOG_PATH = './logs/{dataset}/{part}/{aggregation}/log.txt'.format(
         dataset=args.dataset,
         part=args.part,
-        aggregation=args.aggregation,
-        iteration='{iteration}'
+        aggregation=args.aggregation
     )
     AGGREGATION = args.aggregation
 
@@ -145,8 +143,8 @@ if __name__ == '__main__':
     # 3 datasets, 2 models
     # Record training time
 
-    logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
-                        format='%(asctime)s \n%(message)s',
+    logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+                        format='%(asctime)s \n%(message)s\n',
                         datefmt='%b %d %Y %H:%M:%S',
                         level=logging.DEBUG)
     logger = logging.getLogger()
