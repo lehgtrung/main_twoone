@@ -68,11 +68,11 @@ peop(Y) :- kill(X,Y).
 
 
 % Triplets
-orgbasedIn(O, P2) :- locatedIn(P1,P2), orgbasedIn(O,P1).
-locatedIn(P1, P3) :- locatedIn(P1,P2), locatedIn(P2,P3).
-liveIn(X,P2) :- liveIn(X,P1), locatedIn(P1,P2).
+%orgbasedIn(O, P2) :- locatedIn(P1,P2), orgbasedIn(O,P1).
+%locatedIn(P1, P3) :- locatedIn(P1,P2), locatedIn(P2,P3).
+%liveIn(X,P2) :- liveIn(X,P1), locatedIn(P1,P2).
 
 % Not absolutely correct, we assume no one works remotely
-liveIn(X,P) :- workFor(X,O), orgbasedIn(O,P).
-orgbasedIn(O,P) :- liveIn(X,P), workFor(X,O).
+%liveIn(X,P) :- workFor(X,O), orgbasedIn(O,P).
+%orgbasedIn(O,P) :- liveIn(X,P), workFor(X,O).
 
