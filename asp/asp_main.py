@@ -293,7 +293,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         print('Train on labeled data')
-        subprocess.run(script, shell=True, check=True)
+        # subprocess.run(script, shell=True, check=True)
     else:
         print('Labeled model exists')
 
@@ -311,7 +311,7 @@ def curriculum_training(labeled_path,
             print('Round #{}: Retrain on raw pseudo labels'.format(iteration))
             script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                          train_path=raw_pseudo_labeled_path)
-            subprocess.run(script, shell=True, check=True)
+            # subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
@@ -333,6 +333,8 @@ def curriculum_training(labeled_path,
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
+
+        exit()
 
         # Step 5: return to Step 2 while not converge
         if check_coverage(iteration, answer_sets_per_sentences):
