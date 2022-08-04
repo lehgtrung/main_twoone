@@ -301,8 +301,8 @@ def curriculum_training(labeled_path,
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
 
-    logger.info('Labeled path: ', labeled_path)
-    logger.info('Aggregation function: ', aggregation)
+    logger.info(f'Labeled path: {labeled_path}')
+    logger.info(f'Aggregation function: {aggregation}')
 
     # Step 1: Train on labeled data
     if not labeled_model_exists(labeled_model_path):
