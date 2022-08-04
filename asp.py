@@ -24,4 +24,7 @@ if __name__ == '__main__':
                         unified_pseudo_labeled_path=UNIFIED_PSEUDO_LABELED_PATH,
                         labeled_model_path=LABELED_MODEL_PATH,
                         raw_model_path=RAW_MODEL_PATH,
-                        intermediate_model_path=INTERMEDIATE_MODEL_PATH)
+                        intermediate_model_path=INTERMEDIATE_MODEL_PATH,
+                        aggregation='weighted',
+                        max_iterations=5
+                        )

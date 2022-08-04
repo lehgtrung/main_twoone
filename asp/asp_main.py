@@ -136,10 +136,10 @@ def verify_and_infer(entities, relations, inference_program):
         es, rs = convert_solutions_back(solution)
         # Inference ends here
         final_outputs.append(es + rs)
-    return final_outputs, len(answer_sets), e_atoms + r_atoms
+    return final_outputs, e_atoms + r_atoms
 
 
-def verify_and_infer_file(input_path, output_path):
+def verify_and_infer_file(input_path, output_path, aggregation):
     with open(input_path, 'r') as f:
         input_data = json.load(f)
     with open('asp/inference.lp') as f:
@@ -147,7 +147,6 @@ def verify_and_infer_file(input_path, output_path):
     with open('asp/satisfiable.lp') as f:
         satisfiable_program = f.read()
     data_points = []
-    answer_sets_per_sentences = []
     for i, row in tqdm(enumerate(input_data), total=len(input_data)):
         tokens = row['tokens']
         entities = row['entities']
@@ -161,14 +160,13 @@ def verify_and_infer_file(input_path, output_path):
             print(f'{i}: unsatisfiable')
 
         if not satisfiable:
-            final_outputs, answer_sets_per_sentence, atoms = verify_and_infer(entities, relations, inference_program)
-            answer_sets_per_sentences.append(answer_sets_per_sentence)
+            final_outputs, atoms = verify_and_infer(entities, relations, inference_program)
 
             atoms = remove_wrap(atoms, wrap_type='atom')
             word_atoms = convert_position_to_word_atoms(tokens, atoms)
 
             # Unite atoms
-            united_atoms, eweights, rweights = unite_atoms(final_outputs, inference_program)
+            united_atoms, eweights, rweights = unite_atoms(final_outputs, aggregation)
 
             if len(united_atoms) == 0:
                 print('Empty selection: ', word_atoms)
@@ -203,21 +201,25 @@ def verify_and_infer_file(input_path, output_path):
         data_points.append(data_point)
     with open(output_path, 'w') as f:
         json.dump(data_points, f)
-    return answer_sets_per_sentences
 
 
-def unite_atoms(outputs, inference_program):
-    # Select 1 answer set randomly
-    output = answer_sets_randomly_selection(outputs)
-    # Do inference on that answer set
-    program = inference_program + '\n' + '\n'.join(output)
-    solution = solve(program)
-    if len(solution) == 0:
+def unite_atoms(outputs, aggregation):
+    if aggregation == 'intersection':
+        output = answer_sets_intersection(outputs)
+    elif aggregation == 'random':
+        output = answer_sets_randomly_selection(outputs)
+    elif aggregation == 'weighted':
+        output = answer_sets_randomly_selection(outputs)
+    else:
+        raise ValueError('Wrong aggregation value')
+
+    if len(output) == 0:
         return [], [], []
     # Compute weight
     eweights = []
     rweights = []
-    for atom in solution:
+
+    for atom in output:
         weight = 0
         for answer_set in outputs:
             if atom + '.' in answer_set:
@@ -227,8 +229,8 @@ def unite_atoms(outputs, inference_program):
             eweights.append(weight)
         else:
             rweights.append(weight)
-    assert len(solution) == len(eweights) + len(rweights)
-    return solution, eweights, rweights
+    assert len(output) == len(eweights) + len(rweights)
+    return output, eweights, rweights
 
 
 def answer_sets_randomly_selection(answer_sets):
@@ -248,14 +250,19 @@ def answer_sets_intersection(answer_sets):
     return inter
 
 
-def check_coverage(iteration, answer_sets_per_sentences):
-    if iteration > 2:
+def check_coverage(iteration, max_iterations, raw_pseudo_labeled_path):
+    with open('asp/satisfiable.lp') as f:
+        satisfiable_program = f.read()
+    count = 0
+    with open(raw_pseudo_labeled_path, 'r') as f:
+        data = json.load(f)
+        for row in data:
+            if not is_satisfiable(row['entities'], row['relations'], satisfiable_program):
+                count += 1
+    print('Number of unsatisfiable sentences: ', count)
+    if count == 0:
         return True
-    # Number of unsatisfiable sentences
-    # answer_sets_per_sentences = [1, 1, 2, 2, 1, 1, ...]
-    # iteration = 1, 6 sentences
-    # iteration = 2 => 0 sentences
-    if len([e for e in answer_sets_per_sentences if e > 1]) == 0:
+    if iteration >= max_iterations:
         return True
     return False
 
@@ -285,7 +292,9 @@ def curriculum_training(labeled_path,
                         unified_pseudo_labeled_path,
                         labeled_model_path,
                         raw_model_path,
-                        intermediate_model_path
+                        intermediate_model_path,
+                        aggregation,
+                        max_iterations,
                         ):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
@@ -300,7 +309,7 @@ def curriculum_training(labeled_path,
     else:
         print('Labeled model exists')
 
-    iteration = 1
+    iteration = 0
     while True:
         # Step 2: Predict on unlabeled data
         script = PREDICT_SCRIPT.format(model_read_ckpt=labeled_model_path,
@@ -308,6 +317,12 @@ def curriculum_training(labeled_path,
                                        predict_output_path=raw_pseudo_labeled_path)
         print('Round #{}: Predict on unlabeled data'.format(iteration))
         # subprocess.run(script, shell=True, check=True)
+
+        # Step 5: return to Step 2 while not converge
+        if check_coverage(iteration=iteration,
+                          max_iterations=max_iterations,
+                          raw_pseudo_labeled_path=raw_pseudo_labeled_path):
+            break
 
         # Step 3: Train a model on raw prediction
         if iteration == 1:
@@ -318,9 +333,10 @@ def curriculum_training(labeled_path,
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        answer_sets_per_sentences = verify_and_infer_file(
+        verify_and_infer_file(
             input_path=raw_pseudo_labeled_path,
-            output_path=selected_pseudo_labeled_path
+            output_path=selected_pseudo_labeled_path,
+            aggregation=aggregation
         )
 
         # Step 5 Unify labeled and selected pseudo labels
@@ -336,12 +352,6 @@ def curriculum_training(labeled_path,
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
-
-        exit()
-
-        # Step 5: return to Step 2 while not converge
-        if check_coverage(iteration, answer_sets_per_sentences):
-            break
 
 
 
