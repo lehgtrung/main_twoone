@@ -250,7 +250,7 @@ def answer_sets_intersection(answer_sets):
     return inter
 
 
-def check_coverage(iteration, max_iterations, raw_pseudo_labeled_path):
+def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger):
     with open('asp/satisfiable.lp') as f:
         satisfiable_program = f.read()
     count = 0
@@ -259,12 +259,12 @@ def check_coverage(iteration, max_iterations, raw_pseudo_labeled_path):
         for row in data:
             if not is_satisfiable(row['entities'], row['relations'], satisfiable_program):
                 count += 1
-    print('Number of unsatisfiable sentences: ', count)
+    logger.info('Number of unsatisfiable sentences: ', count)
     if count == 0:
-        return True
+        return 'satisfiable'
     if iteration >= max_iterations:
-        return True
-    return False
+        return 'max_iter'
+    return 'no'
 
 
 def labeled_model_exists(path):
@@ -306,7 +306,7 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         logger.info('Train on labeled data')
-        # subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
     else:
         logger.info('Labeled model exists')
 
@@ -321,12 +321,18 @@ def curriculum_training(labeled_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=raw_pseudo_labeled_path)
         logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
-        # subprocess.run(script, shell=True, check=True)
+        subprocess.run(script, shell=True, check=True)
 
         # Step 5: return to Step 2 while not converge
-        if check_coverage(iteration=iteration,
-                          max_iterations=max_iterations,
-                          raw_pseudo_labeled_path=raw_pseudo_labeled_path):
+        converged = check_convergence(iteration=iteration,
+                                      max_iterations=max_iterations,
+                                      raw_pseudo_labeled_path=raw_pseudo_labeled_path,
+                                      logger=logger)
+        if converged == 'satisfiable':
+            logger.info('Round #{}: Converged by satisfiable'.format(iteration))
+            break
+        elif converged == 'max_iter':
+            logger.info('Round #{}: Converged by max iteration'.format(iteration))
             break
 
         # Step 3: Train a model on raw prediction
@@ -334,7 +340,7 @@ def curriculum_training(labeled_path,
             logger.info('Round #{}: Retrain on raw pseudo labels'.format(iteration))
             script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                          train_path=raw_pseudo_labeled_path)
-            # subprocess.run(script, shell=True, check=True)
+            subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))

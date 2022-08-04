@@ -1,11 +1,21 @@
 from asp.asp_main import curriculum_training
 import logging
 import os
-from local_parser import none_or_int, none_or_str
 import argparse
 
 
+def check_data(dataset):
+    for part in range(1, 11):
+        _path1 = './datasets/{dataset}/{part}/train/labeled.json'.format(dataset=dataset, part=part)
+        _path2 = './datasets/{dataset}/{part}/train/unlabeled.json'.format(dataset=dataset, part=part)
+        if not os.path.exists(_path1) or not os.path.exists(_path2):
+            raise ValueError('Dataset not exist: ', _path1)
+
+
 def create_folder_for_ssl(dataset):
+    # 10 part data is located at
+    # ./datasets/{dataset}/parts/1/labeled.json
+    # ./datasets/{dataset}/parts/1/unlabeled.json
     for part in range(1, 11):
         for agg in ['random', 'weighted', 'intersection']:
             for i in range(5):
@@ -123,7 +133,10 @@ if __name__ == '__main__':
     #     if os.path.exists(path):
     #         os.makedirs(path, exist_ok=True)
 
-    create_folder_for_ssl(args.dataset)
+    # create_folder_for_ssl(args.dataset)
+    print('Checking data')
+    check_data(args.dataset)
+    print('Data is ok')
 
     # Different ways to compute aggregation function: random, intersection, weighted
     # Number of iterations = 1, 2, 4, 6, 8, 10
@@ -132,23 +145,23 @@ if __name__ == '__main__':
     # 3 datasets, 2 models
     # Record training time
 
-    # logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
-    #                     format='%(asctime)s \n%(message)s',
-    #                     datefmt='%b %d %Y %H:%M:%S',
-    #                     level=logging.DEBUG)
-    # logger = logging.getLogger()
-    #
-    # curriculum_training(labeled_path=configs['LABELED_PATH'],
-    #                     unlabeled_path=configs['UNLABELED_PATH'],
-    #                     raw_pseudo_labeled_path=configs['RAW_PSEUDO_LABELED_PATH'],
-    #                     selected_pseudo_labeled_path=configs['SELECTED_PSEUDO_LABELED_PATH'],
-    #                     unified_pseudo_labeled_path=configs['UNIFIED_PSEUDO_LABELED_PATH'],
-    #                     labeled_model_path=configs['LABELED_MODEL_PATH'],
-    #                     raw_model_path=configs['RAW_MODEL_PATH'],
-    #                     intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
-    #                     logger=logger,
-    #                     aggregation=configs['AGGREGATION'],
-    #                     max_iterations=4
-    #                 )
+    logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
+                        format='%(asctime)s \n%(message)s',
+                        datefmt='%b %d %Y %H:%M:%S',
+                        level=logging.DEBUG)
+    logger = logging.getLogger()
+
+    curriculum_training(labeled_path=configs['LABELED_PATH'],
+                        unlabeled_path=configs['UNLABELED_PATH'],
+                        raw_pseudo_labeled_path=configs['RAW_PSEUDO_LABELED_PATH'],
+                        selected_pseudo_labeled_path=configs['SELECTED_PSEUDO_LABELED_PATH'],
+                        unified_pseudo_labeled_path=configs['UNIFIED_PSEUDO_LABELED_PATH'],
+                        labeled_model_path=configs['LABELED_MODEL_PATH'],
+                        raw_model_path=configs['RAW_MODEL_PATH'],
+                        intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
+                        logger=logger,
+                        aggregation=configs['AGGREGATION'],
+                        max_iterations=4
+                    )
 
 
