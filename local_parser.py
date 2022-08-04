@@ -10,7 +10,7 @@ def none_or_int(value):
     return int(value)
 
 
-def local_parse(parser):
+def set_conll04_arguments(parser):
     parser.add_argument('--mode',
                         default='train',
                         action='store', )

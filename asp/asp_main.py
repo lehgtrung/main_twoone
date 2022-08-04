@@ -251,6 +251,10 @@ def answer_sets_intersection(answer_sets):
 def check_coverage(iteration, answer_sets_per_sentences):
     if iteration > 2:
         return True
+    # Number of unsatisfiable sentences
+    # answer_sets_per_sentences = [1, 1, 2, 2, 1, 1, ...]
+    # iteration = 1, 6 sentences
+    # iteration = 2 => 0 sentences
     if len([e for e in answer_sets_per_sentences if e > 1]) == 0:
         return True
     return False
@@ -309,14 +313,14 @@ def curriculum_training(labeled_path,
                                          train_path=raw_pseudo_labeled_path)
             subprocess.run(script, shell=True, check=True)
 
-        # Step 3: For each sentence, verify and infer => list of answer sets (ASs)
+        # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
         answer_sets_per_sentences = verify_and_infer_file(
             input_path=raw_pseudo_labeled_path,
             output_path=selected_pseudo_labeled_path
         )
 
-        # Step 3.5 Unify labeled and selected pseudo labels
+        # Step 5 Unify labeled and selected pseudo labels
         print('Round #{}: Unify labels and pseudo labels'.format(iteration))
         unify_two_datasets(first_path=selected_pseudo_labeled_path,
                            second_path=labeled_path,
