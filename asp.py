@@ -143,7 +143,7 @@ if __name__ == '__main__':
     # 3 datasets, 2 models
     # Record training time
 
-    logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+    logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
                         format='%(asctime)s \n%(message)s\n',
                         datefmt='%b %d %Y %H:%M:%S',
                         level=logging.DEBUG)
