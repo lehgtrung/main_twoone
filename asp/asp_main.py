@@ -307,14 +307,14 @@ def curriculum_training(labeled_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=raw_pseudo_labeled_path)
         print('Round #{}: Predict on unlabeled data'.format(iteration))
-        subprocess.run(script, shell=True, check=True)
+        # subprocess.run(script, shell=True, check=True)
 
         # Step 3: Train a model on raw prediction
         if iteration == 1:
             print('Round #{}: Retrain on raw pseudo labels'.format(iteration))
             script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                          train_path=raw_pseudo_labeled_path)
-            subprocess.run(script, shell=True, check=True)
+            # subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
@@ -325,8 +325,8 @@ def curriculum_training(labeled_path,
 
         # Step 5 Unify labeled and selected pseudo labels
         print('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        unify_two_datasets(labeled_path=selected_pseudo_labeled_path,
-                           pseudo_path=labeled_path,
+        unify_two_datasets(labeled_path=labeled_path,
+                           pseudo_path=selected_pseudo_labeled_path,
                            output_path=unified_pseudo_labeled_path)
 
         # Step 4: Retrain on labeled and pseudo-labeled data
