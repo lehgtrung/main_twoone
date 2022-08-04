@@ -16,9 +16,7 @@ def make_prediction(model, input_path, output_path):
             'entities': [],
             'relations': [],
             'entity_gts': [],
-            'relation_gts': [],
-            'eweights': [],
-            'rweights': []
+            'relation_gts': []
         }
         rets = model.predict_step(step_input)
         rets = {k: list(v[0]) for k, v in rets.items() if k in kept_fields}
@@ -43,9 +41,6 @@ def make_prediction(model, input_path, output_path):
             # k.append(' '.join(tokens[r[0]: r[1]]))
             # k.append(' '.join(tokens[r[2]: r[3]]))
             step_output['relations'].append(k)
-
-        step_output['eweights'] = [1.0 for _ in range(len(step_output['entities']))]
-        step_output['rweights'] = [1.0 for _ in range(len(step_output['relations']))]
 
         step_output['tokens'] = tokens
         outputs.append(step_output)

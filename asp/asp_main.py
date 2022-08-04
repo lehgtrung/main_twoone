@@ -266,13 +266,16 @@ def labeled_model_exists(path):
     return False
 
 
-def unify_two_datasets(first_path, second_path, output_path):
-    with open(first_path, 'r') as f:
-        first = json.load(f)
-    with open(second_path, 'r') as f:
-        second = json.load(f)
+def unify_two_datasets(labeled_path, pseudo_path, output_path):
+    with open(labeled_path, 'r') as f:
+        labeled = json.load(f)
+        for line in labeled:
+            line['eweights'] = [1.0 for _ in range(len(line['entities']))]
+            line['rweights'] = [1.0 for _ in range(len(line['relations']))]
+    with open(pseudo_path, 'r') as f:
+        pseudo = json.load(f)
     with open(output_path, 'w') as f:
-        json.dump(first + second, f)
+        json.dump(labeled + pseudo, f)
 
 
 def curriculum_training(labeled_path,
@@ -311,7 +314,7 @@ def curriculum_training(labeled_path,
             print('Round #{}: Retrain on raw pseudo labels'.format(iteration))
             script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                          train_path=raw_pseudo_labeled_path)
-            # subprocess.run(script, shell=True, check=True)
+            subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         print('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
@@ -322,8 +325,8 @@ def curriculum_training(labeled_path,
 
         # Step 5 Unify labeled and selected pseudo labels
         print('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        unify_two_datasets(first_path=selected_pseudo_labeled_path,
-                           second_path=labeled_path,
+        unify_two_datasets(labeled_path=selected_pseudo_labeled_path,
+                           pseudo_path=labeled_path,
                            output_path=unified_pseudo_labeled_path)
 
         # Step 4: Retrain on labeled and pseudo-labeled data
