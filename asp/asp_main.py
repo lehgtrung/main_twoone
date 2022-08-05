@@ -309,13 +309,9 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         logger.info('Train on labeled data')
-        print('Model not exists')
-        exit()
         subprocess.run(script, shell=True, check=True)
     else:
-        print('Model exists')
-        logger.info('Labeled model exists')
-        exit()
+        logger.info('Labeled model exists, skip training ...')
 
     iteration = 0
     while True:
