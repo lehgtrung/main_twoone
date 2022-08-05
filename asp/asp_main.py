@@ -259,7 +259,7 @@ def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger
         for row in data:
             if not is_satisfiable(row['entities'], row['relations'], satisfiable_program):
                 count += 1
-    logger.info('Number of unsatisfiable sentences: ', count)
+    logger.info('Number of unsatisfiable sentences: {}'.format(count))
     if count == 0:
         return 'satisfiable'
     if iteration >= max_iterations:
