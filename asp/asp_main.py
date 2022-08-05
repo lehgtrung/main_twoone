@@ -318,6 +318,7 @@ def curriculum_training(labeled_path,
     while True:
         if skip_first_iter:
             iteration += 1
+            skip_first_iter = False
             continue
         formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
         formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
