@@ -295,6 +295,7 @@ def curriculum_training(labeled_path,
                         intermediate_model_path,
                         logger,
                         aggregation,
+                        skip_first_iter,
                         max_iterations,
                         ):
     SCRIPT = conll04_script()
@@ -315,6 +316,9 @@ def curriculum_training(labeled_path,
 
     iteration = 0
     while True:
+        if skip_first_iter:
+            iteration += 1
+            continue
         formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
         formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
         formatted_unified_pseudo_labeled_path = unified_pseudo_labeled_path.format(iteration=iteration)
@@ -323,7 +327,7 @@ def curriculum_training(labeled_path,
         if iteration == 0:
             _path = labeled_model_path
         else:
-            _path = intermediate_model_path
+            _path = intermediate_model_path.format(iteration=iteration-1)
         script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=formatted_raw_pseudo_labeled_path)
