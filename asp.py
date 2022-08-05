@@ -113,10 +113,6 @@ if __name__ == '__main__':
     )
     AGGREGATION = args.aggregation
 
-    print('UNLABELED_PATH')
-    print(UNLABELED_PATH)
-    exit()
-
     configs = {
         'LABELED_PATH': LABELED_PATH,
         'UNLABELED_PATH': UNLABELED_PATH,
