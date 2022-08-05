@@ -61,10 +61,11 @@ def set_conll04_arguments(parser):
                         required=True,
                         type=str,
                         action='store')
-    parser.add_argument('--skip_first_iter',
-                        required=True,
-                        type=bool,
-                        action='store')
+    # parser.add_argument('--skip_first_iter',
+    #                     required=False,
+    #                     type=bool,
+    #                     default=False,
+    #                     action='store')
     return parser
 
 
@@ -163,7 +164,6 @@ if __name__ == '__main__':
                         intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
                         logger=logger,
                         aggregation=configs['AGGREGATION'],
-                        skip_first_iter=args.skip_first_iter,
                         max_iterations=4
                     )
 
