@@ -268,6 +268,8 @@ def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger
 
 
 def labeled_model_exists(path):
+    print(os.path.dirname(path))
+    print(glob.glob(os.path.dirname(path)))
     if 'labeled.pt' in glob.glob(os.path.dirname(path)):
         return True
     return False
