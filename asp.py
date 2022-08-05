@@ -71,7 +71,7 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
     LABELED_PATH = './datasets/{dataset}/{part}/train/labeled.json'.format(dataset=args.dataset, part=args.part)
-    UNLABELED_PATH = './datasets/{dataset}/{part}/train/unlabeled.json'.format(dataset=args.dataset, part=args.part),
+    UNLABELED_PATH = './datasets/{dataset}/{part}/train/unlabeled.json'.format(dataset=args.dataset, part=args.part)
     RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/{part}/{aggregation}/{iteration}/raw.json'.format(
         dataset=args.dataset,
         part=args.part,
