@@ -268,7 +268,7 @@ def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger
 
 
 def labeled_model_exists(path):
-    if 'done.txt' in glob.glob(os.path.dirname(path)):
+    if 'labeled.pt' in glob.glob(os.path.dirname(path)):
         return True
     return False
 
@@ -309,9 +309,11 @@ def curriculum_training(labeled_path,
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
                                      train_path=labeled_path)
         logger.info('Train on labeled data')
+        exit()
         subprocess.run(script, shell=True, check=True)
     else:
         logger.info('Labeled model exists')
+        exit()
 
     iteration = 0
     while True:
