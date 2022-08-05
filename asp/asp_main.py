@@ -268,9 +268,6 @@ def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger
 
 
 def labeled_model_exists(path):
-    print(os.path.join(os.path.dirname(path), 'labeled.pt'))
-    print(os.path.abspath(os.path.join(os.path.dirname(path), 'labeled.pt')))
-    print(os.path.exists(os.path.join(os.path.dirname(path), 'labeled.pt')))
     if os.path.exists(os.path.join(os.path.dirname(path), 'labeled.pt')):
         return True
     return False
@@ -316,7 +313,7 @@ def curriculum_training(labeled_path,
         exit()
         subprocess.run(script, shell=True, check=True)
     else:
-        print('Model not exists')
+        print('Model exists')
         logger.info('Labeled model exists')
         exit()
 
