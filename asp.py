@@ -2,48 +2,40 @@ from asp.asp_main import curriculum_training
 import logging
 import os
 import argparse
+import shutil
 
 
 def check_data(dataset):
-    for part in range(1, 11):
-        _path1 = './datasets/{dataset}/{part}/train/labeled.json'.format(dataset=dataset, part=part)
-        _path2 = './datasets/{dataset}/{part}/train/unlabeled.json'.format(dataset=dataset, part=part)
+    for fold in range(1, 11):
+        _path1 = './datasets/{dataset}/folds/{fold}/labeled.json'.format(dataset=dataset, fold=fold)
+        _path2 = './datasets/{dataset}/folds/{fold}/unlabeled.json'.format(dataset=dataset, fold=fold)
         if not os.path.exists(_path1) or not os.path.exists(_path2):
             raise ValueError('Dataset not exist: ', _path1)
 
 
-def create_folder_for_ssl(dataset):
-    # 10 part data is located at
-    # ./datasets/{dataset}/parts/1/labeled.json
-    # ./datasets/{dataset}/parts/1/unlabeled.json
-    for part in range(1, 11):
+def create_folder_for_ssl(dataset, max_iter):
+    for fold in range(1, 11):
         for agg in ['random', 'weighted', 'intersection']:
-            for i in range(5):
+            for i in range(max_iter):
                 _paths = [
-                    './datasets/{dataset}/{part}/train'.format(dataset=dataset, part=part),
-                    './datasets/{dataset}/{part}/{aggregation}/{iteration}'.format(dataset=dataset,
-                                                                                   part=part,
+                    './datasets/{dataset}/{fold}/train'.format(dataset=dataset, fold=fold),
+                    './datasets/{dataset}/{fold}/{aggregation}/{iteration}'.format(dataset=dataset,
+                                                                                   fold=fold,
                                                                                    aggregation=agg,
                                                                                    iteration=i),
-                    './datasets/{dataset}/{part}/{aggregation}/{iteration}'.format(dataset=dataset,
-                                                                                   part=part,
-                                                                                   aggregation=agg,
-                                                                                   iteration=i),
-                    './ckpts/{dataset}/{part}/{aggregation}/labeled'.format(dataset=dataset,
-                                                                            part=part,
-                                                                            aggregation=agg),
-                    './ckpts/{dataset}/{part}/{aggregation}/raw'.format(dataset=dataset,
-                                                                        part=part,
-                                                                        aggregation=agg),
-                    './ckpts/{dataset}/{part}/{aggregation}/{iteration}/intermediate'.format(dataset=dataset,
-                                                                                             part=part,
+                    './ckpts/{dataset}/{fold}/labeled'.format(dataset=dataset, fold=fold),
+                    './ckpts/{dataset}/{fold}/raw'.format(dataset=dataset, fold=fold),
+                    './ckpts/{dataset}/{fold}/{aggregation}/{iteration}/intermediate'.format(dataset=dataset,
+                                                                                             fold=fold,
                                                                                              aggregation=agg,
                                                                                              iteration=i),
-                    './logs/{dataset}/{part}/{aggregation}/'.format(dataset=dataset,
-                                                                    part=part,
+                    './logs/{dataset}/{fold}/{aggregation}/'.format(dataset=dataset,
+                                                                    fold=fold,
                                                                     aggregation=agg)
                 ]
+                # Remove and re-create folders
                 for _path in _paths:
+                    shutil.rmtree(_paths)
                     os.makedirs(_path, exist_ok=True)
 
 
@@ -52,7 +44,7 @@ def set_conll04_arguments(parser):
                         action='store',
                         required=True)
 
-    parser.add_argument('--part',
+    parser.add_argument('--fold',
                         required=True,
                         type=int,
                         action='store')
@@ -61,11 +53,6 @@ def set_conll04_arguments(parser):
                         required=True,
                         type=str,
                         action='store')
-    # parser.add_argument('--skip_first_iter',
-    #                     required=False,
-    #                     type=bool,
-    #                     default=False,
-    #                     action='store')
     return parser
 
 
@@ -75,43 +62,39 @@ args = parser.parse_args()
 
 
 if __name__ == '__main__':
-    LABELED_PATH = './datasets/{dataset}/{part}/train/labeled.json'.format(dataset=args.dataset, part=args.part)
-    UNLABELED_PATH = './datasets/{dataset}/{part}/train/unlabeled.json'.format(dataset=args.dataset, part=args.part)
-    RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/{part}/{aggregation}/{iteration}/raw.json'.format(
+    LABELED_PATH = './datasets/{dataset}/folds/{fold}/labeled.json'.format(dataset=args.dataset, fold=args.fold)
+    UNLABELED_PATH = './datasets/{dataset}/folds/{fold}/unlabeled.json'.format(dataset=args.dataset, fold=args.fold)
+    RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/folds/{fold}/raw.json'.format(dataset=args.dataset,
+                                                                                  fold=args.fold)
+    SELECTED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/selected.json'.format(
         dataset=args.dataset,
-        part=args.part,
+        fold=args.fold,
         aggregation=args.aggregation,
         iteration='{iteration}'
     )
-    SELECTED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{part}/{aggregation}/{iteration}/selected.json'.format(
+    UNIFIED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/unified.json'.format(
         dataset=args.dataset,
-        part=args.part,
+        fold=args.fold,
         aggregation=args.aggregation,
         iteration='{iteration}'
     )
-    UNIFIED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{part}/{aggregation}/{iteration}/unified.json'.format(
+    LABELED_MODEL_PATH = './ckpts/{dataset}/{fold}/labeled/labeled'.format(
         dataset=args.dataset,
-        part=args.part,
+        fold=args.fold
+    )
+    RAW_MODEL_PATH = './ckpts/{dataset}/{fold}/raw/raw'.format(
+        dataset=args.dataset,
+        fold=args.fold
+    )
+    INTERMEDIATE_MODEL_PATH = './ckpts/{dataset}/{fold}/{aggregation}/{iteration}/intermediate/intermediate'.format(
+        dataset=args.dataset,
+        fold=args.fold,
         aggregation=args.aggregation,
         iteration='{iteration}'
     )
-    LABELED_MODEL_PATH = './ckpts/{dataset}/{part}/labeled/labeled'.format(
+    LOG_PATH = './logs/{dataset}/{fold}/{aggregation}/log.txt'.format(
         dataset=args.dataset,
-        part=args.part
-    )
-    RAW_MODEL_PATH = './ckpts/{dataset}/{part}/raw/raw'.format(
-        dataset=args.dataset,
-        part=args.part
-    )
-    INTERMEDIATE_MODEL_PATH = './ckpts/{dataset}/{part}/{aggregation}/{iteration}/intermediate/intermediate'.format(
-        dataset=args.dataset,
-        part=args.part,
-        aggregation=args.aggregation,
-        iteration='{iteration}'
-    )
-    LOG_PATH = './logs/{dataset}/{part}/{aggregation}/log.txt'.format(
-        dataset=args.dataset,
-        part=args.part,
+        fold=args.fold,
         aggregation=args.aggregation
     )
     AGGREGATION = args.aggregation
@@ -134,10 +117,10 @@ if __name__ == '__main__':
     #     if os.path.exists(path):
     #         os.makedirs(path, exist_ok=True)
 
-    # create_folder_for_ssl(args.dataset)
-    print('Checking data')
-    check_data(args.dataset)
-    print('Data is ok')
+    create_folder_for_ssl(args.dataset, 5)
+    # print('Checking data')
+    # check_data(args.dataset)
+    # print('Data is ok')
 
     # Different ways to compute aggregation function: random, intersection, weighted
     # Number of iterations = 1, 2, 4, 6, 8, 10
