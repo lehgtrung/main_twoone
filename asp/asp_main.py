@@ -10,10 +10,10 @@ def conll04_script():
         --mode train \
         --num_layers 3 \
         --batch_size 8  \
-        --evaluate_interval 500 \
+        --evaluate_interval 1000 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-        --max_epoches 2000 \
+        --max_epoches 10000 \
         --max_steps 500 \
         --model_class JointModel \
         --crf None  \
