@@ -1,7 +1,7 @@
-import random
 from .asp_ult import *
 from tqdm import tqdm
-import glob, os
+from .asp_converter import *
+from .asp_checker import *
 
 
 def conll04_script():
@@ -76,49 +76,11 @@ def conll04_script():
     return CONLL04_SCRIPT
 
 
-def convert_solution_to_data(tokens, solution):
-    data_point = {
-        'tokens': tokens,
-        'entities': [],
-        'relations': []
-    }
-    for atom in solution:
-        if match_form(atom) == 'entity':
-            entity_type, word = extract_from_atom(atom, 'entity')
-            start, end = word.split('+')
-            data_point['entities'].append([
-                int(start),
-                int(end),
-                polish_type(entity_type)
-            ])
-        else:
-            relation_type, head_word, tail_word = extract_from_atom(atom, 'relation')
-            hstart, hend = head_word.split('+')
-            tstart, tend = tail_word.split('+')
-            data_point['relations'].append([
-                int(hstart),
-                int(hend),
-                int(tstart),
-                int(tend),
-                polish_type(relation_type)
-            ])
-    return data_point
-
-
-def convert_solutions_back(solution):
-    es = []
-    rs = []
-    for atom in solution:
-        atom = atom.replace('ok(', '', 1).replace(')', '', 1) + '.'
-        if atom.startswith('loc(') or atom.startswith('peop(') or \
-                atom.startswith('org(') or atom.startswith('other('):
-            es.append(atom)
-        else:
-            rs.append(atom)
-    return es, rs
-
-
-def verify_and_infer(entities, relations, inference_program):
+def verify_and_infer(entities, relations, inference_program, model_type):
+    assert model_type in ['twoone', 'spert']
+    if model_type == 'spert':
+        entities = spert_to_twoone(entities, relations, 'entity')
+        relations = spert_to_twoone(entities, relations, 'relation')
     final_outputs = []
     # Remove connected components
     e_atoms = convert_original_to_atoms(entities, 'entity')
@@ -153,14 +115,14 @@ def verify_and_infer_file(input_path, output_path, aggregation):
         relations = row['relations']
 
         # First, check if the prediction satisfiable
-        satisfiable = is_satisfiable(entities, relations, satisfiable_program)
+        satisfiable = is_satisfiable(entities, relations, satisfiable_program, model_type='twoone')
 
         # If NOT satisfiable
         if not satisfiable:
             print(f'{i}: unsatisfiable')
 
         if not satisfiable:
-            final_outputs, atoms = verify_and_infer(entities, relations, inference_program)
+            final_outputs, atoms = verify_and_infer(entities, relations, inference_program, model_type='twoone')
 
             atoms = remove_wrap(atoms, wrap_type='atom')
             word_atoms = convert_position_to_word_atoms(tokens, atoms)
@@ -203,88 +165,6 @@ def verify_and_infer_file(input_path, output_path, aggregation):
         json.dump(data_points, f)
 
 
-def unite_atoms(outputs, aggregation):
-    if aggregation == 'intersection':
-        output = answer_sets_intersection(outputs)
-    elif aggregation == 'random':
-        output = answer_sets_randomly_selection(outputs)
-    elif aggregation == 'weighted':
-        output = answer_sets_randomly_selection(outputs)
-    else:
-        raise ValueError('Wrong aggregation value')
-
-    if len(output) == 0:
-        return [], [], []
-    # Compute weight
-    eweights = []
-    rweights = []
-
-    for atom in output:
-        weight = 0
-        for answer_set in outputs:
-            if atom + '.' in answer_set:
-                weight += 1
-        weight = weight / len(outputs)
-        if match_form(atom) == 'entity':
-            eweights.append(weight)
-        else:
-            rweights.append(weight)
-    assert len(output) == len(eweights) + len(rweights)
-    return output, eweights, rweights
-
-
-def answer_sets_randomly_selection(answer_sets):
-    # Number of times an atom appears in each answer_set / total number of answer sets
-    if not answer_sets:
-        return []
-    return random.choice(answer_sets)
-
-
-def answer_sets_intersection(answer_sets):
-    # Number of times an atom appears in each answer_set / total number of answer sets
-    if not answer_sets:
-        return []
-    inter = set(answer_sets[0])
-    for answer_set in answer_sets:
-        inter = inter.intersection(answer_set)
-    return inter
-
-
-def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger):
-    with open('asp/satisfiable.lp') as f:
-        satisfiable_program = f.read()
-    count = 0
-    with open(raw_pseudo_labeled_path, 'r') as f:
-        data = json.load(f)
-        for row in data:
-            if not is_satisfiable(row['entities'], row['relations'], satisfiable_program):
-                count += 1
-    logger.info('Number of unsatisfiable sentences: {}'.format(count))
-    if count == 0:
-        return 'satisfiable'
-    if iteration >= max_iterations:
-        return 'max_iter'
-    return 'no'
-
-
-def labeled_model_exists(path):
-    if os.path.exists(os.path.join(os.path.dirname(path), 'labeled.pt')):
-        return True
-    return False
-
-
-def unify_two_datasets(labeled_path, pseudo_path, output_path):
-    with open(labeled_path, 'r') as f:
-        labeled = json.load(f)
-        for line in labeled:
-            line['eweights'] = [1.0 for _ in range(len(line['entities']))]
-            line['rweights'] = [1.0 for _ in range(len(line['relations']))]
-    with open(pseudo_path, 'r') as f:
-        pseudo = json.load(f)
-    with open(output_path, 'w') as f:
-        json.dump(labeled + pseudo, f)
-
-
 def curriculum_training(labeled_path,
                         unlabeled_path,
                         raw_pseudo_labeled_path,
@@ -315,10 +195,6 @@ def curriculum_training(labeled_path,
 
     iteration = 0
     while True:
-        # if skip_first_iter:
-        #     iteration += 1
-        #     skip_first_iter = False
-        #     continue
         formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
         formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
         formatted_unified_pseudo_labeled_path = unified_pseudo_labeled_path.format(iteration=iteration)

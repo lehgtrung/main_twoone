@@ -95,15 +95,13 @@ if __name__ == '__main__':
         aggregation=args.aggregation,
         iteration='{iteration}'
     )
-    LABELED_MODEL_PATH = './ckpts/{dataset}/{part}/{aggregation}/labeled/labeled'.format(
+    LABELED_MODEL_PATH = './ckpts/{dataset}/{part}/labeled/labeled'.format(
         dataset=args.dataset,
-        part=args.part,
-        aggregation=args.aggregation
+        part=args.part
     )
-    RAW_MODEL_PATH = './ckpts/{dataset}/{part}/{aggregation}/raw/raw'.format(
+    RAW_MODEL_PATH = './ckpts/{dataset}/{part}/raw/raw'.format(
         dataset=args.dataset,
-        part=args.part,
-        aggregation=args.aggregation
+        part=args.part
     )
     INTERMEDIATE_MODEL_PATH = './ckpts/{dataset}/{part}/{aggregation}/{iteration}/intermediate/intermediate'.format(
         dataset=args.dataset,
@@ -164,7 +162,7 @@ if __name__ == '__main__':
                         intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
                         logger=logger,
                         aggregation=configs['AGGREGATION'],
-                        max_iterations=4
+                        max_iterations=5
                     )
 
 
