@@ -35,7 +35,7 @@ def create_folder_for_ssl(dataset, max_iter):
                 ]
                 # Remove and re-create folders
                 for _path in _paths:
-                    shutil.rmtree(_paths)
+                    shutil.rmtree(_path)
                     os.makedirs(_path, exist_ok=True)
 
 
