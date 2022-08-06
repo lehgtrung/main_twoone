@@ -64,8 +64,12 @@ args = parser.parse_args()
 if __name__ == '__main__':
     LABELED_PATH = './datasets/{dataset}/folds/{fold}/labeled.json'.format(dataset=args.dataset, fold=args.fold)
     UNLABELED_PATH = './datasets/{dataset}/folds/{fold}/unlabeled.json'.format(dataset=args.dataset, fold=args.fold)
-    RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/folds/{fold}/raw.json'.format(dataset=args.dataset,
-                                                                                  fold=args.fold)
+    RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/raw.json'.format(
+        dataset=args.dataset,
+        fold=args.fold,
+        aggregation=args.aggregation,
+        iteration='{iteration}'
+    )
     SELECTED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/selected.json'.format(
         dataset=args.dataset,
         fold=args.fold,

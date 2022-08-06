@@ -6,7 +6,7 @@ from .asp_converter import is_satisfiable
 from .asp_ult import match_form
 
 
-def labeled_model_exists(path):
+def model_exists(path):
     if os.path.exists(os.path.join(os.path.dirname(path), 'labeled.pt')):
         return True
     return False
