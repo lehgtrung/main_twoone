@@ -135,6 +135,7 @@ if __name__ == '__main__':
                         datefmt='%b %d %Y %H:%M:%S',
                         level=logging.DEBUG)
     logger = logging.getLogger()
+    logger.info(f'python asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
     curriculum_training(labeled_path=configs['LABELED_PATH'],
                         unlabeled_path=configs['UNLABELED_PATH'],
