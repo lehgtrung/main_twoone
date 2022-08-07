@@ -7,7 +7,7 @@ from .asp_ult import match_form
 
 
 def model_exists(path):
-    if os.path.exists(os.path.join(os.path.dirname(path), 'labeled.pt')):
+    if os.path.exists(os.path.join(os.path.dirname(path), os.path.basename(path) + '.pt')):
         return True
     return False
 
