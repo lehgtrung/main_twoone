@@ -53,6 +53,7 @@ def set_conll04_arguments(parser):
                         required=True,
                         type=str,
                         action='store')
+
     return parser
 
 
@@ -121,7 +122,8 @@ if __name__ == '__main__':
     #     if os.path.exists(path):
     #         os.makedirs(path, exist_ok=True)
 
-    # create_folder_for_ssl(args.dataset, 5)
+    create_folder_for_ssl(args.dataset, 5)
+    exit()
 
     # print('Checking data')
     # check_data(args.dataset)
