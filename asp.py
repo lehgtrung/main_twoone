@@ -121,8 +121,7 @@ if __name__ == '__main__':
     #     if os.path.exists(path):
     #         os.makedirs(path, exist_ok=True)
 
-    create_folder_for_ssl(args.dataset, 5)
-    exit()
+    # create_folder_for_ssl(args.dataset, 5)
 
     # print('Checking data')
     # check_data(args.dataset)
