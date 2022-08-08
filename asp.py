@@ -121,11 +121,11 @@ if __name__ == '__main__':
     #     if os.path.exists(path):
     #         os.makedirs(path, exist_ok=True)
 
-    # create_folder_for_ssl(args.dataset, 5)
+    create_folder_for_ssl(args.dataset, 5)
 
-    print('Checking data')
-    check_data(args.dataset)
-    print('Data is ok')
+    # print('Checking data')
+    # check_data(args.dataset)
+    # print('Data is ok')
 
     # Different ways to compute aggregation function: random, intersection, weighted
     # Number of iterations = 1, 2, 4, 6, 8, 10
