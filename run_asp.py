@@ -61,61 +61,69 @@ parser = argparse.ArgumentParser(description='CONLL04')
 parser = set_conll04_arguments(parser)
 args = parser.parse_args()
 
+LABELED_PATH = './datasets/{dataset}/folds/{fold}/labeled.json'.format(dataset=args.dataset, fold=args.fold)
+UNLABELED_PATH = './datasets/{dataset}/folds/{fold}/unlabeled.json'.format(dataset=args.dataset, fold=args.fold)
+RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/raw.json'.format(
+    dataset=args.dataset,
+    fold=args.fold,
+    aggregation=args.aggregation,
+    iteration='{iteration}'
+)
+SELECTED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/selected.json'.format(
+    dataset=args.dataset,
+    fold=args.fold,
+    aggregation=args.aggregation,
+    iteration='{iteration}'
+)
+UNIFIED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/unified.json'.format(
+    dataset=args.dataset,
+    fold=args.fold,
+    aggregation=args.aggregation,
+    iteration='{iteration}'
+)
+LABELED_MODEL_PATH = './ckpts/{dataset}/{fold}/labeled/labeled'.format(
+    dataset=args.dataset,
+    fold=args.fold
+)
+RAW_MODEL_PATH = './ckpts/{dataset}/{fold}/raw/raw'.format(
+    dataset=args.dataset,
+    fold=args.fold
+)
+INTERMEDIATE_MODEL_PATH = './ckpts/{dataset}/{fold}/{aggregation}/{iteration}/intermediate/intermediate'.format(
+    dataset=args.dataset,
+    fold=args.fold,
+    aggregation=args.aggregation,
+    iteration='{iteration}'
+)
+LOG_PATH = './logs/{dataset}/{fold}/{aggregation}/log.txt'.format(
+    dataset=args.dataset,
+    fold=args.fold,
+    aggregation=args.aggregation
+)
+AGGREGATION = args.aggregation
+
+configs = {
+    'LABELED_PATH': LABELED_PATH,
+    'UNLABELED_PATH': UNLABELED_PATH,
+    'RAW_PSEUDO_LABELED_PATH': RAW_PSEUDO_LABELED_PATH,
+    'SELECTED_PSEUDO_LABELED_PATH': SELECTED_PSEUDO_LABELED_PATH,
+    'UNIFIED_PSEUDO_LABELED_PATH': UNIFIED_PSEUDO_LABELED_PATH,
+    'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
+    'RAW_MODEL_PATH': RAW_MODEL_PATH,
+    'INTERMEDIATE_MODEL_PATH': INTERMEDIATE_MODEL_PATH,
+    'LOG_PATH': LOG_PATH,
+    'AGGREGATION': AGGREGATION
+}
+
+logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
+                        format='%(asctime)s \n%(message)s\n',
+                        datefmt='%b %d %Y %H:%M:%S',
+                        level=logging.DEBUG)
+logger = logging.getLogger()
+logger.info(f'python asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
+
 
 if __name__ == '__main__':
-    LABELED_PATH = './datasets/{dataset}/folds/{fold}/labeled.json'.format(dataset=args.dataset, fold=args.fold)
-    UNLABELED_PATH = './datasets/{dataset}/folds/{fold}/unlabeled.json'.format(dataset=args.dataset, fold=args.fold)
-    RAW_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/raw.json'.format(
-        dataset=args.dataset,
-        fold=args.fold,
-        aggregation=args.aggregation,
-        iteration='{iteration}'
-    )
-    SELECTED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/selected.json'.format(
-        dataset=args.dataset,
-        fold=args.fold,
-        aggregation=args.aggregation,
-        iteration='{iteration}'
-    )
-    UNIFIED_PSEUDO_LABELED_PATH = './datasets/{dataset}/{fold}/{aggregation}/{iteration}/unified.json'.format(
-        dataset=args.dataset,
-        fold=args.fold,
-        aggregation=args.aggregation,
-        iteration='{iteration}'
-    )
-    LABELED_MODEL_PATH = './ckpts/{dataset}/{fold}/labeled/labeled'.format(
-        dataset=args.dataset,
-        fold=args.fold
-    )
-    RAW_MODEL_PATH = './ckpts/{dataset}/{fold}/raw/raw'.format(
-        dataset=args.dataset,
-        fold=args.fold
-    )
-    INTERMEDIATE_MODEL_PATH = './ckpts/{dataset}/{fold}/{aggregation}/{iteration}/intermediate/intermediate'.format(
-        dataset=args.dataset,
-        fold=args.fold,
-        aggregation=args.aggregation,
-        iteration='{iteration}'
-    )
-    LOG_PATH = './logs/{dataset}/{fold}/{aggregation}/log.txt'.format(
-        dataset=args.dataset,
-        fold=args.fold,
-        aggregation=args.aggregation
-    )
-    AGGREGATION = args.aggregation
-
-    configs = {
-        'LABELED_PATH': LABELED_PATH,
-        'UNLABELED_PATH': UNLABELED_PATH,
-        'RAW_PSEUDO_LABELED_PATH': RAW_PSEUDO_LABELED_PATH,
-        'SELECTED_PSEUDO_LABELED_PATH': SELECTED_PSEUDO_LABELED_PATH,
-        'UNIFIED_PSEUDO_LABELED_PATH': UNIFIED_PSEUDO_LABELED_PATH,
-        'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
-        'RAW_MODEL_PATH': RAW_MODEL_PATH,
-        'INTERMEDIATE_MODEL_PATH': INTERMEDIATE_MODEL_PATH,
-        'LOG_PATH': LOG_PATH,
-        'AGGREGATION': AGGREGATION
-    }
 
     # for key in configs:
     #     path = os.path.dirname(configs[key])
@@ -135,13 +143,6 @@ if __name__ == '__main__':
     # Change percentage: 10%, 30%, 50%, 70%, 90%
     # 3 datasets, 2 models
     # Record training time
-
-    logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
-                        format='%(asctime)s \n%(message)s\n',
-                        datefmt='%b %d %Y %H:%M:%S',
-                        level=logging.DEBUG)
-    logger = logging.getLogger()
-    logger.info(f'python asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
     curriculum_training(labeled_path=configs['LABELED_PATH'],
                         unlabeled_path=configs['UNLABELED_PATH'],

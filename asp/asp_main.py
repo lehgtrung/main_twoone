@@ -11,7 +11,7 @@ np.random.seed(0)
 
 
 def conll04_script():
-    train_script_labeled = """
+    train_script = """
         python -u ./main.py \
         --mode train \
         --num_layers 3 \
@@ -20,7 +20,7 @@ def conll04_script():
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 2000 \
-        --max_steps 15000 \
+        --max_steps 30000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
@@ -39,34 +39,6 @@ def conll04_script():
         --model_write_ckpt {model_write_ckpt} \
         --train_path {train_path}
         """
-    train_script_pseudo = """
-            python -u ./main.py \
-            --mode train \
-            --num_layers 3 \
-            --batch_size 8  \
-            --evaluate_interval 1000 \
-            --dataset CoNLL04 \
-            --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-            --max_epoches 2000 \
-            --max_steps 15000 \
-            --model_class JointModel \
-            --crf None  \
-            --optimizer adam \
-            --lr 0.001  \
-            --tag_form iob2 \
-            --cased 0  \
-            --token_emb_dim 100 \
-            --char_emb_dim 30 \
-            --char_encoder lstm  \
-            --lm_emb_dim 4096 \
-            --head_emb_dim 768 \
-            --lm_emb_path ./wv/albert.conll04_with_heads.pkl \
-            --hidden_dim 200     --ner_tag_vocab_size 9 \
-            --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
-            --grad_period 1 --warm_steps 1000 \
-            --model_write_ckpt {model_write_ckpt} \
-            --train_path {train_path}
-            """
     predict_script = """
             python -u ./main.py \
             --mode predict \
@@ -103,8 +75,7 @@ def conll04_script():
             --model_read_ckpt {model_read_ckpt}
     """
     CONLL04_SCRIPT = {
-        'train_labeled': train_script_labeled,
-        'train_pseudo': train_script_pseudo,
+        'train': train_script,
         'eval': eval_script,
         'predict': predict_script
     }
@@ -217,8 +188,7 @@ def curriculum_training(labeled_path,
                         max_iterations,
                         ):
     SCRIPT = conll04_script()
-    TRAIN_SCRIPT_LABELED = SCRIPT['train_labeled']
-    TRAIN_SCRIPT_PSEUDO = SCRIPT['train_pseudo']
+    TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
 
     logger.info(f'Labeled path: {labeled_path}')
@@ -226,8 +196,8 @@ def curriculum_training(labeled_path,
 
     # Step 1: Train on labeled data
     if not model_exists(labeled_model_path):
-        script = TRAIN_SCRIPT_LABELED.format(model_write_ckpt=labeled_model_path,
-                                             train_path=labeled_path)
+        script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
+                                     train_path=labeled_path)
         logger.info('Train on labeled data')
         subprocess.run(script, shell=True, check=True)
     else:
@@ -236,6 +206,7 @@ def curriculum_training(labeled_path,
     iteration = 0
     while True:
         formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
+        formatted_raw_pseudo_labeled_path_bk = raw_pseudo_labeled_path.format(iteration=iteration) + '.bk'
         formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
         formatted_unified_pseudo_labeled_path = unified_pseudo_labeled_path.format(iteration=iteration)
         formatted_intermediate_model_path = intermediate_model_path.format(iteration=iteration)
@@ -267,9 +238,19 @@ def curriculum_training(labeled_path,
         if iteration == 0:
             if not model_exists(raw_model_path):
                 logger.info('Round #{}: Retrain on raw pseudo labels'.format(iteration))
-                script = TRAIN_SCRIPT_PSEUDO.format(model_write_ckpt=raw_model_path,
-                                                    train_path=formatted_raw_pseudo_labeled_path)
+                script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
+                                             train_path=formatted_raw_pseudo_labeled_path)
                 subprocess.run(script, shell=True, check=True)
+                # Make prediction from raw model and check number of unsatisfiable
+                logger.info('Round #{}: Make prediction from raw model and check convergence'.format(iteration))
+                script = PREDICT_SCRIPT.format(model_read_ckpt=raw_model_path,
+                                               predict_input_path=unlabeled_path,
+                                               predict_output_path=formatted_raw_pseudo_labeled_path_bk)
+                subprocess.run(script, shell=True, check=True)
+                check_convergence(iteration=iteration,
+                                  max_iterations=max_iterations,
+                                  raw_pseudo_labeled_path=formatted_raw_pseudo_labeled_path_bk,
+                                  logger=logger)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
@@ -287,8 +268,8 @@ def curriculum_training(labeled_path,
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
-        script = TRAIN_SCRIPT_PSEUDO.format(model_write_ckpt=formatted_intermediate_model_path,
-                                            train_path=formatted_unified_pseudo_labeled_path)
+        script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
+                                     train_path=formatted_unified_pseudo_labeled_path)
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
