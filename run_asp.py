@@ -40,6 +40,7 @@ def create_folder_for_ssl(dataset, max_iter):
 
 
 def set_conll04_arguments_asp(parser):
+    print('READ ARGUMENTS FROM ASP')
     parser.add_argument('--aggregation',
                         action='store',
                         required=True)

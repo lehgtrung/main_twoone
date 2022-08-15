@@ -47,7 +47,7 @@ def predict(args):
 
 
 parser = argparse.ArgumentParser(description='Arguments for training.')
-# parser = set_conll04_arguments_main(parser)
+parser = set_conll04_arguments_main(parser)
 args = parser.parse_args()
 
 # Constants
