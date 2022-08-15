@@ -121,7 +121,7 @@ if __name__ == '__main__':
                         format='%(asctime)s \n%(message)s\n',
                         datefmt='%b %d %Y %H:%M:%S',
                         level=logging.DEBUG)
-    logger = logging.getLogger()
+    logger = logging.getLogger('root')
     logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
     # for key in configs:

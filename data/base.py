@@ -12,8 +12,7 @@ from utils import *
 from itertools import combinations
 
 import logging
-logging.basicConfig()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('root')
 logger.info('HELLO FROM BASE DATA')
 
 
@@ -74,7 +73,8 @@ class Trainer:
                     adjust_learning_rate(model.optimizer, lr=_lr)
                     if global_steps % 10 == 0:
                         print(f"warm up: learning rate was adjusted to {_lr}")
-                
+                        logger.info(f"warm up: learning rate was adjusted to {_lr}")
+
                 loss = model.train_step(batch)['loss'].detach().cpu().numpy()
                 losses.append(loss)
                 toc = time.time()
