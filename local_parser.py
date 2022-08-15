@@ -11,6 +11,7 @@ def none_or_int(value):
 
 
 def set_conll04_arguments_main(parser):
+    print('READ ARGUMENTS FROM MAIN')
     parser.add_argument('--mode',
                         default='train',
                         action='store', )
