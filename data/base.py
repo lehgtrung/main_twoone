@@ -11,9 +11,7 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations
 
-import logging
-logger = logging.getLogger('root')
-logger.info('HELLO FROM BASE DATA')
+from base_logger import logger
 
 
 class Trainer:
