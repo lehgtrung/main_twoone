@@ -11,6 +11,15 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations
 
+import logging
+with open('configs.json', 'r') as f:
+    configs = json.load(f)
+logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+                    format='%(asctime)s \n%(message)s\n',
+                    datefmt='%b %d %Y %H:%M:%S',
+                    level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 class Trainer:
     
@@ -69,6 +78,7 @@ class Trainer:
                     adjust_learning_rate(model.optimizer, lr=_lr)
                     if global_steps % 10 == 0:
                         print(f"warm up: learning rate was adjusted to {_lr}")
+                        logger.info(f"warm up: learning rate was adjusted to {_lr}")
 
                 loss = model.train_step(batch)['loss'].detach().cpu().numpy()
                 losses.append(loss)

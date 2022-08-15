@@ -23,7 +23,7 @@ logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
                     format='%(asctime)s \n%(message)s\n',
                     datefmt='%b %d %Y %H:%M:%S',
                     level=logging.DEBUG)
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 ### RE
 
