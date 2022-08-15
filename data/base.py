@@ -11,12 +11,6 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations
 
-from base_logger import logger
-fhan = logger.handlers[0]
-filename = fhan.baseFilename
-print('fhan.baseFilename: ', fhan.baseFilename)
-exit()
-
 
 class Trainer:
     
@@ -75,7 +69,6 @@ class Trainer:
                     adjust_learning_rate(model.optimizer, lr=_lr)
                     if global_steps % 10 == 0:
                         print(f"warm up: learning rate was adjusted to {_lr}")
-                        logger.info(f"warm up: learning rate was adjusted to {_lr}")
 
                 loss = model.train_step(batch)['loss'].detach().cpu().numpy()
                 losses.append(loss)

@@ -3,7 +3,7 @@ import logging
 import os
 import argparse
 import shutil
-from base_logger import logger
+import json
 
 
 def check_data(dataset):
@@ -118,16 +118,14 @@ if __name__ == '__main__':
         'AGGREGATION': AGGREGATION
     }
 
-    # logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
-    #                     format='%(asctime)s \n%(message)s\n',
-    #                     datefmt='%b %d %Y %H:%M:%S',
-    #                     level=logging.DEBUG)
-    # logger = logging.getLogger()
-    fhan = logging.FileHandler(filename=configs['LOG_PATH'], mode='w')
-    formatter = logging.Formatter(fmt='%(asctime)s \n%(message)s\n',
-                                  datefmt='%b %d %Y %H:%M:%S')
-    fhan.setFormatter(formatter)
-    logger.addHandler(fhan)
+    with open('configs.json', 'w') as f:
+        json.dump(configs, f)
+
+    logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
+                        format='%(asctime)s \n%(message)s\n',
+                        datefmt='%b %d %Y %H:%M:%S',
+                        level=logging.DEBUG)
+    logger = logging.getLogger()
     logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
     # for key in configs:

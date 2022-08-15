@@ -16,8 +16,14 @@ from itertools import combinations, permutations
 from .basics import *
 from .base import *
 
-from base_logger import logger
-logger.info('HELLO FROM JOINT DATA')
+import logging
+with open('../configs.json', 'r') as f:
+    configs = json.load(f)
+logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+                    format='%(asctime)s \n%(message)s\n',
+                    datefmt='%b %d %Y %H:%M:%S',
+                    level=logging.DEBUG)
+logger = logging.getLogger()
 
 ### RE
 
