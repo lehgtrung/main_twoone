@@ -13,12 +13,13 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations, permutations
 
-from run_asp import logger
+import logging
 
 from .basics import *
 from .base import *
 
-
+logging.basicConfig()
+logger = logging.getLogger(__name__)
 
 ### RE
 
