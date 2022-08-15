@@ -12,6 +12,10 @@ from utils import *
 from itertools import combinations
 
 from base_logger import logger
+fhan = logger.handlers[0]
+filename = fhan.baseFilename
+print('fhan.baseFilename: ', fhan.baseFilename)
+exit()
 
 
 class Trainer:
