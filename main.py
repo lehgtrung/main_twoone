@@ -1,5 +1,5 @@
 
-from local_parser import set_conll04_arguments
+from local_parser import set_conll04_arguments_main
 from models import *
 from prediction_helper import make_prediction, load_model
 
@@ -47,7 +47,7 @@ def predict(args):
 
 
 parser = argparse.ArgumentParser(description='Arguments for training.')
-parser = set_conll04_arguments(parser)
+parser = set_conll04_arguments_main(parser)
 args = parser.parse_args()
 
 # Constants

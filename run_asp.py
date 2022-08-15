@@ -120,7 +120,7 @@ logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
                         datefmt='%b %d %Y %H:%M:%S',
                         level=logging.DEBUG)
 logger = logging.getLogger()
-logger.info(f'python asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
+logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
 
 if __name__ == '__main__':
