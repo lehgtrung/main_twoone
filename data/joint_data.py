@@ -20,6 +20,7 @@ from .base import *
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.info('HELLO FROM JOINT DATA')
 
 ### RE
 
