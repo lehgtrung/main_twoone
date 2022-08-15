@@ -17,7 +17,7 @@ from .basics import *
 from .base import *
 
 import logging
-with open('../configs.json', 'r') as f:
+with open('configs.json', 'r') as f:
     configs = json.load(f)
 logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
                     format='%(asctime)s \n%(message)s\n',
