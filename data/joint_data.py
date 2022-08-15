@@ -13,11 +13,10 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations, permutations
 
-import logging
-
 from .basics import *
 from .base import *
 
+import logging
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.info('HELLO FROM JOINT DATA')

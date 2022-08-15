@@ -9,7 +9,12 @@ import time
 from collections import defaultdict
 from torch.utils.data import Dataset, DataLoader
 from utils import *
-from itertools import combinations 
+from itertools import combinations
+
+import logging
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.info('HELLO FROM BASE DATA')
 
 
 class Trainer:
