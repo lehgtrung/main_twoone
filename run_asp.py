@@ -124,7 +124,7 @@ if __name__ == '__main__':
     #                     level=logging.DEBUG)
     # logger = logging.getLogger()
     fhan = logging.FileHandler(filename=configs['LOG_PATH'], mode='w')
-    formatter = logging.Formatter(fmt='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    formatter = logging.Formatter(fmt='%(asctime)s \n%(message)s\n',
                                   datefmt='%b %d %Y %H:%M:%S')
     fhan.setFormatter(formatter)
     logger.addHandler(fhan)

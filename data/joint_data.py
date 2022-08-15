@@ -16,9 +16,7 @@ from itertools import combinations, permutations
 from .basics import *
 from .base import *
 
-import logging
-logging.basicConfig()
-logger = logging.getLogger(__name__)
+from base_logger import logger
 logger.info('HELLO FROM JOINT DATA')
 
 ### RE
