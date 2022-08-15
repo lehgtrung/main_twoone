@@ -39,7 +39,7 @@ def create_folder_for_ssl(dataset, max_iter):
                     os.makedirs(_path, exist_ok=True)
 
 
-def set_conll04_arguments(parser):
+def set_conll04_arguments_asp(parser):
     parser.add_argument('--aggregation',
                         action='store',
                         required=True)
@@ -58,7 +58,7 @@ def set_conll04_arguments(parser):
 
 
 parser = argparse.ArgumentParser(description='CONLL04')
-parser = set_conll04_arguments(parser)
+parser = set_conll04_arguments_asp(parser)
 args = parser.parse_args()
 
 LABELED_PATH = './datasets/{dataset}/folds/{fold}/labeled.json'.format(dataset=args.dataset, fold=args.fold)
