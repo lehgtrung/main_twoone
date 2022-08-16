@@ -271,7 +271,7 @@ class JointTrainer(Trainer):
         if (e_f1 + r_f1) / 2 > self.max_f1[3]:
             self.max_f1[3] = (e_f1 + r_f1) / 2
             print('new max averaged entity f1 and relation f1 on valid!')
-            logger.info('new max averaged entity f1 and relation f1 on valid!')
+            # logger.info('new max averaged entity f1 and relation f1 on valid!')
 
             # log_info = f'''
             #         >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
@@ -289,7 +289,7 @@ class JointTrainer(Trainer):
         if (e_f1 + r_f1_wNER) / 2 > self.max_f1[4]:
             self.max_f1[4] = (e_f1 + r_f1_wNER) / 2
             # print('new max averaged entity f1 and relation f1 with NER on valid!')
-            logger.info('new max averaged entity f1 and relation f1 with NER on valid!')
+            # logger.info('new max averaged entity f1 and relation f1 with NER on valid!')
 
                 
 class JointTrainerMacroF1(JointTrainer):
