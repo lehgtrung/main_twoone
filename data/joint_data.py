@@ -227,7 +227,6 @@ class JointTrainer(Trainer):
                 sents, pred_relations, label_relations, verbose=verbose==2)
             rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = self._get_metrics(
                 sents, pred_relations_wNER, label_relations_wNER, verbose=verbose==3)
-        logger.info(f"Performance: {rets}")
         return rets
 
     def _evaluate_during_train(self, model=None, trainer_target=None, args=None):
@@ -238,27 +237,31 @@ class JointTrainer(Trainer):
         rets = trainer_target.evaluate_model(model, verbose=0, test_type='test')
         precision, recall, f1 = rets['entity_p'], rets['entity_r'], rets['entity_f1']
         print(f">> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        logger.info(f">> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p'], rets['relation_r'], rets['relation_f1']
         print(f">> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        logger.info(f">> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
         print(f">> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        logger.info(f">> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
         rets = trainer_target.evaluate_model(model, verbose=0, test_type='valid')
         precision, recall, f1 = rets['entity_p'], rets['entity_r'], rets['entity_f1']
         e_f1 = f1
         print(f">> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        logger.info(f">> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p'], rets['relation_r'], rets['relation_f1']
         r_f1 = f1
         print(f">> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        logger.info(f">> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
         r_f1_wNER = f1
         print(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        logger.info(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+
+        log_info = f'''
+        >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+        >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+        >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+        >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+        >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+        >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+        '''
+        logger.info(log_info)
 
         if e_f1 > self.max_f1[0]:
             self.max_f1[0] = e_f1
