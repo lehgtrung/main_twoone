@@ -252,6 +252,8 @@ def curriculum_training(labeled_path,
                                   max_iterations=max_iterations,
                                   raw_pseudo_labeled_path=formatted_raw_pseudo_labeled_path_bk,
                                   logger=logger)
+                script = EVAL_SCRIPT.format(model_read_ckpt=raw_model_path)
+                subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
