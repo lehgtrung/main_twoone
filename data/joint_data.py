@@ -227,10 +227,9 @@ class JointTrainer(Trainer):
                 sents, pred_relations, label_relations, verbose=verbose==2)
             rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = self._get_metrics(
                 sents, pred_relations_wNER, label_relations_wNER, verbose=verbose==3)
-        
+        logger.info(f"Performance: {rets}")
         return rets
-    
-    
+
     def _evaluate_during_train(self, model=None, trainer_target=None, args=None):
         
         if not hasattr(self, 'max_f1'):

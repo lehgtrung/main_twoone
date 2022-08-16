@@ -190,6 +190,7 @@ def curriculum_training(labeled_path,
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
+    EVAL_SCRIPT = SCRIPT['eval']
 
     logger.info(f'Labeled path: {labeled_path}')
     logger.info(f'Aggregation function: {aggregation}')
@@ -270,6 +271,9 @@ def curriculum_training(labeled_path,
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
                                      train_path=formatted_unified_pseudo_labeled_path)
+        subprocess.run(script, shell=True, check=True)
+        # Eval the trained model
+        script = EVAL_SCRIPT.format(model_read_ckpt=formatted_intermediate_model_path)
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
