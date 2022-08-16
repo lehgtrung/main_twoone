@@ -16,14 +16,14 @@ from itertools import combinations, permutations
 from .basics import *
 from .base import *
 
-import logging
-with open('configs.json', 'r') as f:
-    configs = json.load(f)
-logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
-                    format='%(asctime)s \n%(message)s\n',
-                    datefmt='%b %d %Y %H:%M:%S',
-                    level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+# import logging
+# with open('configs.json', 'r') as f:
+#     configs = json.load(f)
+# logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+#                     format='%(asctime)s \n%(message)s\n',
+#                     datefmt='%b %d %Y %H:%M:%S',
+#                     level=logging.DEBUG)
+# logger = logging.getLogger(__name__)
 
 ### RE
 
@@ -273,15 +273,15 @@ class JointTrainer(Trainer):
             print('new max averaged entity f1 and relation f1 on valid!')
             logger.info('new max averaged entity f1 and relation f1 on valid!')
 
-            log_info = f'''
-                    >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-                    >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-                    >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-                    >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-                    >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-                    >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-                    '''
-            logger.info(log_info)
+            # log_info = f'''
+            #         >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+            #         >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+            #         >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+            #         >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+            #         >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+            #         >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+            #         '''
+            # logger.info(log_info)
 
             if args.model_write_ckpt:
                 model.save(args.model_write_ckpt)
