@@ -253,42 +253,42 @@ class JointTrainer(Trainer):
         r_f1_wNER = f1
         print(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
-        log_info = f'''
-        >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-        >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-        >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-        >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-        >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-        >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-        '''
-        logger.info(log_info)
-
         if e_f1 > self.max_f1[0]:
             self.max_f1[0] = e_f1
             print('new max entity f1 on valid!')
-            logger.info('new max entity f1 on valid!')
+            # logger.info('new max entity f1 on valid!')
 
         if r_f1 > self.max_f1[1]:
             self.max_f1[1] = r_f1
             print('new max relation f1 on valid!')
-            logger.info('new max relation f1 on valid!')
+            # logger.info('new max relation f1 on valid!')
 
         if r_f1_wNER > self.max_f1[2]:
             self.max_f1[2] = r_f1_wNER
             print('new max relation f1 with NER on valid!')
-            logger.info('new max relation f1 with NER on valid!')
+            # logger.info('new max relation f1 with NER on valid!')
 
         if (e_f1 + r_f1) / 2 > self.max_f1[3]:
             self.max_f1[3] = (e_f1 + r_f1) / 2
             print('new max averaged entity f1 and relation f1 on valid!')
             logger.info('new max averaged entity f1 and relation f1 on valid!')
 
+            log_info = f'''
+                    >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    '''
+            logger.info(log_info)
+
             if args.model_write_ckpt:
                 model.save(args.model_write_ckpt)
                 
         if (e_f1 + r_f1_wNER) / 2 > self.max_f1[4]:
             self.max_f1[4] = (e_f1 + r_f1_wNER) / 2
-            print('new max averaged entity f1 and relation f1 with NER on valid!')
+            # print('new max averaged entity f1 and relation f1 with NER on valid!')
             logger.info('new max averaged entity f1 and relation f1 with NER on valid!')
 
                 
