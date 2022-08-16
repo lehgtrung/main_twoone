@@ -56,6 +56,11 @@ def set_conll04_arguments_asp(parser):
                         type=str,
                         action='store')
 
+    parser.add_argument('--with_triplets',
+                        required=True,
+                        type=bool,
+                        action='store')
+
     return parser
 
 
@@ -157,6 +162,7 @@ if __name__ == '__main__':
                         intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
                         logger=logger,
                         aggregation=configs['AGGREGATION'],
+                        with_triplets=args.with_triplets,
                         max_iterations=5
                     )
 

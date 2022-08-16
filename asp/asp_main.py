@@ -107,11 +107,15 @@ def verify_and_infer(entities, relations, inference_program, model_type):
     return final_outputs, e_atoms + r_atoms
 
 
-def verify_and_infer_file(input_path, output_path, aggregation):
+def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
     with open(input_path, 'r') as f:
         input_data = json.load(f)
-    with open('asp/inference.lp') as f:
-        inference_program = f.read()
+    if with_triplets:
+        with open('asp/inference_triplets.lp') as f:
+            inference_program = f.read()
+    else:
+        with open('asp/inference.lp') as f:
+            inference_program = f.read()
     with open('asp/satisfiable.lp') as f:
         satisfiable_program = f.read()
     data_points = []
@@ -185,6 +189,7 @@ def curriculum_training(labeled_path,
                         intermediate_model_path,
                         logger,
                         aggregation,
+                        with_triplets,
                         max_iterations,
                         ):
     SCRIPT = conll04_script()
@@ -260,7 +265,8 @@ def curriculum_training(labeled_path,
         verify_and_infer_file(
             input_path=formatted_raw_pseudo_labeled_path,
             output_path=formatted_selected_pseudo_labeled_path,
-            aggregation=aggregation
+            aggregation=aggregation,
+            with_triplets=with_triplets
         )
 
         # Step 5 Unify labeled and selected pseudo labels
