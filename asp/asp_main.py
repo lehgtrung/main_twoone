@@ -15,12 +15,12 @@ def conll04_script():
         python -u ./main.py \
         --mode train \
         --num_layers 3 \
-        --batch_size 8  \
+        --batch_size 24  \
         --evaluate_interval 1000 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-        --max_epoches 2000 \
-        --max_steps 15000 \
+        --max_epoches 5000 \
+        --max_steps 20000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
@@ -210,7 +210,7 @@ def curriculum_training(labeled_path,
         logger.info('Labeled model exists, skip training ...')
 
     iteration = 0
-    while True:
+    while True: # 15000
         formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
         formatted_raw_pseudo_labeled_path_bk = raw_pseudo_labeled_path.format(iteration=iteration) + '.bk'
         formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
