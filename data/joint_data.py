@@ -16,14 +16,14 @@ from itertools import combinations, permutations
 from .basics import *
 from .base import *
 
-# import logging
-# with open('configs.json', 'r') as f:
-#     configs = json.load(f)
-# logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
-#                     format='%(asctime)s \n%(message)s\n',
-#                     datefmt='%b %d %Y %H:%M:%S',
-#                     level=logging.DEBUG)
-# logger = logging.getLogger(__name__)
+import logging
+with open('configs.json', 'r') as f:
+    configs = json.load(f)
+logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+                    format='%(asctime)s \n%(message)s\n',
+                    datefmt='%b %d %Y %H:%M:%S',
+                    level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 ### RE
 
@@ -237,59 +237,65 @@ class JointTrainer(Trainer):
         rets = trainer_target.evaluate_model(model, verbose=0, test_type='test')
         precision, recall, f1 = rets['entity_p'], rets['entity_r'], rets['entity_f1']
         print(f">> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p'], rets['relation_r'], rets['relation_f1']
         print(f">> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
         print(f">> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
         rets = trainer_target.evaluate_model(model, verbose=0, test_type='valid')
         precision, recall, f1 = rets['entity_p'], rets['entity_r'], rets['entity_f1']
         e_f1 = f1
         print(f">> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p'], rets['relation_r'], rets['relation_f1']
         r_f1 = f1
         print(f">> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
         precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
         r_f1_wNER = f1
         print(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
         if e_f1 > self.max_f1[0]:
             self.max_f1[0] = e_f1
             print('new max entity f1 on valid!')
-            # logger.info('new max entity f1 on valid!')
+            logger.info('new max entity f1 on valid!')
 
         if r_f1 > self.max_f1[1]:
             self.max_f1[1] = r_f1
             print('new max relation f1 on valid!')
-            # logger.info('new max relation f1 on valid!')
+            logger.info('new max relation f1 on valid!')
 
         if r_f1_wNER > self.max_f1[2]:
             self.max_f1[2] = r_f1_wNER
             print('new max relation f1 with NER on valid!')
-            # logger.info('new max relation f1 with NER on valid!')
+            logger.info('new max relation f1 with NER on valid!')
 
         if (e_f1 + r_f1) / 2 > self.max_f1[3]:
             self.max_f1[3] = (e_f1 + r_f1) / 2
             print('new max averaged entity f1 and relation f1 on valid!')
-            # logger.info('new max averaged entity f1 and relation f1 on valid!')
+            logger.info('new max averaged entity f1 and relation f1 on valid!')
 
-            # log_info = f'''
-            #         >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-            #         >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-            #         >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-            #         >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-            #         >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-            #         >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
-            #         '''
-            # logger.info(log_info)
+            log_info = f'''
+                    >> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    >> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}
+                    '''
+            logger.info(log_info)
 
             if args.model_write_ckpt:
                 model.save(args.model_write_ckpt)
                 
         if (e_f1 + r_f1_wNER) / 2 > self.max_f1[4]:
             self.max_f1[4] = (e_f1 + r_f1_wNER) / 2
-            # print('new max averaged entity f1 and relation f1 with NER on valid!')
-            # logger.info('new max averaged entity f1 and relation f1 with NER on valid!')
+            print('new max averaged entity f1 and relation f1 with NER on valid!')
+            logger.info('new max averaged entity f1 and relation f1 with NER on valid!')
 
                 
 class JointTrainerMacroF1(JointTrainer):

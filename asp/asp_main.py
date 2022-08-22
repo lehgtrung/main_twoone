@@ -15,12 +15,12 @@ def conll04_script():
         python -u ./main.py \
         --mode train \
         --num_layers 3 \
-        --batch_size 24  \
-        --evaluate_interval 1000 \
+        --batch_size 8  \
+        --evaluate_interval 100 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-        --max_epoches 5000 \
-        --max_steps 20000 \
+        --max_epoches 200 \
+        --max_steps 30000 \
         --model_class JointModel \
         --crf None  \
         --optimizer adam \
@@ -35,7 +35,7 @@ def conll04_script():
         --lm_emb_path ./wv/albert.conll04_with_heads.pkl \
         --hidden_dim 200     --ner_tag_vocab_size 9 \
         --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
-        --grad_period 1 --warm_steps 1000 \
+        --grad_period 1 --warm_steps 300 \
         --model_write_ckpt {model_write_ckpt} \
         --train_path {train_path}
         """

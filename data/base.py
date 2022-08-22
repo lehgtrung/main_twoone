@@ -11,6 +11,15 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations
 
+import logging
+with open('configs.json', 'r') as f:
+    configs = json.load(f)
+logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+                    format='%(asctime)s \n%(message)s\n',
+                    datefmt='%b %d %Y %H:%M:%S',
+                    level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 class Trainer:
     
@@ -58,6 +67,7 @@ class Trainer:
 
             if global_steps > args.max_steps:
                 print(f"reach max_steps, stop training")
+                logger.info(f"reach max_steps, stop training")
                 break
 
             tic = time.time()
@@ -69,6 +79,7 @@ class Trainer:
                     adjust_learning_rate(model.optimizer, lr=_lr)
                     if global_steps % 10 == 0:
                         print(f"warm up: learning rate was adjusted to {_lr}")
+                        logger.info(f"warm up: learning rate was adjusted to {_lr}")
 
                 loss = model.train_step(batch)['loss'].detach().cpu().numpy()
                 losses.append(loss)
@@ -80,6 +91,8 @@ class Trainer:
                     print(f"g_step {global_steps}, step {i+1}, "
                           f"avg_time {sum(times)/len(times):.3f}, "
                           f"loss:{sum(losses)/len(losses):.4f}")
+                    logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, "
+                                f"avg_time {sum(times)/len(times):.3f}, loss:{sum(losses)/len(losses):.4f}")
                     losses = []
                     times = []
 
@@ -88,6 +101,7 @@ class Trainer:
                 if global_steps % 1000 == 0:
                     _lr = learning_rate/(1+decay_rate*global_steps/1000)
                     print(f"learning rate was adjusted to {_lr}")
+                    logger.info(f"learning rate was adjusted to {_lr}")
                     adjust_learning_rate(model.optimizer, lr=_lr)
 
                 if global_steps % args.evaluate_interval == 0:
