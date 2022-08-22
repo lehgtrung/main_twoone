@@ -328,8 +328,8 @@ class JointModel(Tagger):
             'masks': Tensor
         }
         '''
-        print('_ner_tags.shape: ', inputs['_ner_tags'].shape)
-        print('_re_tags.shape: ', inputs['_re_tags'].shape)
+        #print('_ner_tags.shape: ', inputs['_ner_tags'].shape)
+        #print('_re_tags.shape: ', inputs['_re_tags'].shape)
         tic = time.time()
         inputs = self.forward_embeddings(inputs)
         toc = time.time()
@@ -340,14 +340,14 @@ class JointModel(Tagger):
         tic = time.time()
         re_tag_logits = self.re_tag_logits_layer(tab_embeddings)
         toc = time.time()
-        print('re_tag_logits time: ', toc - tic)
+        #print('re_tag_logits time: ', toc - tic)
         
         # use diagonal elements
         #ner_tag_embeddings = relation_embeddings.diagonal(dim1=1, dim2=2).permute(0, -1, 1)
         tic = time.time()
         ner_tag_logits = self.ner_tag_logits_layer(seq_embeddings)
         toc = time.time()
-        print('re_tag_logits time: ', toc - tic)
+        #print('re_tag_logits time: ', toc - tic)
         
         rets = inputs
         rets['ner_tag_logits'] = ner_tag_logits
