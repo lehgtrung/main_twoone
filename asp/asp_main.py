@@ -16,7 +16,7 @@ def conll04_script():
         --mode train \
         --num_layers 3 \
         --batch_size 8  \
-        --evaluate_interval 100 \
+        --evaluate_interval 500 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 200 \
@@ -226,6 +226,7 @@ def curriculum_training(labeled_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=formatted_raw_pseudo_labeled_path)
         logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
+        logger.info('=======================================================')
         subprocess.run(script, shell=True, check=True)
 
         # Step 2: check convergence
@@ -235,20 +236,24 @@ def curriculum_training(labeled_path,
                                       logger=logger)
         if converged == 'satisfiable':
             logger.info('Round #{}: Converged by satisfiable'.format(iteration))
+            logger.info('=======================================================')
             break
         elif converged == 'max_iter':
             logger.info('Round #{}: Converged by max iteration'.format(iteration))
+            logger.info('=======================================================')
             break
 
         # Step 3: Train a model on raw prediction
         if iteration == 0:
             if not model_exists(raw_model_path):
                 logger.info('Round #{}: Retrain on raw pseudo labels'.format(iteration))
+                logger.info('=======================================================')
                 script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                              train_path=formatted_raw_pseudo_labeled_path)
                 subprocess.run(script, shell=True, check=True)
                 # Make prediction from raw model and check number of unsatisfiable
                 logger.info('Round #{}: Make prediction from raw model and check convergence'.format(iteration))
+                logger.info('=======================================================')
                 script = PREDICT_SCRIPT.format(model_read_ckpt=raw_model_path,
                                                predict_input_path=unlabeled_path,
                                                predict_output_path=formatted_raw_pseudo_labeled_path_bk)
@@ -262,6 +267,7 @@ def curriculum_training(labeled_path,
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
+        logger.info('=======================================================')
         verify_and_infer_file(
             input_path=formatted_raw_pseudo_labeled_path,
             output_path=formatted_selected_pseudo_labeled_path,
@@ -271,12 +277,14 @@ def curriculum_training(labeled_path,
 
         # Step 5 Unify labeled and selected pseudo labels
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
+        logger.info('=======================================================')
         unify_two_datasets(labeled_path=labeled_path,
                            pseudo_path=formatted_selected_pseudo_labeled_path,
                            output_path=formatted_unified_pseudo_labeled_path)
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
+        logger.info('=======================================================')
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
                                      train_path=formatted_unified_pseudo_labeled_path)
         subprocess.run(script, shell=True, check=True)
