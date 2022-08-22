@@ -328,7 +328,8 @@ class JointModel(Tagger):
             'masks': Tensor
         }
         '''
-        print('inputs.shape: ', inputs)
+        print('_ner_tags.shape: ', inputs['_ner_tags'].shape)
+        print('_re_tags.shape: ', inputs['_re_tags'].shape)
         tic = time.time()
         inputs = self.forward_embeddings(inputs)
         toc = time.time()
