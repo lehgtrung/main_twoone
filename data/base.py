@@ -79,7 +79,7 @@ class Trainer:
                     adjust_learning_rate(model.optimizer, lr=_lr)
                     if global_steps % 10 == 0:
                         print(f"warm up: learning rate was adjusted to {_lr}")
-                        logger.info(f"g_step {global_steps}, epoch {i_epoch}, warm up: learning rate was adjusted to {_lr}")
+                        #logger.info(f"g_step {global_steps}, epoch {i_epoch}, warm up: learning rate was adjusted to {_lr}")
 
                 loss = model.train_step(batch)['loss'].detach().cpu().numpy()
                 losses.append(loss)
@@ -101,7 +101,7 @@ class Trainer:
                 if global_steps % 1000 == 0:
                     _lr = learning_rate/(1+decay_rate*global_steps/1000)
                     print(f"learning rate was adjusted to {_lr}")
-                    logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, learning rate was adjusted to {_lr}")
+                    #logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, learning rate was adjusted to {_lr}")
                     adjust_learning_rate(model.optimizer, lr=_lr)
 
                 if global_steps % args.evaluate_interval == 0:
