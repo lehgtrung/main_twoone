@@ -11,14 +11,14 @@ from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations
 
-import logging
-with open('configs.json', 'r') as f:
-    configs = json.load(f)
-logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
-                    format='%(asctime)s \n%(message)s\n',
-                    datefmt='%b %d %Y %H:%M:%S',
-                    level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+# import logging
+# with open('configs.json', 'r') as f:
+#     configs = json.load(f)
+# logging.basicConfig(filename=configs['LOG_PATH'], filemode='a',
+#                     format='%(asctime)s \n%(message)s\n',
+#                     datefmt='%b %d %Y %H:%M:%S',
+#                     level=logging.DEBUG)
+# logger = logging.getLogger(__name__)
 
 
 class Trainer:
@@ -67,7 +67,7 @@ class Trainer:
 
             if global_steps > args.max_steps:
                 print(f"reach max_steps, stop training")
-                logger.info(f"g_step {global_steps}, epoch {i_epoch}, reach max_steps, stop training")
+                # logger.info(f"g_step {global_steps}, epoch {i_epoch}, reach max_steps, stop training")
                 break
 
             tic = time.time()
@@ -91,8 +91,8 @@ class Trainer:
                     print(f"g_step {global_steps}, step {i+1}, "
                           f"avg_time {sum(times)/len(times):.3f}, "
                           f"loss:{sum(losses)/len(losses):.4f}")
-                    logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, "
-                                f"avg_time {sum(times)/len(times):.3f}, loss:{sum(losses)/len(losses):.4f}")
+                    # logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, "
+                    #             f"avg_time {sum(times)/len(times):.3f}, loss:{sum(losses)/len(losses):.4f}")
                     losses = []
                     times = []
 
