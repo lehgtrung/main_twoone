@@ -28,6 +28,11 @@ def set_conll04_arguments_main(parser):
                         default=None, type=none_or_str,
                         action='store', )
 
+    parser.add_argument('--log_path',
+                        default=None,
+                        type=none_or_str,
+                        action='store', )
+
     parser.add_argument('--pretrained_wv',
                         default=None, type=none_or_str,
                         action='store', )
