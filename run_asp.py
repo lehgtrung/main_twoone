@@ -135,6 +135,7 @@ if __name__ == '__main__':
     # logger = logging.getLogger()
     # logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
+    os.remove(configs['LOG_PATH'])
     logger = Logger(path=configs['LOG_PATH'])
     logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
