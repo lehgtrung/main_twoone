@@ -6,4 +6,4 @@ class Logger:
 
     def info(self, msg):
         with open(self.path, 'a') as f:
-            f.write(msg)
+            f.write(msg + '\n')
