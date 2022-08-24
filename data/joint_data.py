@@ -232,9 +232,7 @@ class JointTrainer(Trainer):
                 sents, pred_relations, label_relations, verbose=verbose==2)
             rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = self._get_metrics(
                 sents, pred_relations_wNER, label_relations_wNER, verbose=verbose==3)
-        log_info = f'''
-        >> ret: {rets}
-        '''
+        log_info = f'''>> ret: {rets}'''
         self.logger.info(log_info)
         return rets
 
@@ -278,12 +276,9 @@ class JointTrainer(Trainer):
             self.max_f1[3] = (e_f1 + r_f1) / 2
             print('new max averaged entity f1 and relation f1 on valid!')
 
-            log_info = f'''
-            >> test ret: {test_rets}
-            >> valid ret: {valid_rets}
-            '''
             self.logger.info(f'Latest model at: Epoch: {self.current_epoch}, global_step: {self.current_global_step}')
-            self.logger.info(log_info)
+            self.logger.info(f">> test ret: {test_rets}")
+            self.logger.info(f">> valid ret: {valid_rets}")
 
             if args.model_write_ckpt:
                 model.save(args.model_write_ckpt)
