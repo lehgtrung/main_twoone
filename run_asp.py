@@ -166,6 +166,7 @@ if __name__ == '__main__':
                         raw_model_path=configs['RAW_MODEL_PATH'],
                         intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
                         logger=logger,
+                        log_path=configs['LOG_PATH'],
                         aggregation=configs['AGGREGATION'],
                         with_triplets=args.with_triplets,
                         max_iterations=5
