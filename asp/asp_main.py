@@ -19,7 +19,7 @@ def conll04_script():
         --evaluate_interval 500 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-        --max_epoches 500 \
+        --max_epoches 100 \
         --max_steps 3000000 \
         --model_class JointModel \
         --crf None  \
@@ -210,7 +210,7 @@ def curriculum_training(labeled_path,
         logger.info('Labeled model exists, skip training ...')
 
     iteration = 0
-    while True: # 15000
+    while True:
         formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
         formatted_raw_pseudo_labeled_path_bk = raw_pseudo_labeled_path.format(iteration=iteration) + '.bk'
         formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
@@ -248,6 +248,10 @@ def curriculum_training(labeled_path,
             if not model_exists(raw_model_path):
                 logger.info('Round #{}: Retrain on raw pseudo labels'.format(iteration))
                 logger.info('=======================================================')
+                # Unify labeled and raw pseudo labels
+                unify_two_datasets(labeled_path=labeled_path,
+                                   pseudo_path=formatted_raw_pseudo_labeled_path,
+                                   output_path=formatted_raw_pseudo_labeled_path)
                 script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                              train_path=formatted_raw_pseudo_labeled_path)
                 subprocess.run(script, shell=True, check=True)
