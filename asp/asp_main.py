@@ -127,8 +127,8 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
         relations = row['relations']
 
         # Adhoc debug
-        if i == 740:
-            continue
+        # if i == 740:
+        #     continue
 
         # First, check if the prediction satisfiable
         satisfiable = is_satisfiable(entities, relations, satisfiable_program, model_type='twoone')
