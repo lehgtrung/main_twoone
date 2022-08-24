@@ -146,13 +146,14 @@ class JointDataLoader(DataLoader):
     
     
 class JointTrainer(Trainer):
-    def __init__(self, train_path, test_path, valid_path, log_path='',
+    def __init__(self, train_path, test_path, valid_path, log_path='', final=False,
                  batch_size=128, shuffle=True, model=None, num_workers=0, tag_form='iob2',
                  *args, **kargs):
         self.batch_size = batch_size
         self.model = model
         self.log_path = log_path
         self.logger = Logger(self.log_path)
+        self.final = final
         self.current_epoch = 0
         self.current_global_step = 0
         self.train = JointDataLoader(train_path, model=model, batch_size=batch_size, 
@@ -232,8 +233,9 @@ class JointTrainer(Trainer):
                 sents, pred_relations, label_relations, verbose=verbose==2)
             rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = self._get_metrics(
                 sents, pred_relations_wNER, label_relations_wNER, verbose=verbose==3)
-        log_info = f'''>> ret: {rets}'''
-        self.logger.info(log_info)
+        if self.final:
+            log_info = f'''>> ret: {rets}'''
+            self.logger.info(log_info)
         return rets
 
     def _evaluate_during_train(self, model=None, trainer_target=None, args=None):
