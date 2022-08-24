@@ -12,7 +12,7 @@ def model_exists(path):
     return False
 
 
-def unify_two_datasets(labeled_path, pseudo_path, output_path):
+def unify_two_datasets(labeled_path, pseudo_path, output_path, with_weight=False):
     with open(labeled_path, 'r') as f:
         labeled = json.load(f)
         for line in labeled:
@@ -20,6 +20,10 @@ def unify_two_datasets(labeled_path, pseudo_path, output_path):
             line['rweights'] = [1.0 for _ in range(len(line['relations']))]
     with open(pseudo_path, 'r') as f:
         pseudo = json.load(f)
+        if with_weight:
+            for line in pseudo:
+                line['eweights'] = [1.0 for _ in range(len(line['entities']))]
+                line['rweights'] = [1.0 for _ in range(len(line['relations']))]
     with open(output_path, 'w') as f:
         json.dump(labeled + pseudo, f)
 

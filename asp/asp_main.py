@@ -252,7 +252,8 @@ def curriculum_training(labeled_path,
                 logger.info('Round #{}: Unify labeled and raw pseudo labeled data'.format(iteration))
                 unify_two_datasets(labeled_path=labeled_path,
                                    pseudo_path=formatted_raw_pseudo_labeled_path,
-                                   output_path=formatted_raw_pseudo_labeled_path)
+                                   output_path=formatted_raw_pseudo_labeled_path,
+                                   with_weight=True)
                 script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
                                              train_path=formatted_raw_pseudo_labeled_path,
                                              log_path=log_path)
