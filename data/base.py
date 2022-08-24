@@ -63,23 +63,23 @@ class Trainer:
         learning_rate = args.lr
         for i_epoch in range(args.max_epoches):
 
+            # Current epoch
+            self.current_epoch = i_epoch
+
             global_steps = int(model.global_steps.data)
 
             if global_steps > args.max_steps:
                 print(f"reach max_steps, stop training")
-                # logger.info(f"g_step {global_steps}, epoch {i_epoch}, reach max_steps, stop training")
                 break
 
             tic = time.time()
             for i, batch in enumerate(trainer_source):
-                
                 # warm up
                 if global_steps < warm_steps:
                     _lr = learning_rate * (global_steps+1) / warm_steps
                     adjust_learning_rate(model.optimizer, lr=_lr)
                     if global_steps % 10 == 0:
                         print(f"warm up: learning rate was adjusted to {_lr}")
-                        #logger.info(f"g_step {global_steps}, epoch {i_epoch}, warm up: learning rate was adjusted to {_lr}")
 
                 loss = model.train_step(batch)['loss'].detach().cpu().numpy()
                 losses.append(loss)
@@ -87,12 +87,13 @@ class Trainer:
                 times.append(toc - tic)
 
                 global_steps = int(model.global_steps.data)
+                # Current global step
+                self.current_global_step = global_steps
+
                 if global_steps % 100 == 0:
                     print(f"g_step {global_steps}, step {i+1}, "
                           f"avg_time {sum(times)/len(times):.3f}, "
                           f"loss:{sum(losses)/len(losses):.4f}")
-                    # logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, "
-                    #             f"avg_time {sum(times)/len(times):.3f}, loss:{sum(losses)/len(losses):.4f}")
                     losses = []
                     times = []
 
@@ -101,7 +102,6 @@ class Trainer:
                 if global_steps % 1000 == 0:
                     _lr = learning_rate/(1+decay_rate*global_steps/1000)
                     print(f"learning rate was adjusted to {_lr}")
-                    #logger.info(f"g_step {global_steps}, step {i+1}, epoch {i_epoch}, learning rate was adjusted to {_lr}")
                     adjust_learning_rate(model.optimizer, lr=_lr)
 
                 if global_steps % args.evaluate_interval == 0:

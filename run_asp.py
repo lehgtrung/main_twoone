@@ -4,6 +4,7 @@ import os
 import argparse
 import shutil
 import json
+from logger import Logger
 
 
 def check_data(dataset):
@@ -57,7 +58,8 @@ def set_conll04_arguments_asp(parser):
                         action='store')
 
     parser.add_argument('--with_triplets',
-                        required=True,
+                        required=False,
+                        default=True,
                         type=bool,
                         action='store')
 
@@ -126,11 +128,14 @@ if __name__ == '__main__':
     with open('configs.json', 'w') as f:
         json.dump(configs, f)
 
-    logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
-                        format='%(asctime)s \n%(message)s\n',
-                        datefmt='%b %d %Y %H:%M:%S',
-                        level=logging.DEBUG)
-    logger = logging.getLogger()
+    # logging.basicConfig(filename=configs['LOG_PATH'], filemode='w',
+    #                     format='%(asctime)s \n%(message)s\n',
+    #                     datefmt='%b %d %Y %H:%M:%S',
+    #                     level=logging.DEBUG)
+    # logger = logging.getLogger()
+    # logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
+
+    logger = Logger(path=configs['LOG_PATH'])
     logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
     # for key in configs:

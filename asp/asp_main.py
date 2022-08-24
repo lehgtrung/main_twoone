@@ -37,7 +37,8 @@ def conll04_script():
         --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
         --grad_period 1 --warm_steps 300 \
         --model_write_ckpt {model_write_ckpt} \
-        --train_path {train_path}
+        --train_path {train_path} \
+        --log_path {log_path}
         """
     predict_script = """
             python -u ./main.py \
@@ -72,7 +73,8 @@ def conll04_script():
             --hidden_dim 200     --ner_tag_vocab_size 9 \
             --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
             --grad_period 1 --warm_steps 1000 \
-            --model_read_ckpt {model_read_ckpt}
+            --model_read_ckpt {model_read_ckpt} \
+            --log_path {log_path}
     """
     CONLL04_SCRIPT = {
         'train': train_script,
@@ -188,6 +190,7 @@ def curriculum_training(labeled_path,
                         raw_model_path,
                         intermediate_model_path,
                         logger,
+                        log_path,
                         aggregation,
                         with_triplets,
                         max_iterations,
@@ -203,7 +206,8 @@ def curriculum_training(labeled_path,
     # Step 1: Train on labeled data
     if not model_exists(labeled_model_path):
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
-                                     train_path=labeled_path)
+                                     train_path=labeled_path,
+                                     log_path=log_path)
         logger.info('Train on labeled data')
         subprocess.run(script, shell=True, check=True)
     else:
@@ -226,7 +230,6 @@ def curriculum_training(labeled_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=formatted_raw_pseudo_labeled_path)
         logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
-        logger.info('=======================================================')
         subprocess.run(script, shell=True, check=True)
 
         # Step 2: check convergence
@@ -236,28 +239,26 @@ def curriculum_training(labeled_path,
                                       logger=logger)
         if converged == 'satisfiable':
             logger.info('Round #{}: Converged by satisfiable'.format(iteration))
-            logger.info('=======================================================')
             break
         elif converged == 'max_iter':
             logger.info('Round #{}: Converged by max iteration'.format(iteration))
-            logger.info('=======================================================')
             break
 
         # Step 3: Train a model on raw prediction
         if iteration == 0:
             if not model_exists(raw_model_path):
                 logger.info('Round #{}: Retrain on raw pseudo labels'.format(iteration))
-                logger.info('=======================================================')
                 # Unify labeled and raw pseudo labels
+                logger.info('Round #{}: Unify labeled and raw pseudo labeled data'.format(iteration))
                 unify_two_datasets(labeled_path=labeled_path,
                                    pseudo_path=formatted_raw_pseudo_labeled_path,
                                    output_path=formatted_raw_pseudo_labeled_path)
                 script = TRAIN_SCRIPT.format(model_write_ckpt=raw_model_path,
-                                             train_path=formatted_raw_pseudo_labeled_path)
+                                             train_path=formatted_raw_pseudo_labeled_path,
+                                             log_path=log_path)
                 subprocess.run(script, shell=True, check=True)
                 # Make prediction from raw model and check number of unsatisfiable
                 logger.info('Round #{}: Make prediction from raw model and check convergence'.format(iteration))
-                logger.info('=======================================================')
                 script = PREDICT_SCRIPT.format(model_read_ckpt=raw_model_path,
                                                predict_input_path=unlabeled_path,
                                                predict_output_path=formatted_raw_pseudo_labeled_path_bk)
@@ -266,12 +267,12 @@ def curriculum_training(labeled_path,
                                   max_iterations=max_iterations,
                                   raw_pseudo_labeled_path=formatted_raw_pseudo_labeled_path_bk,
                                   logger=logger)
-                script = EVAL_SCRIPT.format(model_read_ckpt=raw_model_path)
+                script = EVAL_SCRIPT.format(model_read_ckpt=raw_model_path,
+                                            log_path=log_path)
                 subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        logger.info('=======================================================')
         verify_and_infer_file(
             input_path=formatted_raw_pseudo_labeled_path,
             output_path=formatted_selected_pseudo_labeled_path,
@@ -281,19 +282,19 @@ def curriculum_training(labeled_path,
 
         # Step 5 Unify labeled and selected pseudo labels
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        logger.info('=======================================================')
         unify_two_datasets(labeled_path=labeled_path,
                            pseudo_path=formatted_selected_pseudo_labeled_path,
                            output_path=formatted_unified_pseudo_labeled_path)
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
-        logger.info('=======================================================')
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
-                                     train_path=formatted_unified_pseudo_labeled_path)
+                                     train_path=formatted_unified_pseudo_labeled_path,
+                                     log_path=log_path)
         subprocess.run(script, shell=True, check=True)
         # Eval the trained model
-        script = EVAL_SCRIPT.format(model_read_ckpt=formatted_intermediate_model_path)
+        script = EVAL_SCRIPT.format(model_read_ckpt=formatted_intermediate_model_path,
+                                    log_path=log_path)
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
