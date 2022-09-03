@@ -45,7 +45,7 @@ class JointDataLoader(DataLoader):
             # Trung: handle multiple answer sets
             item['ner_tags'] = []
             print("item['entities']: ", item['entities'])
-            print('num answer sets: ', item['num_answer_sets'])
+            print('item: ', item)
             for _entities in item['entities']:
                 tags = np.zeros(len(tokens), dtype='<U32')
                 tags.fill('O')
