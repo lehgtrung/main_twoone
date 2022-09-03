@@ -127,6 +127,7 @@ class JointDataLoader(DataLoader):
     def _collect_fn(self, batch):
         tokens, ner_tags, re_tags, relations, entities = [], [], [], [], []
         for item in batch:
+            print(item)
             if 'num_answer_sets' in item:
                 if item['num_answer_sets'] > 1:
                     index = random.choice(range(item['num_answer_sets']))

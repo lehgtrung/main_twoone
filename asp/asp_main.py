@@ -19,7 +19,7 @@ def conll04_script():
         --evaluate_interval 200 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
-        --max_epoches 100 \
+        --max_epoches 250 \
         --max_steps 3000000 \
         --model_class JointModel \
         --crf None  \
