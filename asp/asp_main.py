@@ -15,8 +15,8 @@ def conll04_script():
         python -u ./main.py \
         --mode train \
         --num_layers 3 \
-        --batch_size 16  \
-        --evaluate_interval 200 \
+        --batch_size 8  \
+        --evaluate_interval 500 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
         --max_epoches 250 \
@@ -280,15 +280,15 @@ def curriculum_training(labeled_path,
         )
 
         # Step 5 Unify labeled and selected pseudo labels
-        # logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        # unify_two_datasets(labeled_path=labeled_path,
-        #                    pseudo_path=formatted_selected_pseudo_labeled_path,
-        #                    output_path=formatted_unified_pseudo_labeled_path)
+        logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
+        unify_two_datasets(labeled_path=labeled_path,
+                           pseudo_path=formatted_selected_pseudo_labeled_path,
+                           output_path=formatted_unified_pseudo_labeled_path)
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
-                                     train_path=formatted_selected_pseudo_labeled_path,
+                                     train_path=formatted_unified_pseudo_labeled_path,
                                      log_path=log_path)
         subprocess.run(script, shell=True, check=True)
         # Eval the trained model
