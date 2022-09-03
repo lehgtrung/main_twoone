@@ -135,8 +135,8 @@ class JointDataLoader(DataLoader):
                     re_tags.append(item['re_tags'][index])
                     relations.append(item['relations'][index])
                     entities.append(item['entities'][index])
-                    item['eweights'] = item['eweights'][index]
-                    item['rweights'] = item['rweights'][index]
+                    # item['eweights'] = item['eweights'][index]
+                    # item['rweights'] = item['rweights'][index]
                 else:  # num_answer_sets == 0
                     tokens.append(item['tokens'])
 

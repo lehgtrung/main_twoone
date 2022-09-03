@@ -310,9 +310,9 @@ class JointModel(Tagger):
         inputs['tab_embeddings'] = tab_embeddings
         inputs['seq_embeddings'] = seq_embeddings
 
-        if 'eweights' in inputs:
-            inputs['eweights'] = torch.FloatTensor(inputs['eweights']).to(self.device)
-            inputs['rweights'] = torch.FloatTensor(inputs['rweights']).to(self.device)
+        # if 'eweights' in inputs:
+        #     inputs['eweights'] = torch.FloatTensor(inputs['eweights']).to(self.device)
+        #     inputs['rweights'] = torch.FloatTensor(inputs['rweights']).to(self.device)
 
         return inputs
     
@@ -355,10 +355,10 @@ class JointModel(Tagger):
         mask_float = mask.float() # B, T
 
         # Instance weight
-        if 'eweights' in rets:
-            eweights = rets['eweights']
-            rweights = rets['rweights']
-            mask_float = mask_float * eweights
+        # if 'eweights' in rets:
+        #     eweights = rets['eweights']
+        #     rweights = rets['rweights']
+        #     mask_float = mask_float * eweights
         
         if '_ner_tags' in rets:
             ner_tags = rets['_ner_tags'].to(self.device)
@@ -381,8 +381,8 @@ class JointModel(Tagger):
         
         matrix_mask_float = mask_float[:, None] * mask_float[:, :, None] # B, N, N
 
-        if 'eweights' in rets:
-            matrix_mask_float = matrix_mask_float * rweights
+        # if 'eweights' in rets:
+        #     matrix_mask_float = matrix_mask_float * rweights
 
         r_loss = self.loss_layer(re_tag_logits.permute(0, -1, 1, 2), re_tags)
         r_loss = (r_loss * matrix_mask_float).sum()
