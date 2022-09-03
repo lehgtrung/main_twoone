@@ -224,11 +224,11 @@ def curriculum_training(labeled_path,
             _path = labeled_model_path
         else:
             _path = intermediate_model_path.format(iteration=iteration-1)
-        # script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
-        #                                predict_input_path=unlabeled_path,
-        #                                predict_output_path=formatted_raw_pseudo_labeled_path)
-        # logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
-        # subprocess.run(script, shell=True, check=True)
+        script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
+                                       predict_input_path=unlabeled_path,
+                                       predict_output_path=formatted_raw_pseudo_labeled_path)
+        logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
+        subprocess.run(script, shell=True, check=True)
 
         # Step 2: check convergence: CANCELED
         # converged = check_convergence(iteration=iteration,
