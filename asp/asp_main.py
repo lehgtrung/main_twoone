@@ -269,24 +269,24 @@ def curriculum_training(labeled_path,
                 subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
-        logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        verify_and_infer_file(
-            input_path=formatted_raw_pseudo_labeled_path,
-            output_path=formatted_selected_pseudo_labeled_path,
-            aggregation=aggregation,
-            with_triplets=with_triplets
-        )
+        # logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
+        # verify_and_infer_file(
+        #     input_path=formatted_raw_pseudo_labeled_path,
+        #     output_path=formatted_selected_pseudo_labeled_path,
+        #     aggregation=aggregation,
+        #     with_triplets=with_triplets
+        # )
 
         # Step 5 Unify labeled and selected pseudo labels
-        logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        unify_two_datasets(labeled_path=labeled_path,
-                           pseudo_path=formatted_selected_pseudo_labeled_path,
-                           output_path=formatted_unified_pseudo_labeled_path)
+        # logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
+        # unify_two_datasets(labeled_path=labeled_path,
+        #                    pseudo_path=formatted_selected_pseudo_labeled_path,
+        #                    output_path=formatted_unified_pseudo_labeled_path)
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
-                                     train_path=formatted_unified_pseudo_labeled_path,
+                                     train_path=formatted_selected_pseudo_labeled_path,
                                      log_path=log_path)
         subprocess.run(script, shell=True, check=True)
         # Eval the trained model
