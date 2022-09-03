@@ -190,8 +190,6 @@ class JointDataLoader(DataLoader):
 
         if self.model is not None:
             print(tokens)
-            print(ner_tags)
-            print(re_tags)
             tokens = self.model.token_indexing(tokens)
             ner_tags = self.model.ner_tag_indexing(ner_tags)
             re_tags = self.model.re_tag_indexing(re_tags)
