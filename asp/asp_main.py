@@ -269,13 +269,13 @@ def curriculum_training(labeled_path,
                 subprocess.run(script, shell=True, check=True)
 
         # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
-        # logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        # verify_and_infer_file(
-        #     input_path=formatted_raw_pseudo_labeled_path,
-        #     output_path=formatted_selected_pseudo_labeled_path,
-        #     aggregation=aggregation,
-        #     with_triplets=with_triplets
-        # )
+        logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
+        verify_and_infer_file(
+            input_path=formatted_raw_pseudo_labeled_path,
+            output_path=formatted_selected_pseudo_labeled_path,
+            aggregation=aggregation,
+            with_triplets=with_triplets
+        )
 
         # Step 5 Unify labeled and selected pseudo labels
         # logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
