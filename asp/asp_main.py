@@ -173,6 +173,8 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
                 'rweights': [[1.0 for _ in range(len(relations))]]
             }
         data_points.append(data_point)
+        for every in data_points:
+            assert 'num_answer_sets' in every
     with open(output_path, 'w') as f:
         json.dump(data_points, f)
 
