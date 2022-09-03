@@ -280,6 +280,7 @@ def curriculum_training(labeled_path,
         )
         with open(formatted_selected_pseudo_labeled_path, 'r') as f:
             _data = json.load(f)
+            print('LENGTH OF SELECTED DATA: ', len(_data))
             for every in _data:
                 assert 'num_answer_sets' in every
         exit()
