@@ -41,33 +41,40 @@ class JointDataLoader(DataLoader):
         
         for item in self.dataset.json_list:
             tokens = item['tokens']
-            tags = np.zeros(len(tokens), dtype='<U32')
-            tags.fill('O')
-            for i_begin, i_end, etype in item['entities']:
-                tags[i_begin] = f'B-{etype}'
-                tags[i_begin+1 : i_end] = f'I-{etype}'
-            
-            if tag_form == 'iob2':
-                item['ner_tags'] = tags
-            elif tag_form == 'iobes':
-                item['ner_tags'] = BIO2BIOES(tags)
-            
-            relations = np.zeros([len(tokens), len(tokens)], dtype='<U32')
-            relations.fill('O')
-            
-            for i_begin, i_end, j_begin, j_end, rtype in item['relations']:
-            
-                relations = self.annotate_relation(relations, i_begin, i_end, j_begin, j_end, f"fw:{rtype}")
-                
-                # aux annotation
-                if relations[j_begin, i_begin] == 'O' or relations[j_begin, i_begin].split(':')[-1] == 'O': 
-                    # make sure we dont have conflicts
-                    relations = self.annotate_relation(relations, j_begin, j_end, i_begin, i_end, f"bw:{rtype}")
-                #else:
-                #    print('conflict. ()')
-                #    print(relations[i_begin, j_begin], relations[j_begin, i_begin])
-                
-            item['re_tags'] = relations
+
+            # Trung: handle multiple answer sets
+            item['ner_tags'] = []
+            for _entities in item['entities']:
+                tags = np.zeros(len(tokens), dtype='<U32')
+                tags.fill('O')
+                for i_begin, i_end, etype in _entities:
+                    tags[i_begin] = f'B-{etype}'
+                    tags[i_begin+1 : i_end] = f'I-{etype}'
+
+                if tag_form == 'iob2':
+                    item['ner_tags'].append(tags)
+                elif tag_form == 'iobes':
+                    item['ner_tags'].append(BIO2BIOES(tags))
+
+            # Trung: handle multiple answer sets
+            item['re_tags'] = []
+            for _relations in item['relations']:
+                relations = np.zeros([len(tokens), len(tokens)], dtype='<U32')
+                relations.fill('O')
+
+                for i_begin, i_end, j_begin, j_end, rtype in _relations:
+
+                    relations = self.annotate_relation(relations, i_begin, i_end, j_begin, j_end, f"fw:{rtype}")
+
+                    # aux annotation
+                    if relations[j_begin, i_begin] == 'O' or relations[j_begin, i_begin].split(':')[-1] == 'O':
+                        # make sure we dont have conflicts
+                        relations = self.annotate_relation(relations, j_begin, j_end, i_begin, i_end, f"bw:{rtype}")
+                    #else:
+                    #    print('conflict. ()')
+                    #    print(relations[i_begin, j_begin], relations[j_begin, i_begin])
+
+                item['re_tags'].append(relations)
         
         if self.num_workers == 0:
             pass # does not need warm indexing
@@ -91,11 +98,21 @@ class JointDataLoader(DataLoader):
     def _collect_fn(self, batch):
         tokens, ner_tags, re_tags, relations, entities = [], [], [], [], []
         for item in batch:
-            tokens.append(item['tokens'])
-            ner_tags.append(item['ner_tags'])
-            re_tags.append(item['re_tags'])
-            relations.append(item['relations'])
-            entities.append(item['entities'])
+            if item['num_answer_sets'] > 1:
+                index = random.choice(range(item['num_answer_sets']))
+                tokens.append(item['tokens'])
+                ner_tags.append(item['ner_tags'][index])
+                re_tags.append(item['re_tags'][index])
+                relations.append(item['relations'][index])
+                entities.append(item['entities'][index])
+                item['eweights'] = item['eweights'][index]
+                item['rweights'] = item['rweights'][index]
+            else:
+                tokens.append(item['tokens'])
+                ner_tags.append(item['ner_tags'])
+                re_tags.append(item['re_tags'])
+                relations.append(item['relations'])
+                entities.append(item['entities'])
 
         rets = {
             'tokens': tokens,
