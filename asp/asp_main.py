@@ -278,12 +278,6 @@ def curriculum_training(labeled_path,
             aggregation=aggregation,
             with_triplets=with_triplets
         )
-        with open(formatted_selected_pseudo_labeled_path, 'r') as f:
-            _data = json.load(f)
-            print('LENGTH OF SELECTED DATA: ', len(_data))
-            for every in _data:
-                assert 'num_answer_sets' in every
-        exit()
 
         # Step 5 Unify labeled and selected pseudo labels
         # logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
