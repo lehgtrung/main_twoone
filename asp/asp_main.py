@@ -153,8 +153,8 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
                 'atoms': word_atoms,
                 # 'eweights': eweights,
                 # 'rweights': rweights,
-                'eweights': [1.0 for _ in range(len(entities))],
-                'rweights': [1.0 for _ in range(len(relations))]
+                'eweights': [[1.0 for _ in range(len(_entities))] for _entities in set_entities],
+                'rweights': [[1.0 for _ in range(len(_relations))] for _relations in set_relations]
             }
         else:
             e_atoms = convert_original_to_atoms(entities, 'entity')
@@ -164,13 +164,13 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
             word_atoms = convert_position_to_word_atoms(tokens, atoms)
             data_point = {
                 'tokens': tokens,
-                'entities': entities,
-                'relations': relations,
+                'entities': [entities],
+                'relations': [relations],
                 'id': i,
                 'num_answer_sets': 1,
                 'atoms': word_atoms,
-                'eweights': [1.0 for _ in range(len(entities))],
-                'rweights': [1.0 for _ in range(len(relations))]
+                'eweights': [[1.0 for _ in range(len(entities))]],
+                'rweights': [[1.0 for _ in range(len(relations))]]
             }
         data_points.append(data_point)
     with open(output_path, 'w') as f:
