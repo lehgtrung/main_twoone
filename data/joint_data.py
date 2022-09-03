@@ -127,15 +127,24 @@ class JointDataLoader(DataLoader):
     def _collect_fn(self, batch):
         tokens, ner_tags, re_tags, relations, entities = [], [], [], [], []
         for item in batch:
-            if 'num_answer_sets' in item and item['num_answer_sets'] > 1:
-                index = random.choice(range(item['num_answer_sets']))
-                tokens.append(item['tokens'])
-                ner_tags.append(item['ner_tags'][index])
-                re_tags.append(item['re_tags'][index])
-                relations.append(item['relations'][index])
-                entities.append(item['entities'][index])
-                item['eweights'] = item['eweights'][index]
-                item['rweights'] = item['rweights'][index]
+            if 'num_answer_sets' in item:
+                if item['num_answer_sets'] > 1:
+                    index = random.choice(range(item['num_answer_sets']))
+                    tokens.append(item['tokens'])
+                    ner_tags.append(item['ner_tags'][index])
+                    re_tags.append(item['re_tags'][index])
+                    relations.append(item['relations'][index])
+                    entities.append(item['entities'][index])
+                    item['eweights'] = item['eweights'][index]
+                    item['rweights'] = item['rweights'][index]
+                else:
+                    tokens.append(item['tokens'])
+                    ner_tags.append(item['ner_tags'][0])
+                    re_tags.append(item['re_tags'][0])
+                    relations.append(item['relations'][0])
+                    entities.append(item['entities'][0])
+                    item['eweights'] = item['eweights'][0]
+                    item['rweights'] = item['rweights'][0]
             else:
                 tokens.append(item['tokens'])
                 ner_tags.append(item['ner_tags'])
