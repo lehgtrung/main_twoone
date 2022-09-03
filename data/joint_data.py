@@ -139,8 +139,15 @@ class JointDataLoader(DataLoader):
                     item['rweights'] = item['rweights'][index]
                 else:  # num_answer_sets == 0
                     tokens.append(item['tokens'])
-                    ner_tags.append([])
-                    re_tags.append([])
+
+                    tags = np.zeros(len(item['tokens']), dtype='<U32')
+                    tags.fill('O')
+                    ner_tags.append(tags)
+
+                    tags = np.zeros([len(item['tokens']), len(item['tokens'])], dtype='<U32')
+                    tags.fill('O')
+                    re_tags.append(tags)
+
                     relations.append([])
                     entities.append([])
                     item['eweights'] = []
