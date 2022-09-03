@@ -151,8 +151,10 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
                 'id': i,
                 'num_answer_sets': len(all_answer_sets),
                 'atoms': word_atoms,
-                'eweights': eweights,
-                'rweights': rweights
+                # 'eweights': eweights,
+                # 'rweights': rweights,
+                'eweights': [1.0 for _ in range(len(entities))],
+                'rweights': [1.0 for _ in range(len(relations))]
             }
         else:
             e_atoms = convert_original_to_atoms(entities, 'entity')
