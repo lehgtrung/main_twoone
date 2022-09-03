@@ -110,8 +110,6 @@ def verify_and_infer(entities, relations, inference_program, model_type):
 
 
 def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
-    print('USING NEW verify_and_infer_file')
-    exit()
     with open(input_path, 'r') as f:
         input_data = json.load(f)
     if with_triplets:
