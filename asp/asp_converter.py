@@ -61,6 +61,30 @@ def remove_wrap(atoms, wrap_type):
     return new_atoms
 
 
+def convert_position_atom_to_training_form(atom, atype=None):
+    if not atype:
+        if match_form(atom) == 'entity':
+            entity_type, word = extract_from_atom(atom, 'entity')
+            start, end = word.split('+')
+            row = [int(start), int(end), polish_type(entity_type)]
+        else:
+            relation_type, head_word, tail_word = extract_from_atom(atom, 'relation')
+            hstart, hend = head_word.split('+')
+            tstart, tend = tail_word.split('+')
+            row = [int(hstart), int(hend), int(tstart), int(tend), polish_type(relation_type)]
+    else:
+        if atype == 'entity':
+            entity_type, word = extract_from_atom(atom, 'entity')
+            start, end = word.split('+')
+            row = [int(start), int(end), polish_type(entity_type)]
+        else:
+            relation_type, head_word, tail_word = extract_from_atom(atom, 'relation')
+            hstart, hend = head_word.split('+')
+            tstart, tend = tail_word.split('+')
+            row = [int(hstart), int(hend), int(tstart), int(tend), polish_type(relation_type)]
+    return row
+
+
 def convert_solution_to_data(tokens, solution):
     data_point = {
         'tokens': tokens,
@@ -69,15 +93,10 @@ def convert_solution_to_data(tokens, solution):
     }
     for atom in solution:
         if match_form(atom) == 'entity':
-            entity_type, word = extract_from_atom(atom, 'entity')
-            start, end = word.split('+')
-            row = [int(start), int(end), polish_type(entity_type)]
+            row = convert_position_atom_to_training_form(atom, 'entity')
             data_point['entities'].append(row)
         else:
-            relation_type, head_word, tail_word = extract_from_atom(atom, 'relation')
-            hstart, hend = head_word.split('+')
-            tstart, tend = tail_word.split('+')
-            row = [int(hstart), int(hend), int(tstart), int(tend), polish_type(relation_type)]
+            row = convert_position_atom_to_training_form(atom, 'relation')
             data_point['relations'].append(row)
     return data_point
 

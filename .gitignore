@@ -1,9 +1,12 @@
 
 .idea/
 
+configs.json
+logs/
 asp/p3.lp
 asp/test.lp
 datasets/pseudo
+datasets/
 utils/__pycache__/
 models/__pycache__/
 wv/

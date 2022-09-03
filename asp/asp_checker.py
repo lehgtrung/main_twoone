@@ -2,7 +2,7 @@
 import json
 import random
 import os
-from .asp_converter import is_satisfiable
+from .asp_converter import is_satisfiable, convert_position_atom_to_training_form
 from .asp_ult import match_form
 
 
@@ -59,32 +59,47 @@ def aggregate_answer_sets(answer_sets, how):
         return inter
 
 
-def unite_atoms(outputs, aggregation):
-    if aggregation == 'intersection':
-        output = aggregate_answer_sets(outputs, 'intersection')
-    elif aggregation == 'random':
-        output = aggregate_answer_sets(outputs, 'random')
-    elif aggregation == 'weighted':
-        output = aggregate_answer_sets(outputs, 'random')
-    else:
-        raise ValueError('Wrong aggregation value')
+def unite_atoms(answer_sets, aggregation):
+    # if aggregation == 'intersection':
+    #     output = aggregate_answer_sets(outputs, 'intersection')
+    # elif aggregation == 'random':
+    #     output = aggregate_answer_sets(outputs, 'random')
+    # elif aggregation == 'weighted':
+    #     output = aggregate_answer_sets(outputs, 'random')
+    # else:
+    #     raise ValueError('Wrong aggregation value')
 
-    if len(output) == 0:
-        return [], [], []
+    # if len(output) == 0:
+    #     return [], [], []
     # Compute weight
+    entities = []
+    relations = []
     eweights = []
     rweights = []
 
-    for atom in output:
-        weight = 0
-        for answer_set in outputs:
-            if atom + '.' in answer_set:
-                weight += 1
-        weight = weight / len(outputs)
-        if match_form(atom) == 'entity':
-            eweights.append(weight)
-        else:
-            rweights.append(weight)
-    assert len(output) == len(eweights) + len(rweights)
-    return output, eweights, rweights
+    for answer_set in answer_sets:
+        _entities = []
+        _relations = []
+        _eweights = []
+        _rweights = []
+        for atom in answer_set:
+            weight = 0
+            for other_answer_set in answer_sets:
+                if atom + '.' in other_answer_set:
+                    weight += 1
+            weight = weight / len(answer_sets)
+            if match_form(atom) == 'entity':
+                entity = convert_position_atom_to_training_form(atom, 'entity')
+                _entities.append(entity)
+                _eweights.append(weight)
+            else:
+                relation = convert_position_atom_to_training_form(atom, 'relation')
+                _relations.append(relation)
+                _rweights.append(weight)
+        entities.append(_entities)
+        relations.append(_relations)
+        eweights.append(_eweights)
+        rweights.append(_rweights)
+    # assert len(output) == len(eweights) + len(rweights)
+    return entities, relations, eweights, rweights
 

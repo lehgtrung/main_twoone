@@ -58,7 +58,18 @@ class VanillaJsonDataset(Dataset):
         return len(self.json_list)
     
     def __getitem__(self, idx):
-        return self.json_list[idx]
+        # Trung: sample entities and relations from multiple answer sets
+        item = self.json_list[idx]
+        num_answer_sets = item['num_answer_sets']
+        if num_answer_sets == 1:
+            return item
+        index = random.choice(range(num_answer_sets))
+        sampled_item = {
+            'tokens': item['tokens'],
+            'entities': item['entities'][index],
+            'relations': item['relations'][index]
+        }
+        return sampled_item
 
 
 class SimpleJsonDataset(Dataset):
