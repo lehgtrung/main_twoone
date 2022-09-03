@@ -15,7 +15,7 @@ def conll04_script():
         python -u ./main.py \
         --mode train \
         --num_layers 3 \
-        --batch_size 2  \
+        --batch_size 16  \
         --evaluate_interval 200 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
@@ -110,6 +110,8 @@ def verify_and_infer(entities, relations, inference_program, model_type):
 
 
 def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
+    print('USING NEW verify_and_infer_file')
+    exit()
     with open(input_path, 'r') as f:
         input_data = json.load(f)
     if with_triplets:
@@ -220,11 +222,11 @@ def curriculum_training(labeled_path,
             _path = labeled_model_path
         else:
             _path = intermediate_model_path.format(iteration=iteration-1)
-        script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
-                                       predict_input_path=unlabeled_path,
-                                       predict_output_path=formatted_raw_pseudo_labeled_path)
-        logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
-        subprocess.run(script, shell=True, check=True)
+        # script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
+        #                                predict_input_path=unlabeled_path,
+        #                                predict_output_path=formatted_raw_pseudo_labeled_path)
+        # logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
+        # subprocess.run(script, shell=True, check=True)
 
         # Step 2: check convergence: CANCELED
         # converged = check_convergence(iteration=iteration,
