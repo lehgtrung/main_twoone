@@ -143,6 +143,10 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
             # Trung: keep all answer sets and compute weight for each atom
             set_entities, set_relations, eweights, rweights = unite_atoms(all_answer_sets, aggregation)
 
+            print(set_entities)
+            print(set_relations)
+            exit()
+
             # data_point = convert_solution_to_data(tokens, all_answer_sets)
             data_point = {
                 'tokens': tokens,
