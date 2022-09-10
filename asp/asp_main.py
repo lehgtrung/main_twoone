@@ -143,9 +143,10 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
             # Trung: keep all answer sets and compute weight for each atom
             set_entities, set_relations, eweights, rweights = unite_atoms(all_answer_sets, aggregation)
 
-            print(set_entities)
-            print(set_relations)
-            exit()
+            if aggregation == 'weighted' or aggregation == 'random':
+                num_answer_sets = len(all_answer_sets)
+            else:
+                num_answer_sets = 1
 
             # data_point = convert_solution_to_data(tokens, all_answer_sets)
             data_point = {
@@ -153,7 +154,7 @@ def verify_and_infer_file(input_path, output_path, aggregation, with_triplets):
                 'entities': set_entities,
                 'relations': set_relations,
                 'id': i,
-                'num_answer_sets': len(all_answer_sets),
+                'num_answer_sets': num_answer_sets,
                 'atoms': word_atoms,
                 # 'eweights': eweights,
                 # 'rweights': rweights,
