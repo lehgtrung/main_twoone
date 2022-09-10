@@ -128,7 +128,13 @@ class JointDataLoader(DataLoader):
         tokens, ner_tags, re_tags, relations, entities = [], [], [], [], []
         for item in batch:
             if 'num_answer_sets' in item:
-                if item['num_answer_sets'] >= 1:
+                if item['num_answer_sets'] == 1:
+                    tokens.append(item['tokens'])
+                    ner_tags.append(item['ner_tags'])
+                    re_tags.append(item['re_tags'])
+                    relations.append(item['relations'])
+                    entities.append(item['entities'])
+                elif item['num_answer_sets'] >= 1:
                     index = random.choice(range(item['num_answer_sets']))
                     tokens.append(item['tokens'])
                     ner_tags.append(item['ner_tags'][index])
