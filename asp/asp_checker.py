@@ -88,6 +88,8 @@ def unite_atoms(answer_sets, aggregation):
                 relation = convert_position_atom_to_training_form(atom, 'relation')
                 relations.append(relation)
                 rweights.append(1.0)
+        entities = [entities]
+        relations = [relations]
     else:
         entities = []
         relations = []
