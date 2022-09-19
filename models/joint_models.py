@@ -252,6 +252,7 @@ class JointModel(Tagger):
         
         self.token_embedding = AllEmbedding(self.config)
         self.token_indexing = self.token_embedding.preprocess_sentences
+
         
     def set_encoding_layer(self):
         

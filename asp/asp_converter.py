@@ -177,3 +177,17 @@ def is_satisfiable(entities, relations, satisfiable_program, model_type, wrap=Fa
     if solution:
         return True
     return False
+
+
+def is_inferable(entities, relations, inference_program, model_type, wrap=False):
+    assert model_type in ['twoone', 'spert']
+    if model_type == 'spert':
+        entities = spert_to_twoone(entities, relations, 'entity')
+        relations = spert_to_twoone(entities, relations, 'relation')
+
+    e_atoms = convert_original_to_atoms(entities, 'entity', wrap)
+    r_atoms = convert_original_to_atoms(relations, 'relation', wrap)
+    program = inference_program + '\n' + concat_facts(e_atoms, r_atoms)
+    solution = solve(program)
+    return len(solution) > len(entities) + len(relations)
+
