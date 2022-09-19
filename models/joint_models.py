@@ -359,6 +359,7 @@ class JointModel(Tagger):
         # Trung: transform seq embeddings into a mask then apply a linear layer on it
         batch_size = tab_embeddings.shape[0]
         entry_tag_logits = self.pre_entry_tag_logits_layer(tab_embeddings)
+        entry_tag_logits = F.relu(entry_tag_logits)
         # print('pre.entry_tag_logits: ', entry_tag_logits.shape)
         entry_tag_logits = entry_tag_logits.view(batch_size, -1)
 
