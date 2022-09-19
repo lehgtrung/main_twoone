@@ -305,7 +305,7 @@ class JointModel(Tagger):
         inputs['entry_length'] = torch.FloatTensor(inputs['entry_length']).to(self.device)
         inputs['sent_length'] = torch.LongTensor(inputs['sent_length']).to(self.device)
         # print("inputs['sent_length']: ", inputs['sent_length'])
-        sent_length_embeddings = self.size_embeddings(inputs['sent_length'])
+        # sent_length_embeddings = self.size_embeddings(inputs['sent_length'])
             
         embeddings, masks, embeddings_dict = self.token_embedding(sents, return_dict=True)
         
@@ -329,7 +329,7 @@ class JointModel(Tagger):
         inputs['masks'] = masks
         inputs['tab_embeddings'] = tab_embeddings
         inputs['seq_embeddings'] = seq_embeddings
-        inputs['sent_length_embeddings'] = sent_length_embeddings
+        # inputs['sent_length_embeddings'] = sent_length_embeddings
 
         return inputs
     
