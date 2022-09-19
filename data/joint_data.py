@@ -101,7 +101,8 @@ class JointDataLoader(DataLoader):
 
     def _collect_fn(self, batch):
         tokens, ner_tags, re_tags, relations, entities, entry_length = [], [], [], [], [], []
-        sent_length = -1
+        batch_max_length = -1
+        sent_length = []
         for item in batch:
             tokens.append(item['tokens'])
             ner_tags.append(item['ner_tags'])
@@ -109,8 +110,9 @@ class JointDataLoader(DataLoader):
             relations.append(item['relations'])
             entities.append(item['entities'])
             entry_length.append(calc_entry_length(item['entities'], item['relations']))
-            if len(item['tokens']) > sent_length:
-                sent_length = len(item['tokens'])
+            sent_length.append(len(item['tokens']))
+            if len(item['tokens']) > batch_max_length:
+                batch_max_length = len(item['tokens'])
 
         rets = {
             'tokens': tokens,
@@ -119,7 +121,8 @@ class JointDataLoader(DataLoader):
             'relations': relations,
             'entities': entities,
             'entry_length': entry_length,
-            'sent_length': sent_length
+            'sent_length': sent_length,
+            'batch_max_length': batch_max_length
         }
 
         if self.model is not None:

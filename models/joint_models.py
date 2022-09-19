@@ -252,6 +252,11 @@ class JointModel(Tagger):
         
         self.token_embedding = AllEmbedding(self.config)
         self.token_indexing = self.token_embedding.preprocess_sentences
+
+        # Trung
+        self.config.max_sent_length = 120  # Conll04
+        self.config.size_embedding_size = 100
+        self.size_embeddings = nn.Embedding(self.config.max_sent_length, self.config.size_embedding_size)
         
     def set_encoding_layer(self):
         
@@ -275,8 +280,8 @@ class JointModel(Tagger):
         # Trung: entry layer
         # (batch_size, num_rows, num_cols, 1) -> (batch_size)
         self.pre_entry_tag_logits_layer = nn.Linear(self.config.hidden_dim, 1)
-        self.config.max_sent_length = 114  # Conll04
-        self.post_entry_tag_logits_layer = nn.Linear(self.config.max_sent_length * self.config.max_sent_length, 1)
+        self.post_entry_tag_logits_layer = nn.Linear(self.config.max_sent_length *
+                                                     self.config.max_sent_length + self.config.size_embedding_size, 1)
         
     def set_loss_layer(self):
         
@@ -295,9 +300,11 @@ class JointModel(Tagger):
             sents = inputs['tokens']
 
         # Sentence length
-        self.sent_length = inputs['sent_length']
+        # sent_length = torch.LongTensor([len(e) for e in sents[0]]).to(self.device)
         inputs['entry_length'] = torch.FloatTensor(inputs['entry_length']).to(self.device)
-        #self.size_embeddings = nn.Embedding(100, 100)  # num_embeddings, embedding_dim
+        inputs['sent_length'] = torch.LongTensor(inputs['sent_length']).to(self.device)
+        # print("inputs['sent_length']: ", inputs['sent_length'])
+        sent_length_embeddings = self.size_embeddings(inputs['sent_length'])
             
         embeddings, masks, embeddings_dict = self.token_embedding(sents, return_dict=True)
         
@@ -321,6 +328,7 @@ class JointModel(Tagger):
         inputs['masks'] = masks
         inputs['tab_embeddings'] = tab_embeddings
         inputs['seq_embeddings'] = seq_embeddings
+        inputs['sent_length_embeddings'] = sent_length_embeddings
 
         return inputs
     
@@ -339,6 +347,7 @@ class JointModel(Tagger):
         inputs = self.forward_embeddings(inputs)
         tab_embeddings = inputs['tab_embeddings']
         seq_embeddings = inputs['seq_embeddings']
+        sent_length_embeddings = inputs['sent_length_embeddings']
 
         re_tag_logits = self.re_tag_logits_layer(tab_embeddings)
         
@@ -351,12 +360,14 @@ class JointModel(Tagger):
         entry_tag_logits = self.pre_entry_tag_logits_layer(tab_embeddings)
         # print('pre.entry_tag_logits: ', entry_tag_logits.shape)
         entry_tag_logits = entry_tag_logits.view(batch_size, -1)
+
         # print('reshape.entry_tag_logits: ', entry_tag_logits.shape)
-        pad_amount = self.config.max_sent_length ** 2 - self.sent_length ** 2
+        pad_amount = self.config.max_sent_length ** 2 - inputs['batch_max_length'] ** 2
         entry_tag_logits = F.pad(input=entry_tag_logits, pad=[0, pad_amount], mode='constant', value=0)
         # print('padded.entry_tag_logits: ', entry_tag_logits.shape)
         # print('config.max_sent_length: ', self.config.max_sent_length)
         # print('self.sent_length: ', self.sent_length)
+        entry_tag_logits = torch.cat((entry_tag_logits, sent_length_embeddings), 1)
         entry_tag_logits = self.post_entry_tag_logits_layer(entry_tag_logits).view(batch_size,)
         # print('post.entry_tag_logits: ', entry_tag_logits.shape)
         # print('loss value: ', self.mse_loss_layer(entry_tag_logits, inputs['entry_length']).item())
