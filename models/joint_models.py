@@ -252,7 +252,6 @@ class JointModel(Tagger):
         
         self.token_embedding = AllEmbedding(self.config)
         self.token_indexing = self.token_embedding.preprocess_sentences
-
         
     def set_encoding_layer(self):
         
@@ -272,6 +271,12 @@ class JointModel(Tagger):
         
         self.re_tag_logits_layer = nn.Linear(self.config.hidden_dim, self.config.re_tag_vocab_size)
         init_linear(self.re_tag_logits_layer)
+
+        # Trung: entry layer
+        # (batch_size, num_rows, num_cols, 1) -> (batch_size)
+        self.pre_entry_tag_logits_layer = nn.Linear(self.config.hidden_dim, 1)
+        self.config.max_sent_length = 114  # Conll04
+        self.post_entry_tag_logits_layer = nn.Linear(self.config.max_sent_length * self.config.max_sent_length, 1)
         
     def set_loss_layer(self):
         
@@ -280,6 +285,7 @@ class JointModel(Tagger):
         
         self.soft_loss_layer = LabelSmoothLoss(0.02, reduction='none') 
         self.loss_layer = nn.CrossEntropyLoss(reduction='none')
+        self.mse_loss_layer = nn.MSELoss()
     
     def forward_embeddings(self, inputs):
         
@@ -287,6 +293,11 @@ class JointModel(Tagger):
             sents = inputs['_tokens']
         else:
             sents = inputs['tokens']
+
+        # Sentence length
+        self.sent_length = inputs['sent_length']
+        inputs['entry_length'] = torch.FloatTensor(inputs['entry_length']).to(self.device)
+        #self.size_embeddings = nn.Embedding(100, 100)  # num_embeddings, embedding_dim
             
         embeddings, masks, embeddings_dict = self.token_embedding(sents, return_dict=True)
         
@@ -311,10 +322,6 @@ class JointModel(Tagger):
         inputs['tab_embeddings'] = tab_embeddings
         inputs['seq_embeddings'] = seq_embeddings
 
-        # if 'eweights' in inputs:
-        #     inputs['eweights'] = torch.FloatTensor(inputs['eweights']).to(self.device)
-        #     inputs['rweights'] = torch.FloatTensor(inputs['rweights']).to(self.device)
-
         return inputs
     
     
@@ -338,10 +345,27 @@ class JointModel(Tagger):
         # use diagonal elements
         #ner_tag_embeddings = relation_embeddings.diagonal(dim1=1, dim2=2).permute(0, -1, 1)
         ner_tag_logits = self.ner_tag_logits_layer(seq_embeddings)
+
+        # Trung: transform seq embeddings into a mask then apply a linear layer on it
+        batch_size = tab_embeddings.shape[0]
+        entry_tag_logits = self.pre_entry_tag_logits_layer(tab_embeddings)
+        # print('pre.entry_tag_logits: ', entry_tag_logits.shape)
+        entry_tag_logits = entry_tag_logits.view(batch_size, -1)
+        # print('reshape.entry_tag_logits: ', entry_tag_logits.shape)
+        pad_amount = self.config.max_sent_length ** 2 - self.sent_length ** 2
+        entry_tag_logits = F.pad(input=entry_tag_logits, pad=[0, pad_amount], mode='constant', value=0)
+        # print('padded.entry_tag_logits: ', entry_tag_logits.shape)
+        # print('config.max_sent_length: ', self.config.max_sent_length)
+        # print('self.sent_length: ', self.sent_length)
+        entry_tag_logits = self.post_entry_tag_logits_layer(entry_tag_logits).view(batch_size,)
+        # print('post.entry_tag_logits: ', entry_tag_logits.shape)
+        # print('loss value: ', self.mse_loss_layer(entry_tag_logits, inputs['entry_length']).item())
+        # exit()
         
         rets = inputs
         rets['ner_tag_logits'] = ner_tag_logits
         rets['re_tag_logits'] = re_tag_logits
+        rets['entry_tag_logits'] = entry_tag_logits
         
         return rets
     
@@ -351,15 +375,10 @@ class JointModel(Tagger):
         rets = self.forward_step(inputs)
         ner_tag_logits = rets['ner_tag_logits']
         re_tag_logits = rets['re_tag_logits']
+        entry_tag_logits = rets['entry_tag_logits']
         
         mask = rets['masks']
         mask_float = mask.float() # B, T
-
-        # Instance weight
-        # if 'eweights' in rets:
-        #     eweights = rets['eweights']
-        #     rweights = rets['rweights']
-        #     mask_float = mask_float * eweights
         
         if '_ner_tags' in rets:
             ner_tags = rets['_ner_tags'].to(self.device)
@@ -382,13 +401,11 @@ class JointModel(Tagger):
         
         matrix_mask_float = mask_float[:, None] * mask_float[:, :, None] # B, N, N
 
-        # if 'eweights' in rets:
-        #     matrix_mask_float = matrix_mask_float * rweights
-
         r_loss = self.loss_layer(re_tag_logits.permute(0, -1, 1, 2), re_tags)
         r_loss = (r_loss * matrix_mask_float).sum()
+        entry_loss = self.mse_loss_layer(entry_tag_logits, inputs['entry_length'])
         
-        loss = e_loss + r_loss
+        loss = e_loss + r_loss + entry_loss
 
         rets['_ner_tags'] = ner_tags
         rets['_re_tags'] = re_tags
@@ -491,6 +508,7 @@ class JointModel(Tagger):
         rets = self.forward_step(inputs)
         re_tag_logits = rets['re_tag_logits']
         ner_tag_logits = rets['ner_tag_logits']
+        entry_tag_logits = rets['entry_tag_logits']
         mask = rets['masks']
         mask_np = mask.cpu().detach().numpy()
         
@@ -519,6 +537,7 @@ class JointModel(Tagger):
         relation_preds = self._postprocess_relations(re_tag_logits, entity_preds)
         rets['entity_preds'] = entity_preds
         rets['relation_preds'] = relation_preds
+        rets['entry_length_preds'] = entry_tag_logits
             
         return rets
     

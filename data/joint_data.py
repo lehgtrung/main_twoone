@@ -12,6 +12,7 @@ from collections import defaultdict
 from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations, permutations
+from sklearn.metrics import mean_squared_error
 
 from .basics import *
 from .base import *
@@ -28,6 +29,16 @@ from logger import Logger
 
 ### RE
 
+
+def calc_entry_length(entities, relations):
+    total_len = 0
+    for ent in entities:
+        total_len += ent[1] - ent[0]
+    for rel in relations:
+        total_len += (rel[1] - rel[0]) * (rel[3] - rel[2])
+    return total_len
+
+
 class JointDataLoader(DataLoader):
     
     def __init__(self, json_path, 
@@ -38,72 +49,36 @@ class JointDataLoader(DataLoader):
         self.tag_form = tag_form
         
         super().__init__(dataset=self.dataset, collate_fn=self._collect_fn, num_workers=num_workers, *args, **kargs)
-        
+
         for item in self.dataset.json_list:
             tokens = item['tokens']
+            tags = np.zeros(len(tokens), dtype='<U32')
+            tags.fill('O')
+            for i_begin, i_end, etype in item['entities']:
+                tags[i_begin] = f'B-{etype}'
+                tags[i_begin + 1: i_end] = f'I-{etype}'
 
-            if 'num_answer_sets' in item:
-                # Trung: handle multiple answer sets
-                item['ner_tags'] = []
-                for _entities in item['entities']:
-                    tags = np.zeros(len(tokens), dtype='<U32')
-                    tags.fill('O')
-                    for i_begin, i_end, etype in _entities:
-                        tags[i_begin] = f'B-{etype}'
-                        tags[i_begin+1 : i_end] = f'I-{etype}'
+            if tag_form == 'iob2':
+                item['ner_tags'] = tags
+            elif tag_form == 'iobes':
+                item['ner_tags'] = BIO2BIOES(tags)
 
-                    if tag_form == 'iob2':
-                        item['ner_tags'].append(tags)
-                    elif tag_form == 'iobes':
-                        item['ner_tags'].append(BIO2BIOES(tags))
+            relations = np.zeros([len(tokens), len(tokens)], dtype='<U32')
+            relations.fill('O')
 
-                # Trung: handle multiple answer sets
-                item['re_tags'] = []
-                for _relations in item['relations']:
-                    relations = np.zeros([len(tokens), len(tokens)], dtype='<U32')
-                    relations.fill('O')
+            for i_begin, i_end, j_begin, j_end, rtype in item['relations']:
 
-                    for i_begin, i_end, j_begin, j_end, rtype in _relations:
+                relations = self.annotate_relation(relations, i_begin, i_end, j_begin, j_end, f"fw:{rtype}")
 
-                        relations = self.annotate_relation(relations, i_begin, i_end, j_begin, j_end, f"fw:{rtype}")
+                # aux annotation
+                if relations[j_begin, i_begin] == 'O' or relations[j_begin, i_begin].split(':')[-1] == 'O':
+                    # make sure we dont have conflicts
+                    relations = self.annotate_relation(relations, j_begin, j_end, i_begin, i_end, f"bw:{rtype}")
+                # else:
+                #    print('conflict. ()')
+                #    print(relations[i_begin, j_begin], relations[j_begin, i_begin])
 
-                        # aux annotation
-                        if relations[j_begin, i_begin] == 'O' or relations[j_begin, i_begin].split(':')[-1] == 'O':
-                            # make sure we dont have conflicts
-                            relations = self.annotate_relation(relations, j_begin, j_end, i_begin, i_end, f"bw:{rtype}")
-                        #else:
-                        #    print('conflict. ()')
-                        #    print(relations[i_begin, j_begin], relations[j_begin, i_begin])
-
-                    item['re_tags'].append(relations)
-            else:
-                tags = np.zeros(len(tokens), dtype='<U32')
-                tags.fill('O')
-                for i_begin, i_end, etype in item['entities']:
-                    tags[i_begin] = f'B-{etype}'
-                    tags[i_begin + 1: i_end] = f'I-{etype}'
-
-                if tag_form == 'iob2':
-                    item['ner_tags'] = tags
-                elif tag_form == 'iobes':
-                    item['ner_tags'] = BIO2BIOES(tags)
-
-                relations = np.zeros([len(tokens), len(tokens)], dtype='<U32')
-                relations.fill('O')
-
-                for i_begin, i_end, j_begin, j_end, rtype in item['relations']:
-
-                    relations = self.annotate_relation(relations, i_begin, i_end, j_begin, j_end, f"fw:{rtype}")
-
-                    # aux annotation
-                    if relations[j_begin, i_begin] == 'O' or relations[j_begin, i_begin].split(':')[-1] == 'O':
-                        # make sure we dont have conflicts
-                        relations = self.annotate_relation(relations, j_begin, j_end, i_begin, i_end, f"bw:{rtype}")
-                    # else:
-                    #    print('conflict. ()')
-                    #    print(relations[i_begin, j_begin], relations[j_begin, i_begin])
-
-                item['re_tags'] = relations
+            item['re_tags'] = relations
         
         if self.num_workers == 0:
             pass # does not need warm indexing
@@ -125,39 +100,17 @@ class JointDataLoader(DataLoader):
         return matrix
 
     def _collect_fn(self, batch):
-        tokens, ner_tags, re_tags, relations, entities = [], [], [], [], []
+        tokens, ner_tags, re_tags, relations, entities, entry_length = [], [], [], [], [], []
+        sent_length = -1
         for item in batch:
-            if 'num_answer_sets' in item:
-                if item['num_answer_sets'] == 1:
-                    index = random.choice(range(item['num_answer_sets']))
-                    tokens.append(item['tokens'])
-                    ner_tags.append(item['ner_tags'][index])
-                    re_tags.append(item['re_tags'][index])
-                    relations.append(item['relations'][index])
-                    entities.append(item['entities'][index])
-                    # item['eweights'] = item['eweights'][index]
-                    # item['rweights'] = item['rweights'][index]
-                else:  # num_answer_sets == 0
-                    tokens.append(item['tokens'])
-
-                    tags = np.zeros(len(item['tokens']), dtype='<U32')
-                    tags.fill('O')
-                    ner_tags.append(tags)
-
-                    tags = np.zeros([len(item['tokens']), len(item['tokens'])], dtype='<U32')
-                    tags.fill('O')
-                    re_tags.append(tags)
-
-                    relations.append([])
-                    entities.append([])
-                    item['eweights'] = []
-                    item['rweights'] = []
-            else:
-                tokens.append(item['tokens'])
-                ner_tags.append(item['ner_tags'])
-                re_tags.append(item['re_tags'])
-                relations.append(item['relations'])
-                entities.append(item['entities'])
+            tokens.append(item['tokens'])
+            ner_tags.append(item['ner_tags'])
+            re_tags.append(item['re_tags'])
+            relations.append(item['relations'])
+            entities.append(item['entities'])
+            entry_length.append(calc_entry_length(item['entities'], item['relations']))
+            if len(item['tokens']) > sent_length:
+                sent_length = len(item['tokens'])
 
         rets = {
             'tokens': tokens,
@@ -165,35 +118,9 @@ class JointDataLoader(DataLoader):
             're_tags': re_tags,
             'relations': relations,
             'entities': entities,
+            'entry_length': entry_length,
+            'sent_length': sent_length
         }
-
-        # if 'eweights' in batch[0]:
-        #     eweights, rweights = [], []
-        #
-        #     max_num_tokens = max([len(item['tokens']) for item in batch])
-        #     for item in batch:
-        #         num_tokens = len(item['tokens'])
-        #         _eweights = np.zeros(max_num_tokens)
-        #         _rweights = np.zeros((max_num_tokens, max_num_tokens))
-        #         for _eweight, ent in zip(item['eweights'], item['entities']):
-        #             start, end, _ = ent
-        #             for i in range(num_tokens):
-        #                 _eweights[i] = 1.0
-        #             for i in range(start, end):
-        #                 _eweights[i] = _eweight
-        #         for _rweight, rel in zip(item['rweights'], item['relations']):
-        #             h_start, h_end, t_start, t_end, _ = rel
-        #             for i in range(num_tokens):
-        #                 for j in range(num_tokens):
-        #                     _rweights[i][j] = 1.0
-        #             for i in range(h_start, h_end):
-        #                 for j in range(t_start, t_end):
-        #                     _rweights[i][j] = _rweight
-        #         eweights.append(_eweights)
-        #         rweights.append(_rweights)
-        #
-        #     rets['eweights'] = eweights
-        #     rets['rweights'] = rweights
 
         if self.model is not None:
             tokens = self.model.token_indexing(tokens)
@@ -266,6 +193,8 @@ class JointTrainer(Trainer):
             label_entities = []
             label_relations = []
             label_relations_wNER = []
+            entry_lengths_pred = []
+            entry_lengths_gt = []
             for i, inputs in enumerate(g):
                 inputs = model.predict_step(inputs)
                 pred_span_to_etype = [{(ib,ie):etype for ib, ie, etype in x} for x in inputs['entity_preds']]
@@ -274,6 +203,8 @@ class JointTrainer(Trainer):
                 label_entities += inputs['entities'] 
                 pred_relations += inputs['relation_preds']
                 label_relations += inputs['relations']
+                entry_lengths_pred += inputs['entry_length_preds'].cpu().numpy().tolist()
+                entry_lengths_gt += inputs['entry_length'].cpu().numpy().tolist()
 
                 pred_relations_wNER += [ 
                     [
@@ -295,6 +226,7 @@ class JointTrainer(Trainer):
                 sents, pred_relations, label_relations, verbose=verbose==2)
             rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = self._get_metrics(
                 sents, pred_relations_wNER, label_relations_wNER, verbose=verbose==3)
+            rets['rmse_entry_length'] = mean_squared_error(entry_lengths_gt, entry_lengths_pred, squared=False)
         if self.final:
             log_info = f'''>> ret: {rets}'''
             self.logger.info(log_info)
@@ -313,6 +245,9 @@ class JointTrainer(Trainer):
         precision, recall, f1 = test_rets['relation_p_wNER'], test_rets['relation_r_wNER'], test_rets['relation_f1_wNER']
         print(f">> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
+        rmse_entry_length = test_rets['rmse_entry_length']
+        print(f">> test RMSE entry length:{rmse_entry_length:.4f}")
+
         valid_rets = trainer_target.evaluate_model(model, verbose=0, test_type='valid')
         precision, recall, f1 = valid_rets['entity_p'], valid_rets['entity_r'], valid_rets['entity_f1']
         e_f1 = f1
@@ -323,6 +258,9 @@ class JointTrainer(Trainer):
         precision, recall, f1 = valid_rets['relation_p_wNER'], valid_rets['relation_r_wNER'], valid_rets['relation_f1_wNER']
         r_f1_wNER = f1
         print(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+
+        rmse_entry_length = valid_rets['rmse_entry_length']
+        print(f">> valid RMSE entry length:{rmse_entry_length:.4f}")
 
         if e_f1 > self.max_f1[0]:
             self.max_f1[0] = e_f1
