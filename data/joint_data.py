@@ -215,13 +215,13 @@ class JointTrainer(Trainer):
         rmse_entry_length = test_rets['rmse_entry_length']
         r2_entry_length = test_rets['r2_entry_length']
         print(f">> test RMSE entry length:{rmse_entry_length:.4f}")
-        # print(f">> test R2 entry length:{r2_entry_length:.4f}")
+        print(f">> test R2 entry length:{r2_entry_length:.4f}")
 
         valid_rets = trainer_target.evaluate_model(model, verbose=0, test_type='valid')
         rmse_entry_length = valid_rets['rmse_entry_length']
         r2_entry_length = valid_rets['r2_entry_length']
         print(f">> valid RMSE entry length:{rmse_entry_length:.4f}")
-        # print(f">> valid R2 entry length:{r2_entry_length:.4f}")
+        print(f">> valid R2 entry length:{r2_entry_length:.4f}")
 
         if rmse_entry_length < self.min_rmse:
             self.min_rmse = rmse_entry_length
