@@ -19,6 +19,8 @@ from .base import *
 
 import copy
 
+# torch.backends.cudnn.enabled = False
+
 
 class TabEncoding(nn.Module):
     
@@ -227,8 +229,25 @@ class StackedTwoWayEncoding(nn.Module):
             attn_list.append(attn) 
         
         return S_list, T_list, attn_list
-        
-    
+
+
+class ConvNet3layers(nn.Module):
+
+    def __init__(self, input_dim, hid_dim, output_dim, kernel_size=1, stride=1, padding=0, dropout=0.3):
+        super(ConvNet3layers, self).__init__()
+        self.conv1 = nn.Conv2d(input_dim, hid_dim, kernel_size, stride, padding)
+        self.conv2 = nn.Conv2d(hid_dim, hid_dim, kernel_size, stride, padding)
+        self.conv3 = nn.Conv2d(hid_dim, output_dim, kernel_size, stride, padding)
+        self.dropout = nn.Dropout2d(dropout)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.dropout(x)
+        x = F.relu(self.conv2(x))
+        x = self.dropout(x)
+        return self.conv3(x)
+
+
 class JointModel(Tagger):
     
     def check_attrs(self):
@@ -254,8 +273,10 @@ class JointModel(Tagger):
         self.token_indexing = self.token_embedding.preprocess_sentences
 
         # Trung
+        self.conv_encoder = ConvNet3layers(input_dim=self.config.hidden_dim,
+                                           hid_dim=self.config.hidden_dim//2, output_dim=1)
         self.config.max_sent_length = 120  # Conll04
-        self.config.size_embedding_size = 100
+        # self.config.size_embedding_size = 100
         # self.size_embeddings = nn.Embedding(self.config.max_sent_length, self.config.size_embedding_size)
         
     def set_encoding_layer(self):
@@ -270,19 +291,9 @@ class JointModel(Tagger):
         self.dropout_layer = nn.Dropout(self.config.dropout)
         
     def set_logits_layer(self):
-        
-        self.ner_tag_logits_layer = nn.Linear(self.config.hidden_dim, self.config.ner_tag_vocab_size)
-        init_linear(self.ner_tag_logits_layer)
-        
-        self.re_tag_logits_layer = nn.Linear(self.config.hidden_dim, self.config.re_tag_vocab_size)
-        init_linear(self.re_tag_logits_layer)
-
         # Trung: entry layer
         # (batch_size, num_rows, num_cols, 1) -> (batch_size)
-        self.pre_entry_tag_logits_layer = nn.Linear(self.config.hidden_dim, 1)
-        # self.post_entry_tag_logits_layer = nn.Linear(self.config.max_sent_length *
-        #                                              self.config.max_sent_length + self.config.size_embedding_size, 1)
-        self.post_entry_tag_logits_layer = nn.Linear(self.config.max_sent_length ** 2, 1)
+        self.entry_tag_logits_layer = nn.Linear(self.config.max_sent_length ** 2, 1)
         
     def set_loss_layer(self):
         
@@ -301,10 +312,8 @@ class JointModel(Tagger):
             sents = inputs['tokens']
 
         # Sentence length
-        # sent_length = torch.LongTensor([len(e) for e in sents[0]]).to(self.device)
         inputs['entry_length'] = torch.FloatTensor(inputs['entry_length']).to(self.device)
         inputs['sent_length'] = torch.LongTensor(inputs['sent_length']).to(self.device)
-        # print("inputs['sent_length']: ", inputs['sent_length'])
         # sent_length_embeddings = self.size_embeddings(inputs['sent_length'])
             
         embeddings, masks, embeddings_dict = self.token_embedding(sents, return_dict=True)
@@ -321,9 +330,6 @@ class JointModel(Tagger):
         tab_embeddings = tab_embeddings[-1]
         seq_embeddings = self.dropout_layer(seq_embeddings)
         tab_embeddings = self.dropout_layer(tab_embeddings)
-        
-        # use diag as seq representation
-        #seq_embeddings = tab_embeddings.diagonal(dim1=1, dim2=2).permute(0, -1, 1)
         
         inputs['attns'] = attns
         inputs['masks'] = masks
@@ -350,206 +356,44 @@ class JointModel(Tagger):
         seq_embeddings = inputs['seq_embeddings']
         # sent_length_embeddings = inputs['sent_length_embeddings']
 
-        re_tag_logits = self.re_tag_logits_layer(tab_embeddings)
-        
-        # use diagonal elements
-        #ner_tag_embeddings = relation_embeddings.diagonal(dim1=1, dim2=2).permute(0, -1, 1)
-        ner_tag_logits = self.ner_tag_logits_layer(seq_embeddings)
+        # Use conv net with 1x1 kernel
+        tab_embeddings = tab_embeddings.permute(0, 3, 1, 2)
 
         # Trung: transform seq embeddings into a mask then apply a linear layer on it
         batch_size = tab_embeddings.shape[0]
-        entry_tag_logits = self.pre_entry_tag_logits_layer(tab_embeddings)
-        entry_tag_logits = F.relu(entry_tag_logits)
-        # print('pre.entry_tag_logits: ', entry_tag_logits.shape)
+
+        entry_tag_logits = self.conv_encoder(tab_embeddings)
+        # entry_tag_logits = F.relu(entry_tag_logits)
         entry_tag_logits = entry_tag_logits.view(batch_size, -1)
 
-        # print('reshape.entry_tag_logits: ', entry_tag_logits.shape)
         pad_amount = self.config.max_sent_length ** 2 - inputs['batch_max_length'] ** 2
         entry_tag_logits = F.pad(input=entry_tag_logits, pad=[0, pad_amount], mode='constant', value=0)
-        # print('padded.entry_tag_logits: ', entry_tag_logits.shape)
-        # print('config.max_sent_length: ', self.config.max_sent_length)
-        # print('self.sent_length: ', self.sent_length)
-        # entry_tag_logits = torch.cat((entry_tag_logits, sent_length_embeddings), 1)
-        entry_tag_logits = self.post_entry_tag_logits_layer(entry_tag_logits).view(batch_size,)
-        # print('post.entry_tag_logits: ', entry_tag_logits.shape)
+        entry_tag_logits = self.entry_tag_logits_layer(entry_tag_logits).view(batch_size,)
+        # print('post.entry_tag_logits: ', entry_tag_logits)
         # print('loss value: ', self.mse_loss_layer(entry_tag_logits, inputs['entry_length']).item())
         # exit()
         
         rets = inputs
-        rets['ner_tag_logits'] = ner_tag_logits
-        rets['re_tag_logits'] = re_tag_logits
         rets['entry_tag_logits'] = entry_tag_logits
         
         return rets
-    
-    
+
     def forward(self, inputs):
 
         rets = self.forward_step(inputs)
-        ner_tag_logits = rets['ner_tag_logits']
-        re_tag_logits = rets['re_tag_logits']
         entry_tag_logits = rets['entry_tag_logits']
-        
-        mask = rets['masks']
-        mask_float = mask.float() # B, T
-        
-        if '_ner_tags' in rets:
-            ner_tags = rets['_ner_tags'].to(self.device)
-        else:
-            ner_tags = self.ner_tag_indexing(rets['ner_tags']).to(self.device)
-        
-        if self.config.crf == 'CRF':
-            e_loss = - self.crf_layer(ner_tag_logits, tags, mask=mask, reduction=self.config.loss_reduction)
-        elif not self.config.crf:
-            e_loss = self.loss_layer(ner_tag_logits.permute(0, 2, 1), ner_tags) # B, T
-            e_loss = (e_loss * mask_float).sum()
-        else:
-            raise Exception('not a compatible loss')
-            
-            
-        if '_re_tags' in rets:
-            re_tags = rets['_re_tags'].to(self.device)
-        else:
-            re_tags = self.re_tag_indexing(rets['re_tags']).to(self.device)
-        
-        matrix_mask_float = mask_float[:, None] * mask_float[:, :, None] # B, N, N
-
-        r_loss = self.loss_layer(re_tag_logits.permute(0, -1, 1, 2), re_tags)
-        r_loss = (r_loss * matrix_mask_float).sum()
         entry_loss = self.mse_loss_layer(entry_tag_logits, inputs['entry_length'])
         
-        loss = e_loss + r_loss + entry_loss
-
-        rets['_ner_tags'] = ner_tags
-        rets['_re_tags'] = re_tags
+        loss = entry_loss
         rets['loss'] = loss
             
         return rets
-    
-    
-    def _postprocess_entities(self, tags_list):
-        
-        entities = []
-        
-        for tags in tags_list:
-            spans, etypes = tag2span(tags, True, True)
-            entities.append([(i_start, i_end, etype) for (i_start, i_end), etype in zip(spans, etypes)]) 
-        
-        return entities
-    
-    def _postprocess_relations(self, relation_logits, entities):
-        
-        # convert relation_logits to relations on entities 
-        
-        # except for 'O', a typical relation tag is in form of 'a:b:c', where
-        # a === 'I' constantly, means the word-pair is inside a relation. We can also extent it to scheme like BIO or BIEOS;
-        # b in {'fw', 'bw'}, indicating the direction of a relation;
-        # c is the relation type.
-        
-        relations = []
-        
-        fw_togglemap, bw_togglemap = self._get_togglemaps()
-        
-        relation_logits = relation_logits.detach().softmax(-1).cpu()
-        for i_batch, _entities in enumerate(entities):
-            
-            curr = set()
-            for (ib, ie, it), (jb, je, jt) in permutations(_entities, 2):
-                fw_logit = relation_logits[i_batch, ib:ie, jb:je].sum(0).sum(0) @ fw_togglemap
-                bw_logit = relation_logits[i_batch, jb:je, ib:ie].sum(0).sum(0) @ bw_togglemap
-                
-                logit = fw_logit + bw_logit
 
-                rid = int(logit.argmax())
-                rtag = self.re_tag_indexing.idx2token(rid)
-                
-                if rtag != 'O':
-                    _, direction, rtype = rtag.split(':')
-                    curr.add((ib, ie, jb, je, rtype))
-                        
-            relations.append(curr)
-                        
-        return relations
-    
-    def _get_togglemaps(self):
-        
-        # fw_togglemap only keep forward relation
-        # bw_togglemap maps backward relation to forward relation
-        
-        #self.need_update = True # force update
-        
-        # the togglemap need to be updated in case the tag vocab changes.
-        
-        if not hasattr(self, 'need_update'):
-            self.need_update = True
-            
-        if not self.need_update:
-            return self.fw_togglemap, self.bw_togglemap
-        
-        fw_togglemap = torch.zeros(self.config.re_tag_vocab_size, self.config.re_tag_vocab_size)
-        bw_togglemap = torch.zeros(self.config.re_tag_vocab_size, self.config.re_tag_vocab_size)
-        
-        for head_tag in self.re_tag_indexing.vocab:
-            head_id = self.re_tag_indexing.token2idx(head_tag)
-            if head_tag == 'O' or head_tag.split(':')[-1] == 'O':
-                fw_togglemap[head_id, 0] = 1
-                bw_togglemap[head_id, 0] = 1
-            else:
-                a, b, c = head_tag.split(':')
-                if b=='fw':
-                    tail_id = self.re_tag_indexing.token2idx(f"{a}:bw:{c}")
-                    fw_togglemap[head_id, head_id] = 1
-                    fw_togglemap[tail_id, 0] = 1
-                    bw_togglemap[head_id, 0] = 1
-                    bw_togglemap[tail_id, head_id] = 1
-                elif b=='bw':
-                    tail_id = self.re_tag_indexing.token2idx(f"{a}:fw:{c}")
-                    fw_togglemap[tail_id, tail_id] = 1
-                    fw_togglemap[head_id, 0] = 1
-                    bw_togglemap[tail_id, 0] = 1
-                    bw_togglemap[head_id, tail_id] = 1
-                
-        self.fw_togglemap = fw_togglemap
-        self.bw_togglemap = bw_togglemap
-        
-        self.need_update = False
-        
-        return self.fw_togglemap, self.bw_togglemap
-    
     def predict_step(self, inputs):
         
         rets = self.forward_step(inputs)
-        re_tag_logits = rets['re_tag_logits']
-        ner_tag_logits = rets['ner_tag_logits']
         entry_tag_logits = rets['entry_tag_logits']
-        mask = rets['masks']
-        mask_np = mask.cpu().detach().numpy()
-        
-        if self.config.crf == 'CRF':
-            ner_tag_preds = self.crf_layer.decode(ner_tag_logits, mask=mask)
-        elif not self.config.crf:
-            ner_tag_preds = ner_tag_logits.argmax(dim=-1).cpu().detach().numpy()
-        else:
-            raise Exception('not a compatible decode')
-            
-        ner_tag_preds = np.array(ner_tag_preds)
-        ner_tag_preds *= mask_np
-        ner_tag_preds = self.ner_tag_indexing.inv(ner_tag_preds)
-        rets['ner_tag_preds'] = ner_tag_preds
-        
-        matrix_mask_np = mask_np[:, np.newaxis] + mask_np[:, :, np.newaxis]
 
-        ## uncomment below to return relation tag for each entry by argmax
-        #re_tag_preds = relation_logits.argmax(dim=-1).cpu().detach().numpy()
-        #re_tag_preds *= matrix_mask_np
-        #re_tag_preds = self.re_tag_indexing.inv(re_tag_preds) # str:(B, N, N)
-        #rets['re_tag_preds'] = re_tag_preds
-
-        entity_preds = self._postprocess_entities(ner_tag_preds)
-        # relation_preds = self._postprocess_relations(relation_logits, rets['entities']) # use GOLD entity spans
-        relation_preds = self._postprocess_relations(re_tag_logits, entity_preds)
-        rets['entity_preds'] = entity_preds
-        rets['relation_preds'] = relation_preds
         rets['entry_length_preds'] = entry_tag_logits
             
         return rets

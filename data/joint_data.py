@@ -12,7 +12,7 @@ from collections import defaultdict
 from torch.utils.data import Dataset, DataLoader
 from utils import *
 from itertools import combinations, permutations
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score, mean_squared_error
 
 from .basics import *
 from .base import *
@@ -189,47 +189,18 @@ class JointTrainer(Trainer):
             else:
                 g = []
 
-            sents = []
-            pred_entities = []
-            pred_relations = []
-            pred_relations_wNER = []
-            label_entities = []
-            label_relations = []
-            label_relations_wNER = []
             entry_lengths_pred = []
             entry_lengths_gt = []
             for i, inputs in enumerate(g):
                 inputs = model.predict_step(inputs)
-                pred_span_to_etype = [{(ib,ie):etype for ib, ie, etype in x} for x in inputs['entity_preds']]
-                label_span_to_etype = [{(ib,ie):etype for ib, ie, etype in x} for x in inputs['entities']]
-                pred_entities += inputs['entity_preds']
-                label_entities += inputs['entities'] 
-                pred_relations += inputs['relation_preds']
-                label_relations += inputs['relations']
                 entry_lengths_pred += inputs['entry_length_preds'].cpu().numpy().tolist()
                 entry_lengths_gt += inputs['entry_length'].cpu().numpy().tolist()
 
-                pred_relations_wNER += [ 
-                    [
-                        (ib, ie, m[(ib,ie)], jb, je, m[(jb,je)], rtype) for ib, ie, jb, je, rtype in x
-                    ] for x, m in zip(inputs['relation_preds'], pred_span_to_etype)
-                ]
-                label_relations_wNER += [ 
-                    [
-                        (ib, ie, m[(ib,ie)], jb, je, m[(jb,je)], rtype) for ib, ie, jb, je, rtype in x 
-                    ] for x, m in zip(inputs['relations'], label_span_to_etype)
-                ]
-                
-                sents += inputs['tokens']
-
             rets = {}
-            rets['entity_p'], rets['entity_r'], rets['entity_f1'] = self._get_metrics(
-                sents, pred_entities, label_entities, verbose=verbose==1)
-            rets['relation_p'], rets['relation_r'], rets['relation_f1'] = self._get_metrics(
-                sents, pred_relations, label_relations, verbose=verbose==2)
-            rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = self._get_metrics(
-                sents, pred_relations_wNER, label_relations_wNER, verbose=verbose==3)
+            # print('gt: ', entry_lengths_gt)
+            # print('pr: ', entry_lengths_pred)
             rets['rmse_entry_length'] = mean_squared_error(entry_lengths_gt, entry_lengths_pred, squared=False)
+            rets['r2_entry_length'] = r2_score(entry_lengths_gt, entry_lengths_pred)
         if self.final:
             log_info = f'''>> ret: {rets}'''
             self.logger.info(log_info)
@@ -237,49 +208,24 @@ class JointTrainer(Trainer):
 
     def _evaluate_during_train(self, model=None, trainer_target=None, args=None):
         
-        if not hasattr(self, 'max_f1'):
-            self.max_f1 = [0.0, 0.0, 0.0, 0.0, 0.0]
+        if not hasattr(self, 'min_rmse'):
+            self.min_rmse = 10000
         
         test_rets = trainer_target.evaluate_model(model, verbose=0, test_type='test')
-        precision, recall, f1 = test_rets['entity_p'], test_rets['entity_r'], test_rets['entity_f1']
-        print(f">> test entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        precision, recall, f1 = test_rets['relation_p'], test_rets['relation_r'], test_rets['relation_f1']
-        print(f">> test relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        precision, recall, f1 = test_rets['relation_p_wNER'], test_rets['relation_r_wNER'], test_rets['relation_f1_wNER']
-        print(f">> test relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-
         rmse_entry_length = test_rets['rmse_entry_length']
+        r2_entry_length = test_rets['r2_entry_length']
         print(f">> test RMSE entry length:{rmse_entry_length:.4f}")
+        # print(f">> test R2 entry length:{r2_entry_length:.4f}")
 
         valid_rets = trainer_target.evaluate_model(model, verbose=0, test_type='valid')
-        precision, recall, f1 = valid_rets['entity_p'], valid_rets['entity_r'], valid_rets['entity_f1']
-        e_f1 = f1
-        print(f">> valid entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        precision, recall, f1 = valid_rets['relation_p'], valid_rets['relation_r'], valid_rets['relation_f1']
-        r_f1 = f1
-        print(f">> valid relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-        precision, recall, f1 = valid_rets['relation_p_wNER'], valid_rets['relation_r_wNER'], valid_rets['relation_f1_wNER']
-        r_f1_wNER = f1
-        print(f">> valid relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-
         rmse_entry_length = valid_rets['rmse_entry_length']
+        r2_entry_length = valid_rets['r2_entry_length']
         print(f">> valid RMSE entry length:{rmse_entry_length:.4f}")
+        # print(f">> valid R2 entry length:{r2_entry_length:.4f}")
 
-        if e_f1 > self.max_f1[0]:
-            self.max_f1[0] = e_f1
-            print('new max entity f1 on valid!')
-
-        if r_f1 > self.max_f1[1]:
-            self.max_f1[1] = r_f1
-            print('new max relation f1 on valid!')
-
-        if r_f1_wNER > self.max_f1[2]:
-            self.max_f1[2] = r_f1_wNER
-            print('new max relation f1 with NER on valid!')
-
-        if (e_f1 + r_f1) / 2 > self.max_f1[3]:
-            self.max_f1[3] = (e_f1 + r_f1) / 2
-            print('new max averaged entity f1 and relation f1 on valid!')
+        if rmse_entry_length < self.min_rmse:
+            self.min_rmse = rmse_entry_length
+            print('new min RMSE on valid!')
 
             self.logger.info(f'Latest model at: Epoch: {self.current_epoch}, global_step: {self.current_global_step}')
             self.logger.info(f">> test ret: {test_rets}")
@@ -287,10 +233,6 @@ class JointTrainer(Trainer):
 
             if args.model_write_ckpt:
                 model.save(args.model_write_ckpt)
-                
-        if (e_f1 + r_f1_wNER) / 2 > self.max_f1[4]:
-            self.max_f1[4] = (e_f1 + r_f1_wNER) / 2
-            print('new max averaged entity f1 and relation f1 with NER on valid!')
 
                 
 class JointTrainerMacroF1(JointTrainer):
