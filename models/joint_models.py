@@ -231,6 +231,20 @@ class StackedTwoWayEncoding(nn.Module):
         return S_list, T_list, attn_list
 
 
+class ConvNet2layers(nn.Module):
+
+    def __init__(self, input_dim, hid_dim, output_dim, kernel_size=1, stride=1, padding='same', dropout=0.3):
+        super(ConvNet2layers, self).__init__()
+        self.conv1 = nn.Conv2d(input_dim, hid_dim, kernel_size, stride, padding)
+        self.conv2 = nn.Conv2d(hid_dim, output_dim, kernel_size, stride, padding)
+        self.dropout = nn.Dropout2d(dropout)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.dropout(x)
+        return self.conv2(x)
+
+
 class ConvNet3layers(nn.Module):
 
     def __init__(self, input_dim, hid_dim, output_dim, kernel_size=1, stride=1, padding=0, dropout=0.3):
@@ -273,11 +287,11 @@ class JointModel(Tagger):
         self.token_indexing = self.token_embedding.preprocess_sentences
 
         # Trung
-        self.conv_encoder = ConvNet3layers(input_dim=self.config.hidden_dim,
+        self.conv_encoder = ConvNet2layers(input_dim=self.config.hidden_dim,
                                            hid_dim=self.config.hidden_dim//2, output_dim=1)
         self.config.max_sent_length = 120  # Conll04
-        # self.config.size_embedding_size = 100
-        # self.size_embeddings = nn.Embedding(self.config.max_sent_length, self.config.size_embedding_size)
+        self.config.size_embedding_size = 100
+        self.size_embeddings = nn.Embedding(self.config.max_sent_length, self.config.size_embedding_size)
         
     def set_encoding_layer(self):
         
@@ -293,7 +307,7 @@ class JointModel(Tagger):
     def set_logits_layer(self):
         # Trung: entry layer
         # (batch_size, num_rows, num_cols, 1) -> (batch_size)
-        self.entry_tag_logits_layer = nn.Linear(self.config.max_sent_length ** 2, 1)
+        self.entry_tag_logits_layer = nn.Linear(self.config.max_sent_length ** 2 + self.config.size_embedding_size, 1)
         
     def set_loss_layer(self):
         
@@ -314,7 +328,7 @@ class JointModel(Tagger):
         # Sentence length
         inputs['entry_length'] = torch.FloatTensor(inputs['entry_length']).to(self.device)
         inputs['sent_length'] = torch.LongTensor(inputs['sent_length']).to(self.device)
-        # sent_length_embeddings = self.size_embeddings(inputs['sent_length'])
+        sent_length_embeddings = self.size_embeddings(inputs['sent_length'])
             
         embeddings, masks, embeddings_dict = self.token_embedding(sents, return_dict=True)
         
@@ -335,7 +349,7 @@ class JointModel(Tagger):
         inputs['masks'] = masks
         inputs['tab_embeddings'] = tab_embeddings
         inputs['seq_embeddings'] = seq_embeddings
-        # inputs['sent_length_embeddings'] = sent_length_embeddings
+        inputs['sent_length_embeddings'] = sent_length_embeddings
 
         return inputs
     
@@ -354,7 +368,7 @@ class JointModel(Tagger):
         inputs = self.forward_embeddings(inputs)
         tab_embeddings = inputs['tab_embeddings']
         seq_embeddings = inputs['seq_embeddings']
-        # sent_length_embeddings = inputs['sent_length_embeddings']
+        sent_length_embeddings = inputs['sent_length_embeddings']
 
         # Use conv net with 1x1 kernel
         tab_embeddings = tab_embeddings.permute(0, 3, 1, 2)
@@ -363,11 +377,11 @@ class JointModel(Tagger):
         batch_size = tab_embeddings.shape[0]
 
         entry_tag_logits = self.conv_encoder(tab_embeddings)
-        # entry_tag_logits = F.relu(entry_tag_logits)
         entry_tag_logits = entry_tag_logits.view(batch_size, -1)
 
         pad_amount = self.config.max_sent_length ** 2 - inputs['batch_max_length'] ** 2
         entry_tag_logits = F.pad(input=entry_tag_logits, pad=[0, pad_amount], mode='constant', value=0)
+        entry_tag_logits = torch.cat((entry_tag_logits, sent_length_embeddings), 1)
         entry_tag_logits = self.entry_tag_logits_layer(entry_tag_logits).view(batch_size,)
         # print('post.entry_tag_logits: ', entry_tag_logits)
         # print('loss value: ', self.mse_loss_layer(entry_tag_logits, inputs['entry_length']).item())
