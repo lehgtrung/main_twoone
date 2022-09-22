@@ -13,8 +13,8 @@ def train(args):
     trainer = Trainer(
         model=model,
         train_path=f'{args.train_path}',
-        test_path=DEFAULT_TEST_PATH,
-        valid_path=DEFAULT_VALID_PATH,
+        test_path=BINARY_TEST_PATH,
+        valid_path=BINARY_VALID_PATH,
         log_path=args.log_path,
         final=False,
         label_config=args.label_config,
@@ -58,7 +58,9 @@ args = parser.parse_args()
 if os.path.exists(f'./datasets/unified/train.{args.dataset}.json'):
     DEFAULT_TRAIN_PATH = f'./datasets/unified/train.{args.dataset}.json'
     DEFAULT_TEST_PATH = f'./datasets/unified/test.{args.dataset}.json'
+    BINARY_TEST_PATH = f'./datasets/unified/binary_test.{args.dataset}.json'
     DEFAULT_VALID_PATH = f'./datasets/unified/valid.{args.dataset}.json'
+    BINARY_VALID_PATH = f'./datasets/unified/binary_valid.{args.dataset}.json'
 else:
     DEFAULT_TRAIN_PATH = f'../datasets/unified/train.{args.dataset}.json'
     DEFAULT_TEST_PATH = f'../datasets/unified/test.{args.dataset}.json'
