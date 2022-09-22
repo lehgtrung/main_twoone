@@ -135,8 +135,10 @@ if __name__ == '__main__':
     # logger = logging.getLogger()
     # logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
-    if os.path.exists(configs['LOG_PATH']):
-        os.remove(configs['LOG_PATH'])
+    # if os.path.exists(configs['LOG_PATH']):
+    #     os.remove(configs['LOG_PATH'])
+    with open(configs['LOG_PATH'], 'w') as f:
+        f.write('Start training\n')
     logger = Logger(path=configs['LOG_PATH'])
     logger.info(f'python run_asp.py --dataset {args.dataset} --fold {args.fold} --aggregation {args.aggregation}')
 
