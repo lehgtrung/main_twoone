@@ -13,8 +13,8 @@ def train(args):
     trainer = Trainer(
         model=model,
         train_path=f'{args.train_path}',
-        test_path=BINARY_TEST_PATH,
-        valid_path=BINARY_VALID_PATH,
+        test_path=DEFAULT_TEST_PATH,
+        valid_path=DEFAULT_VALID_PATH,
         log_path=args.log_path,
         final=False,
         label_config=args.label_config,
