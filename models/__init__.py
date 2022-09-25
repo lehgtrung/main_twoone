@@ -41,7 +41,7 @@ class Config:
         tag_form='iobes',
         warm_steps=0,
         grad_period=1,
-        device=torch.device('cuda:1' if torch.cuda.is_available() else 'cpu'),
+        device=torch.device('cuda:0' if torch.cuda.is_available() else 'cpu'),
         *args, **kargs,
     ):
         self.cased = cased
