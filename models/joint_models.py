@@ -17,6 +17,7 @@ from data import *
 
 from .base import *
 
+from focal_loss import FocalLoss
 import copy
 
 
@@ -279,7 +280,10 @@ class JointModel(Tagger):
             self.crf_layer = eval(self.config.crf)(self.config)
         
         self.soft_loss_layer = LabelSmoothLoss(0.02, reduction='none') 
-        self.loss_layer = nn.CrossEntropyLoss(reduction='none')
+        # self.loss_layer = nn.CrossEntropyLoss(reduction='none')
+
+        # Try focal loss
+        self.loss_layer = FocalLoss(gamma=2)
     
     def forward_embeddings(self, inputs):
         
