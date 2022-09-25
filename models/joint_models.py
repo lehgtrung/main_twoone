@@ -17,7 +17,7 @@ from data import *
 
 from .base import *
 
-from focal_loss import FocalLoss
+from models.focal_loss import FocalLoss
 import copy
 
 
