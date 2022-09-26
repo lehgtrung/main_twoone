@@ -2,7 +2,7 @@ from models import *
 
 
 def make_prediction(model, input_path, output_path):
-    kept_fields = ['entity_preds', 'relation_preds']
+    kept_fields = ['entity_preds', 'relation_preds', 'table_probs']
     with open(input_path, 'r') as f:
         input_data = json.load(f)
     outputs = []
@@ -16,7 +16,10 @@ def make_prediction(model, input_path, output_path):
             'entities': [],
             'relations': [],
             'entity_gts': [],
-            'relation_gts': []
+            'relation_gts': [],
+            'entities_': [],
+            'relations_': [],
+            'table_probs': []
         }
         rets = model.predict_step(step_input)
         rets = {k: list(v[0]) for k, v in rets.items() if k in kept_fields}
@@ -41,6 +44,22 @@ def make_prediction(model, input_path, output_path):
             # k.append(' '.join(tokens[r[0]: r[1]]))
             # k.append(' '.join(tokens[r[2]: r[3]]))
             step_output['relations'].append(k)
+
+        # Predicted with descriptions
+        table_probs = np.asarray(rets['table_probs'])
+        for e in rets['entity_preds']:
+            k = list(e)
+            k.append(' '.join(tokens[e[0]: e[1]]))
+            k.append(table_probs.diagonal()[e[0]: e[1]].tolist())
+            step_output['entities_'].append(k)
+        for r in rets['relation_preds']:
+            k = list(r)
+            k.append(' '.join(tokens[r[0]: r[1]]))
+            k.append(' '.join(tokens[r[2]: r[3]]))
+            k.append(table_probs[r[0]: r[1], r[2]: r[3]].tolist())
+            step_output['relations_'].append(k)
+
+        step_output['table_probs'] = table_probs.tolist()
 
         step_output['tokens'] = tokens
         outputs.append(step_output)

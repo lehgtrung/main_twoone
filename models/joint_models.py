@@ -509,10 +509,16 @@ class JointModel(Tagger):
         matrix_mask_np = mask_np[:, np.newaxis] + mask_np[:, :, np.newaxis]
 
         ## uncomment below to return relation tag for each entry by argmax
-        #re_tag_preds = relation_logits.argmax(dim=-1).cpu().detach().numpy()
-        #re_tag_preds *= matrix_mask_np
-        #re_tag_preds = self.re_tag_indexing.inv(re_tag_preds) # str:(B, N, N)
-        #rets['re_tag_preds'] = re_tag_preds
+        # re_tag_preds = re_tag_logits.argmax(dim=-1).cpu().detach().numpy()
+        # re_tag_preds *= matrix_mask_np
+        # re_tag_preds = self.re_tag_indexing.inv(re_tag_preds) # str:(B, N, N)
+        # rets['re_tag_preds'] = re_tag_preds
+
+        # Trung: table probability
+        rets['table_probs'] = F.softmax(re_tag_logits, dim=-1).max(dim=-1).values
+        diags = F.softmax(ner_tag_logits, dim=-1).max(dim=-1).values
+        rets['table_probs'].diagonal(dim1=-1, dim2=-2).copy_(diags)
+        rets['table_probs'] = rets['table_probs'].cpu().detach().numpy()
 
         entity_preds = self._postprocess_entities(ner_tag_preds)
         # relation_preds = self._postprocess_relations(relation_logits, rets['entities']) # use GOLD entity spans
