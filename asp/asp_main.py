@@ -14,8 +14,8 @@ def conll04_script():
     train_script = """
         python -u ./main.py \
         --mode train \
-        --num_layers 3 \
-        --batch_size 8  \
+        --num_layers 2 \
+        --batch_size 2  \
         --evaluate_interval 500 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
@@ -304,23 +304,22 @@ def curriculum_training(labeled_path,
         iteration += 1
 
 
-def select_pseudo_labels_by_confidence(input_path, output_path):
-    ...
-
+def select_pseudo_labels_by_confidence(input_path, z=0.05):
+    with open(input_path, 'r') as f:
+        data = json.load(f)
+    min_probs = []
+    for i, row in enumerate(data):
+        min_probs.append(np.asarray(row['table_prob']).min())
+    top_z = int(len(data) * z)
+    return list(np.asarray(min_probs).argsort()[-top_z:])
 
 
 def confidence_curriculum_training(labeled_path,
                                    unlabeled_path,
-                                   raw_pseudo_labeled_path,
-                                   selected_pseudo_labeled_path,
-                                   unified_pseudo_labeled_path,
                                    labeled_model_path,
-                                   raw_model_path,
                                    intermediate_model_path,
                                    logger,
                                    log_path,
-                                   aggregation,
-                                   with_triplets,
                                    max_iterations,
                                    ):
     SCRIPT = conll04_script()
@@ -329,7 +328,6 @@ def confidence_curriculum_training(labeled_path,
     EVAL_SCRIPT = SCRIPT['eval']
 
     logger.info(f'Labeled path: {labeled_path}')
-    logger.info(f'Aggregation function: {aggregation}')
 
     # Step 1: Train on labeled data
     if not model_exists(labeled_model_path):
@@ -342,16 +340,10 @@ def confidence_curriculum_training(labeled_path,
         logger.info('Labeled model exists, skip training ...')
 
     iteration = 0
-    unlabeled_set = []
     while True:
-
-        if iteration == max_iterations or len(unlabeled_set) == 0:
+        if iteration == max_iterations or os.stat(unlabeled_path).st_size == 0:
             break
 
-        formatted_raw_pseudo_labeled_path = raw_pseudo_labeled_path.format(iteration=iteration)
-        formatted_raw_pseudo_labeled_path_bk = raw_pseudo_labeled_path.format(iteration=iteration) + '.bk'
-        formatted_selected_pseudo_labeled_path = selected_pseudo_labeled_path.format(iteration=iteration)
-        formatted_unified_pseudo_labeled_path = unified_pseudo_labeled_path.format(iteration=iteration)
         formatted_intermediate_model_path = intermediate_model_path.format(iteration=iteration)
 
         # Step 1: Predict on unlabeled data
@@ -361,27 +353,26 @@ def confidence_curriculum_training(labeled_path,
             _path = intermediate_model_path.format(iteration=iteration-1)
         script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
                                        predict_input_path=unlabeled_path,
-                                       predict_output_path=formatted_raw_pseudo_labeled_path)
+                                       predict_output_path=unlabeled_path)
         logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
         subprocess.run(script, shell=True, check=True)
 
-        # Step 4: For each sentence, verify and infer => list of answer sets (ASs)
+        # Step 4: For each sentence, sort by minimum confidence
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
-        select_pseudo_labels_by_confidence(
-            input_path=formatted_raw_pseudo_labeled_path,
-            output_path=formatted_selected_pseudo_labeled_path
+        indices = select_pseudo_labels_by_confidence(
+            input_path=unlabeled_path
         )
 
         # Step 5 Unify labeled and selected pseudo labels
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
-        unify_two_datasets(labeled_path=labeled_path,
-                           pseudo_path=formatted_selected_pseudo_labeled_path,
-                           output_path=formatted_unified_pseudo_labeled_path)
+        transfer_and_subtract_two_datasets(labeled_path=labeled_path,
+                                           unlabeled_path=unlabeled_path,
+                                           indices=indices)
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
-                                     train_path=formatted_unified_pseudo_labeled_path,
+                                     train_path=labeled_path,
                                      log_path=log_path)
         subprocess.run(script, shell=True, check=True)
         # Eval the trained model
