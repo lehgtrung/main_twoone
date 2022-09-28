@@ -14,8 +14,8 @@ def conll04_script():
     train_script = """
         python -u ./main.py \
         --mode train \
-        --num_layers 2 \
-        --batch_size 2  \
+        --num_layers 3 \
+        --batch_size 8  \
         --evaluate_interval 500 \
         --dataset CoNLL04 \
         --pretrained_wv ./wv/glove.6B.100d.conll04.txt \
