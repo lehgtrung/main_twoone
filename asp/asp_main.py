@@ -309,7 +309,7 @@ def select_pseudo_labels_by_confidence(input_path, z=0.05):
         data = json.load(f)
     min_probs = []
     for i, row in enumerate(data):
-        min_probs.append(np.asarray(row['table_prob']).min())
+        min_probs.append(np.asarray(row['table_probs']).min())
     top_z = int(len(data) * z)
     return list(np.asarray(min_probs).argsort()[-top_z:])
 
