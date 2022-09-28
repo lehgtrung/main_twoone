@@ -362,6 +362,7 @@ def confidence_curriculum_training(labeled_path,
         indices = select_pseudo_labels_by_confidence(
             input_path=unlabeled_path
         )
+        logger.info('Round #{}: Indices: {}'.format(iteration, indices))
 
         # Step 5 Unify labeled and selected pseudo labels
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
