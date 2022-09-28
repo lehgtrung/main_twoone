@@ -303,6 +303,7 @@ def curriculum_training(labeled_path,
 
         iteration += 1
 
+### Iterative enlargement
 
 def select_pseudo_labels_by_confidence(input_path, z=0.1):
     with open(input_path, 'r') as f:
@@ -319,8 +320,25 @@ def check_size(path):
         return len(json.load(f))
 
 
+def percentage_correct(path):
+    with open(path, 'r') as f:
+        data = json.load(f)
+    match = 0
+    for row in data:
+        entities = set([(e[0], e[1]) for e in row['entities']])
+        entity_gts = set([(e[0], e[1]) for e in row['entity_gts']])
+
+        relations = set([(e[0], e[1], e[2], e[3]) for e in row['relations']])
+        relation_gts = set([(e[0], e[1], e[2], e[3]) for e in row['relation_gts']])
+
+        if entities == entity_gts and relations == relation_gts:
+            match += 1
+    return match / len(data)
+
+
 def confidence_curriculum_training(labeled_path,
                                    unlabeled_path,
+                                   selected_path,
                                    labeled_model_path,
                                    intermediate_model_path,
                                    logger,
@@ -373,7 +391,10 @@ def confidence_curriculum_training(labeled_path,
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
         transfer_and_subtract_two_datasets(labeled_path=labeled_path,
                                            unlabeled_path=unlabeled_path,
+                                           selected_path=selected_path,
                                            indices=indices)
+        logger.info('Round #{}: Percent match of selected set: {}'.format(iteration, percentage_correct(selected_path)))
+        logger.info('Round #{}: Percent match of labeled set: {}'.format(iteration, percentage_correct(labeled_path)))
         logger.info('Round #{}: Labeled size: {}, unlabeled size: {}'.format(iteration,
                                                                              check_size(labeled_path),
                                                                              check_size(unlabeled_path)))
