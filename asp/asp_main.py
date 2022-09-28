@@ -394,7 +394,6 @@ def confidence_curriculum_training(labeled_path,
                                            selected_path=selected_path,
                                            indices=indices)
         logger.info('Round #{}: Percent match of selected set: {}'.format(iteration, percentage_correct(selected_path)))
-        logger.info('Round #{}: Percent match of labeled set: {}'.format(iteration, percentage_correct(labeled_path)))
         logger.info('Round #{}: Labeled size: {}, unlabeled size: {}'.format(iteration,
                                                                              check_size(labeled_path),
                                                                              check_size(unlabeled_path)))
