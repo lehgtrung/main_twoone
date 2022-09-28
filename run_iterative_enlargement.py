@@ -35,6 +35,6 @@ if __name__ == '__main__':
                                    intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
                                    logger=logger,
                                    log_path=configs['LOG_PATH'],
-                                   max_iterations=5)
+                                   max_iterations=10)
 
 

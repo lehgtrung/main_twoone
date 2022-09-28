@@ -304,7 +304,7 @@ def curriculum_training(labeled_path,
         iteration += 1
 
 
-def select_pseudo_labels_by_confidence(input_path, z=0.05):
+def select_pseudo_labels_by_confidence(input_path, z=0.1):
     with open(input_path, 'r') as f:
         data = json.load(f)
     min_probs = []
@@ -312,6 +312,11 @@ def select_pseudo_labels_by_confidence(input_path, z=0.05):
         min_probs.append(np.asarray(row['table_probs']).min())
     top_z = int(len(data) * z)
     return list(np.asarray(min_probs).argsort()[-top_z:])
+
+
+def check_size(path):
+    with open(path, 'r') as f:
+        return len(json.load(f))
 
 
 def confidence_curriculum_training(labeled_path,
@@ -369,6 +374,9 @@ def confidence_curriculum_training(labeled_path,
         transfer_and_subtract_two_datasets(labeled_path=labeled_path,
                                            unlabeled_path=unlabeled_path,
                                            indices=indices)
+        logger.info('Round #{}: Labeled size: {}, unlabeled size: {}'.format(iteration,
+                                                                             check_size(labeled_path),
+                                                                             check_size(unlabeled_path)))
 
         # Step 6: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
