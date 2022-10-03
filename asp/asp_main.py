@@ -312,7 +312,7 @@ def select_pseudo_labels_by_confidence(input_path, z):
     min_probs = []
     for i, row in enumerate(data):
         min_probs.append(np.asarray(row['table_probs']).min())
-    top_z = int(len(data) * z)
+    top_z = int(len(data) * (1-z))
     return list(np.asarray(min_probs).argsort()[-top_z:])
 
 
