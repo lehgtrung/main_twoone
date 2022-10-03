@@ -400,7 +400,7 @@ def pseudo_labelling_under_curriculum(labeled_path,
                                            indices=indices)
         logger.info('Round #{}: Percent match of selected set: {}'.format(iteration, percentage_correct(selected_path)))
         logger.info('Round #{}: Labeled size: {}, unlabeled size: {}'.format(iteration,
-                                                                             check_size(labeled_path),
+                                                                             check_size(temp_labeled_path),
                                                                              check_size(unlabeled_path)))
 
         # Step 5: Retrain on labeled and pseudo-labeled data
