@@ -8,13 +8,13 @@ from logger import Logger
 
 
 if __name__ == '__main__':
-    LABELED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/labeled.json'
-    TEMP_LABELED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/temp_labeled.json'
-    UNLABELED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/unlabeled.json'
-    SELECTED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/selected.json'
-    LABELED_MODEL_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/models/labeled'
-    INTERMEDIATE_MODEL_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/models/inter_{iteration}'
-    LOG_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/logs.txt'
+    LABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/labeled.json'
+    TEMP_LABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/temp_labeled.json'
+    UNLABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/unlabeled.json'
+    SELECTED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/selected.json'
+    LABELED_MODEL_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/models/labeled'
+    INTERMEDIATE_MODEL_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/models/inter_{iteration}'
+    LOG_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/logs.txt'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,
