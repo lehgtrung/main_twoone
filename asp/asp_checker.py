@@ -28,7 +28,11 @@ def unify_two_datasets(labeled_path, pseudo_path, output_path, with_weight=False
         json.dump(labeled + pseudo, f)
 
 
-def transfer_and_subtract_two_datasets(labeled_path, unlabeled_path, selected_path, indices):
+def transfer_and_subtract_two_datasets(labeled_path,
+                                       unlabeled_path,
+                                       temp_labeled_path,
+                                       selected_path,
+                                       indices):
     with open(labeled_path, 'r') as f:
         labeled = json.load(f)
     with open(unlabeled_path, 'r') as f:
@@ -42,10 +46,8 @@ def transfer_and_subtract_two_datasets(labeled_path, unlabeled_path, selected_pa
             remains.append(row)
     with open(selected_path, 'w') as f:
         json.dump(selected, f)
-    with open(labeled_path, 'w') as f:
+    with open(temp_labeled_path, 'w') as f:
         json.dump(labeled + selected, f)
-    with open(unlabeled_path, 'w') as f:
-        json.dump(remains, f)
 
 
 def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger):

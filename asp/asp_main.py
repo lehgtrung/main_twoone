@@ -305,7 +305,8 @@ def curriculum_training(labeled_path,
 
 ### Iterative enlargement
 
-def select_pseudo_labels_by_confidence(input_path, z=0.1):
+
+def select_pseudo_labels_by_confidence(input_path, z):
     with open(input_path, 'r') as f:
         data = json.load(f)
     min_probs = []
@@ -336,15 +337,15 @@ def percentage_correct(path):
     return match / len(data)
 
 
-def confidence_curriculum_training(labeled_path,
-                                   unlabeled_path,
-                                   selected_path,
-                                   labeled_model_path,
-                                   intermediate_model_path,
-                                   logger,
-                                   log_path,
-                                   max_iterations,
-                                   ):
+def pseudo_labelling_under_curriculum(labeled_path,
+                                      unlabeled_path,
+                                      temp_labeled_path,
+                                      selected_path,
+                                      labeled_model_path,
+                                      intermediate_model_path,
+                                      logger,
+                                      log_path,
+                                      delta=0.2):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -363,13 +364,15 @@ def confidence_curriculum_training(labeled_path,
         logger.info('Labeled model exists, skip training ...')
 
     iteration = 0
-    while True:
-        if iteration == max_iterations or os.stat(unlabeled_path).st_size == 0:
-            break
+    current_delta = 1.0 - delta
+    while current_delta >= 0:
+
+        # if iteration == max_iterations or os.stat(unlabeled_path).st_size == 0:
+        #     break
 
         formatted_intermediate_model_path = intermediate_model_path.format(iteration=iteration)
 
-        # Step 1: Predict on unlabeled data
+        # Step 2: Predict on unlabeled data
         if iteration == 0:
             _path = labeled_model_path
         else:
@@ -380,17 +383,19 @@ def confidence_curriculum_training(labeled_path,
         logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
         subprocess.run(script, shell=True, check=True)
 
-        # Step 4: For each sentence, sort by minimum confidence
+        # Step 3: For each sentence, sort by minimum confidence
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
         indices = select_pseudo_labels_by_confidence(
-            input_path=unlabeled_path
+            input_path=unlabeled_path,
+            z=current_delta
         )
         logger.info('Round #{}: Indices: {}'.format(iteration, indices))
 
-        # Step 5 Unify labeled and selected pseudo labels
+        # Step 4: Unify labeled and selected pseudo labels
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
         transfer_and_subtract_two_datasets(labeled_path=labeled_path,
                                            unlabeled_path=unlabeled_path,
+                                           temp_labeled_path=temp_labeled_path,
                                            selected_path=selected_path,
                                            indices=indices)
         logger.info('Round #{}: Percent match of selected set: {}'.format(iteration, percentage_correct(selected_path)))
@@ -398,10 +403,10 @@ def confidence_curriculum_training(labeled_path,
                                                                              check_size(labeled_path),
                                                                              check_size(unlabeled_path)))
 
-        # Step 6: Retrain on labeled and pseudo-labeled data
+        # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
-                                     train_path=labeled_path,
+                                     train_path=temp_labeled_path,
                                      log_path=log_path)
         subprocess.run(script, shell=True, check=True)
         # Eval the trained model
@@ -410,4 +415,5 @@ def confidence_curriculum_training(labeled_path,
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
+        current_delta = current_delta - delta
 

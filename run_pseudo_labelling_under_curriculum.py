@@ -1,4 +1,4 @@
-from asp.asp_main import confidence_curriculum_training
+from asp.asp_main import pseudo_labelling_under_curriculum
 import logging
 import os
 import argparse
@@ -9,6 +9,7 @@ from logger import Logger
 
 if __name__ == '__main__':
     LABELED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/labeled.json'
+    TEMP_LABELED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/temp_labeled.json'
     UNLABELED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/unlabeled.json'
     SELECTED_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/selected.json'
     LABELED_MODEL_PATH = './datasets/iterative_enlargement/conll04_pct=30_fold=10/models/labeled'
@@ -18,6 +19,7 @@ if __name__ == '__main__':
     configs = {
         'LABELED_PATH': LABELED_PATH,
         'UNLABELED_PATH': UNLABELED_PATH,
+        'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
         'SELECTED_PATH': SELECTED_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
         'INTERMEDIATE_MODEL_PATH': INTERMEDIATE_MODEL_PATH,
@@ -31,13 +33,13 @@ if __name__ == '__main__':
         f.write('Start training\n')
     logger = Logger(path=configs['LOG_PATH'])
 
-    confidence_curriculum_training(labeled_path=configs['LABELED_PATH'],
-                                   unlabeled_path=configs['UNLABELED_PATH'],
-                                   selected_path=configs['SELECTED_PATH'],
-                                   labeled_model_path=configs['LABELED_MODEL_PATH'],
-                                   intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
-                                   logger=logger,
-                                   log_path=configs['LOG_PATH'],
-                                   max_iterations=10)
+    pseudo_labelling_under_curriculum(labeled_path=configs['LABELED_PATH'],
+                                      unlabeled_path=configs['UNLABELED_PATH'],
+                                      temp_labeled_path=configs['TEMP_LABELED_PATH'],
+                                      selected_path=configs['SELECTED_PATH'],
+                                      labeled_model_path=configs['LABELED_MODEL_PATH'],
+                                      intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
+                                      logger=logger,
+                                      log_path=configs['LOG_PATH'])
 
 
