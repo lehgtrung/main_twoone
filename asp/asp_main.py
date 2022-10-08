@@ -311,9 +311,18 @@ def select_pseudo_labels_by_confidence(input_path, z):
         data = json.load(f)
     min_probs = []
     for i, row in enumerate(data):
-        min_probs.append(np.asarray(row['table_probs']).min())
+        # min_probs.append(np.asarray(row['table_probs']).min())
+        min_probs.append(row['agg_probs'])
     top_z = int(len(data) * (1-z))
-    return list(np.asarray(min_probs).argsort()[-top_z:])
+    indices = list(np.asarray(min_probs).argsort()[-top_z:])
+    for i, row in enumerate(data):
+        if i in indices:
+            row['correct'] = 1
+        else:
+            row['correct'] = 0
+    with open(input_path, 'w') as f:
+        json.dump(data, f)
+    return indices
 
 
 def check_size(path):

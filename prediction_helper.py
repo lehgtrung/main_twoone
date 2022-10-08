@@ -19,7 +19,8 @@ def make_prediction(model, input_path, output_path):
             'relation_gts': [],
             'entities_': [],
             'relations_': [],
-            'table_probs': []
+            'agg_probs': []
+            # 'table_probs': []
         }
         rets = model.predict_step(step_input)
         rets = {k: list(v[0]) for k, v in rets.items() if k in kept_fields}
@@ -59,7 +60,8 @@ def make_prediction(model, input_path, output_path):
             k.append(table_probs[r[0]: r[1], r[2]: r[3]].tolist())
             step_output['relations_'].append(k)
 
-        step_output['table_probs'] = table_probs.tolist()
+        #step_output['table_probs'] = table_probs.tolist()
+        step_output['agg_probs'] = np.asarray(table_probs.tolist()).min()
 
         step_output['tokens'] = tokens
         outputs.append(step_output)
