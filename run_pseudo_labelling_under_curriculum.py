@@ -11,6 +11,7 @@ if __name__ == '__main__':
     LABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/labeled.json'
     TEMP_LABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/temp_labeled.json'
     UNLABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/unlabeled.json'
+    PREDICTION_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/prediction.json'
     SELECTED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/selected.json'
     LABELED_MODEL_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/models/labeled'
     INTERMEDIATE_MODEL_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/models/inter_{iteration}'
@@ -19,6 +20,7 @@ if __name__ == '__main__':
     configs = {
         'LABELED_PATH': LABELED_PATH,
         'UNLABELED_PATH': UNLABELED_PATH,
+        'PREDICTION_PATH': PREDICTION_PATH,
         'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
         'SELECTED_PATH': SELECTED_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
@@ -35,6 +37,7 @@ if __name__ == '__main__':
 
     pseudo_labelling_under_curriculum(labeled_path=configs['LABELED_PATH'],
                                       unlabeled_path=configs['UNLABELED_PATH'],
+                                      prediction_path=configs['PREDICTION_PATH'],
                                       temp_labeled_path=configs['TEMP_LABELED_PATH'],
                                       selected_path=configs['SELECTED_PATH'],
                                       labeled_model_path=configs['LABELED_MODEL_PATH'],
