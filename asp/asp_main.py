@@ -337,8 +337,10 @@ def percentage_correct(path):
     return match / len(data)
 
 
+# Pseudo labelling under curriculum
 def pseudo_labelling_under_curriculum(labeled_path,
                                       unlabeled_path,
+                                      prediction_path,
                                       temp_labeled_path,
                                       selected_path,
                                       labeled_model_path,
@@ -379,7 +381,7 @@ def pseudo_labelling_under_curriculum(labeled_path,
             _path = intermediate_model_path.format(iteration=iteration-1)
         script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
                                        predict_input_path=unlabeled_path,
-                                       predict_output_path=unlabeled_path)
+                                       predict_output_path=prediction_path)
         logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
         subprocess.run(script, shell=True, check=True)
 
@@ -394,7 +396,7 @@ def pseudo_labelling_under_curriculum(labeled_path,
         # Step 4: Unify labeled and selected pseudo labels
         logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
         transfer_and_subtract_two_datasets(labeled_path=labeled_path,
-                                           unlabeled_path=unlabeled_path,
+                                           prediction_path=prediction_path,
                                            temp_labeled_path=temp_labeled_path,
                                            selected_path=selected_path,
                                            indices=indices)
@@ -416,4 +418,63 @@ def pseudo_labelling_under_curriculum(labeled_path,
 
         iteration += 1
         current_delta = current_delta - delta
+
+
+# def add_suffix_to_path(path, suffix, split_by):
+#     dir_name = os.path.dirname(path)
+#     base_name = os.path.basename(path)
+#     if split_by == '':
+#         mod_base_name = f'{base_name}_{suffix}'
+#     else:
+#         parts = base_name.split(split_by)
+#         mod_base_name = f'{parts[0]}_{suffix}{split_by}{parts[1]}'
+#     return os.path.join(dir_name, mod_base_name)
+
+
+# def tri_training(labeled_path,
+#                  unlabeled_path,
+#                  temp_labeled_path,
+#                  selected_path,
+#                  labeled_model_path,
+#                  intermediate_model_path,
+#                  logger,
+#                  log_path,
+#                  delta=0.2):
+#     SCRIPT = conll04_script()
+#     TRAIN_SCRIPT = SCRIPT['train']
+#     PREDICT_SCRIPT = SCRIPT['predict']
+#     EVAL_SCRIPT = SCRIPT['eval']
+#
+#     logger.info(f'Labeled path: {labeled_path}')
+#     # Step 0: Bootstrap sample 3 models
+#     boostrap_labeled_paths = []
+#     boostrap_labeled_model_paths = []
+#     for i in range(1, 4):
+#         boostrap_labeled_paths.append(add_suffix_to_path(labeled_path, suffix=i, split_by='.'))
+#         boostrap_labeled_model_paths.append(add_suffix_to_path(labeled_model_path, suffix=i, split_by=''))
+#
+#     for i in range(1, 4):
+#         with open(labeled_path, 'r') as f:
+#             data = json.load(f)
+#             sample = np.random.choice(data, len(data))
+#         with open(boostrap_labeled_paths[i], 'w') as f:
+#             json.dump(sample, f)
+#
+#     # Step 1: Train on labeled data
+#     for i in range(1, 4):
+#         if not model_exists(boostrap_labeled_model_paths[i]):
+#             script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
+#                                          train_path=boostrap_labeled_paths[i],
+#                                          log_path=log_path)
+#             logger.info(f'Train on labeled data on model #{i}')
+#             subprocess.run(script, shell=True, check=True)
+#         else:
+#             logger.info(f'Labeled model #{i} exists, skip training ...')
+#
+#     for i in range(1, 4):
+#         ...
+
+
+
+
 

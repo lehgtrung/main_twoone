@@ -29,17 +29,17 @@ def unify_two_datasets(labeled_path, pseudo_path, output_path, with_weight=False
 
 
 def transfer_and_subtract_two_datasets(labeled_path,
-                                       unlabeled_path,
+                                       prediction_path,
                                        temp_labeled_path,
                                        selected_path,
                                        indices):
     with open(labeled_path, 'r') as f:
         labeled = json.load(f)
-    with open(unlabeled_path, 'r') as f:
-        unlabeled = json.load(f)
+    with open(prediction_path, 'r') as f:
+        prediction = json.load(f)
     selected = []
     remains = []
-    for i, row in enumerate(unlabeled):
+    for i, row in enumerate(prediction):
         if i in indices:
             selected.append(row)
         else:
