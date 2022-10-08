@@ -388,7 +388,7 @@ def pseudo_labelling_under_curriculum(labeled_path,
         # Step 3: For each sentence, sort by minimum confidence
         logger.info('Round #{}: Verify, Infer and Select on pseudo-labeled data'.format(iteration))
         indices = select_pseudo_labels_by_confidence(
-            input_path=unlabeled_path,
+            input_path=prediction_path,
             z=current_delta
         )
         logger.info('Round #{}: Indices: {}'.format(iteration, indices))
