@@ -55,9 +55,9 @@ parser = set_conll04_arguments_main(parser)
 args = parser.parse_args()
 
 # Constants
-DEFAULT_TRAIN_PATH = f'../datasets/core_{args.dataset.lower()}/train.{args.dataset.lower()}.json'
-DEFAULT_TEST_PATH = f'../datasets/core_{args.dataset.lower()}/test.{args.dataset.lower()}.json'
-DEFAULT_VALID_PATH = f'../datasets/core_{args.dataset.lower()}/valid.{args.dataset.lower()}.json'
+DEFAULT_TRAIN_PATH = f'./datasets/core_{args.dataset.lower()}/train.{args.dataset.lower()}.json'
+DEFAULT_TEST_PATH = f'./datasets/core_{args.dataset.lower()}/test.{args.dataset.lower()}.json'
+DEFAULT_VALID_PATH = f'./datasets/core_{args.dataset.lower()}/valid.{args.dataset.lower()}.json'
 
 
 if args.device is not None and args.device != 'cpu':
