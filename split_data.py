@@ -27,15 +27,16 @@ def split_data_for_ssl(in_path, out_path, portion):
         json.dump(indices, f)
 
 
-def gen_data_folds(in_path):
+def gen_data_folds(in_path, out_path, num_folds):
     # Split the data into 30-70
-    base_path = './datasets/conll04/folds_5/{}'
-    for i in tqdm(range(10)):
-        path = base_path.format(i+1)
+    for i in tqdm(range(num_folds)):
+        path = out_path.format(i+1)
         os.makedirs(path, exist_ok=True)
         path = os.path.join(path, '{}')
-        split_data_for_ssl(in_path, out_path=path, portion=0.05)
+        split_data_for_ssl(in_path, out_path=path, portion=0.3)
 
 
 if __name__ == '__main__':
-    gen_data_folds('./datasets/unified/train.CoNLL04.json')
+    gen_data_folds(in_path='./datasets/core_conll04/train.CoNLL04.json',
+                   out_path='./datasets/core_conll04/conll04_30/fold={}',
+                   num_folds=5)

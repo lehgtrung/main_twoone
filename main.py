@@ -55,16 +55,9 @@ parser = set_conll04_arguments_main(parser)
 args = parser.parse_args()
 
 # Constants
-if os.path.exists(f'./datasets/unified/train.{args.dataset}.json'):
-    DEFAULT_TRAIN_PATH = f'./datasets/unified/train.{args.dataset}.json'
-    DEFAULT_TEST_PATH = f'./datasets/unified/test.{args.dataset}.json'
-    BINARY_TEST_PATH = f'./datasets/unified/binary_test.{args.dataset}.json'
-    DEFAULT_VALID_PATH = f'./datasets/unified/valid.{args.dataset}.json'
-    BINARY_VALID_PATH = f'./datasets/unified/binary_valid.{args.dataset}.json'
-else:
-    DEFAULT_TRAIN_PATH = f'../datasets/unified/train.{args.dataset}.json'
-    DEFAULT_TEST_PATH = f'../datasets/unified/test.{args.dataset}.json'
-    DEFAULT_VALID_PATH = f'../datasets/unified/valid.{args.dataset}.json'
+DEFAULT_TRAIN_PATH = f'../datasets/core_{args.dataset.lower()}/train.{args.dataset.lower()}.json'
+DEFAULT_TEST_PATH = f'../datasets/core_{args.dataset.lower()}/test.{args.dataset.lower()}.json'
+DEFAULT_VALID_PATH = f'../datasets/core_{args.dataset.lower()}/valid.{args.dataset.lower()}.json'
 
 
 if args.device is not None and args.device != 'cpu':

@@ -1,4 +1,4 @@
-from asp.asp_main import pseudo_labelling_under_curriculum
+from methods.pluc.pluc import pseudo_labelling_under_curriculum
 import logging
 import os
 import argparse
@@ -8,14 +8,20 @@ from logger import Logger
 
 
 if __name__ == '__main__':
-    LABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/labeled.json'
-    TEMP_LABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/temp_labeled.json'
-    UNLABELED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/unlabeled.json'
-    PREDICTION_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/prediction.json'
-    SELECTED_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/selected.json'
-    LABELED_MODEL_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/models/labeled'
-    INTERMEDIATE_MODEL_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/models/inter_{iteration}'
-    LOG_PATH = './datasets/pseudo_labelling_under_curriculum/conll04_pct=30_fold=10/logs.txt'
+    fold = 1
+    percent = 30
+    LABELED_PATH = f'./datasets/core_conll04/conll04_{percent}/fold={fold}/labeled.json'
+    TEMP_LABELED_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/temp_labeled.json'
+    UNLABELED_PATH = f'./datasets/core_conll04/conll04_{percent}/fold={fold}/unlabeled.json'
+    PREDICTION_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/prediction.json'
+    SELECTED_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/selected.json'
+    LABELED_MODEL_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/models/labeled'
+    INTERMEDIATE_MODEL_PATH = './datasets/methods/pluc/conll04_{percent}/fold={fold}/models/inter_{iteration}'.format(
+        percent=percent,
+        fold=fold,
+        iteration='{iteration}'
+    )
+    LOG_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/logs.txt'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,
