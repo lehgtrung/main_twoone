@@ -8,20 +8,37 @@ from logger import Logger
 
 
 if __name__ == '__main__':
-    fold = 1
-    percent = 30
-    LABELED_PATH = f'./datasets/core_conll04/conll04_{percent}/fold={fold}/labeled.json'
-    TEMP_LABELED_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/temp_labeled.json'
-    UNLABELED_PATH = f'./datasets/core_conll04/conll04_{percent}/fold={fold}/unlabeled.json'
-    PREDICTION_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/prediction.json'
-    SELECTED_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/selected.json'
-    LABELED_MODEL_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/models/labeled'
-    INTERMEDIATE_MODEL_PATH = './datasets/methods/pluc/conll04_{percent}/fold={fold}/models/inter_{iteration}'.format(
+    parser = argparse.ArgumentParser(description='run pseudo labelling under curriculum')
+    parser.add_argument('--dataset',
+                        action='store',
+                        required=True)
+    parser.add_argument('--fold',
+                        type=int,
+                        action='store',
+                        required=True)
+    parser.add_argument('--percent',
+                        required=True,
+                        type=int,
+                        action='store')
+    args = parser.parse_args()
+
+    dataset = args.dataset
+    fold = args.fold
+    percent = args.percent
+
+    LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
+    TEMP_LABELED_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/temp_labeled.json'
+    UNLABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/unlabeled.json'
+    PREDICTION_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/prediction.json'
+    SELECTED_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/selected.json'
+    LABELED_MODEL_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/models/labeled'
+    INTERMEDIATE_MODEL_PATH = './datasets/methods/pluc/{dataset}_{percent}/fold={fold}/models/inter_{iteration}'.format(
+        dataset=dataset,
         percent=percent,
         fold=fold,
         iteration='{iteration}'
     )
-    LOG_PATH = f'./datasets/methods/pluc/conll04_{percent}/fold={fold}/logs.txt'
+    LOG_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/logs.txt'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,
