@@ -211,7 +211,7 @@ def tri_training(labeled_path,
             data = json.load(f)
             sample = random.sample(data, int(0.632 * len(data)))
         with open(boostrap_labeled_paths[i], 'w') as f:
-            logger.info(f'Boostrap #{i} size: ', len(sample))
+            logger.info(f'Boostrap #{i} size: {len(sample)}')
             json.dump(sample, f)
 
     # Step 1: Train on labeled data
