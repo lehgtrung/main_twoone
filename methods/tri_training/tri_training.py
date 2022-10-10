@@ -199,16 +199,14 @@ def tri_training(labeled_path,
     boostrap_prediction_paths = []
     agreement_paths = []
     boostrap_temp_labeled_paths = []
-    for i in range(1, 4):
+    for i in range(3):
         boostrap_labeled_paths.append(add_suffix_to_path(labeled_path, suffix=i, split_by='.'))
         boostrap_labeled_model_paths.append(add_suffix_to_path(labeled_model_path, suffix=i, split_by=''))
         boostrap_prediction_paths.append(add_suffix_to_path(prediction_path, suffix=i, split_by='.'))
         boostrap_temp_labeled_paths.append(add_suffix_to_path(temp_labeled_path, suffix=i, split_by='.'))
         agreement_paths.append(add_suffix_to_path(agreement_path, suffix=i, split_by='.'))
 
-    print(boostrap_labeled_paths)
-
-    for i in range(1, 4):
+    for i in range(3):
         with open(labeled_path, 'r') as f:
             data = json.load(f)
             sample = random.sample(data, int(0.632 * len(data)))
@@ -216,7 +214,7 @@ def tri_training(labeled_path,
             json.dump(sample, f)
 
     # Step 1: Train on labeled data
-    for i in range(1, 4):
+    for i in range(3):
         if not model_exists(boostrap_labeled_model_paths[i]):
             script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
                                          train_path=boostrap_labeled_paths[i],
@@ -233,7 +231,7 @@ def tri_training(labeled_path,
     iteration = 0
     while True:
         # Step 2: make prediction for each model
-        for i in range(1, 4):
+        for i in range(3):
             script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
                                            predict_input_path=unlabeled_path,
                                            predict_output_path=boostrap_prediction_paths[i])
@@ -246,24 +244,24 @@ def tri_training(labeled_path,
             break
 
         # Step 4: otherwise, find agreements between models
-        for i in range(1, 3):
-            for j in range(i+1, 4):
+        for i in range(2):
+            for j in range(i+1, 3):
                 agree_ratio = select_agreement(in_path1=boostrap_prediction_paths[i],
                                                in_path2=boostrap_prediction_paths[j],
-                                               out_path=agreement_paths[sum(range(1, 4))-(i+j)])
+                                               out_path=agreement_paths[sum(range(3))-(i+j)])
                 logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
                             f'{round(agree_ratio*100, 3)}')
                 logger.info(f'Round #{iteration}: Percent match of selected set: '
-                            f'{agreement_paths[sum(range(1, 4))-(i+j)]}')
+                            f'{agreement_paths[sum(range(3))-(i+j)]}')
 
         # Step 5: transfer
-        for i in range(1, 4):
+        for i in range(3):
             transfer_data(in_path1=labeled_path,
                           in_path2=agreement_paths[i],
                           out_path=boostrap_temp_labeled_paths[i])
 
         # Step 6: train on transfer data
-        for i in range(1, 4):
+        for i in range(3):
             script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
                                          train_path=boostrap_temp_labeled_paths[i],
                                          log_path=log_path)
