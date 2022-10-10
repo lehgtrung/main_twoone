@@ -28,28 +28,6 @@ def unify_two_datasets(labeled_path, pseudo_path, output_path, with_weight=False
         json.dump(labeled + pseudo, f)
 
 
-def transfer_and_subtract_two_datasets(labeled_path,
-                                       prediction_path,
-                                       temp_labeled_path,
-                                       selected_path,
-                                       indices):
-    with open(labeled_path, 'r') as f:
-        labeled = json.load(f)
-    with open(prediction_path, 'r') as f:
-        prediction = json.load(f)
-    selected = []
-    remains = []
-    for i, row in enumerate(prediction):
-        if i in indices:
-            selected.append(row)
-        else:
-            remains.append(row)
-    with open(selected_path, 'w') as f:
-        json.dump(selected, f)
-    with open(temp_labeled_path, 'w') as f:
-        json.dump(labeled + selected, f)
-
-
 def check_convergence(iteration, max_iterations, raw_pseudo_labeled_path, logger):
     with open('asp/satisfiable.lp') as f:
         satisfiable_program = f.read()
