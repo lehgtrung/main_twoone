@@ -253,7 +253,7 @@ def tri_training(labeled_path,
                 logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
                             f'{round(agree_ratio*100, 3)}')
                 logger.info(f'Round #{iteration}: Percent match of selected set: '
-                            f'{agreement_paths[sum(range(3))-(i+j)]}')
+                            f'{percentage_correct(agreement_paths[sum(range(3))-(i+j)])}')
 
         # Step 5: transfer
         for i in range(3):
