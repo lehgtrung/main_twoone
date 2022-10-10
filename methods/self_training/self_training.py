@@ -158,6 +158,11 @@ def self_training(labeled_path,
     else:
         logger.info('Labeled model exists, skip training ...')
 
+    logger.info('Evaluate labeled model ...')
+    script = EVAL_SCRIPT.format(model_read_ckpt=labeled_model_path,
+                                log_path=log_path)
+    subprocess.run(script, shell=True, check=True)
+
     iteration = 0
 
     while iteration < 1:
@@ -171,24 +176,23 @@ def self_training(labeled_path,
         script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=prediction_path)
-        logger.info('Round #{}: Predict on unlabeled data'.format(iteration))
+        logger.info(f'Round #{iteration}: Predict on unlabeled data')
         subprocess.run(script, shell=True, check=True)
 
         # Step 4: Unify labeled and selected pseudo labels
-        logger.info('Round #{}: Unify labels and pseudo labels'.format(iteration))
+        logger.info(f'Round #{iteration}: Unify labels and pseudo labels')
         indices = range(check_size(unlabeled_path))
         transfer_and_subtract_two_datasets(labeled_path=labeled_path,
                                            prediction_path=prediction_path,
                                            temp_labeled_path=temp_labeled_path,
                                            selected_path=selected_path,
                                            indices=indices)
-        logger.info('Round #{}: Percent match of selected set: {}'.format(iteration, percentage_correct(selected_path)))
-        logger.info('Round #{}: Labeled size: {}, unlabeled size: {}'.format(iteration,
-                                                                             check_size(temp_labeled_path),
-                                                                             check_size(unlabeled_path)))
+        logger.info(f'Round #{iteration}: Percent match of selected set: {percentage_correct(selected_path)}')
+        logger.info(f'Round #{iteration}: Labeled size: {check_size(temp_labeled_path)}, '
+                    f'unlabeled size: {check_size(unlabeled_path)}')
 
         # Step 5: Retrain on labeled and pseudo-labeled data
-        logger.info('Round #{}: Retrain on selected pseudo labels'.format(iteration))
+        logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
         script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
                                      train_path=temp_labeled_path,
                                      log_path=log_path)
@@ -199,3 +203,4 @@ def self_training(labeled_path,
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
+

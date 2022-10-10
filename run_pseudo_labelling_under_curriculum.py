@@ -25,20 +25,22 @@ if __name__ == '__main__':
     dataset = args.dataset
     fold = args.fold
     percent = args.percent
+    method = 'pluc'
 
     LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
-    TEMP_LABELED_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/temp_labeled.json'
+    TEMP_LABELED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/temp_labeled.json'
     UNLABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/unlabeled.json'
-    PREDICTION_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/prediction.json'
-    SELECTED_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/selected.json'
+    PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/prediction.json'
+    SELECTED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/selected.json'
     LABELED_MODEL_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/models/labeled'
-    INTERMEDIATE_MODEL_PATH = './datasets/methods/pluc/{dataset}_{percent}/fold={fold}/models/inter_{iteration}'.format(
+    INTERMEDIATE_MODEL_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/inter_{iteration}'.format(
+        method=method,
         dataset=dataset,
         percent=percent,
         fold=fold,
         iteration='{iteration}'
     )
-    LOG_PATH = f'./datasets/methods/pluc/{dataset}_{percent}/fold={fold}/logs.txt'
+    LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,

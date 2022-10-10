@@ -1,4 +1,4 @@
-from methods.self_training.self_training import self_training
+from methods.tri_training.tri_training import tri_training
 import logging
 import os
 import argparse
@@ -8,7 +8,7 @@ from logger import Logger
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='run self training')
+    parser = argparse.ArgumentParser(description='run tri training')
     parser.add_argument('--dataset',
                         action='store',
                         required=True)
@@ -25,22 +25,14 @@ if __name__ == '__main__':
     dataset = args.dataset
     fold = args.fold
     percent = args.percent
-    method = 'self_training'
+    method = 'tri_training'
 
     LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
     TEMP_LABELED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/temp_labeled.json'
     UNLABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/unlabeled.json'
     PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/prediction.json'
-    SELECTED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/selected.json'
-    LABELED_MODEL_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/models/labeled'
-    INTERMEDIATE_MODEL_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/inter_{iteration}'.format(
-        method=method,
-        dataset=dataset,
-        percent=percent,
-        fold=fold,
-        iteration='{iteration}'
-    )
-    LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
+    AGREEMENT_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/agreement.json'
+    LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
 
     configs = {
@@ -48,9 +40,8 @@ if __name__ == '__main__':
         'UNLABELED_PATH': UNLABELED_PATH,
         'PREDICTION_PATH': PREDICTION_PATH,
         'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
-        'SELECTED_PATH': SELECTED_PATH,
+        'AGREEMENT_PATH': AGREEMENT_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
-        'INTERMEDIATE_MODEL_PATH': INTERMEDIATE_MODEL_PATH,
         'LOG_PATH': LOG_PATH
     }
 
@@ -61,14 +52,13 @@ if __name__ == '__main__':
         f.write('Start training\n')
     logger = Logger(path=configs['LOG_PATH'])
 
-    self_training(labeled_path=configs['LABELED_PATH'],
-                  unlabeled_path=configs['UNLABELED_PATH'],
-                  prediction_path=configs['PREDICTION_PATH'],
-                  temp_labeled_path=configs['TEMP_LABELED_PATH'],
-                  selected_path=configs['SELECTED_PATH'],
-                  labeled_model_path=configs['LABELED_MODEL_PATH'],
-                  intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
-                  logger=logger,
-                  log_path=configs['LOG_PATH'])
+    tri_training(labeled_path=configs['LABELED_PATH'],
+                 unlabeled_path=configs['UNLABELED_PATH'],
+                 prediction_path=configs['PREDICTION_PATH'],
+                 agreement_path=configs['AGREEMENT_PATH'],
+                 temp_labeled_path=configs['TEMP_LABELED_PATH'],
+                 labeled_model_path=configs['LABELED_MODEL_PATH'],
+                 logger=logger,
+                 log_path=configs['LOG_PATH'])
 
 
