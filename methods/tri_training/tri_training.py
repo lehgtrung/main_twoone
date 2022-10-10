@@ -143,8 +143,8 @@ def reach_global_agreement(paths, ratio=0.95):
         entities_set = []
         relations_set = []
         for j in range(len(paths)):
-            entities = set([(e[0], e[1]) for e in datasets[j]['entities']])
-            relations = set([(e[0], e[1], e[2], e[3]) for e in datasets[j]['relations']])
+            entities = set([(e[0], e[1]) for e in datasets[j][i]['entities']])
+            relations = set([(e[0], e[1], e[2], e[3]) for e in datasets[j][i]['relations']])
             entities_set.append(entities)
             relations_set.append(relations)
         flag = True
