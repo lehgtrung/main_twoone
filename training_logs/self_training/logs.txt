@@ -1,0 +1,97 @@
+Start training
+10/10/2022 02:11:33
+Labeled path: ./datasets/core_conll04/conll04_30/fold=1/labeled.json
+
+10/10/2022 02:11:33
+Labeled model exists, skip training ...
+
+10/10/2022 02:11:33
+Round #0: Predict on unlabeled data
+
+10/10/2022 02:13:48
+Round #0: Unify labels and pseudo labels
+
+10/10/2022 02:13:48
+Round #0: Percent match of selected set: 0.38080495356037153
+
+10/10/2022 02:13:48
+Round #0: Labeled size: 922, unlabeled size: 646
+
+10/10/2022 02:13:48
+Round #0: Retrain on selected pseudo labels
+
+10/10/2022 02:18:29
+Latest model at: Epoch: 4, global_step: 500
+
+10/10/2022 02:18:29
+>> test ret: {'entity_p': 0.7255936675397926, 'entity_r': 0.7645968489271122, 'entity_f1': 0.7445848447732237, 'relation_p': 0.4782608695536652, 'relation_r': 0.46919431278509016, 'relation_f1': 0.4736842193940157, 'relation_p_wNER': 0.4685990338051063, 'relation_r_wNER': 0.4597156397995328, 'relation_f1_wNER': 0.4641148414486848}
+
+10/10/2022 02:18:29
+>> valid ret: {'entity_p': 0.7246220302297557, 'entity_r': 0.7513997760274199, 'entity_f1': 0.7377680116716923, 'relation_p': 0.519354838692924, 'relation_r': 0.469387755088356, 'relation_f1': 0.4931087377379933, 'relation_p_wNER': 0.5032258064353798, 'relation_r_wNER': 0.45481049561356235, 'relation_f1_wNER': 0.47779480213133396}
+
+10/10/2022 02:22:44
+Latest model at: Epoch: 8, global_step: 1000
+
+10/10/2022 02:22:44
+>> test ret: {'entity_p': 0.82640812556947, 'entity_r': 0.8294717330785036, 'entity_f1': 0.8279371018471223, 'relation_p': 0.6133651551166261, 'relation_r': 0.6090047393220615, 'relation_f1': 0.6111771781535768, 'relation_p_wNER': 0.6062052505821908, 'relation_r_wNER': 0.6018957345828935, 'relation_f1_wNER': 0.6040428143445391}
+
+10/10/2022 02:22:44
+>> valid ret: {'entity_p': 0.7965714285623249, 'entity_r': 0.7805151175724466, 'entity_f1': 0.7884615453452977, 'relation_p': 0.6238244513911027, 'relation_r': 0.5801749270967879, 'relation_f1': 0.6012084674022234, 'relation_p_wNER': 0.6238244513911027, 'relation_r_wNER': 0.5801749270967879, 'relation_f1_wNER': 0.6012084674022234}
+
+10/10/2022 02:27:03
+Latest model at: Epoch: 12, global_step: 1500
+
+10/10/2022 02:27:03
+>> test ret: {'entity_p': 0.7873263888820545, 'entity_r': 0.8405931417901706, 'entity_f1': 0.8130883079080743, 'relation_p': 0.6153846153710905, 'relation_r': 0.6635071089890164, 'relation_f1': 0.6385404868662864, 'relation_p_wNER': 0.6087912087778288, 'relation_r_wNER': 0.6563981042498483, 'relation_f1_wNER': 0.6316989817787653}
+
+10/10/2022 02:27:03
+>> valid ret: {'entity_p': 0.7655099894767033, 'entity_r': 0.8152295632607477, 'entity_f1': 0.7895878593786615, 'relation_p': 0.6225895316632896, 'relation_r': 0.6588921282606737, 'relation_f1': 0.6402266368356219, 'relation_p_wNER': 0.617079889790163, 'relation_r_wNER': 0.6530612244707562, 'relation_f1_wNER': 0.6345609144922919}
+
+10/10/2022 02:31:19
+Latest model at: Epoch: 17, global_step: 2000
+
+10/10/2022 02:31:19
+>> test ret: {'entity_p': 0.8272058823453383, 'entity_r': 0.8341056533750315, 'entity_f1': 0.8306414463211759, 'relation_p': 0.6583541146967992, 'relation_r': 0.6255924170467869, 'relation_f1': 0.641555293473659, 'relation_p_wNER': 0.6558603491108264, 'relation_r_wNER': 0.6232227488003975, 'relation_f1_wNER': 0.639125159831928}
+
+10/10/2022 02:31:19
+>> valid ret: {'entity_p': 0.8112359550470648, 'entity_r': 0.8085106382888184, 'entity_f1': 0.8098710106374564, 'relation_p': 0.683229813643378, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6616541431394879, 'relation_p_wNER': 0.683229813643378, 'relation_r_wNER': 0.6413994168909213, 'relation_f1_wNER': 0.6616541431394879}
+
+10/10/2022 02:48:59
+Latest model at: Epoch: 34, global_step: 4000
+
+10/10/2022 02:48:59
+>> test ret: {'entity_p': 0.8313473877100702, 'entity_r': 0.8405931417901706, 'entity_f1': 0.835944706959413, 'relation_p': 0.6341463414479477, 'relation_r': 0.6161137440612295, 'relation_f1': 0.6250000080339312, 'relation_p_wNER': 0.6268292682773944, 'relation_r_wNER': 0.6090047393220615, 'relation_f1_wNER': 0.6177884696173782}
+
+10/10/2022 02:48:59
+>> valid ret: {'entity_p': 0.8434285714189322, 'entity_r': 0.8264277715472964, 'entity_f1': 0.8348416354660659, 'relation_p': 0.6586826347108179, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6499261526268248, 'relation_p_wNER': 0.6586826347108179, 'relation_r_wNER': 0.6413994168909213, 'relation_f1_wNER': 0.6499261526268248}
+
+10/10/2022 03:15:57
+Latest model at: Epoch: 60, global_step: 7000
+
+10/10/2022 03:15:57
+>> test ret: {'entity_p': 0.8106402164038716, 'entity_r': 0.8331788693157259, 'entity_f1': 0.8217550340402654, 'relation_p': 0.6392251815825853, 'relation_r': 0.6255924170467869, 'relation_f1': 0.6323353373280935, 'relation_p_wNER': 0.6343825665705961, 'relation_r_wNER': 0.6208530805540082, 'relation_f1_wNER': 0.6275449181967084}
+
+10/10/2022 03:15:57
+>> valid ret: {'entity_p': 0.8138766519734154, 'entity_r': 0.8275475923759513, 'entity_f1': 0.8206551981844499, 'relation_p': 0.6705539358405086, 'relation_r': 0.6705539358405086, 'relation_f1': 0.6705539435922957, 'relation_p_wNER': 0.6676384839455499, 'relation_r_wNER': 0.6676384839455499, 'relation_f1_wNER': 0.6676384917168442}
+
+10/10/2022 03:39:23
+Latest model at: Epoch: 81, global_step: 9500
+
+10/10/2022 03:39:23
+>> test ret: {'entity_p': 0.8351648351571872, 'entity_r': 0.8452270620866986, 'entity_f1': 0.8401658286649761, 'relation_p': 0.6767123287485832, 'relation_r': 0.585308056858168, 'relation_f1': 0.6277001351312708, 'relation_p_wNER': 0.6767123287485832, 'relation_r_wNER': 0.585308056858168, 'relation_f1_wNER': 0.6277001351312708}
+
+10/10/2022 03:39:23
+>> valid ret: {'entity_p': 0.8269662921255397, 'entity_r': 0.8241881298899867, 'entity_f1': 0.825574880391087, 'relation_p': 0.7229729729485482, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6697965649104993, 'relation_p_wNER': 0.719594594570284, 'relation_r_wNER': 0.6209912536262101, 'relation_f1_wNER': 0.666666674477678}
+
+10/10/2022 03:48:58
+Latest model at: Epoch: 90, global_step: 10500
+
+10/10/2022 03:48:58
+>> test ret: {'entity_p': 0.8368277119340308, 'entity_r': 0.8507877664425322, 'entity_f1': 0.843750006433359, 'relation_p': 0.6359102244230446, 'relation_r': 0.6042654028292828, 'relation_f1': 0.6196840906959542, 'relation_p_wNER': 0.6359102244230446, 'relation_r_wNER': 0.6042654028292828, 'relation_f1_wNER': 0.6196840906959542}
+
+10/10/2022 03:48:58
+>> valid ret: {'entity_p': 0.8292410714193165, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8306316443274704, 'relation_p': 0.6787878787673094, 'relation_r': 0.6530612244707562, 'relation_f1': 0.665676085034299, 'relation_p_wNER': 0.6757575757370983, 'relation_r_wNER': 0.6501457725757975, 'relation_f1_wNER': 0.6627043168520452}
+
+10/10/2022 04:59:47
+>> ret: {'entity_p': 0.8368277119340308, 'entity_r': 0.8507877664425322, 'entity_f1': 0.843750006433359, 'relation_p': 0.6359102244230446, 'relation_r': 0.6042654028292828, 'relation_f1': 0.6196840906959542, 'relation_p_wNER': 0.6359102244230446, 'relation_r_wNER': 0.6042654028292828, 'relation_f1_wNER': 0.6196840906959542}
+

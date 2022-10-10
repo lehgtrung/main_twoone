@@ -1,0 +1,73 @@
+Start training
+10/10/2022 13:16:06
+Labeled path: ./datasets/core_conll04/conll04_30/fold=1/labeled.json
+
+10/10/2022 13:16:06
+Boostrap #0 size: 174
+
+10/10/2022 13:16:06
+Boostrap #1 size: 174
+
+10/10/2022 13:16:06
+Boostrap #2 size: 174
+
+10/10/2022 13:16:06
+Labeled model #0 exists, skip training ...
+
+10/10/2022 13:16:06
+Labeled model #1 exists, skip training ...
+
+10/10/2022 13:16:06
+Labeled model #2 exists, skip training ...
+
+10/10/2022 13:16:06
+Round #0: Predict on unlabeled data on model m0
+
+10/10/2022 13:18:10
+Round #0: Predict on unlabeled data on model m1
+
+10/10/2022 13:20:00
+Round #0: Predict on unlabeled data on model m2
+
+10/10/2022 13:22:02
+Round #0: Global agreement between 3 models: 0.2894736842105263
+
+10/10/2022 13:22:02
+Round #0: Agreement ratio between model_0 and model_1: 38.545
+
+10/10/2022 13:22:02
+Round #0: Percent match of selected set: 0.6385542168674698
+
+10/10/2022 13:22:02
+Round #0: Agreement ratio between model_0 and model_2: 40.093
+
+10/10/2022 13:22:02
+Round #0: Percent match of selected set: 0.6718146718146718
+
+10/10/2022 13:22:02
+Round #0: Agreement ratio between model_1 and model_2: 36.068
+
+10/10/2022 13:22:02
+Round #0: Percent match of selected set: 0.6952789699570815
+
+10/10/2022 13:22:02
+Round #0: Train on labeled data on model #0
+
+10/10/2022 13:26:16
+Latest model at: Epoch: 7, global_step: 500
+
+10/10/2022 13:26:16
+>> test ret: {'entity_p': 0.7504488330273749, 'entity_r': 0.7747914735794738, 'entity_f1': 0.762425907681923, 'relation_p': 0.462603878103529, 'relation_r': 0.3957345971470205, 'relation_f1': 0.4265645046700233, 'relation_p_wNER': 0.4598337950011126, 'relation_r_wNER': 0.39336492890063113, 'relation_f1_wNER': 0.4240102262646043}
+
+10/10/2022 13:26:16
+>> valid ret: {'entity_p': 0.7381215469531699, 'entity_r': 0.7480403135414553, 'entity_f1': 0.7430478381548278, 'relation_p': 0.5116279069597466, 'relation_r': 0.4489795918236449, 'relation_f1': 0.4782608784492303, 'relation_p_wNER': 0.5083056478236443, 'relation_r_wNER': 0.44606413992868615, 'relation_f1_wNER': 0.47515528840201954}
+
+10/10/2022 13:30:01
+Latest model at: Epoch: 15, global_step: 1000
+
+10/10/2022 13:30:01
+>> test ret: {'entity_p': 0.8323970037375245, 'entity_r': 0.8239110287226701, 'entity_f1': 0.8281322841601794, 'relation_p': 0.6525423728629225, 'relation_r': 0.5473933649159385, 'relation_f1': 0.5953608330314393, 'relation_p_wNER': 0.6440677965919754, 'relation_r_wNER': 0.5402843601767705, 'relation_f1_wNER': 0.5876288743144861}
+
+10/10/2022 13:30:01
+>> valid ret: {'entity_p': 0.8060046189283371, 'entity_r': 0.7816349384011015, 'entity_f1': 0.7936327527224077, 'relation_p': 0.6583629893004141, 'relation_r': 0.5393586005673656, 'relation_f1': 0.5929487262704943, 'relation_p_wNER': 0.6548042704393308, 'relation_r_wNER': 0.5364431486724069, 'relation_f1_wNER': 0.5897435980844222}
+
