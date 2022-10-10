@@ -132,7 +132,7 @@ def select_agreement(in_path1, in_path2, out_path):
     return len(agreements) / dataset_size
 
 
-def reach_global_agreement(paths, ratio=0.95):
+def global_agreement_ratio(paths, ratio=0.95):
     datasets = []
     for path in paths:
         with open(path, 'r') as f:
@@ -158,9 +158,7 @@ def reach_global_agreement(paths, ratio=0.95):
                 break
         if flag:
             agreement += 1
-    if agreement / dataset_size >= ratio:
-        return True
-    return False
+    return agreement / dataset_size
 
 
 def percentage_correct(path):
@@ -240,7 +238,9 @@ def tri_training(labeled_path,
             subprocess.run(script, shell=True, check=True)
 
         # Step 3: stop when predictions from differs under a small ratio
-        if reach_global_agreement(boostrap_prediction_paths, ratio=0.95):
+        agreement_ratio = global_agreement_ratio(boostrap_prediction_paths, ratio=0.95)
+        logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
+        if agreement_ratio >= 0.95:
             logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
             break
 
