@@ -121,10 +121,10 @@ def select_agreement(in_path1, in_path2, out_path):
     agreements = []
     dataset_size = len(dataset1)
     for i in range(dataset_size):
-        entities1 = set([(e[0], e[1]) for e in dataset1['entities']])
-        relations1 = set([(e[0], e[1], e[2], e[3]) for e in dataset1['relations']])
-        entities2 = set([(e[0], e[1]) for e in dataset2['entities']])
-        relations2 = set([(e[0], e[1], e[2], e[3]) for e in dataset2['relations']])
+        entities1 = set([(e[0], e[1]) for e in dataset1[i]['entities']])
+        relations1 = set([(e[0], e[1], e[2], e[3]) for e in dataset1[i]['relations']])
+        entities2 = set([(e[0], e[1]) for e in dataset2[i]['entities']])
+        relations2 = set([(e[0], e[1], e[2], e[3]) for e in dataset2[i]['relations']])
         if entities1 == entities2 and relations1 == relations2:
             agreements.append(dataset1[i])
     with open(out_path, 'w') as f:
