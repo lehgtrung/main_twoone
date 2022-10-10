@@ -31,7 +31,7 @@ if __name__ == '__main__':
     UNLABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/unlabeled.json'
     PREDICTION_PATH = f'./datasets/methods/self_training/{dataset}_{percent}/fold={fold}/prediction.json'
     SELECTED_PATH = f'./datasets/methods/self_training/{dataset}_{percent}/fold={fold}/selected.json'
-    LABELED_MODEL_PATH = f'./datasets/methods/self_training/{dataset}_{percent}/fold={fold}/models/labeled'
+    LABELED_MODEL_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/models/labeled'
     INTERMEDIATE_MODEL_PATH = './datasets/methods/self_training/{dataset}_{percent}/fold={fold}/models/inter_{iteration}'.format(
         dataset=dataset,
         percent=percent,
