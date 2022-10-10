@@ -206,6 +206,8 @@ def tri_training(labeled_path,
         boostrap_temp_labeled_paths.append(add_suffix_to_path(temp_labeled_path, suffix=i, split_by='.'))
         agreement_paths.append(add_suffix_to_path(agreement_path, suffix=i, split_by='.'))
 
+    print(boostrap_labeled_paths)
+
     for i in range(1, 4):
         with open(labeled_path, 'r') as f:
             data = json.load(f)
