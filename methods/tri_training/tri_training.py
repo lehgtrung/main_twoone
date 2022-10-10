@@ -232,12 +232,12 @@ def tri_training(labeled_path,
     iteration = 0
     while True:
         # Step 2: make prediction for each model
-        for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
-                                           predict_input_path=unlabeled_path,
-                                           predict_output_path=boostrap_prediction_paths[i])
-            logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
-            subprocess.run(script, shell=True, check=True)
+        # for i in range(3):
+        #     script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
+        #                                    predict_input_path=unlabeled_path,
+        #                                    predict_output_path=boostrap_prediction_paths[i])
+        #     logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
+        #     subprocess.run(script, shell=True, check=True)
 
         # Step 3: stop when predictions from differs under a small ratio
         if reach_global_agreement(boostrap_prediction_paths, ratio=0.95):
