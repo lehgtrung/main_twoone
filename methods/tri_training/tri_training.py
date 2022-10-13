@@ -270,6 +270,8 @@ def tri_training(labeled_path,
             logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
             subprocess.run(script, shell=True, check=True)
 
+        iteration += 1
+
 
 
 
