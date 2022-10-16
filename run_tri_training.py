@@ -22,14 +22,14 @@ if __name__ == '__main__':
                         action='store')
     parser.add_argument('--with_disagreement',
                         required=True,
-                        type=bool,
+                        type=int,
                         action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
     fold = args.fold
     percent = args.percent
-    if args.with_disagreement:
+    if args.with_disagreement == 1:
         method = 'tri_training_with_disagreement'
     else:
         method = 'tri_training'
