@@ -30,9 +30,9 @@ if __name__ == '__main__':
     fold = args.fold
     percent = args.percent
     if args.with_disagreement:
-        method = 'tri_training'
-    else:
         method = 'tri_training_with_disagreement'
+    else:
+        method = 'tri_training'
 
     LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
     TEMP_LABELED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/temp_labeled.json'
