@@ -20,12 +20,19 @@ if __name__ == '__main__':
                         required=True,
                         type=int,
                         action='store')
+    parser.add_argument('--with_disagreement',
+                        required=True,
+                        type=bool,
+                        action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
     fold = args.fold
     percent = args.percent
-    method = 'tri_training'
+    if args.with_disagreement:
+        method = 'tri_training'
+    else:
+        method = 'tri_training_with_disagreement'
 
     LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
     TEMP_LABELED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/temp_labeled.json'
@@ -33,6 +40,7 @@ if __name__ == '__main__':
     PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/prediction.json'
     AGREEMENT_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/agreement.json'
     LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
+    WITH_DISAGREEMENT = args.with_disagreement
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
 
     configs = {
@@ -42,6 +50,7 @@ if __name__ == '__main__':
         'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
         'AGREEMENT_PATH': AGREEMENT_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
+        'WITH_DISAGREEMENT': WITH_DISAGREEMENT,
         'LOG_PATH': LOG_PATH
     }
 
@@ -59,6 +68,7 @@ if __name__ == '__main__':
                  temp_labeled_path=configs['TEMP_LABELED_PATH'],
                  labeled_model_path=configs['LABELED_MODEL_PATH'],
                  logger=logger,
-                 log_path=configs['LOG_PATH'])
+                 log_path=configs['LOG_PATH'],
+                 with_disagreement=configs['WITH_DISAGREEMENT'])
 
 

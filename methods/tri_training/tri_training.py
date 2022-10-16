@@ -112,11 +112,13 @@ def transfer_data(in_path1, in_path2, out_path):
         json.dump(data1 + data2, f)
 
 
-def select_agreement(in_path1, in_path2, out_path):
+def select_agreement(in_path1, in_path2, in_path3, out_path, with_disagreement=False):
     with open(in_path1, 'r') as f:
         dataset1 = json.load(f)
     with open(in_path2, 'r') as f:
         dataset2 = json.load(f)
+    with open(in_path3, 'r') as f:
+        dataset3 = json.load(f)
 
     agreements = []
     dataset_size = len(dataset1)
@@ -125,14 +127,21 @@ def select_agreement(in_path1, in_path2, out_path):
         relations1 = set([(e[0], e[1], e[2], e[3]) for e in dataset1[i]['relations']])
         entities2 = set([(e[0], e[1]) for e in dataset2[i]['entities']])
         relations2 = set([(e[0], e[1], e[2], e[3]) for e in dataset2[i]['relations']])
-        if entities1 == entities2 and relations1 == relations2:
-            agreements.append(dataset1[i])
+        entities3 = set([(e[0], e[1]) for e in dataset3[i]['entities']])
+        relations3 = set([(e[0], e[1], e[2], e[3]) for e in dataset3[i]['relations']])
+        if with_disagreement:
+            if (entities1 == entities2 and relations1 == relations2) and \
+                    (entities1 != entities3 or relations1 != relations3):
+                agreements.append(dataset1[i])
+        else:
+            if entities1 == entities2 and relations1 == relations2:
+                agreements.append(dataset1[i])
     with open(out_path, 'w') as f:
         json.dump(agreements, f)
     return len(agreements) / dataset_size
 
 
-def global_agreement_ratio(paths, ratio=0.95):
+def global_agreement_ratio(paths):
     datasets = []
     for path in paths:
         with open(path, 'r') as f:
@@ -184,7 +193,8 @@ def tri_training(labeled_path,
                  temp_labeled_path,
                  labeled_model_path,
                  logger,
-                 log_path):
+                 log_path,
+                 with_disagreement):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -242,7 +252,7 @@ def tri_training(labeled_path,
             subprocess.run(script, shell=True, check=True)
 
         # Step 3: stop when predictions from differs under a small ratio
-        agreement_ratio = global_agreement_ratio(boostrap_prediction_paths, ratio=0.95)
+        agreement_ratio = global_agreement_ratio(boostrap_prediction_paths)
         logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
         if agreement_ratio >= 0.9:
             logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
@@ -254,7 +264,9 @@ def tri_training(labeled_path,
                 if not stop_update[sum(range(3))-(i+j)]:
                     agree_ratio = select_agreement(in_path1=boostrap_prediction_paths[i],
                                                    in_path2=boostrap_prediction_paths[j],
-                                                   out_path=agreement_paths[sum(range(3))-(i+j)])
+                                                   in_path3=boostrap_prediction_paths[sum(range(3))-(i+j)],
+                                                   out_path=agreement_paths[sum(range(3))-(i+j)],
+                                                   with_disagreement=with_disagreement)
                     if agree_ratio >= 0.9:
                         stop_update[sum(range(3))-(i+j)] = True
                         logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
