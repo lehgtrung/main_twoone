@@ -1,0 +1,1582 @@
+Start training
+10/16/2022 04:24:06
+Labeled path: ./datasets/core_conll04/conll04_30/fold=1/labeled.json
+
+10/16/2022 04:24:06
+Boostrap #0 size: 276
+
+10/16/2022 04:24:06
+Boostrap #1 size: 276
+
+10/16/2022 04:24:06
+Boostrap #2 size: 276
+
+10/16/2022 04:24:06
+Train on labeled data on model #0
+
+10/16/2022 04:32:00
+Latest model at: Epoch: 14, global_step: 500
+
+10/16/2022 04:32:00
+>> test ret: {'entity_p': 0.7862356621398724, 'entity_r': 0.6987951807164153, 'entity_f1': 0.7399411260337109, 'relation_p': 0.5370370370171468, 'relation_r': 0.34360189572645494, 'relation_f1': 0.41907515410091384, 'relation_p_wNER': 0.5259259259064472, 'relation_r_wNER': 0.3364928909872869, 'relation_f1_wNER': 0.4104046339059106}
+
+10/16/2022 04:32:00
+>> valid ret: {'entity_p': 0.7961290322477919, 'entity_r': 0.6909294512800568, 'entity_f1': 0.7398081607818133, 'relation_p': 0.5990990990721127, 'relation_r': 0.3877551020295115, 'relation_f1': 0.47079646951072124, 'relation_p_wNER': 0.5990990990721127, 'relation_r_wNER': 0.3877551020295115, 'relation_f1_wNER': 0.47079646951072124}
+
+10/16/2022 04:39:41
+Latest model at: Epoch: 28, global_step: 1000
+
+10/16/2022 04:39:41
+>> test ret: {'entity_p': 0.7326388888825293, 'entity_r': 0.7822057460539185, 'entity_f1': 0.7566113921707548, 'relation_p': 0.5873015872829428, 'relation_r': 0.4383886255820287, 'relation_f1': 0.5020352870916418, 'relation_p_wNER': 0.5682539682359284, 'relation_r_wNER': 0.4241706161036926, 'relation_f1_wNER': 0.4857530619350515}
+
+10/16/2022 04:39:41
+>> valid ret: {'entity_p': 0.7353556485278728, 'entity_r': 0.7872340425443759, 'entity_f1': 0.7604110401030653, 'relation_p': 0.5999999999773584, 'relation_r': 0.46355685129843854, 'relation_f1': 0.5230263245690681, 'relation_p_wNER': 0.5886792452608045, 'relation_r_wNER': 0.45481049561356235, 'relation_f1_wNER': 0.5131579035678886}
+
+10/16/2022 04:47:27
+Latest model at: Epoch: 42, global_step: 1500
+
+10/16/2022 04:47:27
+>> test ret: {'entity_p': 0.8097928436835237, 'entity_r': 0.7970342910028079, 'entity_f1': 0.8033629212920886, 'relation_p': 0.5815217391146326, 'relation_r': 0.5071090047273197, 'relation_f1': 0.5417721604641564, 'relation_p_wNER': 0.5815217391146326, 'relation_r_wNER': 0.5071090047273197, 'relation_f1_wNER': 0.5417721604641564}
+
+10/16/2022 04:47:27
+>> valid ret: {'entity_p': 0.8056818181726627, 'entity_r': 0.7939529675163051, 'entity_f1': 0.7997744004763436, 'relation_p': 0.5888157894543152, 'relation_r': 0.5218658891976132, 'relation_f1': 0.5533230378547045, 'relation_p_wNER': 0.585526315770213, 'relation_r_wNER': 0.5189504373026544, 'relation_f1_wNER': 0.5502318477636648}
+
+10/16/2022 04:55:31
+Latest model at: Epoch: 57, global_step: 2000
+
+10/16/2022 04:55:31
+>> test ret: {'entity_p': 0.8237022526853702, 'entity_r': 0.7794253938760017, 'entity_f1': 0.8009523877447574, 'relation_p': 0.628242074909849, 'relation_r': 0.5165876777128771, 'relation_f1': 0.5669700995004067, 'relation_p_wNER': 0.6253602305295285, 'relation_r_wNER': 0.5142180094664878, 'relation_f1_wNER': 0.564369319281116}
+
+10/16/2022 04:55:31
+>> valid ret: {'entity_p': 0.8390243902336705, 'entity_r': 0.7704367301145528, 'entity_f1': 0.8032691252881217, 'relation_p': 0.6769230768970415, 'relation_r': 0.513119533512737, 'relation_f1': 0.5837479354978011, 'relation_p_wNER': 0.6653846153590236, 'relation_r_wNER': 0.5043731778278608, 'relation_f1_wNER': 0.5737976867995017}
+
+10/16/2022 05:03:31
+Latest model at: Epoch: 71, global_step: 2500
+
+10/16/2022 05:03:31
+>> test ret: {'entity_p': 0.8571428571344702, 'entity_r': 0.8118628359516974, 'entity_f1': 0.8338886309871117, 'relation_p': 0.7287581699108249, 'relation_r': 0.5284360189448237, 'relation_f1': 0.6126373709978037, 'relation_p_wNER': 0.7222222221986202, 'relation_r_wNER': 0.523696682452045, 'relation_f1_wNER': 0.6071428655369595}
+
+10/16/2022 05:03:31
+>> valid ret: {'entity_p': 0.8357142857043367, 'entity_r': 0.786114221715721, 'entity_f1': 0.8101558059103935, 'relation_p': 0.7188755019791616, 'relation_r': 0.5218658891976132, 'relation_f1': 0.6047297381329323, 'relation_p_wNER': 0.7148594377222948, 'relation_r_wNER': 0.5189504373026544, 'relation_f1_wNER': 0.601351359775041}
+
+10/16/2022 05:37:01
+Latest model at: Epoch: 128, global_step: 4500
+
+10/16/2022 05:37:01
+>> test ret: {'entity_p': 0.8447619047538595, 'entity_r': 0.8220574606040588, 'entity_f1': 0.8332550558413869, 'relation_p': 0.6559139784769915, 'relation_r': 0.578199052119, 'relation_f1': 0.6146095799238622, 'relation_p_wNER': 0.6505376343911146, 'relation_r_wNER': 0.5734597156262213, 'relation_f1_wNER': 0.6095717965795101}
+
+10/16/2022 05:37:01
+>> valid ret: {'entity_p': 0.8384074941353816, 'entity_r': 0.8017917133168893, 'entity_f1': 0.8196909053195912, 'relation_p': 0.6580645161078044, 'relation_r': 0.5947521865715816, 'relation_f1': 0.6248085838584552, 'relation_p_wNER': 0.6580645161078044, 'relation_r_wNER': 0.5947521865715816, 'relation_f1_wNER': 0.6248085838584552}
+
+10/16/2022 05:50:04
+>> ret: {'entity_p': 0.8447619047538595, 'entity_r': 0.8220574606040588, 'entity_f1': 0.8332550558413869, 'relation_p': 0.6559139784769915, 'relation_r': 0.578199052119, 'relation_f1': 0.6146095799238622, 'relation_p_wNER': 0.6505376343911146, 'relation_r_wNER': 0.5734597156262213, 'relation_f1_wNER': 0.6095717965795101}
+
+10/16/2022 05:50:05
+Train on labeled data on model #1
+
+10/16/2022 05:58:29
+Latest model at: Epoch: 14, global_step: 500
+
+10/16/2022 05:58:29
+>> test ret: {'entity_p': 0.7258064516063997, 'entity_r': 0.7506950880375284, 'entity_f1': 0.7380410095504985, 'relation_p': 0.33492822965973, 'relation_r': 0.4976303317417623, 'relation_f1': 0.4003813251113548, 'relation_p_wNER': 0.3189792663426, 'relation_r_wNER': 0.47393364927786885, 'relation_f1_wNER': 0.38131554825582664}
+
+10/16/2022 05:58:29
+>> valid ret: {'entity_p': 0.7286995515613375, 'entity_r': 0.7278835386256676, 'entity_f1': 0.7282913238664125, 'relation_p': 0.38095238094482237, 'relation_r': 0.5597667638320768, 'relation_f1': 0.4533648263240912, 'relation_p_wNER': 0.37103174602438427, 'relation_r_wNER': 0.5451895043572831, 'relation_f1_wNER': 0.4415584509344599}
+
+10/16/2022 06:05:53
+Latest model at: Epoch: 28, global_step: 1000
+
+10/16/2022 06:05:53
+>> test ret: {'entity_p': 0.7658450704157936, 'entity_r': 0.8063021315958638, 'entity_f1': 0.7855530543181244, 'relation_p': 0.5480093676686649, 'relation_r': 0.5545023696551066, 'relation_f1': 0.5512367575846593, 'relation_p_wNER': 0.5409836065447077, 'relation_r_wNER': 0.5473933649159385, 'relation_f1_wNER': 0.5441696198143454}
+
+10/16/2022 06:05:53
+>> valid ret: {'entity_p': 0.7584699453469019, 'entity_r': 0.777155655086482, 'entity_f1': 0.7676991220904265, 'relation_p': 0.559999999984, 'relation_r': 0.5714285714119117, 'relation_f1': 0.5656565740414243, 'relation_p_wNER': 0.5485714285557551, 'relation_r_wNER': 0.5597667638320768, 'relation_f1_wNER': 0.5541125625623792}
+
+10/16/2022 06:23:15
+Latest model at: Epoch: 57, global_step: 2000
+
+10/16/2022 06:23:15
+>> test ret: {'entity_p': 0.82621082620298, 'entity_r': 0.8063021315958638, 'entity_f1': 0.8161350910912163, 'relation_p': 0.6300268096345837, 'relation_r': 0.5568720379014959, 'relation_f1': 0.5911949768290178, 'relation_p_wNER': 0.6273458444872025, 'relation_r_wNER': 0.5545023696551066, 'relation_f1_wNER': 0.588679253573482}
+
+10/16/2022 06:23:15
+>> valid ret: {'entity_p': 0.8030303030209437, 'entity_r': 0.7715565509432076, 'entity_f1': 0.7869788761159178, 'relation_p': 0.6103896103697926, 'relation_r': 0.5481049562522419, 'relation_f1': 0.5775729730129472, 'relation_p_wNER': 0.6038961038764968, 'relation_r_wNER': 0.5422740524623244, 'relation_f1_wNER': 0.571428579807268}
+
+10/16/2022 06:32:02
+Latest model at: Epoch: 71, global_step: 2500
+
+10/16/2022 06:32:02
+>> test ret: {'entity_p': 0.8103448275788536, 'entity_r': 0.8276181649598924, 'entity_f1': 0.8188904238804936, 'relation_p': 0.6342105262990997, 'relation_r': 0.5710900473798319, 'relation_f1': 0.6009975144408617, 'relation_p_wNER': 0.6184210526153047, 'relation_r_wNER': 0.5568720379014959, 'relation_f1_wNER': 0.5860349210138308}
+
+10/16/2022 06:32:02
+>> valid ret: {'entity_p': 0.7924944812274559, 'entity_r': 0.804031354974199, 'entity_f1': 0.7982212408247618, 'relation_p': 0.6068111454920492, 'relation_r': 0.5714285714119117, 'relation_f1': 0.5885885968477487, 'relation_p_wNER': 0.6068111454920492, 'relation_r_wNER': 0.5714285714119117, 'relation_f1_wNER': 0.5885885968477487}
+
+10/16/2022 07:15:45
+Latest model at: Epoch: 142, global_step: 5000
+
+10/16/2022 07:15:45
+>> test ret: {'entity_p': 0.8590864917312043, 'entity_r': 0.8192771084261421, 'entity_f1': 0.8387096838998539, 'relation_p': 0.672316384161799, 'relation_r': 0.563981042640664, 'relation_f1': 0.6134020700353385, 'relation_p_wNER': 0.672316384161799, 'relation_r_wNER': 0.563981042640664, 'relation_f1_wNER': 0.6134020700353385}
+
+10/16/2022 07:15:45
+>> valid ret: {'entity_p': 0.8422330096985166, 'entity_r': 0.777155655086482, 'entity_f1': 0.8083867277643314, 'relation_p': 0.6643109540401303, 'relation_r': 0.5481049562522419, 'relation_f1': 0.600638985904623, 'relation_p_wNER': 0.6643109540401303, 'relation_r_wNER': 0.5481049562522419, 'relation_f1_wNER': 0.600638985904623}
+
+10/16/2022 07:20:23
+>> ret: {'entity_p': 0.8590864917312043, 'entity_r': 0.8192771084261421, 'entity_f1': 0.8387096838998539, 'relation_p': 0.672316384161799, 'relation_r': 0.563981042640664, 'relation_f1': 0.6134020700353385, 'relation_p_wNER': 0.672316384161799, 'relation_r_wNER': 0.563981042640664, 'relation_f1_wNER': 0.6134020700353385}
+
+10/16/2022 07:20:24
+Train on labeled data on model #2
+
+10/16/2022 07:28:42
+Latest model at: Epoch: 14, global_step: 500
+
+10/16/2022 07:28:42
+>> test ret: {'entity_p': 0.7754491017886682, 'entity_r': 0.7201112140804439, 'entity_f1': 0.7467563743494757, 'relation_p': 0.35551330797803204, 'relation_r': 0.44312796207480737, 'relation_f1': 0.3945147772663078, 'relation_p_wNER': 0.34600760455615953, 'relation_r_wNER': 0.43127962084286064, 'relation_f1_wNER': 0.3839662541008385}
+
+10/16/2022 07:28:42
+>> valid ret: {'entity_p': 0.7677018633445006, 'entity_r': 0.6920492721087117, 'entity_f1': 0.7279152017152724, 'relation_p': 0.349473684203169, 'relation_r': 0.4839650145631497, 'relation_f1': 0.4058679800869794, 'relation_p_wNER': 0.34736842104531857, 'relation_r_wNER': 0.481049562668191, 'relation_f1_wNER': 0.4034229923218715}
+
+10/16/2022 07:36:00
+Latest model at: Epoch: 28, global_step: 1000
+
+10/16/2022 07:36:00
+>> test ret: {'entity_p': 0.8207364341005744, 'entity_r': 0.7849860982318352, 'entity_f1': 0.8024632943190674, 'relation_p': 0.5811518324455196, 'relation_r': 0.5260663506984344, 'relation_f1': 0.5522388144563254, 'relation_p_wNER': 0.570680628257312, 'relation_r_wNER': 0.5165876777128771, 'relation_f1_wNER': 0.5422885657548081}
+
+10/16/2022 07:36:00
+>> valid ret: {'entity_p': 0.7937649880000748, 'entity_r': 0.7413213885695261, 'entity_f1': 0.7666473724375321, 'relation_p': 0.6038338657954047, 'relation_r': 0.5510204081472005, 'relation_f1': 0.5762195205383235, 'relation_p_wNER': 0.581469648543723, 'relation_r_wNER': 0.5306122448824895, 'relation_f1_wNER': 0.5548780572450365}
+
+10/16/2022 07:59:33
+Latest model at: Epoch: 71, global_step: 2500
+
+10/16/2022 07:59:33
+>> test ret: {'entity_p': 0.8012820512747136, 'entity_r': 0.8109360518923918, 'entity_f1': 0.8060801541416196, 'relation_p': 0.6383561643660725, 'relation_r': 0.5521327014087172, 'relation_f1': 0.5921219904952945, 'relation_p_wNER': 0.6328767123114281, 'relation_r_wNER': 0.5473933649159385, 'relation_f1_wNER': 0.5870393984034072}
+
+10/16/2022 07:59:33
+>> valid ret: {'entity_p': 0.7979910714196653, 'entity_r': 0.8006718924882343, 'entity_f1': 0.7993292410055114, 'relation_p': 0.6404109588821777, 'relation_r': 0.5451895043572831, 'relation_f1': 0.5889763862642444, 'relation_p_wNER': 0.6369863013480483, 'relation_r_wNER': 0.5422740524623244, 'relation_f1_wNER': 0.585826779983632}
+
+10/16/2022 08:15:29
+Latest model at: Epoch: 99, global_step: 3500
+
+10/16/2022 08:15:29
+>> test ret: {'entity_p': 0.8299904488936964, 'entity_r': 0.8053753475365583, 'entity_f1': 0.8174976548186323, 'relation_p': 0.631147540966362, 'relation_r': 0.5473933649159385, 'relation_f1': 0.5862944245605722, 'relation_p_wNER': 0.631147540966362, 'relation_r_wNER': 0.5473933649159385, 'relation_f1_wNER': 0.5862944245605722}
+
+10/16/2022 08:15:29
+>> valid ret: {'entity_p': 0.8106852497002244, 'entity_r': 0.7816349384011015, 'entity_f1': 0.795895103748331, 'relation_p': 0.6409395972939281, 'relation_r': 0.556851311937118, 'relation_f1': 0.595943846008455, 'relation_p_wNER': 0.6409395972939281, 'relation_r_wNER': 0.556851311937118, 'relation_f1_wNER': 0.595943846008455}
+
+10/16/2022 08:31:37
+Latest model at: Epoch: 128, global_step: 4500
+
+10/16/2022 08:31:37
+>> test ret: {'entity_p': 0.837656099895892, 'entity_r': 0.808155699714475, 'entity_f1': 0.8226415160457192, 'relation_p': 0.6840277777540268, 'relation_r': 0.4668246445387008, 'relation_f1': 0.5549295862656217, 'relation_p_wNER': 0.6840277777540268, 'relation_r_wNER': 0.4668246445387008, 'relation_f1_wNER': 0.5549295862656217}
+
+10/16/2022 08:31:37
+>> valid ret: {'entity_p': 0.8490338164148667, 'entity_r': 0.7872340425443759, 'entity_f1': 0.8169668863886888, 'relation_p': 0.7113821137922202, 'relation_r': 0.5102040816177783, 'relation_f1': 0.5942275127299874, 'relation_p_wNER': 0.7032520324917377, 'relation_r_wNER': 0.5043731778278608, 'relation_f1_wNER': 0.5874363412932627}
+
+10/16/2022 08:44:21
+>> ret: {'entity_p': 0.837656099895892, 'entity_r': 0.808155699714475, 'entity_f1': 0.8226415160457192, 'relation_p': 0.6840277777540268, 'relation_r': 0.4668246445387008, 'relation_f1': 0.5549295862656217, 'relation_p_wNER': 0.6840277777540268, 'relation_r_wNER': 0.4668246445387008, 'relation_f1_wNER': 0.5549295862656217}
+
+10/16/2022 08:44:22
+Round #0: Predict on unlabeled data on model m0
+
+10/16/2022 08:47:41
+Round #0: Predict on unlabeled data on model m1
+
+10/16/2022 08:51:04
+Round #0: Predict on unlabeled data on model m2
+
+10/16/2022 08:54:10
+Round #0: Global agreement between 3 models: 0.2770897832817337
+
+10/16/2022 08:54:10
+Round #0: Agreement ratio between model_0 and model_1: 11.146
+
+10/16/2022 08:54:10
+Round #0: Percent match of selected set: 0.3888888888888889
+
+10/16/2022 08:54:10
+Round #0: Agreement ratio between model_0 and model_2: 8.359
+
+10/16/2022 08:54:10
+Round #0: Percent match of selected set: 0.24074074074074073
+
+10/16/2022 08:54:10
+Round #0: Agreement ratio between model_1 and model_2: 12.693
+
+10/16/2022 08:54:10
+Round #0: Percent match of selected set: 0.35365853658536583
+
+10/16/2022 08:54:10
+Round #0: Train on labeled data on model #0
+
+10/16/2022 08:59:37
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 08:59:37
+>> test ret: {'entity_p': 0.781919850878081, 'entity_r': 0.7775718257573905, 'entity_f1': 0.7797397839045335, 'relation_p': 0.5119617224757904, 'relation_r': 0.5071090047273197, 'relation_f1': 0.5095238182138322, 'relation_p_wNER': 0.5047846889831391, 'relation_r_wNER': 0.49999999998815164, 'relation_f1_wNER': 0.5023809611072846}
+
+10/16/2022 08:59:37
+>> valid ret: {'entity_p': 0.7829099307068949, 'entity_r': 0.759238521828004, 'entity_f1': 0.7708925596089113, 'relation_p': 0.5419161676484456, 'relation_r': 0.5276967929875307, 'relation_f1': 0.5347119731058694, 'relation_p_wNER': 0.5389221556724874, 'relation_r_wNER': 0.5247813410925719, 'relation_f1_wNER': 0.5317577633728173}
+
+10/16/2022 09:04:37
+Latest model at: Epoch: 22, global_step: 1000
+
+10/16/2022 09:04:37
+>> test ret: {'entity_p': 0.8129699248043895, 'entity_r': 0.8016682112993359, 'entity_f1': 0.8072795214334749, 'relation_p': 0.6685878962343347, 'relation_r': 0.5497630331623279, 'relation_f1': 0.603381022563375, 'relation_p_wNER': 0.642651296811451, 'relation_r_wNER': 0.5284360189448237, 'relation_f1_wNER': 0.5799740005958458}
+
+10/16/2022 09:04:37
+>> valid ret: {'entity_p': 0.8209658421575858, 'entity_r': 0.7805151175724466, 'entity_f1': 0.8002296279204987, 'relation_p': 0.6834532373854872, 'relation_r': 0.5539358600421593, 'relation_f1': 0.61191627230782, 'relation_p_wNER': 0.6762589927814295, 'relation_r_wNER': 0.5481049562522419, 'relation_f1_wNER': 0.6054750485147067}
+
+10/16/2022 09:18:05
+Latest model at: Epoch: 44, global_step: 2000
+
+10/16/2022 09:18:05
+>> test ret: {'entity_p': 0.8381937911492174, 'entity_r': 0.8257645968412812, 'entity_f1': 0.8319327796414733, 'relation_p': 0.7112462005862843, 'relation_r': 0.5545023696551066, 'relation_f1': 0.6231691160512481, 'relation_p_wNER': 0.705167173230846, 'relation_r_wNER': 0.5497630331623279, 'relation_f1_wNER': 0.617842884393361}
+
+10/16/2022 09:18:05
+>> valid ret: {'entity_p': 0.8227848101171141, 'entity_r': 0.8006718924882343, 'entity_f1': 0.811577759253267, 'relation_p': 0.703422053205193, 'relation_r': 0.5393586005673656, 'relation_f1': 0.6105610643958108, 'relation_p_wNER': 0.6996197718365164, 'relation_r_wNER': 0.5364431486724069, 'relation_f1_wNER': 0.6072607343830126}
+
+10/16/2022 09:24:51
+Latest model at: Epoch: 55, global_step: 2500
+
+10/16/2022 09:24:51
+>> test ret: {'entity_p': 0.8544423440372927, 'entity_r': 0.8378127896122539, 'entity_f1': 0.8460458650944729, 'relation_p': 0.6925207756040853, 'relation_r': 0.5924170615973361, 'relation_f1': 0.6385696120923716, 'relation_p_wNER': 0.689750692501669, 'relation_r_wNER': 0.5900473933509467, 'relation_f1_wNER': 0.6360153336923677}
+
+10/16/2022 09:24:51
+>> valid ret: {'entity_p': 0.8285052143588817, 'entity_r': 0.8006718924882343, 'entity_f1': 0.8143508039443224, 'relation_p': 0.6798561150834584, 'relation_r': 0.5510204081472005, 'relation_f1': 0.6086956604113152, 'relation_p_wNER': 0.6798561150834584, 'relation_r_wNER': 0.5510204081472005, 'relation_f1_wNER': 0.6086956604113152}
+
+10/16/2022 09:38:26
+Latest model at: Epoch: 77, global_step: 3500
+
+10/16/2022 09:38:26
+>> test ret: {'entity_p': 0.8392193308472192, 'entity_r': 0.8368860055529483, 'entity_f1': 0.8380510505641207, 'relation_p': 0.6991404011260991, 'relation_r': 0.578199052119, 'relation_f1': 0.632944236345104, 'relation_p_wNER': 0.6876790830748516, 'relation_r_wNER': 0.5687203791334426, 'relation_f1_wNER': 0.6225681015207565}
+
+10/16/2022 09:38:26
+>> valid ret: {'entity_p': 0.8280182232251934, 'entity_r': 0.8141097424320928, 'entity_f1': 0.8210050884958461, 'relation_p': 0.7014925372872577, 'relation_r': 0.5481049562522419, 'relation_f1': 0.6153846236216554, 'relation_p_wNER': 0.694029850720372, 'relation_r_wNER': 0.5422740524623244, 'relation_f1_wNER': 0.6088379788174253}
+
+10/16/2022 09:45:28
+Latest model at: Epoch: 88, global_step: 4000
+
+10/16/2022 09:45:28
+>> test ret: {'entity_p': 0.8574181117451116, 'entity_r': 0.8248378127819757, 'entity_f1': 0.8408124769380696, 'relation_p': 0.7105263157686981, 'relation_r': 0.5758293838726106, 'relation_f1': 0.6361256625199762, 'relation_p_wNER': 0.6959064327281899, 'relation_r_wNER': 0.563981042640664, 'relation_f1_wNER': 0.6230366573671227}
+
+10/16/2022 09:45:28
+>> valid ret: {'entity_p': 0.8466111771599689, 'entity_r': 0.7973124300022697, 'entity_f1': 0.8212226133172228, 'relation_p': 0.7084870848447052, 'relation_r': 0.5597667638320768, 'relation_f1': 0.6254071742852444, 'relation_p_wNER': 0.7084870848447052, 'relation_r_wNER': 0.5597667638320768, 'relation_f1_wNER': 0.6254071742852444}
+
+10/16/2022 09:52:30
+Latest model at: Epoch: 99, global_step: 4500
+
+10/16/2022 09:52:30
+>> test ret: {'entity_p': 0.8480531813784611, 'entity_r': 0.8276181649598924, 'entity_f1': 0.8377110759032163, 'relation_p': 0.6857142856946938, 'relation_r': 0.5687203791334426, 'relation_f1': 0.6217616661690246, 'relation_p_wNER': 0.6771428571235102, 'relation_r_wNER': 0.5616113743942746, 'relation_f1_wNER': 0.6139896454918589}
+
+10/16/2022 09:52:30
+>> valid ret: {'entity_p': 0.8507638072755492, 'entity_r': 0.8107502799461282, 'entity_f1': 0.8302752359072916, 'relation_p': 0.7052631578699907, 'relation_r': 0.5860058308867053, 'relation_f1': 0.6401273965511278, 'relation_p_wNER': 0.6982456140105878, 'relation_r_wNER': 0.5801749270967879, 'relation_f1_wNER': 0.633757969840308}
+
+10/16/2022 09:59:39
+Latest model at: Epoch: 111, global_step: 5000
+
+10/16/2022 09:59:39
+>> test ret: {'entity_p': 0.866088631976242, 'entity_r': 0.8331788693157259, 'entity_f1': 0.8493150748821974, 'relation_p': 0.7117647058614187, 'relation_r': 0.5734597156262213, 'relation_f1': 0.6351706117564635, 'relation_p_wNER': 0.7058823529204152, 'relation_r_wNER': 0.5687203791334426, 'relation_f1_wNER': 0.6299212679577848}
+
+10/16/2022 09:59:39
+>> valid ret: {'entity_p': 0.8516746411381378, 'entity_r': 0.7973124300022697, 'entity_f1': 0.8235974617861801, 'relation_p': 0.7471698112925597, 'relation_r': 0.5772594752018292, 'relation_f1': 0.6513157974957801, 'relation_p_wNER': 0.7433962263870416, 'relation_r_wNER': 0.5743440233068704, 'relation_f1_wNER': 0.6480263238330484}
+
+10/16/2022 10:21:09
+Latest model at: Epoch: 144, global_step: 6500
+
+10/16/2022 10:21:09
+>> test ret: {'entity_p': 0.8622981956233401, 'entity_r': 0.8415199258494762, 'entity_f1': 0.8517823703433168, 'relation_p': 0.6929577464593533, 'relation_r': 0.5829383886117787, 'relation_f1': 0.6332046412579485, 'relation_p_wNER': 0.6901408450509819, 'relation_r_wNER': 0.5805687203653893, 'relation_f1_wNER': 0.6306306387002778}
+
+10/16/2022 10:21:09
+>> valid ret: {'entity_p': 0.8473988439208393, 'entity_r': 0.820828667404022, 'entity_f1': 0.8339021680632984, 'relation_p': 0.726962457313073, 'relation_r': 0.6209912536262101, 'relation_f1': 0.669811328552223, 'relation_p_wNER': 0.726962457313073, 'relation_r_wNER': 0.6209912536262101, 'relation_f1_wNER': 0.669811328552223}
+
+10/16/2022 10:24:42
+Round #0: Train on labeled data on model #1
+
+10/16/2022 10:31:56
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 10:31:56
+>> test ret: {'entity_p': 0.7451523545637567, 'entity_r': 0.7479147358596117, 'entity_f1': 0.7465309970308226, 'relation_p': 0.5223463687004931, 'relation_r': 0.44312796207480737, 'relation_f1': 0.47948718839266924, 'relation_p_wNER': 0.5139664804325708, 'relation_r_wNER': 0.43601895733563933, 'relation_f1_wNER': 0.47179488073714665}
+
+10/16/2022 10:31:56
+>> valid ret: {'entity_p': 0.7344632768278592, 'entity_r': 0.7278835386256676, 'entity_f1': 0.7311586124933666, 'relation_p': 0.5406360423837231, 'relation_r': 0.44606413992868615, 'relation_f1': 0.4888179002553359, 'relation_p_wNER': 0.5371024734792543, 'relation_r_wNER': 0.4431486880337274, 'relation_f1_wNER': 0.4856230120920903}
+
+10/16/2022 10:38:41
+Latest model at: Epoch: 23, global_step: 1000
+
+10/16/2022 10:38:41
+>> test ret: {'entity_p': 0.8182674199546304, 'entity_r': 0.8053753475365583, 'entity_f1': 0.8117702075389219, 'relation_p': 0.6381909547578344, 'relation_r': 0.6018957345828935, 'relation_f1': 0.6195122031964307, 'relation_p_wNER': 0.623115577873791, 'relation_r_wNER': 0.5876777251045574, 'relation_f1_wNER': 0.6048780569449137}
+
+10/16/2022 10:38:41
+>> valid ret: {'entity_p': 0.829009433952488, 'entity_r': 0.7872340425443759, 'entity_f1': 0.8075818562482362, 'relation_p': 0.6677740863565523, 'relation_r': 0.5860058308867053, 'relation_f1': 0.6242236105593437, 'relation_p_wNER': 0.66445182722045, 'relation_r_wNER': 0.5830903789917466, 'relation_f1_wNER': 0.621118020516666}
+
+10/16/2022 10:45:29
+Latest model at: Epoch: 35, global_step: 1500
+
+10/16/2022 10:45:29
+>> test ret: {'entity_p': 0.8380681818102457, 'entity_r': 0.8202038924854477, 'entity_f1': 0.8290398192032294, 'relation_p': 0.6293706293559587, 'relation_r': 0.639810426525123, 'relation_f1': 0.6345475990418405, 'relation_p_wNER': 0.6247086246940627, 'relation_r_wNER': 0.6350710900323443, 'relation_f1_wNER': 0.6298472465452271}
+
+10/16/2022 10:45:29
+>> valid ret: {'entity_p': 0.8279445727387074, 'entity_r': 0.8029115341455441, 'entity_f1': 0.8152359361754395, 'relation_p': 0.6388059701301849, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6312684445684427, 'relation_p_wNER': 0.6298507462498552, 'relation_r_wNER': 0.6151603498362926, 'relation_f1_wNER': 0.6224188871020526}
+
+10/16/2022 10:59:24
+Latest model at: Epoch: 59, global_step: 2500
+
+10/16/2022 10:59:24
+>> test ret: {'entity_p': 0.8348880596937045, 'entity_r': 0.8294717330785036, 'entity_f1': 0.8321710897469333, 'relation_p': 0.6230769230609468, 'relation_r': 0.5758293838726106, 'relation_f1': 0.5985221756973295, 'relation_p_wNER': 0.6205128204969099, 'relation_r_wNER': 0.5734597156262213, 'relation_f1_wNER': 0.5960591215249096}
+
+10/16/2022 10:59:24
+>> valid ret: {'entity_p': 0.855450236956689, 'entity_r': 0.8085106382888184, 'entity_f1': 0.8313183715400562, 'relation_p': 0.7083333333106303, 'relation_r': 0.6443148687858801, 'relation_f1': 0.6748091680303012, 'relation_p_wNER': 0.7019230769005794, 'relation_r_wNER': 0.6384839649959626, 'relation_f1_wNER': 0.6687022978425035}
+
+10/16/2022 11:54:04
+Round #0: Train on labeled data on model #2
+
+10/16/2022 12:00:35
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 12:00:35
+>> test ret: {'entity_p': 0.7886550777603967, 'entity_r': 0.7988878591214191, 'entity_f1': 0.7937384967140892, 'relation_p': 0.4781783681123685, 'relation_r': 0.5971563980901148, 'relation_f1': 0.5310853617041287, 'relation_p_wNER': 0.46679316887159783, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.5184404724135326}
+
+10/16/2022 12:00:35
+>> valid ret: {'entity_p': 0.7659574467999333, 'entity_r': 0.7659574467999333, 'entity_f1': 0.7659574538664793, 'relation_p': 0.48423423422332806, 'relation_r': 0.6268221574161276, 'relation_f1': 0.5463786617712543, 'relation_p_wNER': 0.4707207207101189, 'relation_r_wNER': 0.6093294460463752, 'relation_f1_wNER': 0.5311308854878433}
+
+10/16/2022 12:06:34
+Latest model at: Epoch: 22, global_step: 1000
+
+10/16/2022 12:06:34
+>> test ret: {'entity_p': 0.8183520599174312, 'entity_r': 0.8100092678330861, 'entity_f1': 0.8141592987137999, 'relation_p': 0.6108374384086, 'relation_r': 0.5876777251045574, 'relation_f1': 0.5990338246201778, 'relation_p_wNER': 0.5960591132858113, 'relation_r_wNER': 0.5734597156262213, 'relation_f1_wNER': 0.5845410710831057}
+
+10/16/2022 12:06:34
+>> valid ret: {'entity_p': 0.8195576251359772, 'entity_r': 0.7883538633730307, 'entity_f1': 0.8036529748018311, 'relation_p': 0.6112759643735526, 'relation_r': 0.600583090361499, 'relation_f1': 0.6058823610886678, 'relation_p_wNER': 0.6112759643735526, 'relation_r_wNER': 0.600583090361499, 'relation_f1_wNER': 0.6058823610886678}
+
+10/16/2022 12:18:44
+Latest model at: Epoch: 45, global_step: 2000
+
+10/16/2022 12:18:44
+>> test ret: {'entity_p': 0.8509433962183874, 'entity_r': 0.8359592214936428, 'entity_f1': 0.8433847656697007, 'relation_p': 0.6958904109398386, 'relation_r': 0.6018957345828935, 'relation_f1': 0.645489207444512, 'relation_p_wNER': 0.6931506849125164, 'relation_r_wNER': 0.5995260663365041, 'relation_f1_wNER': 0.6429479113999571}
+
+10/16/2022 12:18:44
+>> valid ret: {'entity_p': 0.8451536642926105, 'entity_r': 0.8006718924882343, 'entity_f1': 0.8223116799923681, 'relation_p': 0.6993243243006985, 'relation_r': 0.6034985422564577, 'relation_f1': 0.6478873318786934, 'relation_p_wNER': 0.6993243243006985, 'relation_r_wNER': 0.6034985422564577, 'relation_f1_wNER': 0.6478873318786934}
+
+10/16/2022 12:24:46
+Latest model at: Epoch: 56, global_step: 2500
+
+10/16/2022 12:24:46
+>> test ret: {'entity_p': 0.8426966292055929, 'entity_r': 0.8341056533750315, 'entity_f1': 0.8383791401529502, 'relation_p': 0.6691919191750204, 'relation_r': 0.6279620852931762, 'relation_f1': 0.6479217682864461, 'relation_p_wNER': 0.6565656565490766, 'relation_r_wNER': 0.6161137440612295, 'relation_f1_wNER': 0.6356968294899003}
+
+10/16/2022 12:24:46
+>> valid ret: {'entity_p': 0.8450867051925424, 'entity_r': 0.8185890257467123, 'entity_f1': 0.8316268552267547, 'relation_p': 0.6534954407096202, 'relation_r': 0.6268221574161276, 'relation_f1': 0.6398809603190104, 'relation_p_wNER': 0.650455927031901, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.6369047698619084}
+
+10/16/2022 12:37:01
+Latest model at: Epoch: 79, global_step: 3500
+
+10/16/2022 12:37:01
+>> test ret: {'entity_p': 0.8613485280070148, 'entity_r': 0.8405931417901706, 'entity_f1': 0.8508442840473717, 'relation_p': 0.6754617414069799, 'relation_r': 0.6066350710756722, 'relation_f1': 0.6392010067215295, 'relation_p_wNER': 0.6728232189796088, 'relation_r_wNER': 0.6042654028292828, 'relation_f1_wNER': 0.6367041278361473}
+
+10/16/2022 12:37:01
+>> valid ret: {'entity_p': 0.8530805687102716, 'entity_r': 0.8062709966315087, 'entity_f1': 0.8290155506035295, 'relation_p': 0.7310344827334125, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6698262321341988, 'relation_p_wNER': 0.7310344827334125, 'relation_r_wNER': 0.6180758017312514, 'relation_f1_wNER': 0.6698262321341988}
+
+10/16/2022 13:15:17
+Round #1: Predict on unlabeled data on model m0
+
+10/16/2022 13:19:10
+Round #1: Predict on unlabeled data on model m1
+
+10/16/2022 13:23:02
+Round #1: Predict on unlabeled data on model m2
+
+10/16/2022 13:26:19
+Round #1: Global agreement between 3 models: 0.4117647058823529
+
+10/16/2022 13:26:19
+Round #1: Agreement ratio between model_0 and model_1: 9.752
+
+10/16/2022 13:26:19
+Round #1: Percent match of selected set: 0.20634920634920634
+
+10/16/2022 13:26:19
+Round #1: Agreement ratio between model_0 and model_2: 9.907
+
+10/16/2022 13:26:19
+Round #1: Percent match of selected set: 0.328125
+
+10/16/2022 13:26:19
+Round #1: Agreement ratio between model_1 and model_2: 13.777
+
+10/16/2022 13:26:19
+Round #1: Percent match of selected set: 0.24719101123595505
+
+10/16/2022 13:26:19
+Round #1: Train on labeled data on model #0
+
+10/16/2022 13:34:08
+Latest model at: Epoch: 10, global_step: 500
+
+10/16/2022 13:34:08
+>> test ret: {'entity_p': 0.7423698384134438, 'entity_r': 0.7664504170457235, 'entity_f1': 0.7542179734077151, 'relation_p': 0.5125348189272274, 'relation_r': 0.43601895733563933, 'relation_f1': 0.47119078999283553, 'relation_p_wNER': 0.5013927576462007, 'relation_r_wNER': 0.42654028435008196, 'relation_f1_wNER': 0.460947512191927}
+
+10/16/2022 13:34:08
+>> valid ret: {'entity_p': 0.757030371195084, 'entity_r': 0.7536394176847296, 'entity_f1': 0.7553310958033698, 'relation_p': 0.5760517799166326, 'relation_r': 0.5189504373026544, 'relation_f1': 0.5460122784584477, 'relation_p_wNER': 0.5695792880074569, 'relation_r_wNER': 0.513119533512737, 'relation_f1_wNER': 0.539877309166792}
+
+10/16/2022 13:40:40
+Latest model at: Epoch: 21, global_step: 1000
+
+10/16/2022 13:40:40
+>> test ret: {'entity_p': 0.8164967562482253, 'entity_r': 0.8164967562482253, 'entity_f1': 0.8164967629148906, 'relation_p': 0.6329787233874208, 'relation_r': 0.563981042640664, 'relation_f1': 0.5964912363094452, 'relation_p_wNER': 0.6223404255153633, 'relation_r_wNER': 0.5545023696551066, 'relation_f1_wNER': 0.586466173712351}
+
+10/16/2022 13:40:40
+>> valid ret: {'entity_p': 0.7970521541859744, 'entity_r': 0.7872340425443759, 'entity_f1': 0.7921126829105845, 'relation_p': 0.6411960132677343, 'relation_r': 0.5626822157270355, 'relation_f1': 0.5993788902152212, 'relation_p_wNER': 0.637873754131632, 'relation_r_wNER': 0.5597667638320768, 'relation_f1_wNER': 0.5962733001717719}
+
+10/16/2022 13:47:31
+Latest model at: Epoch: 32, global_step: 1500
+
+10/16/2022 13:47:31
+>> test ret: {'entity_p': 0.8483992466963428, 'entity_r': 0.8350324374343371, 'entity_f1': 0.841662780855271, 'relation_p': 0.7615658362718304, 'relation_r': 0.5071090047273197, 'relation_f1': 0.6088193541931045, 'relation_p_wNER': 0.7544483985496637, 'relation_r_wNER': 0.502369668234541, 'relation_f1_wNER': 0.6031294538010031}
+
+10/16/2022 13:47:31
+>> valid ret: {'entity_p': 0.8292964244425687, 'entity_r': 0.8051511758028539, 'entity_f1': 0.8170454612005359, 'relation_p': 0.7499999999676724, 'relation_r': 0.5072886297228195, 'relation_f1': 0.6052173998245142, 'relation_p_wNER': 0.745689655140272, 'relation_r_wNER': 0.5043731778278608, 'relation_f1_wNER': 0.6017391389760605}
+
+10/16/2022 13:54:22
+Latest model at: Epoch: 43, global_step: 2000
+
+10/16/2022 13:54:22
+>> test ret: {'entity_p': 0.8445692883816053, 'entity_r': 0.8359592214936428, 'entity_f1': 0.8402422048787958, 'relation_p': 0.6324999999841875, 'relation_r': 0.5995260663365041, 'relation_f1': 0.6155717842532604, 'relation_p_wNER': 0.6324999999841875, 'relation_r_wNER': 0.5995260663365041, 'relation_f1_wNER': 0.6155717842532604}
+
+10/16/2022 13:54:22
+>> valid ret: {'entity_p': 0.838061465711134, 'entity_r': 0.7939529675163051, 'entity_f1': 0.8154111625101378, 'relation_p': 0.6419753086221612, 'relation_r': 0.6064139941514165, 'relation_f1': 0.6236881639665176, 'relation_p_wNER': 0.6388888888691701, 'relation_r_wNER': 0.6034985422564577, 'relation_f1_wNER': 0.6206896632356386}
+
+10/16/2022 14:01:06
+Latest model at: Epoch: 54, global_step: 2500
+
+10/16/2022 14:01:06
+>> test ret: {'entity_p': 0.8607954545373031, 'entity_r': 0.8424467099087819, 'entity_f1': 0.8515222546112927, 'relation_p': 0.5884691848789568, 'relation_r': 0.701421800931246, 'relation_f1': 0.6400000080148429, 'relation_p_wNER': 0.5844930417378829, 'relation_r_wNER': 0.6966824644384673, 'relation_f1_wNER': 0.6356756837181944}
+
+10/16/2022 14:01:06
+>> valid ret: {'entity_p': 0.8499999999901162, 'entity_r': 0.8185890257467123, 'entity_f1': 0.8339988656149461, 'relation_p': 0.5842956119957438, 'relation_r': 0.7376093294245595, 'relation_f1': 0.6520618636618861, 'relation_p_wNER': 0.5819861431736262, 'relation_r_wNER': 0.7346938775296007, 'relation_f1_wNER': 0.6494845440910962}
+
+10/16/2022 14:07:52
+Latest model at: Epoch: 65, global_step: 3000
+
+10/16/2022 14:07:52
+>> test ret: {'entity_p': 0.8468809073643963, 'entity_r': 0.8303985171378092, 'entity_f1': 0.8385587336648603, 'relation_p': 0.6527415143432704, 'relation_r': 0.5924170615973361, 'relation_f1': 0.6211180205014621, 'relation_p_wNER': 0.6475195822285242, 'relation_r_wNER': 0.5876777251045574, 'relation_f1_wNER': 0.6161490764329463}
+
+10/16/2022 14:07:52
+>> valid ret: {'entity_p': 0.8607142857040391, 'entity_r': 0.8096304591174733, 'entity_f1': 0.8343912356011958, 'relation_p': 0.6853582554303627, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6626506102051277, 'relation_p_wNER': 0.6822429906329519, 'relation_r_wNER': 0.6384839649959626, 'relation_f1_wNER': 0.6596385620323614}
+
+10/16/2022 14:14:42
+Latest model at: Epoch: 76, global_step: 3500
+
+10/16/2022 14:14:42
+>> test ret: {'entity_p': 0.8637653736909767, 'entity_r': 0.8461538461460042, 'entity_f1': 0.85486892019673, 'relation_p': 0.6888297872157226, 'relation_r': 0.6137440758148401, 'relation_f1': 0.6491228149277015, 'relation_p_wNER': 0.6861702127477082, 'relation_r_wNER': 0.6113744075684509, 'relation_f1_wNER': 0.6466165492798411}
+
+10/16/2022 14:14:42
+>> valid ret: {'entity_p': 0.8539976824930012, 'entity_r': 0.8253079507186416, 'entity_f1': 0.8394077513450467, 'relation_p': 0.7120253164331637, 'relation_r': 0.655976676365715, 'relation_f1': 0.6828528149483859, 'relation_p_wNER': 0.7120253164331637, 'relation_r_wNER': 0.655976676365715, 'relation_f1_wNER': 0.6828528149483859}
+
+10/16/2022 15:00:28
+Round #1: Train on labeled data on model #1
+
+10/16/2022 15:07:26
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 15:07:26
+>> test ret: {'entity_p': 0.7558031569103455, 'entity_r': 0.7544022242747508, 'entity_f1': 0.755102047958435, 'relation_p': 0.4669926650252569, 'relation_r': 0.45260663506036475, 'relation_f1': 0.45968713288187424, 'relation_p_wNER': 0.45721271392525153, 'relation_r_wNER': 0.44312796207480737, 'relation_f1_wNER': 0.4500601774505655}
+
+10/16/2022 15:07:26
+>> valid ret: {'entity_p': 0.755294117638173, 'entity_r': 0.7189249719964286, 'entity_f1': 0.7366609367163005, 'relation_p': 0.5155279502945488, 'relation_r': 0.4839650145631497, 'relation_f1': 0.49924812904946575, 'relation_p_wNER': 0.4875776397364106, 'relation_r_wNER': 0.4577259475085211, 'relation_f1_wNER': 0.47218046000881897}
+
+10/16/2022 15:14:02
+Latest model at: Epoch: 23, global_step: 1000
+
+10/16/2022 15:14:02
+>> test ret: {'entity_p': 0.7921714818192716, 'entity_r': 0.787766450409752, 'entity_f1': 0.7899628321513402, 'relation_p': 0.6932907348021312, 'relation_r': 0.5142180094664878, 'relation_f1': 0.5904761989367393, 'relation_p_wNER': 0.6485623002987679, 'relation_r_wNER': 0.4810426540170369, 'relation_f1_wNER': 0.5523809610602248}
+
+10/16/2022 15:14:02
+>> valid ret: {'entity_p': 0.802024746897615, 'entity_r': 0.7984322508309246, 'entity_f1': 0.8002244736804067, 'relation_p': 0.7283464566642383, 'relation_r': 0.5393586005673656, 'relation_f1': 0.6197655024182891, 'relation_p_wNER': 0.6968503936733523, 'relation_r_wNER': 0.5160349854076958, 'relation_f1_wNER': 0.5929648325649465}
+
+10/16/2022 15:20:24
+Latest model at: Epoch: 34, global_step: 1500
+
+10/16/2022 15:20:24
+>> test ret: {'entity_p': 0.8614051972968104, 'entity_r': 0.8294717330785036, 'entity_f1': 0.845136928048478, 'relation_p': 0.6838046272317788, 'relation_r': 0.6303317535395656, 'relation_f1': 0.6559802791188665, 'relation_p_wNER': 0.6786632390571038, 'relation_r_wNER': 0.6255924170467869, 'relation_f1_wNER': 0.6510480966604685}
+
+10/16/2022 15:20:24
+>> valid ret: {'entity_p': 0.8423529411665606, 'entity_r': 0.8017917133168893, 'entity_f1': 0.82157200891665, 'relation_p': 0.649275362300021, 'relation_r': 0.6530612244707562, 'relation_f1': 0.6511627985587649, 'relation_p_wNER': 0.649275362300021, 'relation_r_wNER': 0.6530612244707562, 'relation_f1_wNER': 0.6511627985587649}
+
+10/16/2022 15:41:37
+Latest model at: Epoch: 69, global_step: 3000
+
+10/16/2022 15:41:37
+>> test ret: {'entity_p': 0.8437209302247096, 'entity_r': 0.8405931417901706, 'entity_f1': 0.8421541382938224, 'relation_p': 0.6386138613703314, 'relation_r': 0.6113744075684509, 'relation_f1': 0.6246973446001326, 'relation_p_wNER': 0.6311881187962577, 'relation_r_wNER': 0.6042654028292828, 'relation_f1_wNER': 0.6174334221272623}
+
+10/16/2022 15:41:37
+>> valid ret: {'entity_p': 0.8388571428475559, 'entity_r': 0.821948488232677, 'entity_f1': 0.8303167486259622, 'relation_p': 0.652941176451384, 'relation_r': 0.6472303206808387, 'relation_f1': 0.6500732143103481, 'relation_p_wNER': 0.6499999999808823, 'relation_r_wNER': 0.6443148687858801, 'relation_f1_wNER': 0.6471449566427504}
+
+10/16/2022 15:54:24
+Latest model at: Epoch: 93, global_step: 4000
+
+10/16/2022 15:54:24
+>> test ret: {'entity_p': 0.8696883852609095, 'entity_r': 0.8535681186204489, 'entity_f1': 0.861552859415219, 'relation_p': 0.7766666666407778, 'relation_r': 0.5521327014087172, 'relation_f1': 0.6454293710656379, 'relation_p_wNER': 0.7733333333075555, 'relation_r_wNER': 0.5497630331623279, 'relation_f1_wNER': 0.6426592879810621}
+
+10/16/2022 15:54:24
+>> valid ret: {'entity_p': 0.8614668218758851, 'entity_r': 0.8286674132046061, 'entity_f1': 0.8447488648736081, 'relation_p': 0.7719999999691199, 'relation_r': 0.5626822157270355, 'relation_f1': 0.650927495457914, 'relation_p_wNER': 0.7719999999691199, 'relation_r_wNER': 0.5626822157270355, 'relation_f1_wNER': 0.650927495457914}
+
+10/16/2022 16:27:16
+Round #1: Train on labeled data on model #2
+
+10/16/2022 16:33:47
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 16:33:47
+>> test ret: {'entity_p': 0.7374768088985393, 'entity_r': 0.7367933271479445, 'entity_f1': 0.73713491687299, 'relation_p': 0.4677871148328351, 'relation_r': 0.3957345971470205, 'relation_f1': 0.4287548230033896, 'relation_p_wNER': 0.45098039214423025, 'relation_r_wNER': 0.38151658766868446, 'relation_f1_wNER': 0.4133504584986841}
+
+10/16/2022 16:33:47
+>> valid ret: {'entity_p': 0.7462514417445646, 'entity_r': 0.7245240761397029, 'entity_f1': 0.7352272800183045, 'relation_p': 0.5365853658349622, 'relation_r': 0.4489795918236449, 'relation_f1': 0.4888888977573192, 'relation_p_wNER': 0.5296167247202224, 'relation_r_wNER': 0.4431486880337274, 'relation_f1_wNER': 0.4825396914391534}
+
+10/16/2022 16:39:26
+Latest model at: Epoch: 23, global_step: 1000
+
+10/16/2022 16:39:26
+>> test ret: {'entity_p': 0.7536231883993724, 'entity_r': 0.8192771084261421, 'entity_f1': 0.7850799358807407, 'relation_p': 0.47773972601921677, 'relation_r': 0.661137440742627, 'relation_f1': 0.5546719769008415, 'relation_p_wNER': 0.467465753416653, 'relation_r_wNER': 0.646919431264291, 'relation_f1_wNER': 0.5427435475430714}
+
+10/16/2022 16:39:26
+>> valid ret: {'entity_p': 0.7552083333254666, 'entity_r': 0.811870100774783, 'entity_f1': 0.7825148477416852, 'relation_p': 0.4765624999906921, 'relation_r': 0.7113702623699308, 'relation_f1': 0.5707602426666392, 'relation_p_wNER': 0.4687499999908447, 'relation_r_wNER': 0.6997084547900959, 'relation_f1_wNER': 0.5614035175736259}
+
+10/16/2022 16:45:02
+Latest model at: Epoch: 34, global_step: 1500
+
+10/16/2022 16:45:02
+>> test ret: {'entity_p': 0.837558685438145, 'entity_r': 0.8266913809005868, 'entity_f1': 0.8320895587696052, 'relation_p': 0.6559999999825067, 'relation_r': 0.5829383886117787, 'relation_f1': 0.6173149391051134, 'relation_p_wNER': 0.6533333333159111, 'relation_r_wNER': 0.5805687203653893, 'relation_f1_wNER': 0.6148055288320537}
+
+10/16/2022 16:45:02
+>> valid ret: {'entity_p': 0.8038768528984734, 'entity_r': 0.7894736842016856, 'entity_f1': 0.7966101763104024, 'relation_p': 0.6398713826160813, 'relation_r': 0.5801749270967879, 'relation_f1': 0.6085626992850863, 'relation_p_wNER': 0.6398713826160813, 'relation_r_wNER': 0.5801749270967879, 'relation_f1_wNER': 0.6085626992850863}
+
+10/16/2022 16:50:42
+Latest model at: Epoch: 46, global_step: 2000
+
+10/16/2022 16:50:42
+>> test ret: {'entity_p': 0.8544600938886906, 'entity_r': 0.8433734939680875, 'entity_f1': 0.8488806034044419, 'relation_p': 0.5970464134895138, 'relation_r': 0.6706161137281844, 'relation_f1': 0.6316964365958077, 'relation_p_wNER': 0.5928270042069024, 'relation_r_wNER': 0.6658767772354057, 'relation_f1_wNER': 0.6272321509097227}
+
+10/16/2022 16:50:42
+>> valid ret: {'entity_p': 0.8311990686748405, 'entity_r': 0.7995520716595794, 'entity_f1': 0.8150684998234633, 'relation_p': 0.5953608247269236, 'relation_r': 0.6734693877354674, 'relation_f1': 0.6320109519358637, 'relation_p_wNER': 0.5850515463766739, 'relation_r_wNER': 0.6618075801556325, 'relation_f1_wNER': 0.6210670395560305}
+
+10/16/2022 16:56:19
+Latest model at: Epoch: 58, global_step: 2500
+
+10/16/2022 16:56:19
+>> test ret: {'entity_p': 0.861611374399416, 'entity_r': 0.8424467099087819, 'entity_f1': 0.8519212809661184, 'relation_p': 0.705056179755476, 'relation_r': 0.5947867298437254, 'relation_f1': 0.6452442239119818, 'relation_p_wNER': 0.705056179755476, 'relation_r_wNER': 0.5947867298437254, 'relation_f1_wNER': 0.6452442239119818}
+
+10/16/2022 16:56:19
+>> valid ret: {'entity_p': 0.8547815820442174, 'entity_r': 0.8107502799461282, 'entity_f1': 0.8321839145807505, 'relation_p': 0.7039473683978964, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6615146909808914, 'relation_p_wNER': 0.7039473683978964, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.6615146909808914}
+
+10/16/2022 17:14:21
+Latest model at: Epoch: 93, global_step: 4000
+
+10/16/2022 17:14:21
+>> test ret: {'entity_p': 0.8618732261034828, 'entity_r': 0.844300278027393, 'entity_f1': 0.8529962610367089, 'relation_p': 0.7008086253180374, 'relation_r': 0.6161137440612295, 'relation_f1': 0.6557377127928963, 'relation_p_wNER': 0.7008086253180374, 'relation_r_wNER': 0.6161137440612295, 'relation_f1_wNER': 0.6557377127928963}
+
+10/16/2022 17:14:21
+>> valid ret: {'entity_p': 0.8462414578491316, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8390739759797681, 'relation_p': 0.709779179788335, 'relation_r': 0.655976676365715, 'relation_f1': 0.6818181894886594, 'relation_p_wNER': 0.7066246056559424, 'relation_r_wNER': 0.6530612244707562, 'relation_f1_wNER': 0.6787878864790633}
+
+10/16/2022 17:44:37
+Round #2: Predict on unlabeled data on model m0
+
+10/16/2022 17:48:21
+Round #2: Predict on unlabeled data on model m1
+
+10/16/2022 17:51:42
+Round #2: Predict on unlabeled data on model m2
+
+10/16/2022 17:55:08
+Round #2: Global agreement between 3 models: 0.4148606811145511
+
+10/16/2022 17:55:08
+Round #2: Agreement ratio between model_0 and model_1: 8.824
+
+10/16/2022 17:55:08
+Round #2: Percent match of selected set: 0.2631578947368421
+
+10/16/2022 17:55:08
+Round #2: Agreement ratio between model_0 and model_2: 11.3
+
+10/16/2022 17:55:08
+Round #2: Percent match of selected set: 0.3698630136986301
+
+10/16/2022 17:55:08
+Round #2: Agreement ratio between model_1 and model_2: 10.836
+
+10/16/2022 17:55:08
+Round #2: Percent match of selected set: 0.3
+
+10/16/2022 17:55:08
+Round #2: Train on labeled data on model #0
+
+10/16/2022 18:01:32
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 18:01:32
+>> test ret: {'entity_p': 0.758878504665805, 'entity_r': 0.7525486561561395, 'entity_f1': 0.7557003328706265, 'relation_p': 0.5769230768953402, 'relation_r': 0.2843601895667213, 'relation_f1': 0.3809523913685059, 'relation_p_wNER': 0.572115384587879, 'relation_r_wNER': 0.281990521320332, 'relation_f1_wNER': 0.37777778820604674}
+
+10/16/2022 18:01:32
+>> valid ret: {'entity_p': 0.751740139202416, 'entity_r': 0.7256438969683578, 'entity_f1': 0.7384615457296158, 'relation_p': 0.6410256409845496, 'relation_r': 0.2915451894958733, 'relation_f1': 0.40080161379151086, 'relation_p_wNER': 0.6346153845747041, 'relation_r_wNER': 0.2886297376009146, 'relation_f1_wNER': 0.3967935977755912}
+
+10/16/2022 18:07:23
+Latest model at: Epoch: 22, global_step: 1000
+
+10/16/2022 18:07:23
+>> test ret: {'entity_p': 0.7959001782460259, 'entity_r': 0.8276181649598924, 'entity_f1': 0.8114493479127347, 'relation_p': 0.6510989010810138, 'relation_r': 0.5616113743942746, 'relation_f1': 0.6030534433352432, 'relation_p_wNER': 0.6456043955866592, 'relation_r_wNER': 0.5568720379014959, 'relation_f1_wNER': 0.59796438484176}
+
+10/16/2022 18:07:23
+>> valid ret: {'entity_p': 0.7891832229493467, 'entity_r': 0.8006718924882343, 'entity_f1': 0.7948860546368017, 'relation_p': 0.6678200691810443, 'relation_r': 0.5626822157270355, 'relation_f1': 0.6107595018594275, 'relation_p_wNER': 0.6643598615687073, 'relation_r_wNER': 0.5597667638320768, 'relation_f1_wNER': 0.6075949449167801}
+
+10/16/2022 18:13:15
+Latest model at: Epoch: 34, global_step: 1500
+
+10/16/2022 18:13:15
+>> test ret: {'entity_p': 0.8396226415015131, 'entity_r': 0.8248378127819757, 'entity_f1': 0.8321645694103693, 'relation_p': 0.7426710097477958, 'relation_r': 0.5402843601767705, 'relation_f1': 0.6255144115675305, 'relation_p_wNER': 0.7263843647971862, 'relation_r_wNER': 0.5284360189448237, 'relation_f1_wNER': 0.6117969905279419}
+
+10/16/2022 18:13:15
+>> valid ret: {'entity_p': 0.8463356973895232, 'entity_r': 0.8017917133168893, 'entity_f1': 0.8234617662393601, 'relation_p': 0.7748917748582298, 'relation_r': 0.5218658891976132, 'relation_f1': 0.6236933882049679, 'relation_p_wNER': 0.7705627705294128, 'relation_r_wNER': 0.5189504373026544, 'relation_f1_wNER': 0.6202090676692686}
+
+10/16/2022 18:25:03
+Latest model at: Epoch: 56, global_step: 2500
+
+10/16/2022 18:25:03
+>> test ret: {'entity_p': 0.8333333333255307, 'entity_r': 0.8248378127819757, 'entity_f1': 0.829063816523202, 'relation_p': 0.6843657816907267, 'relation_r': 0.5497630331623279, 'relation_f1': 0.6097240555502909, 'relation_p_wNER': 0.6755162241688638, 'relation_r_wNER': 0.5426540284231598, 'relation_f1_wNER': 0.6018396929175768}
+
+10/16/2022 18:25:03
+>> valid ret: {'entity_p': 0.832369942186909, 'entity_r': 0.8062709966315087, 'entity_f1': 0.8191126346248387, 'relation_p': 0.7065217391048362, 'relation_r': 0.5685131195169529, 'relation_f1': 0.6300484733785536, 'relation_p_wNER': 0.7065217391048362, 'relation_r_wNER': 0.5685131195169529, 'relation_f1_wNER': 0.6300484733785536}
+
+10/16/2022 18:30:56
+Latest model at: Epoch: 68, global_step: 3000
+
+10/16/2022 18:30:56
+>> test ret: {'entity_p': 0.846585594005177, 'entity_r': 0.8387395736715595, 'entity_f1': 0.8426443267400753, 'relation_p': 0.7154929577263242, 'relation_r': 0.6018957345828935, 'relation_f1': 0.6537966617169293, 'relation_p_wNER': 0.7070422535012101, 'relation_r_wNER': 0.5947867298437254, 'relation_f1_wNER': 0.6460746540453084}
+
+10/16/2022 18:30:56
+>> valid ret: {'entity_p': 0.831626848682234, 'entity_r': 0.8185890257467123, 'entity_f1': 0.8250564399962993, 'relation_p': 0.7042253520878794, 'relation_r': 0.5830903789917466, 'relation_f1': 0.6379585407286158, 'relation_p_wNER': 0.7007042253274399, 'relation_r_wNER': 0.5801749270967879, 'relation_f1_wNER': 0.6347687480855393}
+
+10/16/2022 18:36:58
+Latest model at: Epoch: 79, global_step: 3500
+
+10/16/2022 18:36:58
+>> test ret: {'entity_p': 0.8637236084370085, 'entity_r': 0.8341056533750315, 'entity_f1': 0.8486563005948019, 'relation_p': 0.6978021977830274, 'relation_r': 0.6018957345828935, 'relation_f1': 0.6463104405193948, 'relation_p_wNER': 0.6978021977830274, 'relation_r_wNER': 0.6018957345828935, 'relation_f1_wNER': 0.6463104405193948}
+
+10/16/2022 18:36:58
+>> valid ret: {'entity_p': 0.8581560283586507, 'entity_r': 0.812989921603438, 'entity_f1': 0.8349626287085538, 'relation_p': 0.709790209765392, 'relation_r': 0.5918367346766228, 'relation_f1': 0.64546900638862, 'relation_p_wNER': 0.7062937062690107, 'relation_r_wNER': 0.5889212827816641, 'relation_f1_wNER': 0.6422893561707205}
+
+10/16/2022 18:43:02
+Latest model at: Epoch: 90, global_step: 4000
+
+10/16/2022 18:43:02
+>> test ret: {'entity_p': 0.8765915768768209, 'entity_r': 0.8294717330785036, 'entity_f1': 0.8523809587476963, 'relation_p': 0.732193732172872, 'relation_r': 0.6090047393220615, 'relation_f1': 0.664941793108686, 'relation_p_wNER': 0.7264957264750286, 'relation_r_wNER': 0.6042654028292828, 'relation_f1_wNER': 0.6597671488998861}
+
+10/16/2022 18:43:02
+>> valid ret: {'entity_p': 0.8629807692203969, 'entity_r': 0.804031354974199, 'entity_f1': 0.8324637746538155, 'relation_p': 0.7084745762471704, 'relation_r': 0.6093294460463752, 'relation_f1': 0.6551724216829139, 'relation_p_wNER': 0.7084745762471704, 'relation_r_wNER': 0.6093294460463752, 'relation_f1_wNER': 0.6551724216829139}
+
+10/16/2022 19:13:40
+Round #2: Train on labeled data on model #1
+
+10/16/2022 19:20:43
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 19:20:43
+>> test ret: {'entity_p': 0.7644859813012665, 'entity_r': 0.7581093605119731, 'entity_f1': 0.761284325382897, 'relation_p': 0.6417322834393019, 'relation_r': 0.38625592416146315, 'relation_f1': 0.4822485301505987, 'relation_p_wNER': 0.6220472440699981, 'relation_r_wNER': 0.3744075829295164, 'relation_f1_wNER': 0.46745563081299674}
+
+10/16/2022 19:20:43
+>> valid ret: {'entity_p': 0.7596266044252086, 'entity_r': 0.7290033594543225, 'entity_f1': 0.744000007228049, 'relation_p': 0.6958525345301451, 'relation_r': 0.4402332361387687, 'relation_f1': 0.5392857233185586, 'relation_p_wNER': 0.6912442395994818, 'relation_r_wNER': 0.43731778424380996, 'relation_f1_wNER': 0.535714294766454}
+
+10/16/2022 19:27:30
+Latest model at: Epoch: 22, global_step: 1000
+
+10/16/2022 19:27:30
+>> test ret: {'entity_p': 0.8164794007414188, 'entity_r': 0.808155699714475, 'entity_f1': 0.8122962339874684, 'relation_p': 0.6041189931211872, 'relation_r': 0.6255924170467869, 'relation_f1': 0.6146682269587914, 'relation_p_wNER': 0.592677345524195, 'relation_r_wNER': 0.6137440758148401, 'relation_f1_wNER': 0.6030267834909423}
+
+10/16/2022 19:27:30
+>> valid ret: {'entity_p': 0.8323632130287268, 'entity_r': 0.8006718924882343, 'entity_f1': 0.8162100523255549, 'relation_p': 0.6005509641707837, 'relation_r': 0.6355685131010038, 'relation_f1': 0.617563747460376, 'relation_p_wNER': 0.5977961432342205, 'relation_r_wNER': 0.632653061206045, 'relation_f1_wNER': 0.6147308862881092}
+
+10/16/2022 19:34:19
+Latest model at: Epoch: 34, global_step: 1500
+
+10/16/2022 19:34:19
+>> test ret: {'entity_p': 0.8334866605259109, 'entity_r': 0.8396663577308651, 'entity_f1': 0.8365651034461148, 'relation_p': 0.6123853210868719, 'relation_r': 0.6327014217859549, 'relation_f1': 0.6223776304290076, 'relation_p_wNER': 0.6077981651236743, 'relation_r_wNER': 0.6279620852931762, 'relation_f1_wNER': 0.6177156257960182}
+
+10/16/2022 19:34:19
+>> valid ret: {'entity_p': 0.8352402745899858, 'entity_r': 0.8174692049180574, 'entity_f1': 0.8262592029563247, 'relation_p': 0.6368563685464267, 'relation_r': 0.6851311953153023, 'relation_f1': 0.6601123673666125, 'relation_p_wNER': 0.6314363143460315, 'relation_r_wNER': 0.6793002915253848, 'relation_f1_wNER': 0.6544943898756076}
+
+10/16/2022 20:09:17
+Latest model at: Epoch: 90, global_step: 4000
+
+10/16/2022 20:09:17
+>> test ret: {'entity_p': 0.8529688972586903, 'entity_r': 0.8387395736715595, 'entity_f1': 0.8457943989393267, 'relation_p': 0.6597938144159847, 'relation_r': 0.6066350710756722, 'relation_f1': 0.6320987734363664, 'relation_p_wNER': 0.6546391752408598, 'relation_r_wNER': 0.6018957345828935, 'relation_f1_wNER': 0.6271605018626428}
+
+10/16/2022 20:09:17
+>> valid ret: {'entity_p': 0.8493626882867976, 'entity_r': 0.820828667404022, 'entity_f1': 0.8348519427272001, 'relation_p': 0.7223974763179054, 'relation_r': 0.6676384839455499, 'relation_f1': 0.6939394015261248, 'relation_p_wNER': 0.709779179788335, 'relation_r_wNER': 0.655976676365715, 'relation_f1_wNER': 0.6818181894886594}
+
+10/16/2022 20:45:25
+Latest model at: Epoch: 147, global_step: 6500
+
+10/16/2022 20:45:25
+>> test ret: {'entity_p': 0.861842105255058, 'entity_r': 0.8498609823832266, 'entity_f1': 0.8558096190229397, 'relation_p': 0.7146596858451659, 'relation_r': 0.646919431264291, 'relation_f1': 0.6791044853138845, 'relation_p_wNER': 0.7041884816569584, 'relation_r_wNER': 0.6374407582787336, 'relation_f1_wNER': 0.6691542366249906}
+
+10/16/2022 20:45:25
+>> valid ret: {'entity_p': 0.8546712802669588, 'entity_r': 0.829787234033261, 'entity_f1': 0.8420454609928655, 'relation_p': 0.7287066245826906, 'relation_r': 0.6734693877354674, 'relation_f1': 0.7000000075443068, 'relation_p_wNER': 0.725552050450298, 'relation_r_wNER': 0.6705539358405086, 'relation_f1_wNER': 0.6969697045352616}
+
+10/16/2022 20:46:54
+Round #2: Train on labeled data on model #2
+
+10/16/2022 20:53:11
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 20:53:11
+>> test ret: {'entity_p': 0.744125326364281, 'entity_r': 0.79240037070628, 'entity_f1': 0.767504495388007, 'relation_p': 0.5569948186384198, 'relation_r': 0.5094786729737091, 'relation_f1': 0.5321782264123922, 'relation_p_wNER': 0.5492227979132326, 'relation_r_wNER': 0.502369668234541, 'relation_f1_wNER': 0.524752483877561}
+
+10/16/2022 20:53:11
+>> valid ret: {'entity_p': 0.7478260869483931, 'entity_r': 0.7704367301145528, 'entity_f1': 0.7589630517910513, 'relation_p': 0.64727272724919, 'relation_r': 0.5189504373026544, 'relation_f1': 0.5760517883785256, 'relation_p_wNER': 0.6327272727042644, 'relation_r_wNER': 0.5072886297228195, 'relation_f1_wNER': 0.5631068046339062}
+
+10/16/2022 20:59:05
+Latest model at: Epoch: 23, global_step: 1000
+
+10/16/2022 20:59:05
+>> test ret: {'entity_p': 0.7824956672375868, 'entity_r': 0.8368860055529483, 'entity_f1': 0.8087774362005172, 'relation_p': 0.6327077747819649, 'relation_r': 0.5592417061478853, 'relation_f1': 0.5937107000844903, 'relation_p_wNER': 0.6246648793398213, 'relation_r_wNER': 0.5521327014087172, 'relation_f1_wNER': 0.5861635303178829}
+
+10/16/2022 20:59:05
+>> valid ret: {'entity_p': 0.7881720430022777, 'entity_r': 0.820828667404022, 'entity_f1': 0.8041689590383257, 'relation_p': 0.6229508196517065, 'relation_r': 0.5539358600421593, 'relation_f1': 0.5864197613832685, 'relation_p_wNER': 0.6229508196517065, 'relation_r_wNER': 0.5539358600421593, 'relation_f1_wNER': 0.5864197613832685}
+
+10/16/2022 21:05:03
+Latest model at: Epoch: 35, global_step: 1500
+
+10/16/2022 21:05:03
+>> test ret: {'entity_p': 0.8441682600301705, 'entity_r': 0.8183503243668365, 'entity_f1': 0.8310588300707078, 'relation_p': 0.7460815046788062, 'relation_r': 0.563981042640664, 'relation_f1': 0.6423751768036046, 'relation_p_wNER': 0.7241379310117825, 'relation_r_wNER': 0.5473933649159385, 'relation_f1_wNER': 0.6234817896092562}
+
+10/16/2022 21:05:03
+>> valid ret: {'entity_p': 0.8406139315130978, 'entity_r': 0.7973124300022697, 'entity_f1': 0.8183908112464657, 'relation_p': 0.7313432835548006, 'relation_r': 0.5714285714119117, 'relation_f1': 0.6415712028342901, 'relation_p_wNER': 0.7276119402713578, 'relation_r_wNER': 0.5685131195169529, 'relation_f1_wNER': 0.6382978804330858}
+
+10/16/2022 21:11:10
+Latest model at: Epoch: 47, global_step: 2000
+
+10/16/2022 21:11:10
+>> test ret: {'entity_p': 0.8397085610123889, 'entity_r': 0.8544949026797546, 'entity_f1': 0.8470372135714447, 'relation_p': 0.6521739130277252, 'relation_r': 0.639810426525123, 'relation_f1': 0.6459330222533824, 'relation_p_wNER': 0.644927536216306, 'relation_r_wNER': 0.6327014217859549, 'relation_f1_wNER': 0.6387559888068324}
+
+10/16/2022 21:11:10
+>> valid ret: {'entity_p': 0.8239910313808969, 'entity_r': 0.8230683090613318, 'entity_f1': 0.8235294183644782, 'relation_p': 0.6494252873376601, 'relation_r': 0.6588921282606737, 'relation_f1': 0.6541244651504458, 'relation_p_wNER': 0.6436781609010437, 'relation_r_wNER': 0.6530612244707562, 'relation_f1_wNER': 0.6483357531767338}
+
+10/16/2022 21:17:09
+Latest model at: Epoch: 59, global_step: 2500
+
+10/16/2022 21:17:09
+>> test ret: {'entity_p': 0.8345521023689713, 'entity_r': 0.8461538461460042, 'entity_f1': 0.8403129378933144, 'relation_p': 0.6304347825934677, 'relation_r': 0.6184834123076188, 'relation_f1': 0.6244019219121872, 'relation_p_wNER': 0.6304347825934677, 'relation_r_wNER': 0.6184834123076188, 'relation_f1_wNER': 0.6244019219121872}
+
+10/16/2022 21:17:09
+>> valid ret: {'entity_p': 0.8301675977560875, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8310962034051205, 'relation_p': 0.6763848396304261, 'relation_r': 0.6763848396304261, 'relation_f1': 0.6763848473429438, 'relation_p_wNER': 0.6647230320505911, 'relation_r_wNER': 0.6647230320505911, 'relation_f1_wNER': 0.6647230398413077}
+
+10/16/2022 21:34:22
+Latest model at: Epoch: 95, global_step: 4000
+
+10/16/2022 21:34:22
+>> test ret: {'entity_p': 0.8648905803913903, 'entity_r': 0.8424467099087819, 'entity_f1': 0.8535211331117857, 'relation_p': 0.74539877298327, 'relation_r': 0.5758293838726106, 'relation_f1': 0.649732628357438, 'relation_p_wNER': 0.7423312883207873, 'relation_r_wNER': 0.5734597156262213, 'relation_f1_wNER': 0.6470588315834025}
+
+10/16/2022 21:34:22
+>> valid ret: {'entity_p': 0.865248226940127, 'entity_r': 0.8197088465753672, 'entity_f1': 0.8418631461894348, 'relation_p': 0.7526501766518497, 'relation_r': 0.6209912536262101, 'relation_f1': 0.680511189863273, 'relation_p_wNER': 0.749116607747381, 'relation_r_wNER': 0.6180758017312514, 'relation_f1_wNER': 0.6773163017061519}
+
+10/16/2022 22:01:45
+Round #3: Predict on unlabeled data on model m0
+
+10/16/2022 22:05:27
+Round #3: Predict on unlabeled data on model m1
+
+10/16/2022 22:09:08
+Round #3: Predict on unlabeled data on model m2
+
+10/16/2022 22:12:52
+Round #3: Global agreement between 3 models: 0.4086687306501548
+
+10/16/2022 22:12:52
+Round #3: Agreement ratio between model_0 and model_1: 11.146
+
+10/16/2022 22:12:52
+Round #3: Percent match of selected set: 0.4583333333333333
+
+10/16/2022 22:12:52
+Round #3: Agreement ratio between model_0 and model_2: 9.907
+
+10/16/2022 22:12:52
+Round #3: Percent match of selected set: 0.3125
+
+10/16/2022 22:12:52
+Round #3: Agreement ratio between model_1 and model_2: 13.777
+
+10/16/2022 22:12:52
+Round #3: Percent match of selected set: 0.3146067415730337
+
+10/16/2022 22:12:52
+Round #3: Train on labeled data on model #0
+
+10/16/2022 22:20:07
+Latest model at: Epoch: 10, global_step: 500
+
+10/16/2022 22:20:07
+>> test ret: {'entity_p': 0.7553688141852908, 'entity_r': 0.7497683039782228, 'entity_f1': 0.7525581466963029, 'relation_p': 0.5350318471167187, 'relation_r': 0.3981042653934098, 'relation_f1': 0.4565217482912925, 'relation_p_wNER': 0.5254777069896345, 'relation_r_wNER': 0.39099526065424184, 'relation_f1_wNER': 0.44836957441535474}
+
+10/16/2022 22:20:07
+>> valid ret: {'entity_p': 0.7722419928734017, 'entity_r': 0.7290033594543225, 'entity_f1': 0.7500000071871549, 'relation_p': 0.5813008129845, 'relation_r': 0.41690962097909884, 'relation_f1': 0.4855687696870469, 'relation_p_wNER': 0.5813008129845, 'relation_r_wNER': 0.41690962097909884, 'relation_f1_wNER': 0.4855687696870469}
+
+10/16/2022 22:26:56
+Latest model at: Epoch: 21, global_step: 1000
+
+10/16/2022 22:26:56
+>> test ret: {'entity_p': 0.79432624112771, 'entity_r': 0.8303985171378092, 'entity_f1': 0.8119619459852565, 'relation_p': 0.6557377049001164, 'relation_r': 0.5687203791334426, 'relation_f1': 0.6091370640173671, 'relation_p_wNER': 0.647540983588865, 'relation_r_wNER': 0.5616113743942746, 'relation_f1_wNER': 0.6015228508656819}
+
+10/16/2022 22:26:56
+>> valid ret: {'entity_p': 0.7803532008743891, 'entity_r': 0.7917133258589953, 'entity_f1': 0.7859922248016978, 'relation_p': 0.6938775509968068, 'relation_r': 0.5947521865715816, 'relation_f1': 0.6405023627759143, 'relation_p_wNER': 0.6768707482762969, 'relation_r_wNER': 0.5801749270967879, 'relation_f1_wNER': 0.6248037757485663}
+
+10/16/2022 22:33:43
+Latest model at: Epoch: 32, global_step: 1500
+
+10/16/2022 22:33:43
+>> test ret: {'entity_p': 0.8478260869485084, 'entity_r': 0.8313253011971148, 'entity_f1': 0.8394946250935925, 'relation_p': 0.6991869918509706, 'relation_r': 0.6113744075684509, 'relation_f1': 0.6523388195315185, 'relation_p_wNER': 0.67750677504939, 'relation_r_wNER': 0.5924170615973361, 'relation_f1_wNER': 0.6321112596113675}
+
+10/16/2022 22:33:43
+>> valid ret: {'entity_p': 0.8530465949718872, 'entity_r': 0.7995520716595794, 'entity_f1': 0.8254335326057937, 'relation_p': 0.6879194630641637, 'relation_r': 0.5976676384665403, 'relation_f1': 0.6396255930071236, 'relation_p_wNER': 0.6879194630641637, 'relation_r_wNER': 0.5976676384665403, 'relation_f1_wNER': 0.6396255930071236}
+
+10/16/2022 22:40:24
+Latest model at: Epoch: 43, global_step: 2000
+
+10/16/2022 22:40:24
+>> test ret: {'entity_p': 0.8352059925015431, 'entity_r': 0.8266913809005868, 'entity_f1': 0.830926881249221, 'relation_p': 0.7554858933932449, 'relation_r': 0.5710900473798319, 'relation_f1': 0.6504723427429469, 'relation_p_wNER': 0.7523510971550987, 'relation_r_wNER': 0.5687203791334426, 'relation_f1_wNER': 0.6477732874299057}
+
+10/16/2022 22:40:24
+>> valid ret: {'entity_p': 0.836994219643503, 'entity_r': 0.8107502799461282, 'entity_f1': 0.823663260298444, 'relation_p': 0.7611940298223435, 'relation_r': 0.5947521865715816, 'relation_f1': 0.6677577820400674, 'relation_p_wNER': 0.7499999999720149, 'relation_r_wNER': 0.5860058308867053, 'relation_f1_wNER': 0.6579378148387045}
+
+10/16/2022 23:00:54
+Latest model at: Epoch: 76, global_step: 3500
+
+10/16/2022 23:00:54
+>> test ret: {'entity_p': 0.8424908424831274, 'entity_r': 0.8526413345611433, 'entity_f1': 0.8475357042360661, 'relation_p': 0.7366863905107489, 'relation_r': 0.5900473933509467, 'relation_f1': 0.6552631658528046, 'relation_p_wNER': 0.7248520709844718, 'relation_r_wNER': 0.5805687203653893, 'relation_f1_wNER': 0.644736850132029}
+
+10/16/2022 23:00:54
+>> valid ret: {'entity_p': 0.821948488232677, 'entity_r': 0.821948488232677, 'entity_f1': 0.8219484948546805, 'relation_p': 0.7254237287889687, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6708464027697251, 'relation_p_wNER': 0.7186440677722493, 'relation_r_wNER': 0.6180758017312514, 'relation_f1_wNER': 0.6645768103352955}
+
+10/16/2022 23:14:49
+Latest model at: Epoch: 97, global_step: 4500
+
+10/16/2022 23:14:49
+>> test ret: {'entity_p': 0.8566001899253884, 'entity_r': 0.8359592214936428, 'entity_f1': 0.8461538525675141, 'relation_p': 0.6633416458687446, 'relation_r': 0.6303317535395656, 'relation_f1': 0.6464155607569437, 'relation_p_wNER': 0.6583541146967992, 'relation_r_wNER': 0.6255924170467869, 'relation_f1_wNER': 0.641555293473659}
+
+10/16/2022 23:14:49
+>> valid ret: {'entity_p': 0.8544819557525671, 'entity_r': 0.821948488232677, 'entity_f1': 0.8378995498628182, 'relation_p': 0.6925373134121631, 'relation_r': 0.6763848396304261, 'relation_f1': 0.6843657893503362, 'relation_p_wNER': 0.6895522387853865, 'relation_r_wNER': 0.6734693877354674, 'relation_f1_wNER': 0.681415936863193}
+
+10/16/2022 23:35:46
+Latest model at: Epoch: 130, global_step: 6000
+
+10/16/2022 23:35:46
+>> test ret: {'entity_p': 0.8707547169729175, 'entity_r': 0.8554216867390602, 'entity_f1': 0.8630201091205012, 'relation_p': 0.7601156069144475, 'relation_r': 0.6232227488003975, 'relation_f1': 0.6848958410680135, 'relation_p_wNER': 0.7572254335041264, 'relation_r_wNER': 0.6208530805540082, 'relation_f1_wNER': 0.6822916744192167}
+
+10/16/2022 23:35:46
+>> valid ret: {'entity_p': 0.8505214368383486, 'entity_r': 0.821948488232677, 'entity_f1': 0.8359908948816814, 'relation_p': 0.7491525423474863, 'relation_r': 0.6443148687858801, 'relation_f1': 0.6927899762871336, 'relation_p_wNER': 0.7491525423474863, 'relation_r_wNER': 0.6443148687858801, 'relation_f1_wNER': 0.6927899762871336}
+
+10/16/2022 23:48:23
+Round #3: Train on labeled data on model #1
+
+10/16/2022 23:54:13
+Latest model at: Epoch: 11, global_step: 500
+
+10/16/2022 23:54:13
+>> test ret: {'entity_p': 0.7617728531785617, 'entity_r': 0.7645968489271122, 'entity_f1': 0.7631822457486388, 'relation_p': 0.4536679536591956, 'relation_r': 0.5568720379014959, 'relation_f1': 0.5000000088436622, 'relation_p_wNER': 0.4478764478678016, 'relation_r_wNER': 0.5497630331623279, 'relation_f1_wNER': 0.49361703015210495}
+
+10/16/2022 23:54:13
+>> valid ret: {'entity_p': 0.754890678932625, 'entity_r': 0.7346024635975968, 'entity_f1': 0.7446084067671656, 'relation_p': 0.45754716980052956, 'relation_r': 0.5655976676219943, 'relation_f1': 0.5058670231604194, 'relation_p_wNER': 0.4551886792345474, 'relation_r_wNER': 0.5626822157270355, 'relation_f1_wNER': 0.5032594612440484}
+
+10/16/2022 23:59:46
+Latest model at: Epoch: 23, global_step: 1000
+
+10/16/2022 23:59:46
+>> test ret: {'entity_p': 0.815413891524116, 'entity_r': 0.7942539388248911, 'entity_f1': 0.8046948424372545, 'relation_p': 0.6119402984922403, 'relation_r': 0.5829383886117787, 'relation_f1': 0.5970873868496088, 'relation_p_wNER': 0.5945273631692903, 'relation_r_wNER': 0.5663507108870532, 'relation_f1_wNER': 0.5800970956878888}
+
+10/16/2022 23:59:46
+>> valid ret: {'entity_p': 0.8068315665393777, 'entity_r': 0.7670772676285882, 'entity_f1': 0.7864523605213467, 'relation_p': 0.6249999999799679, 'relation_r': 0.5685131195169529, 'relation_f1': 0.5954198555598392, 'relation_p_wNER': 0.618589743569917, 'relation_r_wNER': 0.5626822157270355, 'relation_f1_wNER': 0.5893129853671931}
+
+10/17/2022 00:05:14
+Latest model at: Epoch: 34, global_step: 1500
+
+10/17/2022 00:05:14
+>> test ret: {'entity_p': 0.8277777777701133, 'entity_r': 0.828544949019198, 'entity_f1': 0.828161192297212, 'relation_p': 0.6599496221496234, 'relation_r': 0.6208530805540082, 'relation_f1': 0.6398046477515836, 'relation_p_wNER': 0.6473551637116535, 'relation_r_wNER': 0.6090047393220615, 'relation_f1_wNER': 0.6275946356192444}
+
+10/17/2022 00:05:14
+>> valid ret: {'entity_p': 0.8226544622331504, 'entity_r': 0.8051511758028539, 'entity_f1': 0.8138087220172509, 'relation_p': 0.6371681415741248, 'relation_r': 0.6297376093110864, 'relation_f1': 0.6334310930195819, 'relation_p_wNER': 0.6312684365595496, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.627565990417437}
+
+10/17/2022 00:10:43
+Latest model at: Epoch: 46, global_step: 2000
+
+10/17/2022 00:10:43
+>> test ret: {'entity_p': 0.854048964210414, 'entity_r': 0.8405931417901706, 'entity_f1': 0.8472676383510915, 'relation_p': 0.7435897435659106, 'relation_r': 0.5497630331623279, 'relation_f1': 0.6321525967651405, 'relation_p_wNER': 0.7403846153608851, 'relation_r_wNER': 0.5473933649159385, 'relation_f1_wNER': 0.6294278011420754}
+
+10/17/2022 00:10:43
+>> valid ret: {'entity_p': 0.8314087759719236, 'entity_r': 0.8062709966315087, 'entity_f1': 0.818646965141281, 'relation_p': 0.7310606060329143, 'relation_r': 0.5626822157270355, 'relation_f1': 0.6359143409106823, 'relation_p_wNER': 0.7310606060329143, 'relation_r_wNER': 0.5626822157270355, 'relation_f1_wNER': 0.6359143409106823}
+
+10/17/2022 00:16:10
+Latest model at: Epoch: 58, global_step: 2500
+
+10/17/2022 00:16:10
+>> test ret: {'entity_p': 0.853773584897606, 'entity_r': 0.8387395736715595, 'entity_f1': 0.8461898147343367, 'relation_p': 0.6788511749170013, 'relation_r': 0.6161137440612295, 'relation_f1': 0.645962740840338, 'relation_p_wNER': 0.6736292428022551, 'relation_r_wNER': 0.6113744075684509, 'relation_f1_wNER': 0.6409937967730566}
+
+10/17/2022 00:16:10
+>> valid ret: {'entity_p': 0.8379953379855711, 'entity_r': 0.8051511758028539, 'entity_f1': 0.8212450094779096, 'relation_p': 0.650455927031901, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6369047698619084, 'relation_p_wNER': 0.650455927031901, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.6369047698619084}
+
+10/17/2022 00:21:46
+Latest model at: Epoch: 69, global_step: 3000
+
+10/17/2022 00:21:46
+>> test ret: {'entity_p': 0.8510242085581842, 'entity_r': 0.8470806302053098, 'entity_f1': 0.8490478466107004, 'relation_p': 0.6666666666495726, 'relation_r': 0.6161137440612295, 'relation_f1': 0.6403940966191851, 'relation_p_wNER': 0.6666666666495726, 'relation_r_wNER': 0.6161137440612295, 'relation_f1_wNER': 0.6403940966191851}
+
+10/17/2022 00:21:46
+>> valid ret: {'entity_p': 0.8335260115510575, 'entity_r': 0.8073908174601636, 'entity_f1': 0.8202502910432594, 'relation_p': 0.6687499999791016, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6455505358123526, 'relation_p_wNER': 0.6656249999791992, 'relation_r_wNER': 0.6209912536262101, 'relation_f1_wNER': 0.6425339445799864}
+
+10/17/2022 00:27:27
+Latest model at: Epoch: 81, global_step: 3500
+
+10/17/2022 00:27:27
+>> test ret: {'entity_p': 0.8678707224252105, 'entity_r': 0.8461538461460042, 'entity_f1': 0.8568747130328567, 'relation_p': 0.6230598669484909, 'relation_r': 0.6658767772354057, 'relation_f1': 0.6437571671452471, 'relation_p_wNER': 0.6230598669484909, 'relation_r_wNER': 0.6658767772354057, 'relation_f1_wNER': 0.6437571671452471}
+
+10/17/2022 00:27:27
+>> valid ret: {'entity_p': 0.8494117646958893, 'entity_r': 0.8085106382888184, 'entity_f1': 0.8284566904432483, 'relation_p': 0.6191780821748171, 'relation_r': 0.6588921282606737, 'relation_f1': 0.6384180870497782, 'relation_p_wNER': 0.6191780821748171, 'relation_r_wNER': 0.6588921282606737, 'relation_f1_wNER': 0.6384180870497782}
+
+10/17/2022 00:38:56
+Latest model at: Epoch: 104, global_step: 4500
+
+10/17/2022 00:38:56
+>> test ret: {'entity_p': 0.8436632747378016, 'entity_r': 0.8452270620866986, 'entity_f1': 0.8444444508712021, 'relation_p': 0.645933014338614, 'relation_r': 0.639810426525123, 'relation_f1': 0.6428571507757369, 'relation_p_wNER': 0.645933014338614, 'relation_r_wNER': 0.639810426525123, 'relation_f1_wNER': 0.6428571507757369}
+
+10/17/2022 00:38:56
+>> valid ret: {'entity_p': 0.8245219347488805, 'entity_r': 0.820828667404022, 'entity_f1': 0.8226711626113674, 'relation_p': 0.6666666666464647, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6537890123047542, 'relation_p_wNER': 0.6666666666464647, 'relation_r_wNER': 0.6413994168909213, 'relation_f1_wNER': 0.6537890123047542}
+
+10/17/2022 00:44:39
+Latest model at: Epoch: 116, global_step: 5000
+
+10/17/2022 00:44:39
+>> test ret: {'entity_p': 0.8446691176392954, 'entity_r': 0.8517145505018378, 'entity_f1': 0.8481772099024745, 'relation_p': 0.6616541353217631, 'relation_r': 0.6255924170467869, 'relation_f1': 0.6431181565234458, 'relation_p_wNER': 0.6591478696576655, 'relation_r_wNER': 0.6232227488003975, 'relation_f1_wNER': 0.6406821029459632}
+
+10/17/2022 00:44:39
+>> valid ret: {'entity_p': 0.8392246294089027, 'entity_r': 0.8241881298899867, 'entity_f1': 0.8316384246124038, 'relation_p': 0.6783439490229827, 'relation_r': 0.6209912536262101, 'relation_f1': 0.6484018343816388, 'relation_p_wNER': 0.6783439490229827, 'relation_r_wNER': 0.6209912536262101, 'relation_f1_wNER': 0.6484018343816388}
+
+10/17/2022 00:50:24
+Latest model at: Epoch: 127, global_step: 5500
+
+10/17/2022 00:50:24
+>> test ret: {'entity_p': 0.8606173994306772, 'entity_r': 0.8526413345611433, 'entity_f1': 0.8566108070682096, 'relation_p': 0.6595744680695136, 'relation_r': 0.661137440742627, 'relation_f1': 0.6603550373898394, 'relation_p_wNER': 0.657210401875716, 'relation_r_wNER': 0.6587677724962377, 'relation_f1_wNER': 0.6579881735001716}
+
+10/17/2022 00:50:24
+>> valid ret: {'entity_p': 0.8520642201737149, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8419263520567405, 'relation_p': 0.6686390532346557, 'relation_r': 0.6588921282606737, 'relation_f1': 0.6637298168826183, 'relation_p_wNER': 0.6656804733530863, 'relation_r_wNER': 0.655976676365715, 'relation_f1_wNER': 0.6607929593397461}
+
+10/17/2022 01:01:09
+Round #3: Train on labeled data on model #2
+
+10/17/2022 01:07:10
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 01:07:10
+>> test ret: {'entity_p': 0.7793240556582572, 'entity_r': 0.726598702495583, 'entity_f1': 0.7520383764817925, 'relation_p': 0.5072463767968914, 'relation_r': 0.41469194311813523, 'relation_f1': 0.45632334672699987, 'relation_p_wNER': 0.5072463767968914, 'relation_r_wNER': 0.41469194311813523, 'relation_f1_wNER': 0.45632334672699987}
+
+10/17/2022 01:07:10
+>> valid ret: {'entity_p': 0.7997448979489828, 'entity_r': 0.7021276595666055, 'entity_f1': 0.747763871280508, 'relation_p': 0.5145631067794639, 'relation_r': 0.46355685129843854, 'relation_f1': 0.48773007017252246, 'relation_p_wNER': 0.5145631067794639, 'relation_r_wNER': 0.46355685129843854, 'relation_f1_wNER': 0.48773007017252246}
+
+10/17/2022 01:12:41
+Latest model at: Epoch: 22, global_step: 1000
+
+10/17/2022 01:12:41
+>> test ret: {'entity_p': 0.8181818181742284, 'entity_r': 0.817423540307531, 'entity_f1': 0.8178025101254662, 'relation_p': 0.6134663341492901, 'relation_r': 0.5829383886117787, 'relation_f1': 0.597812887913466, 'relation_p_wNER': 0.6134663341492901, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.597812887913466}
+
+10/17/2022 01:12:41
+>> valid ret: {'entity_p': 0.8022598869965847, 'entity_r': 0.79507278834496, 'entity_f1': 0.7986501755309172, 'relation_p': 0.601744186029019, 'relation_r': 0.6034985422564577, 'relation_f1': 0.6026200955029672, 'relation_p_wNER': 0.595930232540816, 'relation_r_wNER': 0.5976676384665403, 'relation_f1_wNER': 0.5967976792352888}
+
+10/17/2022 01:18:16
+Latest model at: Epoch: 34, global_step: 1500
+
+10/17/2022 01:18:16
+>> test ret: {'entity_p': 0.8261665141735942, 'entity_r': 0.8368860055529483, 'entity_f1': 0.8314917192430491, 'relation_p': 0.673913043459948, 'relation_r': 0.5876777251045574, 'relation_f1': 0.6278481093256849, 'relation_p_wNER': 0.6684782608514, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.6227848182182343}
+
+10/17/2022 01:18:16
+>> valid ret: {'entity_p': 0.8110859728415035, 'entity_r': 0.8029115341455441, 'entity_f1': 0.8069780596332491, 'relation_p': 0.6144578313067934, 'relation_r': 0.5947521865715816, 'relation_f1': 0.6044444526024253, 'relation_p_wNER': 0.611445783114113, 'relation_r_wNER': 0.5918367346766228, 'relation_f1_wNER': 0.6014814896574155}
+
+10/17/2022 01:23:47
+Latest model at: Epoch: 45, global_step: 2000
+
+10/17/2022 01:23:47
+>> test ret: {'entity_p': 0.8398876404415742, 'entity_r': 0.8313253011971148, 'entity_f1': 0.8355845430641168, 'relation_p': 0.6489898989735103, 'relation_r': 0.6090047393220615, 'relation_f1': 0.6283618662112552, 'relation_p_wNER': 0.6489898989735103, 'relation_r_wNER': 0.6090047393220615, 'relation_f1_wNER': 0.6283618662112552}
+
+10/17/2022 01:23:47
+>> valid ret: {'entity_p': 0.8279069767345593, 'entity_r': 0.7973124300022697, 'entity_f1': 0.8123217408649371, 'relation_p': 0.6549520766563913, 'relation_r': 0.5976676384665403, 'relation_f1': 0.625000008048734, 'relation_p_wNER': 0.6485623002987679, 'relation_r_wNER': 0.5918367346766228, 'relation_f1_wNER': 0.618902447111234}
+
+10/17/2022 01:29:25
+Latest model at: Epoch: 56, global_step: 2500
+
+10/17/2022 01:29:25
+>> test ret: {'entity_p': 0.8427787934109436, 'entity_r': 0.8544949026797546, 'entity_f1': 0.8485964168844938, 'relation_p': 0.6334841628815954, 'relation_r': 0.6635071089890164, 'relation_f1': 0.6481481560380229, 'relation_p_wNER': 0.6289592760038697, 'relation_r_wNER': 0.6587677724962377, 'relation_f1_wNER': 0.6435185264384001}
+
+10/17/2022 01:29:25
+>> valid ret: {'entity_p': 0.8403171007832354, 'entity_r': 0.830907054861916, 'entity_f1': 0.8355855920854767, 'relation_p': 0.6407506702241086, 'relation_r': 0.6967930028951372, 'relation_f1': 0.6675977731336024, 'relation_p_wNER': 0.6380697050767273, 'relation_r_wNER': 0.6938775510001784, 'relation_f1_wNER': 0.6648044770629038}
+
+10/17/2022 02:03:12
+Latest model at: Epoch: 124, global_step: 5500
+
+10/17/2022 02:03:12
+>> test ret: {'entity_p': 0.8390064397346918, 'entity_r': 0.8452270620866986, 'entity_f1': 0.8421052696045491, 'relation_p': 0.6984126983942218, 'relation_r': 0.6255924170467869, 'relation_f1': 0.66000000783575, 'relation_p_wNER': 0.6957671957487892, 'relation_r_wNER': 0.6232227488003975, 'relation_f1_wNER': 0.6575000078522812}
+
+10/17/2022 02:03:12
+>> valid ret: {'entity_p': 0.8264277715472964, 'entity_r': 0.8264277715472964, 'entity_f1': 0.8264277781323821, 'relation_p': 0.7120253164331637, 'relation_r': 0.655976676365715, 'relation_f1': 0.6828528149483859, 'relation_p_wNER': 0.7120253164331637, 'relation_r_wNER': 0.655976676365715, 'relation_f1_wNER': 0.6828528149483859}
+
+10/17/2022 02:15:53
+Round #4: Predict on unlabeled data on model m0
+
+10/17/2022 02:19:20
+Round #4: Predict on unlabeled data on model m1
+
+10/17/2022 02:23:00
+Round #4: Predict on unlabeled data on model m2
+
+10/17/2022 02:26:33
+Round #4: Global agreement between 3 models: 0.4582043343653251
+
+10/17/2022 02:26:33
+Round #4: Agreement ratio between model_0 and model_1: 10.526
+
+10/17/2022 02:26:33
+Round #4: Percent match of selected set: 0.25
+
+10/17/2022 02:26:33
+Round #4: Agreement ratio between model_0 and model_2: 9.288
+
+10/17/2022 02:26:33
+Round #4: Percent match of selected set: 0.31666666666666665
+
+10/17/2022 02:26:34
+Round #4: Agreement ratio between model_1 and model_2: 10.991
+
+10/17/2022 02:26:34
+Round #4: Percent match of selected set: 0.3380281690140845
+
+10/17/2022 02:26:34
+Round #4: Train on labeled data on model #0
+
+10/17/2022 02:32:29
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 02:32:29
+>> test ret: {'entity_p': 0.769953051635963, 'entity_r': 0.7599629286305843, 'entity_f1': 0.7649253802020651, 'relation_p': 0.6040268456173146, 'relation_r': 0.42654028435008196, 'relation_f1': 0.500000009032716, 'relation_p_wNER': 0.5906040268258187, 'relation_r_wNER': 0.4170616113645246, 'relation_f1_wNER': 0.48888889797685187}
+
+10/17/2022 02:32:29
+>> valid ret: {'entity_p': 0.7650462962874416, 'entity_r': 0.7402015677408712, 'entity_f1': 0.7524189030086792, 'relation_p': 0.6260504201417626, 'relation_r': 0.43440233234885123, 'relation_f1': 0.5129087869625935, 'relation_p_wNER': 0.6218487394696702, 'relation_r_wNER': 0.4314868804538925, 'relation_f1_wNER': 0.5094664461885703}
+
+10/17/2022 02:38:01
+Latest model at: Epoch: 22, global_step: 1000
+
+10/17/2022 02:38:01
+>> test ret: {'entity_p': 0.7955357142786114, 'entity_r': 0.8257645968412812, 'entity_f1': 0.8103683559622807, 'relation_p': 0.6738461538254201, 'relation_r': 0.5189573459592665, 'relation_f1': 0.5863453899600186, 'relation_p_wNER': 0.6707692307485917, 'relation_r_wNER': 0.5165876777128771, 'relation_f1_wNER': 0.583668013804401}
+
+10/17/2022 02:38:01
+>> valid ret: {'entity_p': 0.8099447513722658, 'entity_r': 0.820828667404022, 'entity_f1': 0.8153503959888629, 'relation_p': 0.6564885495932637, 'relation_r': 0.501457725932902, 'relation_f1': 0.568595049866266, 'relation_p_wNER': 0.6564885495932637, 'relation_r_wNER': 0.501457725932902, 'relation_f1_wNER': 0.568595049866266}
+
+10/17/2022 02:43:29
+Latest model at: Epoch: 34, global_step: 1500
+
+10/17/2022 02:43:29
+>> test ret: {'entity_p': 0.802101576175113, 'entity_r': 0.848934198323921, 'entity_f1': 0.8248536761169355, 'relation_p': 0.6416040100089824, 'relation_r': 0.6066350710756722, 'relation_f1': 0.6236297279019228, 'relation_p_wNER': 0.6416040100089824, 'relation_r_wNER': 0.6066350710756722, 'relation_f1_wNER': 0.6236297279019228}
+
+10/17/2022 02:43:29
+>> valid ret: {'entity_p': 0.7924731182710487, 'entity_r': 0.8253079507186416, 'entity_f1': 0.8085573298202254, 'relation_p': 0.6687697160672312, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6424242503567493, 'relation_p_wNER': 0.6593059936700534, 'relation_r_wNER': 0.6093294460463752, 'relation_f1_wNER': 0.6333333413241046}
+
+10/17/2022 02:48:58
+Latest model at: Epoch: 45, global_step: 2000
+
+10/17/2022 02:48:58
+>> test ret: {'entity_p': 0.8582375478844997, 'entity_r': 0.8303985171378092, 'entity_f1': 0.8440885603654523, 'relation_p': 0.6511627906808485, 'relation_r': 0.5971563980901148, 'relation_f1': 0.6229913554051225, 'relation_p_wNER': 0.6459948320246512, 'relation_r_wNER': 0.5924170615973361, 'relation_f1_wNER': 0.6180469796633669}
+
+10/17/2022 02:48:58
+>> valid ret: {'entity_p': 0.859004739326315, 'entity_r': 0.811870100774783, 'entity_f1': 0.8347726029447471, 'relation_p': 0.6483180427936294, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6328358288799287, 'relation_p_wNER': 0.6452599388181878, 'relation_r_wNER': 0.6151603498362926, 'relation_f1_wNER': 0.6298507542719982}
+
+10/17/2022 03:00:07
+Latest model at: Epoch: 68, global_step: 3000
+
+10/17/2022 03:00:07
+>> test ret: {'entity_p': 0.8393021120216777, 'entity_r': 0.8470806302053098, 'entity_f1': 0.8431734381720446, 'relation_p': 0.6590909090742654, 'relation_r': 0.6184834123076188, 'relation_f1': 0.638141817249329, 'relation_p_wNER': 0.6515151514986991, 'relation_r_wNER': 0.6113744075684509, 'relation_f1_wNER': 0.6308068539708633}
+
+10/17/2022 03:00:07
+>> valid ret: {'entity_p': 0.8436073059264428, 'entity_r': 0.8275475923759513, 'entity_f1': 0.8355002891467362, 'relation_p': 0.6569767441669483, 'relation_r': 0.6588921282606737, 'relation_f1': 0.6579330500290062, 'relation_p_wNER': 0.6511627906787453, 'relation_r_wNER': 0.6530612244707562, 'relation_f1_wNER': 0.6521106337645481}
+
+10/17/2022 03:29:09
+Latest model at: Epoch: 124, global_step: 5500
+
+10/17/2022 03:29:09
+>> test ret: {'entity_p': 0.8480662983347325, 'entity_r': 0.8535681186204489, 'entity_f1': 0.8508083204606309, 'relation_p': 0.6833333333143519, 'relation_r': 0.5829383886117787, 'relation_f1': 0.629156018297761, 'relation_p_wNER': 0.6833333333143519, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.629156018297761}
+
+10/17/2022 03:29:09
+>> valid ret: {'entity_p': 0.8348314606647772, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8334268152669774, 'relation_p': 0.7291666666413483, 'relation_r': 0.612244897941334, 'relation_f1': 0.6656101504704378, 'relation_p_wNER': 0.7187499999750434, 'relation_r_wNER': 0.6034985422564577, 'relation_f1_wNER': 0.6561014342102818}
+
+10/17/2022 03:42:19
+Round #4: Train on labeled data on model #1
+
+10/17/2022 03:48:17
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 03:48:17
+>> test ret: {'entity_p': 0.7843530591696655, 'entity_r': 0.7247451343769719, 'entity_f1': 0.7533718761493033, 'relation_p': 0.5343283581930051, 'relation_r': 0.4241706161036926, 'relation_f1': 0.4729194277595807, 'relation_p_wNER': 0.5194029850591223, 'relation_r_wNER': 0.4123222748717459, 'relation_f1_wNER': 0.45970938819141116}
+
+10/17/2022 03:48:17
+>> valid ret: {'entity_p': 0.7971938775408521, 'entity_r': 0.6998880179092958, 'entity_f1': 0.7453786596108066, 'relation_p': 0.574545454524562, 'relation_r': 0.4606413994034798, 'relation_f1': 0.5113268696386715, 'relation_p_wNER': 0.5709090908883305, 'relation_r_wNER': 0.4577259475085211, 'relation_f1_wNER': 0.5080906237005791}
+
+10/17/2022 03:53:49
+Latest model at: Epoch: 23, global_step: 1000
+
+10/17/2022 03:53:49
+>> test ret: {'entity_p': 0.8179271708607104, 'entity_r': 0.8118628359516974, 'entity_f1': 0.8148837276026134, 'relation_p': 0.5958429561063315, 'relation_r': 0.6113744075684509, 'relation_f1': 0.6035087800962484, 'relation_p_wNER': 0.5819861431736262, 'relation_r_wNER': 0.5971563980901148, 'relation_f1_wNER': 0.5894736924609966}
+
+10/17/2022 03:53:49
+>> valid ret: {'entity_p': 0.8114285714192979, 'entity_r': 0.79507278834496, 'entity_f1': 0.803167427581041, 'relation_p': 0.5994397758935731, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6114285795458775, 'relation_p_wNER': 0.5994397758935731, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.6114285795458775}
+
+10/17/2022 04:05:02
+Latest model at: Epoch: 47, global_step: 2000
+
+10/17/2022 04:05:02
+>> test ret: {'entity_p': 0.8446788111136657, 'entity_r': 0.8164967562482253, 'entity_f1': 0.8303487341631142, 'relation_p': 0.6796874999822998, 'relation_r': 0.6184834123076188, 'relation_f1': 0.6476426878096966, 'relation_p_wNER': 0.6666666666493055, 'relation_r_wNER': 0.6066350710756722, 'relation_f1_wNER': 0.6352357399987685}
+
+10/17/2022 04:05:02
+>> valid ret: {'entity_p': 0.8483080513319917, 'entity_r': 0.8141097424320928, 'entity_f1': 0.8308571494002611, 'relation_p': 0.6799999999790769, 'relation_r': 0.6443148687858801, 'relation_f1': 0.6616766545049572, 'relation_p_wNER': 0.6799999999790769, 'relation_r_wNER': 0.6443148687858801, 'relation_f1_wNER': 0.6616766545049572}
+
+10/17/2022 04:35:22
+Latest model at: Epoch: 119, global_step: 5000
+
+10/17/2022 04:35:22
+>> test ret: {'entity_p': 0.851247600759585, 'entity_r': 0.8220574606040588, 'entity_f1': 0.8363979320041853, 'relation_p': 0.6999999999805555, 'relation_r': 0.5971563980901148, 'relation_f1': 0.6445012867418449, 'relation_p_wNER': 0.6999999999805555, 'relation_r_wNER': 0.5971563980901148, 'relation_f1_wNER': 0.6445012867418449}
+
+10/17/2022 04:35:22
+>> valid ret: {'entity_p': 0.8581818181714159, 'entity_r': 0.7928331466876503, 'entity_f1': 0.8242142091705437, 'relation_p': 0.7278911564378268, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6718995368232171, 'relation_p_wNER': 0.7278911564378268, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.6718995368232171}
+
+10/17/2022 04:41:19
+Latest model at: Epoch: 130, global_step: 5500
+
+10/17/2022 04:41:19
+>> test ret: {'entity_p': 0.8347183748768725, 'entity_r': 0.8378127896122539, 'entity_f1': 0.8362627261995995, 'relation_p': 0.6861702127477082, 'relation_r': 0.6113744075684509, 'relation_f1': 0.6466165492798411, 'relation_p_wNER': 0.6861702127477082, 'relation_r_wNER': 0.6113744075684509, 'relation_f1_wNER': 0.6466165492798411}
+
+10/17/2022 04:41:19
+>> valid ret: {'entity_p': 0.8541666666567804, 'entity_r': 0.8264277715472964, 'entity_f1': 0.8400683047002169, 'relation_p': 0.7433333333085556, 'relation_r': 0.6501457725757975, 'relation_f1': 0.6936236468088689, 'relation_p_wNER': 0.7433333333085556, 'relation_r_wNER': 0.6501457725757975, 'relation_f1_wNER': 0.6936236468088689}
+
+10/17/2022 04:50:40
+Round #4: Train on labeled data on model #2
+
+10/17/2022 04:57:17
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 04:57:17
+>> test ret: {'entity_p': 0.7520288548173848, 'entity_r': 0.7729379054608626, 'entity_f1': 0.7623400436521713, 'relation_p': 0.46995708153497945, 'relation_r': 0.5189573459592665, 'relation_f1': 0.49324325204024133, 'relation_p_wNER': 0.46351931329477425, 'relation_r_wNER': 0.5118483412200984, 'relation_f1_wNER': 0.4864864953167356}
+
+10/17/2022 04:57:17
+>> valid ret: {'entity_p': 0.7604049493727738, 'entity_r': 0.7569988801706943, 'entity_f1': 0.7586980991448466, 'relation_p': 0.5013123359448475, 'relation_r': 0.556851311937118, 'relation_f1': 0.5276243180133009, 'relation_p_wNER': 0.49868766402890585, 'relation_r_wNER': 0.5539358600421593, 'relation_f1_wNER': 0.5248618870886878}
+
+10/17/2022 05:03:22
+Latest model at: Epoch: 23, global_step: 1000
+
+10/17/2022 05:03:22
+>> test ret: {'entity_p': 0.8391019644449103, 'entity_r': 0.8313253011971148, 'entity_f1': 0.8351955372309395, 'relation_p': 0.6255707762414253, 'relation_r': 0.6492890995106804, 'relation_f1': 0.6372093102840455, 'relation_p_wNER': 0.6187214611730886, 'relation_r_wNER': 0.6421800947715123, 'relation_f1_wNER': 0.6302325661423742}
+
+10/17/2022 05:03:22
+>> valid ret: {'entity_p': 0.8503562945267179, 'entity_r': 0.8017917133168893, 'entity_f1': 0.8253602371405792, 'relation_p': 0.6243243243074507, 'relation_r': 0.6734693877354674, 'relation_f1': 0.647966347307802, 'relation_p_wNER': 0.621621621604821, 'relation_r_wNER': 0.6705539358405086, 'relation_f1_wNER': 0.6451612982376581}
+
+10/17/2022 05:09:32
+Latest model at: Epoch: 34, global_step: 1500
+
+10/17/2022 05:09:32
+>> test ret: {'entity_p': 0.8408880665972167, 'entity_r': 0.8424467099087819, 'entity_f1': 0.8416666731168682, 'relation_p': 0.6691919191750204, 'relation_r': 0.6279620852931762, 'relation_f1': 0.6479217682864461, 'relation_p_wNER': 0.6616161615994541, 'relation_r_wNER': 0.6208530805540082, 'relation_f1_wNER': 0.640586805008698}
+
+10/17/2022 05:09:32
+>> valid ret: {'entity_p': 0.8452787258151845, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8386004579421741, 'relation_p': 0.6896551723921738, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6646525757600789, 'relation_p_wNER': 0.6896551723921738, 'relation_r_wNER': 0.6413994168909213, 'relation_f1_wNER': 0.6646525757600789}
+
+10/17/2022 05:15:50
+Latest model at: Epoch: 46, global_step: 2000
+
+10/17/2022 05:15:50
+>> test ret: {'entity_p': 0.8759615384531159, 'entity_r': 0.844300278027393, 'entity_f1': 0.859839553254763, 'relation_p': 0.6963350785158028, 'relation_r': 0.6303317535395656, 'relation_f1': 0.6616915501076707, 'relation_p_wNER': 0.6937172774687509, 'relation_r_wNER': 0.6279620852931762, 'relation_f1_wNER': 0.6592039879351067}
+
+10/17/2022 05:15:50
+>> valid ret: {'entity_p': 0.8705463182794472, 'entity_r': 0.820828667404022, 'entity_f1': 0.8449567787634347, 'relation_p': 0.7213114753861865, 'relation_r': 0.6413994168909213, 'relation_f1': 0.679012353387155, 'relation_p_wNER': 0.7213114753861865, 'relation_r_wNER': 0.6413994168909213, 'relation_f1_wNER': 0.679012353387155}
+
+10/17/2022 06:10:33
+Round #5: Predict on unlabeled data on model m0
+
+10/17/2022 06:13:49
+Round #5: Predict on unlabeled data on model m1
+
+10/17/2022 06:17:14
+Round #5: Predict on unlabeled data on model m2
+
+10/17/2022 06:20:33
+Round #5: Global agreement between 3 models: 0.4582043343653251
+
+10/17/2022 06:20:33
+Round #5: Agreement ratio between model_0 and model_1: 12.848
+
+10/17/2022 06:20:33
+Round #5: Percent match of selected set: 0.2891566265060241
+
+10/17/2022 06:20:33
+Round #5: Agreement ratio between model_0 and model_2: 8.05
+
+10/17/2022 06:20:33
+Round #5: Percent match of selected set: 0.34615384615384615
+
+10/17/2022 06:20:33
+Round #5: Agreement ratio between model_1 and model_2: 10.836
+
+10/17/2022 06:20:33
+Round #5: Percent match of selected set: 0.32857142857142857
+
+10/17/2022 06:20:33
+Round #5: Train on labeled data on model #0
+
+10/17/2022 06:26:44
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 06:26:44
+>> test ret: {'entity_p': 0.6955424726602563, 'entity_r': 0.7664504170457235, 'entity_f1': 0.729276903301431, 'relation_p': 0.42640692639769684, 'relation_r': 0.4668246445387008, 'relation_f1': 0.4457013664832057, 'relation_p_wNER': 0.4220779220687862, 'relation_r_wNER': 0.4620853080459221, 'relation_f1_wNER': 0.44117647962554507}
+
+10/17/2022 06:26:44
+>> valid ret: {'entity_p': 0.7005181347077667, 'entity_r': 0.7569988801706943, 'entity_f1': 0.7276641623650904, 'relation_p': 0.47286821704204474, 'relation_r': 0.5335276967774482, 'relation_f1': 0.5013698717794333, 'relation_p_wNER': 0.46511627905774894, 'relation_r_wNER': 0.5247813410925719, 'relation_f1_wNER': 0.49315069373833736}
+
+10/17/2022 06:32:21
+Latest model at: Epoch: 22, global_step: 1000
+
+10/17/2022 06:32:21
+>> test ret: {'entity_p': 0.8190386427821015, 'entity_r': 0.8053753475365583, 'entity_f1': 0.8121495394054635, 'relation_p': 0.5888324872946997, 'relation_r': 0.5497630331623279, 'relation_f1': 0.5686274593615437, 'relation_p_wNER': 0.5812182740969234, 'relation_r_wNER': 0.5426540284231598, 'relation_f1_wNER': 0.5612745182267938}
+
+10/17/2022 06:32:21
+>> valid ret: {'entity_p': 0.8171021377575166, 'entity_r': 0.7704367301145528, 'entity_f1': 0.7930835803416224, 'relation_p': 0.6037735848866738, 'relation_r': 0.5597667638320768, 'relation_f1': 0.5809379810778149, 'relation_p_wNER': 0.6006289307987224, 'relation_r_wNER': 0.556851311937118, 'relation_f1_wNER': 0.5779122624872689}
+
+10/17/2022 06:38:02
+Latest model at: Epoch: 34, global_step: 1500
+
+10/17/2022 06:38:02
+>> test ret: {'entity_p': 0.7918871252134755, 'entity_r': 0.8322520852564204, 'entity_f1': 0.8115680139356336, 'relation_p': 0.5896860986414868, 'relation_r': 0.6232227488003975, 'relation_f1': 0.6059907915676963, 'relation_p_wNER': 0.5874439461751694, 'relation_r_wNER': 0.6208530805540082, 'relation_f1_wNER': 0.603686644116248}
+
+10/17/2022 06:38:02
+>> valid ret: {'entity_p': 0.7703862660861547, 'entity_r': 0.804031354974199, 'entity_f1': 0.7868493219687777, 'relation_p': 0.5902964959409623, 'relation_r': 0.6384839649959626, 'relation_f1': 0.6134453862678797, 'relation_p_wNER': 0.5849056603615929, 'relation_r_wNER': 0.632653061206045, 'relation_f1_wNER': 0.6078431454058878}
+
+10/17/2022 06:43:42
+Latest model at: Epoch: 45, global_step: 2000
+
+10/17/2022 06:43:42
+>> test ret: {'entity_p': 0.8587677725037084, 'entity_r': 0.8396663577308651, 'entity_f1': 0.8491096596217356, 'relation_p': 0.6134831460536296, 'relation_r': 0.646919431264291, 'relation_f1': 0.6297577934766639, 'relation_p_wNER': 0.6112359550424441, 'relation_r_wNER': 0.6445497630179017, 'relation_f1_wNER': 0.6274509884162466}
+
+10/17/2022 06:43:42
+>> valid ret: {'entity_p': 0.8458823529312249, 'entity_r': 0.8051511758028539, 'entity_f1': 0.8250143496800085, 'relation_p': 0.5922077921924102, 'relation_r': 0.6647230320505911, 'relation_f1': 0.6263736344279828, 'relation_p_wNER': 0.5922077921924102, 'relation_r_wNER': 0.6647230320505911, 'relation_f1_wNER': 0.6263736344279828}
+
+10/17/2022 06:49:29
+Latest model at: Epoch: 56, global_step: 2500
+
+10/17/2022 06:49:29
+>> test ret: {'entity_p': 0.8461538461459086, 'entity_r': 0.8359592214936428, 'entity_f1': 0.8410256474815462, 'relation_p': 0.6648793565505394, 'relation_r': 0.5876777251045574, 'relation_f1': 0.6238993791452238, 'relation_p_wNER': 0.6621983914031582, 'relation_r_wNER': 0.585308056858168, 'relation_f1_wNER': 0.6213836558905106}
+
+10/17/2022 06:49:29
+>> valid ret: {'entity_p': 0.8385964912182621, 'entity_r': 0.8029115341455441, 'entity_f1': 0.8203661393534488, 'relation_p': 0.6760124610381304, 'relation_r': 0.632653061206045, 'relation_f1': 0.6536144656865565, 'relation_p_wNER': 0.6728971962407196, 'relation_r_wNER': 0.6297376093110864, 'relation_f1_wNER': 0.6506024175135179}
+
+10/17/2022 06:55:14
+Latest model at: Epoch: 68, global_step: 3000
+
+10/17/2022 06:55:14
+>> test ret: {'entity_p': 0.8331797234946251, 'entity_r': 0.8378127896122539, 'entity_f1': 0.8354898401435438, 'relation_p': 0.704545454525439, 'relation_r': 0.5876777251045574, 'relation_f1': 0.6408268813969513, 'relation_p_wNER': 0.6988636363437822, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.6356589227737381}
+
+10/17/2022 06:55:14
+>> valid ret: {'entity_p': 0.8356481481384763, 'entity_r': 0.8085106382888184, 'entity_f1': 0.8218554420173894, 'relation_p': 0.7181208053450295, 'relation_r': 0.6239067055211689, 'relation_f1': 0.6677067160676206, 'relation_p_wNER': 0.7147651006471555, 'relation_r_wNER': 0.6209912536262101, 'relation_f1_wNER': 0.6645865912835103}
+
+10/17/2022 07:00:52
+Latest model at: Epoch: 79, global_step: 3500
+
+10/17/2022 07:00:52
+>> test ret: {'entity_p': 0.8244824482374035, 'entity_r': 0.848934198323921, 'entity_f1': 0.8365296868608828, 'relation_p': 0.6464646464483216, 'relation_r': 0.6066350710756722, 'relation_f1': 0.6259168784515874, 'relation_p_wNER': 0.6338383838223778, 'relation_r_wNER': 0.5947867298437254, 'relation_f1_wNER': 0.6136919396523514}
+
+10/17/2022 07:00:52
+>> valid ret: {'entity_p': 0.8275862068873461, 'entity_r': 0.8331466965192257, 'entity_f1': 0.8303571494005226, 'relation_p': 0.6686567163979505, 'relation_r': 0.6530612244707562, 'relation_f1': 0.6607669694507531, 'relation_p_wNER': 0.6686567163979505, 'relation_r_wNER': 0.6530612244707562, 'relation_f1_wNER': 0.6607669694507531}
+
+10/17/2022 07:06:38
+Latest model at: Epoch: 90, global_step: 4000
+
+10/17/2022 07:06:38
+>> test ret: {'entity_p': 0.8500948766522762, 'entity_r': 0.8303985171378092, 'entity_f1': 0.8401312769754109, 'relation_p': 0.6933701657267025, 'relation_r': 0.5947867298437254, 'relation_f1': 0.6403061304412548, 'relation_p_wNER': 0.6850828729092518, 'relation_r_wNER': 0.5876777251045574, 'relation_f1_wNER': 0.6326530692656707}
+
+10/17/2022 07:06:38
+>> valid ret: {'entity_p': 0.8656361474332267, 'entity_r': 0.8152295632607477, 'entity_f1': 0.8396770537635245, 'relation_p': 0.72727272724824, 'relation_r': 0.6297376093110864, 'relation_f1': 0.6750000077524414, 'relation_p_wNER': 0.72727272724824, 'relation_r_wNER': 0.6297376093110864, 'relation_f1_wNER': 0.6750000077524414}
+
+10/17/2022 07:24:23
+Latest model at: Epoch: 124, global_step: 5500
+
+10/17/2022 07:24:23
+>> test ret: {'entity_p': 0.8591417910367618, 'entity_r': 0.8535681186204489, 'entity_f1': 0.8563458919600908, 'relation_p': 0.7119113573209996, 'relation_r': 0.6090047393220615, 'relation_f1': 0.6564495608905722, 'relation_p_wNER': 0.698060941808918, 'relation_r_wNER': 0.5971563980901148, 'relation_f1_wNER': 0.6436781688921837}
+
+10/17/2022 07:24:23
+>> valid ret: {'entity_p': 0.8443935926676843, 'entity_r': 0.8264277715472964, 'entity_f1': 0.8353140981837682, 'relation_p': 0.7443365695551994, 'relation_r': 0.6705539358405086, 'relation_f1': 0.7055214799093867, 'relation_p_wNER': 0.734627831691436, 'relation_r_wNER': 0.6618075801556325, 'relation_f1_wNER': 0.696319025986441}
+
+10/17/2022 07:37:35
+Round #5: Train on labeled data on model #1
+
+10/17/2022 07:43:58
+Latest model at: Epoch: 12, global_step: 500
+
+10/17/2022 07:43:58
+>> test ret: {'entity_p': 0.751831501824617, 'entity_r': 0.7608897126898899, 'entity_f1': 0.7563334940055984, 'relation_p': 0.45362903224891876, 'relation_r': 0.5331753554376024, 'relation_f1': 0.4901960872842116, 'relation_p_wNER': 0.435483870958962, 'relation_r_wNER': 0.5118483412200984, 'relation_f1_wNER': 0.47058824424157847}
+
+10/17/2022 07:43:58
+>> valid ret: {'entity_p': 0.7539682539597056, 'entity_r': 0.7446808510554906, 'entity_f1': 0.7492957818326079, 'relation_p': 0.503836317122664, 'relation_r': 0.5743440233068704, 'relation_f1': 0.5367847497318637, 'relation_p_wNER': 0.5012787723656962, 'relation_r_wNER': 0.5714285714119117, 'relation_f1_wNER': 0.5340599541062002}
+
+10/17/2022 07:49:58
+Latest model at: Epoch: 24, global_step: 1000
+
+10/17/2022 07:49:58
+>> test ret: {'entity_p': 0.8238050609107423, 'entity_r': 0.8146431881296141, 'entity_f1': 0.8191985154909285, 'relation_p': 0.646753246736448, 'relation_r': 0.5900473933509467, 'relation_f1': 0.617100379848875, 'relation_p_wNER': 0.6441558441391129, 'relation_r_wNER': 0.5876777251045574, 'relation_f1_wNER': 0.6146220651182267}
+
+10/17/2022 07:49:58
+>> valid ret: {'entity_p': 0.8380281690042485, 'entity_r': 0.7995520716595794, 'entity_f1': 0.8183381155302765, 'relation_p': 0.6776315789250779, 'relation_r': 0.600583090361499, 'relation_f1': 0.6367851702766544, 'relation_p_wNER': 0.667763157872771, 'relation_r_wNER': 0.5918367346766228, 'relation_f1_wNER': 0.6275116000109887}
+
+10/17/2022 07:55:53
+Latest model at: Epoch: 36, global_step: 1500
+
+10/17/2022 07:55:53
+>> test ret: {'entity_p': 0.8387096774116248, 'entity_r': 0.8433734939680875, 'entity_f1': 0.8410351266034779, 'relation_p': 0.6848958333154975, 'relation_r': 0.6232227488003975, 'relation_f1': 0.6526054669336366, 'relation_p_wNER': 0.6822916666488986, 'relation_r_wNER': 0.6208530805540082, 'relation_f1_wNER': 0.6501240773716974}
+
+10/17/2022 07:55:53
+>> valid ret: {'entity_p': 0.8388952819236031, 'entity_r': 0.8163493840894026, 'entity_f1': 0.8274687920399957, 'relation_p': 0.6443768996764627, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6309523889474384, 'relation_p_wNER': 0.6413373859987436, 'relation_r_wNER': 0.6151603498362926, 'relation_f1_wNER': 0.6279761984900705}
+
+10/17/2022 08:13:36
+Latest model at: Epoch: 73, global_step: 3000
+
+10/17/2022 08:13:36
+>> test ret: {'entity_p': 0.854596622881289, 'entity_r': 0.844300278027393, 'entity_f1': 0.8494172558021486, 'relation_p': 0.7057220708254571, 'relation_r': 0.6137440758148401, 'relation_f1': 0.6565272575599538, 'relation_p_wNER': 0.7029972751852044, 'relation_r_wNER': 0.6113744075684509, 'relation_f1_wNER': 0.653992403330747}
+
+10/17/2022 08:13:36
+>> valid ret: {'entity_p': 0.8520642201737149, 'entity_r': 0.8320268756905708, 'entity_f1': 0.8419263520567405, 'relation_p': 0.715231788055787, 'relation_r': 0.6297376093110864, 'relation_f1': 0.6697674496371613, 'relation_p_wNER': 0.715231788055787, 'relation_r_wNER': 0.6297376093110864, 'relation_f1_wNER': 0.6697674496371613}
+
+10/17/2022 08:37:22
+Latest model at: Epoch: 121, global_step: 5000
+
+10/17/2022 08:37:22
+>> test ret: {'entity_p': 0.8502772643174652, 'entity_r': 0.8526413345611433, 'entity_f1': 0.8514576648586776, 'relation_p': 0.7158176943507824, 'relation_r': 0.6327014217859549, 'relation_f1': 0.6716981209727463, 'relation_p_wNER': 0.7158176943507824, 'relation_r_wNER': 0.6327014217859549, 'relation_f1_wNER': 0.6716981209727463}
+
+10/17/2022 08:37:22
+>> valid ret: {'entity_p': 0.855824682804431, 'entity_r': 0.830907054861916, 'entity_f1': 0.843181824619641, 'relation_p': 0.7213114753861865, 'relation_r': 0.6413994168909213, 'relation_f1': 0.679012353387155, 'relation_p_wNER': 0.7180327868617038, 'relation_r_wNER': 0.6384839649959626, 'relation_f1_wNER': 0.6759259336550735}
+
+10/17/2022 08:50:54
+Round #5: Train on labeled data on model #2
+
+10/17/2022 08:57:20
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 08:57:20
+>> test ret: {'entity_p': 0.7684210526242257, 'entity_r': 0.7442075996223892, 'entity_f1': 0.7561205344438194, 'relation_p': 0.5821325648247224, 'relation_r': 0.47867298577064754, 'relation_f1': 0.5253576159836377, 'relation_p_wNER': 0.5475504322608775, 'relation_r_wNER': 0.4502369668139754, 'relation_f1_wNER': 0.4941482533346974}
+
+10/17/2022 08:57:20
+>> valid ret: {'entity_p': 0.7710843373401074, 'entity_r': 0.7166853303391189, 'entity_f1': 0.7428903148483341, 'relation_p': 0.602040816306053, 'relation_r': 0.5160349854076958, 'relation_f1': 0.5557299927989571, 'relation_p_wNER': 0.5816326530414411, 'relation_r_wNER': 0.4985422740379434, 'relation_f1_wNER': 0.5368916883498739}
+
+10/17/2022 09:03:18
+Latest model at: Epoch: 22, global_step: 1000
+
+10/17/2022 09:03:18
+>> test ret: {'entity_p': 0.8173431734241944, 'entity_r': 0.8211306765447532, 'entity_f1': 0.819232554024656, 'relation_p': 0.6401985111503673, 'relation_r': 0.6113744075684509, 'relation_f1': 0.6254545534887199, 'relation_p_wNER': 0.6277915632598563, 'relation_r_wNER': 0.5995260663365041, 'relation_f1_wNER': 0.6133333414428797}
+
+10/17/2022 09:03:18
+>> valid ret: {'entity_p': 0.8006756756666591, 'entity_r': 0.7961926091736149, 'entity_f1': 0.7984278563264177, 'relation_p': 0.6349693251338966, 'relation_r': 0.6034985422564577, 'relation_f1': 0.6188340887906676, 'relation_p_wNER': 0.6319018404714141, 'relation_r_wNER': 0.600583090361499, 'relation_f1_wNER': 0.615844552187389}
+
+10/17/2022 09:09:21
+Latest model at: Epoch: 33, global_step: 1500
+
+10/17/2022 09:09:21
+>> test ret: {'entity_p': 0.8405931417901706, 'entity_r': 0.8405931417901706, 'entity_f1': 0.8405931482571865, 'relation_p': 0.6831955922676806, 'relation_r': 0.5876777251045574, 'relation_f1': 0.6318471418021989, 'relation_p_wNER': 0.677685950394554, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.626751600433121}
+
+10/17/2022 09:09:21
+>> valid ret: {'entity_p': 0.8287037036941122, 'entity_r': 0.8017917133168893, 'entity_f1': 0.8150256185104738, 'relation_p': 0.6768707482762969, 'relation_r': 0.5801749270967879, 'relation_f1': 0.6248037757485663, 'relation_p_wNER': 0.6700680271880929, 'relation_r_wNER': 0.5743440233068704, 'relation_f1_wNER': 0.618524340936937}
+
+10/17/2022 09:15:23
+Latest model at: Epoch: 44, global_step: 2000
+
+10/17/2022 09:15:23
+>> test ret: {'entity_p': 0.8430451127740316, 'entity_r': 0.8313253011971148, 'entity_f1': 0.8371441968759328, 'relation_p': 0.7179487179282635, 'relation_r': 0.5971563980901148, 'relation_f1': 0.652005182586184, 'relation_p_wNER': 0.7065527065325768, 'relation_r_wNER': 0.5876777251045574, 'relation_f1_wNER': 0.6416558941669778}
+
+10/17/2022 09:15:23
+>> valid ret: {'entity_p': 0.8154897494212359, 'entity_r': 0.8017917133168893, 'entity_f1': 0.8085827283487557, 'relation_p': 0.6801346801117799, 'relation_r': 0.5889212827816641, 'relation_f1': 0.6312500080395508, 'relation_p_wNER': 0.6734006733779999, 'relation_r_wNER': 0.5830903789917466, 'relation_f1_wNER': 0.6250000080790039}
+
+10/17/2022 09:21:26
+Latest model at: Epoch: 55, global_step: 2500
+
+10/17/2022 09:21:26
+>> test ret: {'entity_p': 0.8710937499914934, 'entity_r': 0.8266913809005868, 'entity_f1': 0.8483119417310868, 'relation_p': 0.7393939393715335, 'relation_r': 0.578199052119, 'relation_f1': 0.648936178239588, 'relation_p_wNER': 0.7393939393715335, 'relation_r_wNER': 0.578199052119, 'relation_f1_wNER': 0.648936178239588}
+
+10/17/2022 09:21:26
+>> valid ret: {'entity_p': 0.8498212157228865, 'entity_r': 0.7984322508309246, 'entity_f1': 0.8233256417148139, 'relation_p': 0.7356321838798608, 'relation_r': 0.5597667638320768, 'relation_f1': 0.6357615975462699, 'relation_p_wNER': 0.7279693486311123, 'relation_r_wNER': 0.5539358600421593, 'relation_f1_wNER': 0.6291390810320819}
+
+10/17/2022 09:27:37
+Latest model at: Epoch: 66, global_step: 3000
+
+10/17/2022 09:27:37
+>> test ret: {'entity_p': 0.8465804066465197, 'entity_r': 0.848934198323921, 'entity_f1': 0.8477556750706362, 'relation_p': 0.6658163265136271, 'relation_r': 0.6184834123076188, 'relation_f1': 0.6412776492192829, 'relation_p_wNER': 0.6632653061055289, 'relation_r_wNER': 0.6161137440612295, 'relation_f1_wNER': 0.6388206467780669}
+
+10/17/2022 09:27:37
+>> valid ret: {'entity_p': 0.8248587570528264, 'entity_r': 0.8174692049180574, 'entity_f1': 0.8211473631999782, 'relation_p': 0.6604938271401082, 'relation_r': 0.6239067055211689, 'relation_f1': 0.641679168349903, 'relation_p_wNER': 0.6604938271401082, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.641679168349903}
+
+10/17/2022 09:33:55
+Latest model at: Epoch: 77, global_step: 3500
+
+10/17/2022 09:33:55
+>> test ret: {'entity_p': 0.8634237605157772, 'entity_r': 0.8554216867390602, 'entity_f1': 0.8594041031336022, 'relation_p': 0.7417582417378638, 'relation_r': 0.639810426525123, 'relation_f1': 0.6870229084403265, 'relation_p_wNER': 0.7390109889906865, 'relation_r_wNER': 0.6374407582787336, 'relation_f1_wNER': 0.6844783791957539}
+
+10/17/2022 09:33:55
+>> valid ret: {'entity_p': 0.8379310344731272, 'entity_r': 0.8163493840894026, 'entity_f1': 0.8269994393577055, 'relation_p': 0.7157534246330222, 'relation_r': 0.6093294460463752, 'relation_f1': 0.6582677244126233, 'relation_p_wNER': 0.7123287670988928, 'relation_r_wNER': 0.6064139941514165, 'relation_f1_wNER': 0.6551181181341931}
+
+10/17/2022 10:16:57
+Round #6: Predict on unlabeled data on model m0
+
+10/17/2022 10:20:36
+Round #6: Predict on unlabeled data on model m1
+
+10/17/2022 10:23:58
+Round #6: Predict on unlabeled data on model m2
+
+10/17/2022 10:27:20
+Round #6: Global agreement between 3 models: 0.4628482972136223
+
+10/17/2022 10:27:21
+Round #6: Agreement ratio between model_0 and model_1: 9.752
+
+10/17/2022 10:27:21
+Round #6: Percent match of selected set: 0.2222222222222222
+
+10/17/2022 10:27:21
+Round #6: Agreement ratio between model_0 and model_2: 10.681
+
+10/17/2022 10:27:21
+Round #6: Percent match of selected set: 0.2608695652173913
+
+10/17/2022 10:27:21
+Round #6: Agreement ratio between model_1 and model_2: 10.681
+
+10/17/2022 10:27:21
+Round #6: Percent match of selected set: 0.3188405797101449
+
+10/17/2022 10:27:21
+Round #6: Train on labeled data on model #0
+
+10/17/2022 10:33:55
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 10:33:55
+>> test ret: {'entity_p': 0.7482332155410935, 'entity_r': 0.7849860982318352, 'entity_f1': 0.7661691612925954, 'relation_p': 0.5350649350510372, 'relation_r': 0.4881516587562049, 'relation_f1': 0.5105328463755338, 'relation_p_wNER': 0.5272727272590318, 'relation_r_wNER': 0.4810426540170369, 'relation_f1_wNER': 0.5030979021754812}
+
+10/17/2022 10:33:55
+>> valid ret: {'entity_p': 0.7280606717147555, 'entity_r': 0.7525195968560748, 'entity_f1': 0.7400881129827984, 'relation_p': 0.5203761755322766, 'relation_r': 0.4839650145631497, 'relation_f1': 0.5015105827585546, 'relation_p_wNER': 0.5109717868178378, 'relation_r_wNER': 0.47521865887827347, 'relation_f1_wNER': 0.4924471386951105}
+
+10/17/2022 10:39:57
+Latest model at: Epoch: 22, global_step: 1000
+
+10/17/2022 10:39:57
+>> test ret: {'entity_p': 0.8158614402842675, 'entity_r': 0.8294717330785036, 'entity_f1': 0.8226103007273322, 'relation_p': 0.7038123166949029, 'relation_r': 0.5687203791334426, 'relation_f1': 0.629095683084637, 'relation_p_wNER': 0.6950146627362166, 'relation_r_wNER': 0.5616113743942746, 'relation_f1_wNER': 0.6212319871969135}
+
+10/17/2022 10:39:57
+>> valid ret: {'entity_p': 0.8206278026813831, 'entity_r': 0.8197088465753672, 'entity_f1': 0.8201680738543261, 'relation_p': 0.7213740457739933, 'relation_r': 0.5510204081472005, 'relation_f1': 0.6247933966365139, 'relation_p_wNER': 0.7137404579880251, 'relation_r_wNER': 0.5451895043572831, 'relation_f1_wNER': 0.6181818264298886}
+
+10/17/2022 10:52:18
+Latest model at: Epoch: 45, global_step: 2000
+
+10/17/2022 10:52:18
+>> test ret: {'entity_p': 0.8285714285637921, 'entity_r': 0.8331788693157259, 'entity_f1': 0.8308687680933636, 'relation_p': 0.6188118811728017, 'relation_r': 0.5924170615973361, 'relation_f1': 0.6053268846713061, 'relation_p_wNER': 0.611386138598728, 'relation_r_wNER': 0.585308056858168, 'relation_f1_wNER': 0.5980629621970287}
+
+10/17/2022 10:52:18
+>> valid ret: {'entity_p': 0.8235955056087236, 'entity_r': 0.820828667404022, 'entity_f1': 0.8222097654440879, 'relation_p': 0.6578171091251381, 'relation_r': 0.6501457725757975, 'relation_f1': 0.6539589521243797, 'relation_p_wNER': 0.6548672566178505, 'relation_r_wNER': 0.6472303206808387, 'relation_f1_wNER': 0.6510264008239522}
+
+10/17/2022 11:30:24
+Latest model at: Epoch: 113, global_step: 5000
+
+10/17/2022 11:30:24
+>> test ret: {'entity_p': 0.8554216867390602, 'entity_r': 0.8554216867390602, 'entity_f1': 0.8554216930803288, 'relation_p': 0.6850393700607601, 'relation_r': 0.6184834123076188, 'relation_f1': 0.6500622743975968, 'relation_p_wNER': 0.6850393700607601, 'relation_r_wNER': 0.6184834123076188, 'relation_f1_wNER': 0.6500622743975968}
+
+10/17/2022 11:30:24
+>> valid ret: {'entity_p': 0.8466819221871089, 'entity_r': 0.8286674132046061, 'entity_f1': 0.8375778219905012, 'relation_p': 0.679487179465401, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6473282521822739, 'relation_p_wNER': 0.67307692305535, 'relation_r_wNER': 0.612244897941334, 'relation_f1_wNER': 0.6412213819927977}
+
+10/17/2022 11:37:02
+Latest model at: Epoch: 124, global_step: 5500
+
+10/17/2022 11:37:02
+>> test ret: {'entity_p': 0.8510638297793612, 'entity_r': 0.8526413345611433, 'entity_f1': 0.8518518582157152, 'relation_p': 0.6859504132042438, 'relation_r': 0.5900473933509467, 'relation_f1': 0.6343949124866405, 'relation_p_wNER': 0.6831955922676806, 'relation_r_wNER': 0.5876777251045574, 'relation_f1_wNER': 0.6318471418021989}
+
+10/17/2022 11:37:02
+>> valid ret: {'entity_p': 0.844067796600632, 'entity_r': 0.8365061590051903, 'entity_f1': 0.8402699727147008, 'relation_p': 0.6905537459058452, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6523077001907692, 'relation_p_wNER': 0.6872964169157232, 'relation_r_wNER': 0.6151603498362926, 'relation_f1_wNER': 0.6492307771339645}
+
+10/17/2022 11:43:47
+Latest model at: Epoch: 136, global_step: 6000
+
+10/17/2022 11:43:47
+>> test ret: {'entity_p': 0.8603773584824493, 'entity_r': 0.8452270620866986, 'entity_f1': 0.8527349292181816, 'relation_p': 0.6863270777295891, 'relation_r': 0.6066350710756722, 'relation_f1': 0.6440251651806496, 'relation_p_wNER': 0.6782841822874455, 'relation_r_wNER': 0.5995260663365041, 'relation_f1_wNER': 0.6364779954178394}
+
+10/17/2022 11:43:47
+>> valid ret: {'entity_p': 0.8517241379212446, 'entity_r': 0.829787234033261, 'entity_f1': 0.8406125986314515, 'relation_p': 0.6893203883272064, 'relation_r': 0.6209912536262101, 'relation_f1': 0.6533742410014961, 'relation_p_wNER': 0.6893203883272064, 'relation_r_wNER': 0.6209912536262101, 'relation_f1_wNER': 0.6533742410014961}
+
+10/17/2022 11:51:43
+Round #6: Train on labeled data on model #1
+
+10/17/2022 11:58:55
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 11:58:55
+>> test ret: {'entity_p': 0.7569060773410967, 'entity_r': 0.7618164967491955, 'entity_f1': 0.7593533558397945, 'relation_p': 0.459290187881852, 'relation_r': 0.5213270142056557, 'relation_f1': 0.4883462907457615, 'relation_p_wNER': 0.45302713986528126, 'relation_r_wNER': 0.5142180094664878, 'relation_f1_wNER': 0.4816870232976309}
+
+10/17/2022 11:58:55
+>> valid ret: {'entity_p': 0.7581775700846007, 'entity_r': 0.7267637177970128, 'entity_f1': 0.7421383720220164, 'relation_p': 0.49210526314494457, 'relation_r': 0.5451895043572831, 'relation_f1': 0.5172890819796108, 'relation_p_wNER': 0.48421052630304706, 'relation_r_wNER': 0.5364431486724069, 'relation_f1_wNER': 0.5089903268357026}
+
+10/17/2022 12:05:35
+Latest model at: Epoch: 22, global_step: 1000
+
+10/17/2022 12:05:35
+>> test ret: {'entity_p': 0.7939001848355463, 'entity_r': 0.7961075069435023, 'entity_f1': 0.7950023205761554, 'relation_p': 0.6534090908905281, 'relation_r': 0.5450236966695492, 'relation_f1': 0.5943152537784188, 'relation_p_wNER': 0.6420454545272146, 'relation_r_wNER': 0.5355450236839918, 'relation_f1_wNER': 0.5839793365269181}
+
+10/17/2022 12:05:35
+>> valid ret: {'entity_p': 0.7795823665802832, 'entity_r': 0.7525195968560748, 'entity_f1': 0.7658119728740189, 'relation_p': 0.6654676258753429, 'relation_r': 0.5393586005673656, 'relation_f1': 0.5958132128242588, 'relation_p_wNER': 0.6582733812712851, 'relation_r_wNER': 0.5335276967774482, 'relation_f1_wNER': 0.5893719890301082}
+
+10/17/2022 12:11:47
+Latest model at: Epoch: 34, global_step: 1500
+
+10/17/2022 12:11:47
+>> test ret: {'entity_p': 0.8003613369394729, 'entity_r': 0.8211306765447532, 'entity_f1': 0.8106129984745395, 'relation_p': 0.6040609136902523, 'relation_r': 0.563981042640664, 'relation_f1': 0.5833333416294214, 'relation_p_wNER': 0.5939086294265505, 'relation_r_wNER': 0.5545023696551066, 'relation_f1_wNER': 0.5735294201177432}
+
+10/17/2022 12:11:47
+>> valid ret: {'entity_p': 0.7930258717571088, 'entity_r': 0.7894736842016856, 'entity_f1': 0.7912457981066117, 'relation_p': 0.6226415094143823, 'relation_r': 0.5772594752018292, 'relation_f1': 0.5990922926191692, 'relation_p_wNER': 0.6100628930625767, 'relation_r_wNER': 0.5655976676219943, 'relation_f1_wNER': 0.5869894182586326}
+
+10/17/2022 12:16:42
+Latest model at: Epoch: 45, global_step: 2000
+
+10/17/2022 12:16:42
+>> test ret: {'entity_p': 0.8530805687122932, 'entity_r': 0.8341056533750315, 'entity_f1': 0.8434864169327329, 'relation_p': 0.7076023391605964, 'relation_r': 0.5734597156262213, 'relation_f1': 0.6335078614895425, 'relation_p_wNER': 0.6900584795119866, 'relation_r_wNER': 0.5592417061478853, 'relation_f1_wNER': 0.6178010553055014}
+
+10/17/2022 12:16:42
+>> valid ret: {'entity_p': 0.8498253783370218, 'entity_r': 0.8174692049180574, 'entity_f1': 0.8333333398553642, 'relation_p': 0.7399267398996363, 'relation_r': 0.5889212827816641, 'relation_f1': 0.6558441638013366, 'relation_p_wNER': 0.7362637362367669, 'relation_r_wNER': 0.5860058308867053, 'relation_f1_wNER': 0.6525974105759297}
+
+10/17/2022 12:35:08
+Latest model at: Epoch: 79, global_step: 3500
+
+10/17/2022 12:35:08
+>> test ret: {'entity_p': 0.8432282003632354, 'entity_r': 0.8424467099087819, 'entity_f1': 0.842837280431969, 'relation_p': 0.6931506849125164, 'relation_r': 0.5995260663365041, 'relation_f1': 0.6429479113999571, 'relation_p_wNER': 0.673972602721261, 'relation_r_wNER': 0.5829383886117787, 'relation_f1_wNER': 0.6251588390862636}
+
+10/17/2022 12:35:08
+>> valid ret: {'entity_p': 0.8443670150889155, 'entity_r': 0.8141097424320928, 'entity_f1': 0.8289623782797618, 'relation_p': 0.7337883958793928, 'relation_r': 0.6268221574161276, 'relation_f1': 0.6761006366858014, 'relation_p_wNER': 0.7303754265962329, 'relation_r_wNER': 0.6239067055211689, 'relation_f1_wNER': 0.6729559826190616}
+
+10/17/2022 13:25:05
+Round #6: Train on labeled data on model #2
+
+10/17/2022 13:32:10
+Latest model at: Epoch: 11, global_step: 500
+
+10/17/2022 13:32:10
+>> test ret: {'entity_p': 0.7613843351478927, 'entity_r': 0.7747914735794738, 'entity_f1': 0.7680294052988388, 'relation_p': 0.4288659793726007, 'relation_r': 0.4928909952489836, 'relation_f1': 0.45865491527076546, 'relation_p_wNER': 0.42268041236241893, 'relation_r_wNER': 0.4857819905098156, 'relation_f1_wNER': 0.45203970030654617}
+
+10/17/2022 13:32:10
+>> valid ret: {'entity_p': 0.7548460661259424, 'entity_r': 0.7413213885695261, 'entity_f1': 0.7480226060647325, 'relation_p': 0.44755244754201506, 'relation_r': 0.5597667638320768, 'relation_f1': 0.4974093352990013, 'relation_p_wNER': 0.4405594405491711, 'relation_r_wNER': 0.5510204081472005, 'relation_f1_wNER': 0.48963731461217075}
+
+10/17/2022 13:38:10
+Latest model at: Epoch: 23, global_step: 1000
+
+10/17/2022 13:38:10
+>> test ret: {'entity_p': 0.8033395176177799, 'entity_r': 0.8025949953586414, 'entity_f1': 0.8029670906816182, 'relation_p': 0.6119402984922403, 'relation_r': 0.5829383886117787, 'relation_f1': 0.5970873868496088, 'relation_p_wNER': 0.5995024875472761, 'relation_r_wNER': 0.5710900473798319, 'relation_f1_wNER': 0.584951464591532}
+
+10/17/2022 13:38:10
+>> valid ret: {'entity_p': 0.8104046242680878, 'entity_r': 0.7849944008870662, 'entity_f1': 0.7974971626723861, 'relation_p': 0.6218749999805664, 'relation_r': 0.5801749270967879, 'relation_f1': 0.6003016673173039, 'relation_p_wNER': 0.6156249999807617, 'relation_r_wNER': 0.5743440233068704, 'relation_f1_wNER': 0.5942684848497505}
+
