@@ -37,7 +37,14 @@ if __name__ == '__main__':
     LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
     TEMP_LABELED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/temp_labeled.json'
     UNLABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/unlabeled.json'
-    PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/prediction.json'
+    PREDICTION_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/iter={iter}/prediction.json'
+    PREDICTION_PATH = PREDICTION_PATH.format(
+        method=method,
+        dataset=dataset,
+        percent=percent,
+        fold=fold,
+        iter='{}'
+    )
     AGREEMENT_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/agreement.json'
     LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
     WITH_DISAGREEMENT = args.with_disagreement

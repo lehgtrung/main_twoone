@@ -194,7 +194,8 @@ def tri_training(labeled_path,
                  labeled_model_path,
                  logger,
                  log_path,
-                 with_disagreement):
+                 with_disagreement,
+                 max_iteration=4):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -207,7 +208,7 @@ def tri_training(labeled_path,
     boostrap_prediction_paths = []
     agreement_paths = []
     boostrap_temp_labeled_paths = []
-    stop_update = [False for i in range(3)]
+    stop_update = [False for _ in range(3)]
     for i in range(3):
         boostrap_labeled_paths.append(add_suffix_to_path(labeled_path, suffix=i, split_by='.'))
         boostrap_labeled_model_paths.append(add_suffix_to_path(labeled_model_path, suffix=i, split_by=''))
@@ -241,18 +242,21 @@ def tri_training(labeled_path,
 
     iteration = 0
     while True:
-        if iteration == 10:
+        formatted_boostrap_prediction_paths = []
+        for i in range(3):
+            formatted_boostrap_prediction_paths.append(boostrap_prediction_paths[i].format(iteration))
+        if iteration == max_iteration:
             break
         # Step 2: make prediction for each model
         for i in range(3):
             script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
                                            predict_input_path=unlabeled_path,
-                                           predict_output_path=boostrap_prediction_paths[i])
+                                           predict_output_path=formatted_boostrap_prediction_paths[i])
             logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
             subprocess.run(script, shell=True, check=True)
 
         # Step 3: stop when predictions from differs under a small ratio
-        agreement_ratio = global_agreement_ratio(boostrap_prediction_paths)
+        agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
         logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
         if agreement_ratio >= 0.9:
             logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
@@ -262,9 +266,9 @@ def tri_training(labeled_path,
         for i in range(2):
             for j in range(i+1, 3):
                 if not stop_update[sum(range(3))-(i+j)]:
-                    agree_ratio = select_agreement(in_path1=boostrap_prediction_paths[i],
-                                                   in_path2=boostrap_prediction_paths[j],
-                                                   in_path3=boostrap_prediction_paths[sum(range(3))-(i+j)],
+                    agree_ratio = select_agreement(in_path1=formatted_boostrap_prediction_paths[i],
+                                                   in_path2=formatted_boostrap_prediction_paths[j],
+                                                   in_path3=formatted_boostrap_prediction_paths[sum(range(3))-(i+j)],
                                                    out_path=agreement_paths[sum(range(3))-(i+j)],
                                                    with_disagreement=with_disagreement)
                     if agree_ratio >= 0.9:
