@@ -245,6 +245,7 @@ def tri_training(labeled_path,
         formatted_boostrap_prediction_paths = []
         for i in range(3):
             formatted_boostrap_prediction_paths.append(boostrap_prediction_paths[i].format(iteration))
+            os.makedirs(os.path.dirname(formatted_boostrap_prediction_paths[0]), exist_ok=True)
         if iteration == max_iteration:
             break
         # Step 2: make prediction for each model
