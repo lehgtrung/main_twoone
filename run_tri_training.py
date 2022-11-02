@@ -61,6 +61,9 @@ if __name__ == '__main__':
         'LOG_PATH': LOG_PATH
     }
 
+    # Create paths
+    os.makedirs(os.path.dirname(LABELED_MODEL_PATH), exist_ok=True)
+
     with open('configs.json', 'w') as f:
         json.dump(configs, f)
 
