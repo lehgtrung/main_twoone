@@ -1,0 +1,3 @@
+atom(peop("Larry+Martin"), 1).
+atom(org("Star"), 1).
+atom(loc("Tucson+Citizen"), 1).

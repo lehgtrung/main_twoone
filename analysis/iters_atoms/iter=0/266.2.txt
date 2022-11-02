@@ -1,0 +1,5 @@
+atom(peop("Anderson"), 2).
+atom(loc("Middle+East"), 2).
+atom(org("Associated+Press."), 2).
+atom(liveIn("Anderson", "Middle+East"), 2).
+atom(workFor("Anderson", "Associated+Press."), 2).

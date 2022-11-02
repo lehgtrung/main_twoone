@@ -1,0 +1,3 @@
+atom(peop("Shi+Liming"), 2).
+atom(loc("Kunming"), 2).
+atom(liveIn("Shi+Liming", "Kunming"), 2).

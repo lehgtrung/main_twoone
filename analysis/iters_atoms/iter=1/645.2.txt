@@ -1,0 +1,4 @@
+atom(org("Eaglebrook+East"), 2).
+atom(loc("Middletown"), 2).
+atom(other("April"), 2).
+atom(orgbasedIn("Eaglebrook+East", "Middletown"), 2).

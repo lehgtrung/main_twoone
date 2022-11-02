@@ -1,0 +1,2 @@
+atom(peop("Mr+Nelson+Rohihlahla+Mandela"), 2).
+atom(loc("Republic+of+South+Africa"), 2).

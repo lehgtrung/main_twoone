@@ -1,0 +1,3 @@
+atom(loc("Anhui"), 1).
+atom(loc("China"), 1).
+atom(locatedIn("Anhui", "China"), 1).

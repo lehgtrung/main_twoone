@@ -1,0 +1,6 @@
+atom(other("37+percent"), 2).
+atom(peop("Cardenas"), 2).
+atom(org("PRD"), 2).
+atom(org("Party+of"), 2).
+atom(other("9+percent"), 2).
+atom(workFor("Cardenas", "Party+of"), 2).

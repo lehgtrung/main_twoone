@@ -1,0 +1,5 @@
+atom(loc("Damascus"), 1).
+atom(org("Syrian+Arab+Republic+Radio+Network"), 1).
+atom(other("1530+GMT"), 1).
+atom(other("14+Apr+94"), 1).
+atom(orgbasedIn("Syrian+Arab+Republic+Radio+Network", "Damascus"), 1).

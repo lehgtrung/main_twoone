@@ -1,0 +1,5 @@
+atom(other("44+B.C."), 2).
+atom(peop("Julius+Caesar"), 2).
+atom(peop("Brutus"), 2).
+atom(peop("Cassius"), 2).
+atom(kill("Brutus", "Julius+Caesar"), 2).

@@ -1,0 +1,2 @@
+atom(peop("Tim+Valentine"), 2).
+atom(loc("U.S."), 2).

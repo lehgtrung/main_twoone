@@ -1,0 +1,7 @@
+atom(peop("Johnny+Campbell"), 1).
+atom(peop("Alicia+Abraham"), 1).
+atom(org("Circuit"), 1).
+atom(peop("Michael+B.+Getty"), 1).
+atom(peop("Lattie+McGee."), 1).
+atom(workFor("Alicia+Abraham", "Circuit"), 1).
+atom(workFor("Michael+B.+Getty", "Circuit"), 1).

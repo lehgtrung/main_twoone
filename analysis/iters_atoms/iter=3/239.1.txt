@@ -1,0 +1,2 @@
+atom(peop("Samih+al-Sa"), 1).
+atom(loc("Asyut"), 1).

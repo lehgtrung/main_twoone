@@ -1,0 +1,6 @@
+atom(peop("Jean-Verdy+Bastien"), 2).
+atom(loc("Celeste+Borlette+Banks"), 2).
+atom(other("Celeste+FM"), 2).
+atom(other("4+May"), 2).
+atom(loc("Delmas"), 2).
+atom(liveIn("Jean-Verdy+Bastien", "Celeste+Borlette+Banks"), 2).

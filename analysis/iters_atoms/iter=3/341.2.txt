@@ -1,0 +1,12 @@
+atom(org("Supreme+Court"), 2).
+atom(peop("Acharya+Giriraj+Kishore"), 2).
+atom(org("Vishwa+Hindu+Parishad"), 2).
+atom(peop("Mr.+G.K.+Mahajan"), 2).
+atom(loc("India"), 2).
+atom(peop("Mr.+Ravi+Thakur"), 2).
+atom(peop("Acharya+Giriraj+Kishore"), 2).
+atom(org("Apex+Court"), 2).
+atom(other("April"), 2).
+atom(workFor("Mr.+G.K.+Mahajan", "India"), 2).
+atom(workFor("Acharya+Giriraj+Kishore", "Vishwa+Hindu+Parishad"), 2).
+atom(workFor("Acharya+Giriraj+Kishore", "Apex+Court"), 2).

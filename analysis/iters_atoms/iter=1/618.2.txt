@@ -1,0 +1,4 @@
+atom(peop("Mauro"), 2).
+atom(org("Owens-Corning+Fiberglass"), 2).
+atom(loc("Toledo"), 2).
+atom(orgbasedIn("Owens-Corning+Fiberglass", "Toledo"), 2).

@@ -1,0 +1,7 @@
+atom(org("NASA"), 1).
+atom(org("Marshall+Space+Flight+Center"), 1).
+atom(loc("Huntsville"), 1).
+atom(loc("Ala"), 1).
+atom(orgbasedIn("Marshall+Space+Flight+Center", "Ala"), 1).
+atom(orgbasedIn("Marshall+Space+Flight+Center", "Huntsville"), 1).
+atom(locatedIn("Huntsville", "Ala"), 1).

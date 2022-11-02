@@ -1,0 +1,4 @@
+atom(peop("Daniel+Sullivan"), 1).
+atom(loc("Boothbay"), 1).
+atom(peop("Fournier"), 1).
+atom(liveIn("Daniel+Sullivan", "Boothbay"), 1).

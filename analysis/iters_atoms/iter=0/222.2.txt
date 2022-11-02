@@ -1,0 +1,5 @@
+atom(org("Department"), 2).
+atom(org("Public+Utilities"), 2).
+atom(peop("Bernice+K.+McIntyre."), 2).
+atom(workFor("Bernice+K.+McIntyre.", "Department"), 2).
+atom(workFor("Bernice+K.+McIntyre.", "Public+Utilities"), 2).

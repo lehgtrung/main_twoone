@@ -1,0 +1,8 @@
+atom(peop("Clinton"), 1).
+atom(other("$12+Billion"), 1).
+atom(loc("Russia"), 1).
+atom(loc("Moscow"), 1).
+atom(loc("United+States"), 1).
+atom(loc("Russia"), 1).
+atom(loc("Ukraine"), 1).
+atom(liveIn("Clinton", "Russia"), 1).

@@ -1,0 +1,7 @@
+atom(peop("Ozawa"), 1).
+atom(loc("U.S."), 1).
+atom(loc("Tokyo"), 1).
+atom(org("YOMIURI+SHIMBUN"), 1).
+atom(other("14+Feb+94"), 1).
+atom(liveIn("Ozawa", "U.S."), 1).
+atom(orgbasedIn("YOMIURI+SHIMBUN", "Tokyo"), 1).

@@ -1,0 +1,7 @@
+atom(loc("Moscow"), 1).
+atom(org("PRAVDA"), 1).
+atom(loc("Russia"), 1).
+atom(other("21+Apr+94"), 1).
+atom(orgbasedIn("PRAVDA", "Russia"), 1).
+atom(locatedIn("Moscow", "Russia"), 1).
+atom(orgbasedIn("PRAVDA", "Moscow"), 1).

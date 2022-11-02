@@ -1,0 +1,2 @@
+atom(loc("West+Germany"), 2).
+atom(org("Rollei"), 2).

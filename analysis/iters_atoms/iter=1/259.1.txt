@@ -1,0 +1,6 @@
+atom(other("March+27"), 1).
+atom(peop("Miss+Bickel"), 1).
+atom(loc("Tempe"), 1).
+atom(peop("Richard+Pavese"), 1).
+atom(liveIn("Miss+Bickel", "Tempe"), 1).
+atom(liveIn("Richard+Pavese", "Tempe"), 1).

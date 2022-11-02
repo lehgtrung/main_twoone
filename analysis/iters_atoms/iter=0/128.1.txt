@@ -1,0 +1,6 @@
+atom(peop("Ludwig+Rinn"), 1).
+atom(loc("Riga"), 1).
+atom(loc("Latvia"), 1).
+atom(loc("Soviet+Union"), 1).
+atom(liveIn("Ludwig+Rinn", "Soviet+Union"), 1).
+atom(locatedIn("Riga", "Soviet+Union"), 1).

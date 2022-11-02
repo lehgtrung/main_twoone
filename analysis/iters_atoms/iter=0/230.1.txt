@@ -1,0 +1,2 @@
+atom(loc("Morocco"), 1).
+atom(loc("Casablanca"), 1).

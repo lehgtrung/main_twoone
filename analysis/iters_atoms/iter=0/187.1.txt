@@ -1,0 +1,5 @@
+atom(peop("Harrington"), 1).
+atom(org("Socialist+International"), 1).
+atom(loc("Stockholm"), 1).
+atom(workFor("Harrington", "Socialist+International"), 1).
+atom(orgbasedIn("Socialist+International", "Stockholm"), 1).

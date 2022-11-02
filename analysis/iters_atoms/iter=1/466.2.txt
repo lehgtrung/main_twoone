@@ -1,0 +1,2 @@
+atom(loc("Miami"), 2).
+atom(loc("Little+Havana"), 2).

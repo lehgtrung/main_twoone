@@ -1,0 +1,3 @@
+atom(loc("HUNTINGTON"), 1).
+atom(loc("Ind+."), 1).
+atom(locatedIn("HUNTINGTON", "Ind+."), 1).

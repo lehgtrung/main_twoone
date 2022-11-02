@@ -1,0 +1,3 @@
+atom(peop("Gary+H.+Heichel"), 2).
+atom(org("USDA"), 2).
+atom(workFor("Gary+H.+Heichel", "USDA"), 2).

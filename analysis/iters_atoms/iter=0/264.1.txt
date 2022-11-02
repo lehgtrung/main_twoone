@@ -1,0 +1,5 @@
+atom(loc("Salida"), 1).
+atom(loc("Gunnison"), 1).
+atom(loc("Colorado"), 1).
+atom(locatedIn("Gunnison", "Colorado"), 1).
+atom(locatedIn("Salida", "Colorado"), 1).

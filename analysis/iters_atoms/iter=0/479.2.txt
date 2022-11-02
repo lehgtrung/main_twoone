@@ -1,0 +1,5 @@
+atom(loc("Dallas"), 2).
+atom(peop("Jack+Ruby"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(peop("President+Kennedy"), 2).
+atom(kill("Jack+Ruby", "Lee+Harvey+Oswald"), 2).

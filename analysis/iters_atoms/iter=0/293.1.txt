@@ -1,0 +1,3 @@
+atom(loc("United+States"), 1).
+atom(other("34+percent"), 1).
+atom(org("FBI"), 1).

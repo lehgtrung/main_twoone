@@ -1,0 +1,10 @@
+atom(peop("Clinton"), 1).
+atom(peop("Madeleine+Albright"), 1).
+atom(loc("U.S."), 1).
+atom(org("United+Nations"), 1).
+atom(peop("John+Shalikashvili"), 1).
+atom(org("Joint+Chiefs+of+Staff"), 1).
+atom(loc("East"), 1).
+atom(loc("U.S."), 1).
+atom(liveIn("Madeleine+Albright", "U.S."), 1).
+atom(workFor("John+Shalikashvili", "Joint+Chiefs+of+Staff"), 1).

@@ -1,0 +1,6 @@
+atom(other("June+28"), 2).
+atom(peop("Gavrilo+Princip"), 2).
+atom(peop("Archduke+Franz+Ferdinand"), 2).
+atom(loc("Austria-Hungary"), 2).
+atom(loc("Sarajevo"), 2).
+atom(kill("Gavrilo+Princip", "Archduke+Franz+Ferdinand"), 2).

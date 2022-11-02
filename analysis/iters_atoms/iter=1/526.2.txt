@@ -1,0 +1,7 @@
+atom(org("International+Court"), 2).
+atom(loc("Hague"), 2).
+atom(loc("Bratislava"), 2).
+atom(loc("Budapest"), 2).
+atom(loc("Danube"), 2).
+atom(loc("Hague"), 2).
+atom(orgbasedIn("International+Court", "Hague"), 2).

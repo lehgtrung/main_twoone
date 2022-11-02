@@ -1,0 +1,6 @@
+atom(other("One+hundred+years"), 1).
+atom(other("Oct."), 1).
+atom(peop("Dwight+D.+Eisenhower"), 1).
+atom(loc("United+States"), 1).
+atom(loc("Denison+,+Texas"), 1).
+atom(liveIn("Dwight+D.+Eisenhower", "Denison+,+Texas"), 1).

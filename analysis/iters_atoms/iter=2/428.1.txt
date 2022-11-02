@@ -1,0 +1,4 @@
+atom(peop("Johnny+Campbell"), 1).
+atom(peop("Alicia+Abraham"), 1).
+atom(peop("Michael+B.+Getty"), 1).
+atom(peop("Lattie+McGee."), 1).

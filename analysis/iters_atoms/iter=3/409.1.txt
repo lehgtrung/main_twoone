@@ -1,0 +1,4 @@
+atom(org("DEP"), 1).
+atom(loc("Turkey"), 1).
+atom(peop("Tansu+Ciller"), 1).
+atom(liveIn("Tansu+Ciller", "Turkey"), 1).

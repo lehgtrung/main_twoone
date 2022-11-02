@@ -1,0 +1,3 @@
+atom(loc("ROCK+HILL"), 2).
+atom(loc("S.C+."), 2).
+atom(locatedIn("ROCK+HILL", "S.C+."), 2).

@@ -1,0 +1,10 @@
+atom(loc("Beijing"), 2).
+atom(org("CHINA"), 2).
+atom(org("DAILY"), 2).
+atom(org("SCIENCE+MEDICINE"), 2).
+atom(other("13+Apr+94"), 2).
+atom(orgbasedIn("SCIENCE+MEDICINE", "CHINA"), 2).
+atom(orgbasedIn("DAILY", "CHINA"), 2).
+atom(orgbasedIn("CHINA", "Beijing"), 2).
+atom(orgbasedIn("SCIENCE+MEDICINE", "Beijing"), 2).
+atom(orgbasedIn("DAILY", "Beijing"), 2).

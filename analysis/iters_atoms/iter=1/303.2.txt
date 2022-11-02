@@ -1,0 +1,4 @@
+atom(peop("James+O.+Mason"), 2).
+atom(org("Department+of+Health+and+Human+Services"), 2).
+atom(loc("Congress"), 2).
+atom(workFor("James+O.+Mason", "Department+of+Health+and+Human+Services"), 2).

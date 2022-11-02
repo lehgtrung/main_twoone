@@ -1,0 +1,4 @@
+atom(org("FAA"), 1).
+atom(peop("Fred+Farrar"), 1).
+atom(org("British+Midland"), 1).
+atom(workFor("Fred+Farrar", "FAA"), 1).

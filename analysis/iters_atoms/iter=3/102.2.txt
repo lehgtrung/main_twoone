@@ -1,0 +1,9 @@
+atom(loc("South"), 2).
+atom(loc("South"), 2).
+atom(loc("Alaska"), 2).
+atom(loc("Kamchatka"), 2).
+atom(loc("Okhotsk+Sea"), 2).
+atom(loc("Kamchatka"), 2).
+atom(peop("Kuzmenko"), 2).
+atom(loc("Okhotsk+Sea."), 2).
+atom(peop("Korochkin"), 2).

@@ -1,0 +1,3 @@
+atom(loc("Colorado"), 2).
+atom(other("13+inches"), 2).
+atom(loc("Denver"), 2).

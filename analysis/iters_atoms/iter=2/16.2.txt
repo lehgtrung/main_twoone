@@ -1,0 +1,8 @@
+atom(peop("Peter+Butler"), 2).
+atom(org("A.+Copeland+Enterprises+Inc."), 2).
+atom(loc("New+Orleans-based"), 2).
+atom(other("Popeyes"), 2).
+atom(peop("Henry+A.+Politz"), 2).
+atom(org("U.S.+Circuit+Court+of+Appeals"), 2).
+atom(workFor("Henry+A.+Politz", "U.S.+Circuit+Court+of+Appeals"), 2).
+atom(workFor("Peter+Butler", "A.+Copeland+Enterprises+Inc."), 2).

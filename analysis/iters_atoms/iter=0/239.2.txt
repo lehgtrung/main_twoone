@@ -1,0 +1,2 @@
+atom(peop("Samih+al-Sa"), 2).
+atom(org("Asyut"), 2).

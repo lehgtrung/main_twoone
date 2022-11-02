@@ -1,0 +1,5 @@
+atom(peop("Warner"), 2).
+atom(org("Home+State+Savings+Bank"), 2).
+atom(loc("Cincinnati"), 2).
+atom(other("October"), 2).
+atom(workFor("Warner", "Home+State+Savings+Bank"), 2).

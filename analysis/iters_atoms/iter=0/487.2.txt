@@ -1,0 +1,6 @@
+atom(loc("Andrews"), 2).
+atom(loc("Early+County"), 2).
+atom(loc("Ga."), 2).
+atom(locatedIn("Andrews", "Ga."), 2).
+atom(locatedIn("Early+County", "Ga."), 2).
+atom(locatedIn("Andrews", "Early+County"), 2).

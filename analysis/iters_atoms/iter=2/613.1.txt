@@ -1,0 +1,3 @@
+atom(loc("MILLINOCKET"), 1).
+atom(loc("Maine"), 1).
+atom(locatedIn("MILLINOCKET", "Maine"), 1).

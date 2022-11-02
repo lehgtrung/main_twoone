@@ -1,0 +1,3 @@
+atom(loc("Kings+Bay"), 1).
+atom(loc("Ga."), 1).
+atom(locatedIn("Kings+Bay", "Ga."), 1).

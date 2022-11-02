@@ -1,0 +1,5 @@
+atom(org("GE"), 2).
+atom(peop("Kennedy"), 2).
+atom(loc("Cincinnati"), 2).
+atom(org("GE"), 2).
+atom(orgbasedIn("GE", "Cincinnati"), 2).

@@ -1,0 +1,8 @@
+atom(org("Russian+Atomic+Energy"), 1).
+atom(peop("V.+Mikhaylov"), 1).
+atom(peop("Gubarev"), 1).
+atom(loc("Ukraine"), 1).
+atom(peop("Mikhaylov"), 1).
+atom(loc("Ukraine"), 1).
+atom(loc("Ukraine"), 1).
+atom(workFor("V.+Mikhaylov", "Russian+Atomic+Energy"), 1).

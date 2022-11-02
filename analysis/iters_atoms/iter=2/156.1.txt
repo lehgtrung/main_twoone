@@ -1,0 +1,8 @@
+atom(org("FBI"), 1).
+atom(org("Environmental+Protection+Agency"), 1).
+atom(loc("Rocky+Flats"), 1).
+atom(loc("Colorado"), 1).
+atom(loc("Fernald+uranium"), 1).
+atom(loc("Ohio"), 1).
+atom(locatedIn("Rocky+Flats", "Colorado"), 1).
+atom(locatedIn("Fernald+uranium", "Ohio"), 1).

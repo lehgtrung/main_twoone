@@ -1,0 +1,2 @@
+atom(peop("Chris+Herr"), 1).
+atom(org("Wool+Wizards"), 1).

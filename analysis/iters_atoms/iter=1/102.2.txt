@@ -1,0 +1,10 @@
+atom(loc("South+Korean"), 2).
+atom(other("32+,+500+tonnes"), 2).
+atom(loc("Alaska"), 2).
+atom(loc("Kamchatka"), 2).
+atom(loc("Okhotsk+Sea"), 2).
+atom(loc("Kamchatka"), 2).
+atom(peop("Kuzmenko"), 2).
+atom(loc("Okhotsk+Sea."), 2).
+atom(peop("Korochkin"), 2).
+atom(liveIn("Korochkin", "Okhotsk+Sea."), 2).

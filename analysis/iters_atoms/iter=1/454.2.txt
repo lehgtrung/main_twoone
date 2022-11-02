@@ -1,0 +1,6 @@
+atom(loc("Portland"), 2).
+atom(loc("Maine"), 2).
+atom(other("58"), 2).
+atom(loc("Bismarck"), 2).
+atom(other("76"), 2).
+atom(locatedIn("Portland", "Maine"), 2).

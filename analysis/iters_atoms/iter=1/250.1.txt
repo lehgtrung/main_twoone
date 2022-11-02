@@ -1,0 +1,10 @@
+atom(other("Thirty+Seconds"), 1).
+atom(loc("Tokyo"), 1).
+atom(loc("Pearl+Harbor"), 1).
+atom(loc("Hawaii"), 1).
+atom(other("Dec."), 1).
+atom(other("Japanese"), 1).
+atom(loc("U.S."), 1).
+atom(loc("Tokyo"), 1).
+atom(loc("Japanese"), 1).
+atom(locatedIn("Pearl+Harbor", "Hawaii"), 1).

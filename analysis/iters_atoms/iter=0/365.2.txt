@@ -1,0 +1,9 @@
+atom(peop("Kennedy"), 2).
+atom(loc("Dealey+Plaza"), 2).
+atom(org("NBC"), 2).
+atom(peop("Jack+Ruby"), 2).
+atom(peop("Oswald"), 2).
+atom(loc("Dallas+Police+Department"), 2).
+atom(workFor("Jack+Ruby", "NBC"), 2).
+atom(kill("Jack+Ruby", "Oswald"), 2).
+atom(liveIn("Kennedy", "Dealey+Plaza"), 2).

@@ -1,0 +1,7 @@
+atom(peop("Ray"), 1).
+atom(loc("Tennessee"), 1).
+atom(loc("Brushy+Mountain+State+Prison"), 1).
+atom(other("April"), 1).
+atom(peop("King"), 1).
+atom(kill("Ray", "King"), 1).
+atom(locatedIn("Brushy+Mountain+State+Prison", "Tennessee"), 1).

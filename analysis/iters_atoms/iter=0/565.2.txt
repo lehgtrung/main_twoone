@@ -1,0 +1,7 @@
+atom(peop("V.+Mikhaylov"), 2).
+atom(peop("Gubarev"), 2).
+atom(loc("Ukraine"), 2).
+atom(peop("Mikhaylov"), 2).
+atom(loc("Ukraine"), 2).
+atom(loc("Ukraine"), 2).
+atom(liveIn("Gubarev", "Ukraine"), 2).

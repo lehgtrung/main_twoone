@@ -1,0 +1,4 @@
+atom(loc("Guatemala+City"), 1).
+atom(other("2+Feb"), 1).
+atom(peop("Ramiro+de+Leon+Carpio"), 1).
+atom(other("1+February"), 1).

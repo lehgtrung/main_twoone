@@ -1,0 +1,6 @@
+atom(peop("Mrs.+Cicippio"), 2).
+atom(org("American+Embassy"), 2).
+atom(loc("Beirut."), 2).
+atom(liveIn("Mrs.+Cicippio", "Beirut."), 2).
+atom(workFor("Mrs.+Cicippio", "American+Embassy"), 2).
+atom(orgbasedIn("American+Embassy", "Beirut."), 2).

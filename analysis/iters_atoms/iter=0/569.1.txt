@@ -1,0 +1,7 @@
+atom(loc("Keen+Corp."), 1).
+atom(loc("New+York"), 1).
+atom(org("Eagle-Picher+Industries"), 1).
+atom(loc("Cincinnati"), 1).
+atom(locatedIn("Keen+Corp.", "New+York"), 1).
+atom(orgbasedIn("Eagle-Picher+Industries", "New+York"), 1).
+atom(orgbasedIn("Eagle-Picher+Industries", "Cincinnati"), 1).

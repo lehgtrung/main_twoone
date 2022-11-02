@@ -1,0 +1,4 @@
+atom(other("Jan."), 1).
+atom(peop("Elvis+Presley"), 1).
+atom(loc("Tupelo+,+Miss"), 1).
+atom(liveIn("Elvis+Presley", "Tupelo+,+Miss"), 1).

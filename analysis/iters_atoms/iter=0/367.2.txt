@@ -1,0 +1,6 @@
+atom(peop("James+Joseph+Rovida+Jr."), 2).
+atom(loc("Los+Alamitos"), 2).
+atom(peop("Cathy+Brock"), 2).
+atom(peop("Robert+Brock"), 2).
+atom(liveIn("James+Joseph+Rovida+Jr.", "Los+Alamitos"), 2).
+atom(kill("Cathy+Brock", "Robert+Brock"), 2).

@@ -1,0 +1,2 @@
+atom(peop("Donald+W.+Riegle+Jr."), 1).
+atom(org("Senate+Banking+Committee"), 1).

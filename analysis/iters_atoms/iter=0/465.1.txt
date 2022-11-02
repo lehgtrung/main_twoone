@@ -1,0 +1,3 @@
+atom(loc("Savannah+River+plant"), 1).
+atom(loc("South+Carolina"), 1).
+atom(locatedIn("Savannah+River+plant", "South+Carolina"), 1).

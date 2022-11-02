@@ -1,0 +1,5 @@
+atom(org("Health"), 2).
+atom(org("Human+Services"), 2).
+atom(peop("Richard+P.+Kusserow"), 2).
+atom(workFor("Richard+P.+Kusserow", "Human+Services"), 2).
+atom(workFor("Richard+P.+Kusserow", "Health"), 2).

@@ -1,0 +1,5 @@
+atom(peop("Sanders"), 1).
+atom(peop("Daniel+Dewey"), 1).
+atom(org("CBOT"), 1).
+atom(org("Treasury"), 1).
+atom(workFor("Daniel+Dewey", "CBOT"), 1).

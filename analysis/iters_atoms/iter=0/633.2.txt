@@ -1,0 +1,2 @@
+atom(peop("SOVETSKAYA+ROSSIA"), 2).
+atom(loc("Russia"), 2).

@@ -1,0 +1,5 @@
+atom(peop("Herschel+Grynszpan"), 1).
+atom(loc("Poland"), 1).
+atom(peop("Ernst+vom+Rath"), 1).
+atom(loc("Paris"), 1).
+atom(other("Nov."), 1).

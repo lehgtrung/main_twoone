@@ -1,0 +1,4 @@
+atom(org("CIA"), 2).
+atom(peop("Sohn+Ho+Young"), 2).
+atom(loc("New+York+City"), 2).
+atom(workFor("Sohn+Ho+Young", "CIA"), 2).

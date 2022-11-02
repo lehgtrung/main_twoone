@@ -1,0 +1,7 @@
+atom(peop("Jack+Ruby"), 2).
+atom(other("$62.50"), 2).
+atom(loc("Dallas"), 2).
+atom(peop("Oswald"), 2).
+atom(peop("Kennedy"), 2).
+atom(kill("Oswald", "Kennedy"), 2).
+atom(kill("Jack+Ruby", "Oswald"), 2).

@@ -1,0 +1,8 @@
+atom(peop("Surratt"), 1).
+atom(peop("John+Wilkes+Booth"), 1).
+atom(peop("Lincoln"), 1).
+atom(peop("Booth"), 1).
+atom(peop("Lincoln"), 1).
+atom(other("April"), 1).
+atom(kill("Booth", "Lincoln"), 1).
+atom(kill("John+Wilkes+Booth", "Lincoln"), 1).

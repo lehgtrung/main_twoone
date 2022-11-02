@@ -1,0 +1,6 @@
+atom(peop("Mauro"), 2).
+atom(org("Owens-Corning"), 2).
+atom(loc("Toledo"), 2).
+atom(loc("Ohio"), 2).
+atom(locatedIn("Toledo", "Ohio"), 2).
+atom(workFor("Mauro", "Owens-Corning"), 2).

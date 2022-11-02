@@ -1,0 +1,2 @@
+atom(peop("George+Tompkins"), 2).
+atom(loc("Soviet"), 2).

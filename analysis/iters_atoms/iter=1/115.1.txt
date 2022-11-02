@@ -1,0 +1,2 @@
+atom(org("The"), 1).
+atom(loc("Hague+ANP"), 1).

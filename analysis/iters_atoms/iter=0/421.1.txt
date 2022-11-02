@@ -1,0 +1,3 @@
+atom(peop("Kennedy"), 1).
+atom(peop("Lee+Harvey+Oswald"), 1).
+atom(org("Texas+School+Book+Depository+Building."), 1).

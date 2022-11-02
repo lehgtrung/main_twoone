@@ -1,0 +1,6 @@
+atom(peop("Judy+Kaye"), 1).
+atom(org("Broadway"), 1).
+atom(loc("New+York"), 1).
+atom(org("Opera+Repertory+Theater"), 1).
+atom(peop("Abbie"), 1).
+atom(orgbasedIn("Opera+Repertory+Theater", "New+York"), 1).

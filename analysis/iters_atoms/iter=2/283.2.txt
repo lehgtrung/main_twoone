@@ -1,0 +1,7 @@
+atom(other("Ides"), 2).
+atom(other("March"), 2).
+atom(peop("Roman+Emperor+Julius+Caesar"), 2).
+atom(peop("Brutus"), 2).
+atom(peop("Cassius"), 2).
+atom(kill("Brutus", "Roman+Emperor+Julius+Caesar"), 2).
+atom(kill("Cassius", "Roman+Emperor+Julius+Caesar"), 2).

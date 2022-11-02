@@ -1,0 +1,4 @@
+atom(peop("Reagan"), 1).
+atom(org("State+Department"), 1).
+atom(loc("U.S."), 1).
+atom(workFor("Reagan", "State+Department"), 1).

@@ -1,0 +1,6 @@
+atom(peop("Bob+Boyd"), 1).
+atom(loc("Chattanooga"), 1).
+atom(loc("Tenn."), 1).
+atom(locatedIn("Chattanooga", "Tenn."), 1).
+atom(liveIn("Bob+Boyd", "Tenn."), 1).
+atom(liveIn("Bob+Boyd", "Chattanooga"), 1).

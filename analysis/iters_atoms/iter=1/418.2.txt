@@ -1,0 +1,5 @@
+atom(loc("South"), 2).
+atom(loc("South+Africa"), 2).
+atom(loc("Russia"), 2).
+atom(org("Foreign+Ministry"), 2).
+atom(orgbasedIn("Foreign+Ministry", "Russia"), 2).

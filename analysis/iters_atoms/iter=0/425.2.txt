@@ -1,0 +1,5 @@
+atom(loc("Moscow"), 2).
+atom(org("METEOROLOGIYA"), 2).
+atom(org("GIDROLOGIYA"), 2).
+atom(orgbasedIn("GIDROLOGIYA", "Moscow"), 2).
+atom(orgbasedIn("METEOROLOGIYA", "Moscow"), 2).

@@ -1,0 +1,6 @@
+atom(loc("SPACE+CENTER"), 1).
+atom(loc("Houston"), 1).
+atom(org("AP"), 1).
+atom(orgbasedIn("AP", "Houston"), 1).
+atom(orgbasedIn("AP", "SPACE+CENTER"), 1).
+atom(locatedIn("SPACE+CENTER", "Houston"), 1).

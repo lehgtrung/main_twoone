@@ -1,0 +1,2 @@
+atom(loc("China"), 1).
+atom(loc("China"), 1).

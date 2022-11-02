@@ -1,0 +1,8 @@
+atom(peop("Judge+Ralph+K.+Winter"), 1).
+atom(org("U.S.+Circuit+Court+of+Appeals"), 1).
+atom(loc("New+York+City"), 1).
+atom(peop("Judge+Kenneth+Starr"), 1).
+atom(loc("U.S.+Circuit+Court+of+Appeals"), 1).
+atom(loc("District+of+Columbia"), 1).
+atom(workFor("Judge+Ralph+K.+Winter", "U.S.+Circuit+Court+of+Appeals"), 1).
+atom(workFor("Judge+Kenneth+Starr", "U.S.+Circuit+Court+of+Appeals"), 1).

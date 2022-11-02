@@ -1,0 +1,5 @@
+atom(peop("Robert+Kennedy"), 2).
+atom(peop("Sirhan+Sirhan"), 2).
+atom(other("June+5+,"), 2).
+atom(loc("Ambassador"), 2).
+atom(kill("Sirhan+Sirhan", "Robert+Kennedy"), 2).

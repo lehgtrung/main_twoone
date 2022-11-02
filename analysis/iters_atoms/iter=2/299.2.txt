@@ -1,0 +1,3 @@
+atom(peop("John+Ray"), 2).
+atom(org("District+of+Columbia+Council"), 2).
+atom(workFor("John+Ray", "District+of+Columbia+Council"), 2).

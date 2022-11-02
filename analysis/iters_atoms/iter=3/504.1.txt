@@ -1,0 +1,3 @@
+atom(loc("United+States"), 1).
+atom(peop("John+Kennedy"), 1).
+atom(peop("Harrington"), 1).

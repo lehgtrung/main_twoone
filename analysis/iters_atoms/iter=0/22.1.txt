@@ -1,0 +1,7 @@
+atom(org("CDT"), 1).
+atom(loc("Port+Arther"), 1).
+atom(loc("Galveston"), 1).
+atom(loc("Texas."), 1).
+atom(locatedIn("Galveston", "Texas."), 1).
+atom(locatedIn("Port+Arther", "Texas."), 1).
+atom(orgbasedIn("CDT", "Texas."), 1).

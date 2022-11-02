@@ -1,0 +1,7 @@
+atom(loc("Seoul"), 2).
+atom(other("May+3"), 2).
+atom(org("YONHAP"), 2).
+atom(org("European+Union"), 2).
+atom(loc("South+Korean"), 2).
+atom(loc("Korea"), 2).
+atom(orgbasedIn("YONHAP", "Seoul"), 2).

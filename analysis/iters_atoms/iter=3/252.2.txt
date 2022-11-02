@@ -1,0 +1,5 @@
+atom(peop("Ileana+Ros-Lehtinen"), 2).
+atom(peop("Carlos+Perez"), 2).
+atom(org("National+Security+Council"), 2).
+atom(peop("Oliver+North."), 2).
+atom(workFor("Oliver+North.", "National+Security+Council"), 2).

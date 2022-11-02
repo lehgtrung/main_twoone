@@ -1,0 +1,6 @@
+atom(peop("Bloch"), 1).
+atom(peop("Weisner"), 1).
+atom(peop("Bloch"), 1).
+atom(org("Austrian+television"), 1).
+atom(loc("Georgetown"), 1).
+atom(workFor("Bloch", "Austrian+television"), 1).

@@ -1,0 +1,5 @@
+atom(peop("Chien"), 2).
+atom(loc("U.S."), 2).
+atom(org("American+Enterprise+Institute"), 2).
+atom(liveIn("Chien", "U.S."), 2).
+atom(workFor("Chien", "American+Enterprise+Institute"), 2).

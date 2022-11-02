@@ -1,0 +1,4 @@
+atom(other("100+years"), 2).
+atom(peop("Eddie+Rickenbacker"), 2).
+atom(loc("Columbus+,+Ohio"), 2).
+atom(liveIn("Eddie+Rickenbacker", "Columbus+,+Ohio"), 2).

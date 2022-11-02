@@ -1,0 +1,6 @@
+atom(org("INPE"), 1).
+atom(org("Finep"), 1).
+atom(loc("China"), 1).
+atom(org("Great+Wall+firm"), 1).
+atom(orgbasedIn("INPE", "China"), 1).
+atom(orgbasedIn("Great+Wall+firm", "China"), 1).

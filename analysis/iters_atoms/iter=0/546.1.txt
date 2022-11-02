@@ -1,0 +1,5 @@
+atom(loc("Soviets"), 1).
+atom(loc("Cuban+Missile"), 1).
+atom(org("Harvard"), 1).
+atom(peop("Kennedy"), 1).
+atom(loc("U.S."), 1).

@@ -1,0 +1,4 @@
+atom(other("65+miles"), 1).
+atom(loc("Baghdad"), 1).
+atom(loc("Iraq"), 1).
+atom(locatedIn("Baghdad", "Iraq"), 1).

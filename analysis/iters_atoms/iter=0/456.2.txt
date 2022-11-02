@@ -1,0 +1,7 @@
+atom(peop("Nancy+Cowan"), 2).
+atom(org("Red+Cross"), 2).
+atom(loc("Calcasieu"), 2).
+atom(loc("Cameron+parishes."), 2).
+atom(orgbasedIn("Red+Cross", "Calcasieu"), 2).
+atom(liveIn("Nancy+Cowan", "Calcasieu"), 2).
+atom(workFor("Nancy+Cowan", "Red+Cross"), 2).

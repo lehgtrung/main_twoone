@@ -1,0 +1,4 @@
+atom(loc("United+States"), 2).
+atom(peop("John+Tyler"), 2).
+atom(loc("Charles+City+County+,+Va"), 2).
+atom(liveIn("John+Tyler", "Charles+City+County+,+Va"), 2).

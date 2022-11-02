@@ -1,0 +1,7 @@
+atom(org("Foreign+Ministry"), 2).
+atom(loc("Beijing"), 2).
+atom(peop("Li+Zhaoxing"), 2).
+atom(loc("China"), 2).
+atom(loc("Vietnam"), 2).
+atom(orgbasedIn("Foreign+Ministry", "Beijing"), 2).
+atom(liveIn("Li+Zhaoxing", "China"), 2).

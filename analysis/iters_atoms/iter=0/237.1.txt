@@ -1,0 +1,6 @@
+atom(loc("Croatian"), 1).
+atom(peop("Franjo+Tudjman"), 1).
+atom(loc("Geneva"), 1).
+atom(loc("republic+of+Croatia"), 1).
+atom(loc("FRY"), 1).
+atom(workFor("Franjo+Tudjman", "Croatian"), 1).

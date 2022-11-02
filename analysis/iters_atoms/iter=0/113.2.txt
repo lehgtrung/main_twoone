@@ -1,0 +1,4 @@
+atom(peop("Dennis+DeConcini"), 2).
+atom(org("Senate"), 2).
+atom(peop("Bush"), 2).
+atom(workFor("Dennis+DeConcini", "Senate"), 2).

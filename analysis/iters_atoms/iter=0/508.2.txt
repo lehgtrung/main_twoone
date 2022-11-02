@@ -1,0 +1,4 @@
+atom(peop("Norma+Cano"), 2).
+atom(peop("Rolando+Miller"), 2).
+atom(peop("Norma+Cano"), 2).
+atom(peop("Rolando+Miller"), 2).

@@ -1,0 +1,4 @@
+atom(loc("U.S.+Bankruptcy"), 2).
+atom(peop("George+Proctor"), 2).
+atom(peop("Bakst"), 2).
+atom(workFor("George+Proctor", "U.S.+Bankruptcy"), 2).

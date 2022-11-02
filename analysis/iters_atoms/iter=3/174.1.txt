@@ -1,0 +1,5 @@
+atom(peop("David+Graham"), 1).
+atom(org("Veterans+Administration+O+Center"), 1).
+atom(loc("Houston"), 1).
+atom(workFor("David+Graham", "Veterans+Administration+O+Center"), 1).
+atom(orgbasedIn("Veterans+Administration+O+Center", "Houston"), 1).

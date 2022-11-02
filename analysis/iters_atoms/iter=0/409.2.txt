@@ -1,0 +1,3 @@
+atom(loc("Turkey"), 2).
+atom(peop("Tansu+Ciller"), 2).
+atom(liveIn("Tansu+Ciller", "Turkey"), 2).

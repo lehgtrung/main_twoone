@@ -1,0 +1,3 @@
+atom(peop("Teruo+Sofue"), 1).
+atom(org("NASDA"), 1).
+atom(workFor("Teruo+Sofue", "NASDA"), 1).

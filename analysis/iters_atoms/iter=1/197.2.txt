@@ -1,0 +1,2 @@
+atom(other("1"), 2).
+atom(loc("Beijing"), 2).

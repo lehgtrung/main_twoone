@@ -1,0 +1,4 @@
+atom(other("12+minutes"), 2).
+atom(loc("Cedar+City"), 2).
+atom(loc("Utah"), 2).
+atom(locatedIn("Cedar+City", "Utah"), 2).

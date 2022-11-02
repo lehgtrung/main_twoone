@@ -1,0 +1,3 @@
+atom(peop("James+Cirona"), 2).
+atom(org("Federal+Home+Loan+Bank+of+San+Francisco"), 2).
+atom(workFor("James+Cirona", "Federal+Home+Loan+Bank+of+San+Francisco"), 2).

@@ -1,0 +1,5 @@
+atom(peop("Buffalo+Bill"), 2).
+atom(peop("Cody"), 2).
+atom(loc("Davenport+,+Iowa"), 2).
+atom(liveIn("Cody", "Davenport+,+Iowa"), 2).
+atom(liveIn("Buffalo+Bill", "Davenport+,+Iowa"), 2).

@@ -1,0 +1,6 @@
+atom(other("Americans"), 2).
+atom(peop("Jack+Ruby"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(peop("President+John+F.+Kennedy"), 2).
+atom(kill("Jack+Ruby", "Lee+Harvey+Oswald"), 2).
+atom(kill("Lee+Harvey+Oswald", "President+John+F.+Kennedy"), 2).

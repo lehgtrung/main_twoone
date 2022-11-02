@@ -1,0 +1,5 @@
+atom(loc("Moscow"), 1).
+atom(loc("Russian+State+Duma"), 1).
+atom(peop("Konstantin+Zatulin"), 1).
+atom(loc("Crimea"), 1).
+atom(workFor("Konstantin+Zatulin", "Russian+State+Duma"), 1).

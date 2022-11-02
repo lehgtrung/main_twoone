@@ -1,0 +1,4 @@
+atom(peop("Perez+de+Cuellar"), 1).
+atom(org("Nobel+Peace+Prize"), 1).
+atom(loc("U.N."), 1).
+atom(org("United+Nations"), 1).

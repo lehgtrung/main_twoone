@@ -1,0 +1,3 @@
+atom(peop("Nick+Rufford"), 2).
+atom(loc("Far+East"), 2).
+atom(liveIn("Nick+Rufford", "Far+East"), 2).

@@ -1,0 +1,8 @@
+atom(peop("Ralph+David+Abernathy"), 2).
+atom(other("March"), 2).
+atom(peop("David+Abernathy"), 2).
+atom(loc("Linden+,+Ala."), 2).
+atom(peop("William"), 2).
+atom(peop("Louiverny+Abernathy"), 2).
+atom(liveIn("Ralph+David+Abernathy", "Linden+,+Ala."), 2).
+atom(liveIn("David+Abernathy", "Linden+,+Ala."), 2).

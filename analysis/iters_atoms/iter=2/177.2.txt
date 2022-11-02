@@ -1,0 +1,6 @@
+atom(org("Warren+Commission"), 2).
+atom(peop("Oswald"), 2).
+atom(peop("Kennedy"), 2).
+atom(loc("Texas+Schoolbook+Depository"), 2).
+atom(loc("Dallas"), 2).
+atom(kill("Oswald", "Kennedy"), 2).

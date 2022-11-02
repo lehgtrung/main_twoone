@@ -1,0 +1,4 @@
+atom(peop("IAI"), 1).
+atom(peop("Reuven+Pedatzur"), 1).
+atom(org("Jaffe+Center+for+Strategic+Studies"), 1).
+atom(workFor("Reuven+Pedatzur", "Jaffe+Center+for+Strategic+Studies"), 1).

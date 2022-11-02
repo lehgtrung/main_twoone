@@ -1,0 +1,2 @@
+atom(peop("President+Reagan"), 1).
+atom(loc("U.S."), 1).

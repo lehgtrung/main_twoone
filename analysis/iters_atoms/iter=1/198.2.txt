@@ -1,0 +1,5 @@
+atom(peop("Pereira"), 2).
+atom(peop("Darly+Alves+da+Silva"), 2).
+atom(peop("Mendes"), 2).
+atom(loc("Amazon"), 2).
+atom(kill("Darly+Alves+da+Silva", "Mendes"), 2).

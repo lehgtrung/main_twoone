@@ -1,0 +1,4 @@
+atom(peop("Slavko+Mestrovic"), 1).
+atom(org("Croatian+People+'s+Party"), 1).
+atom(loc("Croatian"), 1).
+atom(workFor("Slavko+Mestrovic", "Croatian+People+'s+Party"), 1).

@@ -1,0 +1,4 @@
+atom(peop("Viscomi"), 1).
+atom(peop("John+Hoopsick"), 1).
+atom(peop("K+mart"), 1).
+atom(loc("Niagara+Falls"), 1).

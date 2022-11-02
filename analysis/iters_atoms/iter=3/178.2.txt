@@ -1,0 +1,6 @@
+atom(peop("Booth"), 2).
+atom(peop("Lincoln"), 2).
+atom(peop("Mudd"), 2).
+atom(peop("Booth"), 2).
+atom(kill("Booth", "Lincoln"), 2).
+atom(kill("Booth", "Lincoln"), 2).

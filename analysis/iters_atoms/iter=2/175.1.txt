@@ -1,0 +1,11 @@
+atom(peop("Phillip+Lieberman"), 1).
+atom(org("Brown+Univeristy"), 1).
+atom(loc("Providence"), 1).
+atom(loc("R.I."), 1).
+atom(loc("Kebara"), 1).
+atom(orgbasedIn("Brown+Univeristy", "Providence"), 1).
+atom(orgbasedIn("Brown+Univeristy", "R.I."), 1).
+atom(locatedIn("Providence", "R.I."), 1).
+atom(liveIn("Phillip+Lieberman", "R.I."), 1).
+atom(workFor("Phillip+Lieberman", "Brown+Univeristy"), 1).
+atom(liveIn("Phillip+Lieberman", "Providence"), 1).

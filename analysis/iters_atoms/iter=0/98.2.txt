@@ -1,0 +1,3 @@
+atom(other("65+miles"), 2).
+atom(loc("Baghdad"), 2).
+atom(loc("Iraq"), 2).

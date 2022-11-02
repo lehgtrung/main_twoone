@@ -1,0 +1,5 @@
+atom(org("Co."), 2).
+atom(loc("Randolph"), 2).
+atom(peop("Debra+Bornstein"), 2).
+atom(workFor("Debra+Bornstein", "Co."), 2).
+atom(orgbasedIn("Co.", "Randolph"), 2).

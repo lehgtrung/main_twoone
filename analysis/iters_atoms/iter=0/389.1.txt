@@ -1,0 +1,5 @@
+atom(peop("Booth"), 1).
+atom(peop("Lincoln"), 1).
+atom(other("10+:+15+p.m."), 1).
+atom(other("April"), 1).
+atom(kill("Booth", "Lincoln"), 1).

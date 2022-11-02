@@ -1,0 +1,5 @@
+atom(peop("Kravchuk"), 2).
+atom(other("60+percent"), 2).
+atom(peop("Chornovil"), 2).
+atom(other("28+percent"), 2).
+atom(loc("Ukraine"), 2).

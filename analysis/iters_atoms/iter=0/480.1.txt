@@ -1,0 +1,6 @@
+atom(peop("David+Foster"), 1).
+atom(org("AP"), 1).
+atom(loc("Seattle."), 1).
+atom(workFor("David+Foster", "AP"), 1).
+atom(orgbasedIn("AP", "Seattle."), 1).
+atom(liveIn("David+Foster", "Seattle."), 1).

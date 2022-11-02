@@ -1,0 +1,7 @@
+atom(peop("Kennedy"), 1).
+atom(other("Dealey+Plaza"), 1).
+atom(org("NBC"), 1).
+atom(peop("Jack+Ruby"), 1).
+atom(peop("Oswald"), 1).
+atom(loc("Dallas+Police"), 1).
+atom(kill("Jack+Ruby", "Oswald"), 1).

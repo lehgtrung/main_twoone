@@ -1,0 +1,8 @@
+atom(org("CNTP"), 2).
+atom(org("Papa+Egoro+Movement"), 2).
+atom(peop("Norma+Cano"), 2).
+atom(peop("Rolando+Miller"), 2).
+atom(org("CNTP"), 2).
+atom(peop("Norma+Cano"), 2).
+atom(peop("Rolando+Miller"), 2).
+atom(workFor("Norma+Cano", "Papa+Egoro+Movement"), 2).

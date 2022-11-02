@@ -1,0 +1,7 @@
+atom(loc("Tokyo"), 2).
+atom(loc("Pearl+Harbor"), 2).
+atom(loc("Hawaii"), 2).
+atom(other("Dec."), 2).
+atom(loc("U.S."), 2).
+atom(loc("Tokyo"), 2).
+atom(locatedIn("Pearl+Harbor", "Hawaii"), 2).

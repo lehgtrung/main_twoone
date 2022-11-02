@@ -1,0 +1,5 @@
+atom(peop("Perez+Balladares"), 1).
+atom(loc("Panama+City"), 1).
+atom(org("LA+ESTRELLA+DE+PANAMA"), 1).
+atom(other("21+Mar+94"), 1).
+atom(orgbasedIn("LA+ESTRELLA+DE+PANAMA", "Panama+City"), 1).

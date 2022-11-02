@@ -1,0 +1,11 @@
+atom(peop("James+G.+Blight"), 1).
+atom(peop("David+A.+Welch"), 1).
+atom(org("Harvard+University"), 1).
+atom(other("John+F.+Kennedy+School+of+Government"), 1).
+atom(other("10+o"), 1).
+atom(other("Oct."), 1).
+atom(other("several"), 1).
+atom(other("hundred+miles"), 1).
+atom(loc("Cuba."), 1).
+atom(workFor("David+A.+Welch", "Harvard+University"), 1).
+atom(workFor("James+G.+Blight", "Harvard+University"), 1).

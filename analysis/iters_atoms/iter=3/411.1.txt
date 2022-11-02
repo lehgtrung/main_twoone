@@ -1,0 +1,4 @@
+atom(org("Vatican"), 1).
+atom(loc("Soviet"), 1).
+atom(loc("Byelorussia"), 1).
+atom(locatedIn("Byelorussia", "Soviet"), 1).

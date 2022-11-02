@@ -1,0 +1,9 @@
+atom(loc("Croatia"), 1).
+atom(peop("Granic"), 1).
+atom(loc("Croatia"), 1).
+atom(loc("Moscow"), 1).
+atom(org("ITAR-TASS"), 1).
+atom(other("0729+GMT"), 1).
+atom(other("3+Mar+94"), 1).
+atom(orgbasedIn("ITAR-TASS", "Moscow"), 1).
+atom(liveIn("Granic", "Croatia"), 1).

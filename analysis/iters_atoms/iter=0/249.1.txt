@@ -1,0 +1,2 @@
+atom(peop("Lee+Mitgang"), 1).
+atom(org("AP"), 1).

@@ -1,0 +1,6 @@
+atom(peop("Bush"), 2).
+atom(loc("U.S."), 2).
+atom(org("Marine"), 2).
+atom(peop("William+Higgins"), 2).
+atom(liveIn("Bush", "U.S."), 2).
+atom(workFor("William+Higgins", "Marine"), 2).

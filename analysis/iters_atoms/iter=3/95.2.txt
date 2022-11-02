@@ -1,0 +1,8 @@
+atom(loc("U.S."), 2).
+atom(peop("Sara+Matzar"), 2).
+atom(loc("Pabnjachel"), 2).
+atom(loc("Solola"), 2).
+atom(liveIn("Sara+Matzar", "Pabnjachel"), 2).
+atom(liveIn("Sara+Matzar", "Solola"), 2).
+atom(locatedIn("Pabnjachel", "Solola"), 2).
+atom(locatedIn("Pabnjachel", "U.S."), 2).

@@ -1,0 +1,5 @@
+atom(peop("Sirhan+Sirhan"), 1).
+atom(peop("Kennedy"), 1).
+atom(peop("Soledad+Prison"), 1).
+atom(kill("Sirhan+Sirhan", "Soledad+Prison"), 1).
+atom(kill("Sirhan+Sirhan", "Kennedy"), 1).

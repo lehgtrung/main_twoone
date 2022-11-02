@@ -1,0 +1,8 @@
+atom(peop("Gerald+McEntee"), 1).
+atom(org("American+Federation"), 1).
+atom(org("State"), 1).
+atom(org("Municipal+Employees"), 1).
+atom(peop("Michael+Harrington"), 1).
+atom(workFor("Gerald+McEntee", "Municipal+Employees"), 1).
+atom(workFor("Gerald+McEntee", "State"), 1).
+atom(workFor("Gerald+McEntee", "American+Federation"), 1).

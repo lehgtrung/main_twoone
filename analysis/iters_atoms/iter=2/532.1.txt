@@ -1,0 +1,5 @@
+atom(peop("Albrecht"), 1).
+atom(other("University"), 1).
+atom(org("Iowa"), 1).
+atom(org("CFTC"), 1).
+atom(workFor("Albrecht", "Iowa"), 1).

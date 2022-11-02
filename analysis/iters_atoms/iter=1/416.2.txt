@@ -1,0 +1,7 @@
+atom(org("Zapatist+National+Liberation+Army"), 2).
+atom(loc("Southeast"), 2).
+atom(other("15+March"), 2).
+atom(other("15+March+1994"), 2).
+atom(loc("Mexico"), 2).
+atom(org("Zapatist+National+Liberation+Army"), 2).
+atom(loc("San+Cristobal"), 2).

@@ -1,0 +1,6 @@
+atom(peop("Lehi"), 2).
+atom(org("Stern+Gang"), 2).
+atom(peop("Lord+Moyne"), 2).
+atom(org("U.N."), 2).
+atom(peop("Folke+Bernadotte."), 2).
+atom(workFor("Folke+Bernadotte.", "U.N."), 2).

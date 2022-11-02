@@ -1,0 +1,12 @@
+atom(org("FBI"), 1).
+atom(peop("Doug+Beldon"), 1).
+atom(loc("Albuquerque"), 1).
+atom(loc("N.M."), 1).
+atom(loc("Henley"), 1).
+atom(loc("Washington."), 1).
+atom(orgbasedIn("FBI", "N.M."), 1).
+atom(liveIn("Doug+Beldon", "N.M."), 1).
+atom(orgbasedIn("FBI", "Washington."), 1).
+atom(locatedIn("Albuquerque", "N.M."), 1).
+atom(liveIn("Doug+Beldon", "Albuquerque"), 1).
+atom(workFor("Doug+Beldon", "FBI"), 1).

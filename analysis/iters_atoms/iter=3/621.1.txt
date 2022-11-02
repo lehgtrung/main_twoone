@@ -1,0 +1,6 @@
+atom(org("Becton+Dickinson+Co."), 1).
+atom(loc("Franklin+Lakes"), 1).
+atom(loc("N.J."), 1).
+atom(orgbasedIn("Becton+Dickinson+Co.", "Franklin+Lakes"), 1).
+atom(locatedIn("Franklin+Lakes", "N.J."), 1).
+atom(orgbasedIn("Becton+Dickinson+Co.", "N.J."), 1).

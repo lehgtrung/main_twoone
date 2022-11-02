@@ -1,0 +1,4 @@
+atom(loc("SEOUL"), 2).
+atom(loc("South+Korea"), 2).
+atom(org("AP"), 2).
+atom(locatedIn("SEOUL", "South+Korea"), 2).

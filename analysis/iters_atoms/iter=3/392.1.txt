@@ -1,0 +1,3 @@
+atom(peop("Bush"), 1).
+atom(loc("U.S."), 1).
+atom(peop("Marine+Lt.+William+Higgins"), 1).

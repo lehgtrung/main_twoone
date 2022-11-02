@@ -1,0 +1,9 @@
+atom(loc("Seoul"), 2).
+atom(other("May+20"), 2).
+atom(org("YONHAP"), 2).
+atom(org("United+National+Security+Council"), 2).
+atom(loc("North+Korea"), 2).
+atom(org("IAEA"), 2).
+atom(org("International+Atomic+Energy+Agency"), 2).
+atom(loc("Yongbyon"), 2).
+atom(orgbasedIn("YONHAP", "Seoul"), 2).

@@ -1,0 +1,5 @@
+atom(peop("Vyacheslav+Chornovil"), 1).
+atom(org("Ukrainian+Popular+Rukh"), 1).
+atom(other("26+June+,+1994"), 1).
+atom(org("INTERFAX-Ukraine"), 1).
+atom(workFor("Vyacheslav+Chornovil", "Ukrainian+Popular+Rukh"), 1).

@@ -1,0 +1,4 @@
+atom(loc("Yugoslavia"), 1).
+atom(loc("United+States"), 1).
+atom(org("Congress"), 1).
+atom(loc("Yugoslavia"), 1).

@@ -1,0 +1,7 @@
+atom(org("CNTP"), 1).
+atom(peop("Papa+Egoro"), 1).
+atom(peop("Norma+Cano"), 1).
+atom(peop("Rolando+Miller"), 1).
+atom(org("CNTP"), 1).
+atom(peop("Norma+Cano"), 1).
+atom(peop("Rolando+Miller"), 1).

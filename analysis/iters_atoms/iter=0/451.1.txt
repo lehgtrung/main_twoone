@@ -1,0 +1,8 @@
+atom(peop("Leslie+Kota"), 1).
+atom(org("K+mart"), 1).
+atom(loc("Troy"), 1).
+atom(loc("Mich."), 1).
+atom(orgbasedIn("K+mart", "Mich."), 1).
+atom(orgbasedIn("K+mart", "Troy"), 1).
+atom(locatedIn("Troy", "Mich."), 1).
+atom(workFor("Leslie+Kota", "K+mart"), 1).

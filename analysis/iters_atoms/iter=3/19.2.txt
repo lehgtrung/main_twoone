@@ -1,0 +1,6 @@
+atom(loc("U.S.+Coast+Guard+Training+Center"), 2).
+atom(loc("Petaluma"), 2).
+atom(loc("Calif."), 2).
+atom(locatedIn("U.S.+Coast+Guard+Training+Center", "Petaluma"), 2).
+atom(locatedIn("Petaluma", "Calif."), 2).
+atom(locatedIn("U.S.+Coast+Guard+Training+Center", "Calif."), 2).

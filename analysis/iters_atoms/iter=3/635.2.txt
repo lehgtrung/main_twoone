@@ -1,0 +1,4 @@
+atom(loc("Washington"), 2).
+atom(loc("U.S."), 2).
+atom(loc("Pyongyang"), 2).
+atom(locatedIn("Washington", "U.S."), 2).

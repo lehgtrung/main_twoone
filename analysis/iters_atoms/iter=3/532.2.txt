@@ -1,0 +1,3 @@
+atom(peop("Albrecht"), 2).
+atom(other("University+of+Iowa"), 2).
+atom(org("CFTC"), 2).

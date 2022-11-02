@@ -1,0 +1,7 @@
+atom(peop("Mauri+Pekkarinen"), 1).
+atom(loc("Finland"), 1).
+atom(org("EU"), 1).
+atom(org("European+Union"), 1).
+atom(orgbasedIn("European+Union", "Finland"), 1).
+atom(liveIn("Mauri+Pekkarinen", "Finland"), 1).
+atom(orgbasedIn("EU", "Finland"), 1).

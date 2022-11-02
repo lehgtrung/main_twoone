@@ -1,0 +1,3 @@
+atom(loc("WAMPSVILLE"), 1).
+atom(loc("N.Y+."), 1).
+atom(locatedIn("WAMPSVILLE", "N.Y+."), 1).

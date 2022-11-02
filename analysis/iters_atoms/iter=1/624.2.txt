@@ -1,0 +1,6 @@
+atom(peop("George+Shibley"), 2).
+atom(peop("Robert+F.+Kennedy"), 2).
+atom(peop("Sirhan+Sirhan"), 2).
+atom(other("Hispanics"), 2).
+atom(other("1940s"), 2).
+atom(kill("Sirhan+Sirhan", "Robert+F.+Kennedy"), 2).

@@ -1,0 +1,7 @@
+atom(loc("United+States"), 1).
+atom(loc("Britain"), 1).
+atom(loc("France"), 1).
+atom(org("Security+Council"), 1).
+atom(loc("U.S.+Navy"), 1).
+atom(org("Mediterranean"), 1).
+atom(other("Jan."), 1).

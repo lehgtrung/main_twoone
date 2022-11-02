@@ -1,0 +1,10 @@
+atom(peop("Igor+Porshnev"), 2).
+atom(peop("Vitaly+Trubetskoi"), 2).
+atom(loc("Russia"), 2).
+atom(loc("South+Africa"), 2).
+atom(org("Foreign+Ministry"), 2).
+atom(peop("Grigory+Karasin"), 2).
+atom(other("28+April"), 2).
+atom(loc("Moscow"), 2).
+atom(liveIn("Igor+Porshnev", "Russia"), 2).
+atom(workFor("Grigory+Karasin", "Foreign+Ministry"), 2).

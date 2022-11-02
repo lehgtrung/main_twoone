@@ -1,0 +1,8 @@
+atom(peop("Anderson"), 1).
+atom(peop("Peggy+Say"), 1).
+atom(loc("Batavia"), 1).
+atom(loc("N.Y."), 1).
+atom(liveIn("Peggy+Say", "Batavia"), 1).
+atom(liveIn("Anderson", "Batavia"), 1).
+atom(locatedIn("Batavia", "N.Y."), 1).
+atom(liveIn("Peggy+Say", "N.Y."), 1).

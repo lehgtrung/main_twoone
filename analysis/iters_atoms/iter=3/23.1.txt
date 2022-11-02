@@ -1,0 +1,3 @@
+atom(loc("KAL"), 1).
+atom(peop("George+Tompkins"), 1).
+atom(loc("Soviet"), 1).

@@ -1,0 +1,5 @@
+atom(peop("James+Helmer"), 1).
+atom(org("GE"), 1).
+atom(other("Oct.+14"), 1).
+atom(org("FBI"), 1).
+atom(org("Air+Force"), 1).

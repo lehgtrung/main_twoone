@@ -1,0 +1,10 @@
+atom(org("Knight-Ridder+Inc."), 2).
+atom(org("Star-News"), 2).
+atom(loc("Pasadena"), 2).
+atom(loc("Calif."), 2).
+atom(loc("Gary"), 2).
+atom(loc("Ind"), 2).
+atom(orgbasedIn("Knight-Ridder+Inc.", "Ind"), 2).
+atom(locatedIn("Gary", "Ind"), 2).
+atom(locatedIn("Pasadena", "Calif."), 2).
+atom(orgbasedIn("Knight-Ridder+Inc.", "Calif."), 2).

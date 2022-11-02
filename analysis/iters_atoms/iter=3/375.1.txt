@@ -1,0 +1,9 @@
+atom(other("3+p.m."), 1).
+atom(other("59+degrees"), 1).
+atom(loc("Astoria"), 1).
+atom(loc("Ore."), 1).
+atom(loc("Needles"), 1).
+atom(loc("Calif."), 1).
+atom(locatedIn("Needles", "Calif."), 1).
+atom(locatedIn("Astoria", "Ore."), 1).
+atom(locatedIn("Astoria", "Calif."), 1).

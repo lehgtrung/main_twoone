@@ -1,0 +1,4 @@
+atom(loc("Soviets"), 2).
+atom(org("Harvard"), 2).
+atom(peop("Kennedy"), 2).
+atom(loc("U.S."), 2).

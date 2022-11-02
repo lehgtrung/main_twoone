@@ -1,0 +1,7 @@
+atom(org("Supreme+Court+jury"), 2).
+atom(loc("Niagara+County"), 2).
+atom(peop("Thomas+Viscomi"), 2).
+atom(peop("Norma+Viscomi"), 2).
+atom(loc("Niagara+Falls"), 2).
+atom(orgbasedIn("Supreme+Court+jury", "Niagara+County"), 2).
+atom(liveIn("Norma+Viscomi", "Niagara+Falls"), 2).

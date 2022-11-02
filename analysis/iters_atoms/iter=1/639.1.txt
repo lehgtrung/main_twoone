@@ -1,0 +1,4 @@
+atom(loc("United+States"), 1).
+atom(peop("Ulysses+S.+Grant"), 1).
+atom(loc("Point+Pleasant+,+Ohio"), 1).
+atom(liveIn("Ulysses+S.+Grant", "Point+Pleasant+,+Ohio"), 1).

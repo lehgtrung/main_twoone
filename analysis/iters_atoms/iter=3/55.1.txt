@@ -1,0 +1,4 @@
+atom(peop("John+Lennon"), 1).
+atom(peop("Chapman"), 1).
+atom(loc("Attica"), 1).
+atom(kill("Chapman", "John+Lennon"), 1).

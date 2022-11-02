@@ -1,0 +1,4 @@
+atom(peop("Robert+Bernero"), 1).
+atom(org("NRC"), 1).
+atom(loc("Yucca+Mountain"), 1).
+atom(workFor("Robert+Bernero", "NRC"), 1).

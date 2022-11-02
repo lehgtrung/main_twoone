@@ -1,0 +1,6 @@
+atom(loc("GSA+Depot"), 2).
+atom(loc("Watertown"), 2).
+atom(loc("Mass."), 2).
+atom(locatedIn("Watertown", "Mass."), 2).
+atom(locatedIn("GSA+Depot", "Mass."), 2).
+atom(locatedIn("GSA+Depot", "Watertown"), 2).

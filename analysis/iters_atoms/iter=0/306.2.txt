@@ -1,0 +1,4 @@
+atom(loc("Louisiana"), 2).
+atom(peop("Buddy+Roemer"), 2).
+atom(other("last+April"), 2).
+atom(liveIn("Buddy+Roemer", "Louisiana"), 2).

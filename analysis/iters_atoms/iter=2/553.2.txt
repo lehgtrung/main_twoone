@@ -1,0 +1,7 @@
+atom(peop("Quayles"), 2).
+atom(peop("Tucker"), 2).
+atom(peop("Benjamin"), 2).
+atom(peop("Corinne"), 2).
+atom(loc("Naval+Observatory"), 2).
+atom(loc("Washington"), 2).
+atom(locatedIn("Naval+Observatory", "Washington"), 2).

@@ -1,0 +1,4 @@
+atom(peop("Patrick+Strosahl"), 2).
+atom(org("Vision+Seattle"), 2).
+atom(org("CAP"), 2).
+atom(workFor("Patrick+Strosahl", "Vision+Seattle"), 2).

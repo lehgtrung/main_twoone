@@ -1,0 +1,4 @@
+atom(peop("Benjamin+Harrison"), 2).
+atom(loc("United+States"), 2).
+atom(loc("North+Bend+,+Ohio"), 2).
+atom(liveIn("Benjamin+Harrison", "North+Bend+,+Ohio"), 2).

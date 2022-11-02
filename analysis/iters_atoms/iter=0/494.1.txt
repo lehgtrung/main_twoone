@@ -1,0 +1,5 @@
+atom(peop("Trump"), 1).
+atom(loc("Taj+Mahal"), 1).
+atom(loc("Atlantic+City"), 1).
+atom(peop("Patti+Fox"), 1).
+atom(peop("Trump"), 1).

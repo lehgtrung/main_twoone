@@ -1,0 +1,3 @@
+atom(loc("Washington"), 1).
+atom(loc("U.S."), 1).
+atom(loc("Pyongyang"), 1).

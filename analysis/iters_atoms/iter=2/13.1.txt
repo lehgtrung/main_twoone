@@ -1,0 +1,3 @@
+atom(peop("President+James+Garfield"), 1).
+atom(peop("Charles+Guiteau"), 1).
+atom(peop("Jonathan+Hadary"), 1).

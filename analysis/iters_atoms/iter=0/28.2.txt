@@ -1,0 +1,4 @@
+atom(org("Environmental+Protection+Agency"), 2).
+atom(peop("Robin+Woods"), 2).
+atom(loc("Washington"), 2).
+atom(peop("Woods"), 2).

@@ -1,0 +1,4 @@
+atom(peop("W.+Dale+Nelson"), 1).
+atom(other("White+House"), 1).
+atom(org("Associated+Press"), 1).
+atom(workFor("W.+Dale+Nelson", "Associated+Press"), 1).

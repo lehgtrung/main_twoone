@@ -1,0 +1,9 @@
+atom(peop("James+Earl+Ray"), 2).
+atom(peop("Martin+Luther+King+Jr."), 2).
+atom(peop("Anna+Sandhu"), 2).
+atom(loc("Brushy+Mountain"), 2).
+atom(loc("Tennessee"), 2).
+atom(liveIn("Anna+Sandhu", "Tennessee"), 2).
+atom(locatedIn("Brushy+Mountain", "Tennessee"), 2).
+atom(kill("James+Earl+Ray", "Martin+Luther+King+Jr."), 2).
+atom(liveIn("Anna+Sandhu", "Brushy+Mountain"), 2).

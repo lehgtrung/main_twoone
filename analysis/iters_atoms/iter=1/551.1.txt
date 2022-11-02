@@ -1,0 +1,4 @@
+atom(org("Queensland+Liver+Transplant+Service"), 1).
+atom(peop("Dr."), 1).
+atom(peop("Russell+Strong"), 1).
+atom(workFor("Russell+Strong", "Queensland+Liver+Transplant+Service"), 1).

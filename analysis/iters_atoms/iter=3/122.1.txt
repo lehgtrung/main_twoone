@@ -1,0 +1,5 @@
+atom(peop("Robert+Weisner"), 1).
+atom(loc("Washington"), 1).
+atom(loc("Austrian"), 1).
+atom(liveIn("Robert+Weisner", "Austrian"), 1).
+atom(liveIn("Robert+Weisner", "Washington"), 1).

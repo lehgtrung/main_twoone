@@ -1,0 +1,8 @@
+atom(peop("Bossi"), 1).
+atom(peop("Fini"), 1).
+atom(loc("Italy"), 1).
+atom(peop("Minoli"), 1).
+atom(peop("Benito+Mussolini"), 1).
+atom(peop("Fini"), 1).
+atom(loc("Italy"), 1).
+atom(liveIn("Fini", "Italy"), 1).

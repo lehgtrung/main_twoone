@@ -1,0 +1,7 @@
+atom(loc("Caguasu"), 1).
+atom(loc("Cuba+Libre"), 1).
+atom(peop("Juan+Avila"), 1).
+atom(peop("Reinol+Garcia"), 1).
+atom(loc("Mexico"), 1).
+atom(loc("Jovellanos"), 1).
+atom(liveIn("Reinol+Garcia", "Mexico"), 1).

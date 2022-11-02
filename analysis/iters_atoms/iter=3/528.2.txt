@@ -1,0 +1,7 @@
+atom(org("National+Transportation+Safety+Board"), 2).
+atom(loc("Evendale"), 2).
+atom(loc("Ohio"), 2).
+atom(org("General+Electric"), 2).
+atom(other("July+19"), 2).
+atom(org("United+Airlines"), 2).
+atom(locatedIn("Evendale", "Ohio"), 2).

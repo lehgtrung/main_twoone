@@ -1,0 +1,4 @@
+atom(loc("New+York"), 2).
+atom(peop("Mario+Cuomo"), 2).
+atom(peop("Kean"), 2).
+atom(workFor("Mario+Cuomo", "New+York"), 2).

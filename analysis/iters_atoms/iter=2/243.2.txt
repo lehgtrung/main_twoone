@@ -1,0 +1,5 @@
+atom(loc("Johannesburg"), 2).
+atom(org("SAPA"), 2).
+atom(other("1022+GMT"), 2).
+atom(other("9+May+94"), 2).
+atom(orgbasedIn("SAPA", "Johannesburg"), 2).

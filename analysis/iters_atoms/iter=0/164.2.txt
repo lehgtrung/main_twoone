@@ -1,0 +1,19 @@
+atom(peop("Jace+Alexander"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(peop("Victor+Garber"), 2).
+atom(peop("John+Wilkes+Booth"), 2).
+atom(peop("Debra+Monk"), 2).
+atom(peop("Sara+Jane+Moore"), 2).
+atom(peop("Greg+Germann"), 2).
+atom(peop("John+Hinckley"), 2).
+atom(peop("Annie+Golden"), 2).
+atom(peop("Lynette"), 2).
+atom(peop("President+Ford"), 2).
+atom(peop("Terrence+Mann"), 2).
+atom(peop("Leon+Czolgosz"), 2).
+atom(peop("President+McKinley"), 2).
+atom(kill("Jace+Alexander", "Lee+Harvey+Oswald"), 2).
+atom(kill("Greg+Germann", "John+Hinckley"), 2).
+atom(kill("Leon+Czolgosz", "President+McKinley"), 2).
+atom(kill("Victor+Garber", "John+Wilkes+Booth"), 2).
+atom(kill("Terrence+Mann", "President+McKinley"), 2).

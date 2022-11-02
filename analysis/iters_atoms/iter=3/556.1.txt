@@ -1,0 +1,6 @@
+atom(org("CLARIN"), 1).
+atom(org("Mediterranean+Foundation"), 1).
+atom(peop("Juan+Novara"), 1).
+atom(org("CNEA"), 1).
+atom(workFor("Juan+Novara", "CNEA"), 1).
+atom(workFor("Juan+Novara", "Mediterranean+Foundation"), 1).

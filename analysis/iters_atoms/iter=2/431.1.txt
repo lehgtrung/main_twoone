@@ -1,0 +1,3 @@
+atom(loc("Truckee"), 1).
+atom(loc("Calif."), 1).
+atom(locatedIn("Truckee", "Calif."), 1).

@@ -1,0 +1,8 @@
+atom(org("PRI"), 2).
+atom(other("37+percent"), 2).
+atom(peop("Cardenas"), 2).
+atom(org("PRD"), 2).
+atom(org("Party+of+the+Democratic+Revolution"), 2).
+atom(other("9+percent"), 2).
+atom(workFor("Cardenas", "PRD"), 2).
+atom(workFor("Cardenas", "Party+of+the+Democratic+Revolution"), 2).

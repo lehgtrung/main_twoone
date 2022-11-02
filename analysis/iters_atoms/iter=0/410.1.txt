@@ -1,0 +1,4 @@
+atom(peop("Washington+Irving"), 1).
+atom(peop("Rip+Van+Winkle"), 1).
+atom(loc("Sleepy+Hollow"), 1).
+atom(loc("New+York+City"), 1).

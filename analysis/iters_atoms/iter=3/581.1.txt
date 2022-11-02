@@ -1,0 +1,5 @@
+atom(loc("South+Dakota"), 1).
+atom(loc("Lincoln+No.+51"), 1).
+atom(loc("Lemmon"), 1).
+atom(loc("South+Dakota"), 1).
+atom(locatedIn("Lemmon", "South+Dakota"), 1).

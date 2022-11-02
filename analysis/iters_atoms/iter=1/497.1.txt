@@ -1,0 +1,4 @@
+atom(loc("Serbia"), 1).
+atom(loc("Kosovo"), 1).
+atom(loc("Middle"), 1).
+atom(locatedIn("Kosovo", "Serbia"), 1).

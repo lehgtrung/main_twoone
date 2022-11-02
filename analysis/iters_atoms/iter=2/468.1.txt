@@ -1,0 +1,3 @@
+atom(loc("Cedar+City"), 1).
+atom(loc("Utah"), 1).
+atom(locatedIn("Cedar+City", "Utah"), 1).

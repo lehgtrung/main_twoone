@@ -1,0 +1,3 @@
+atom(peop("Reith+Chuol"), 2).
+atom(loc("Upper+Nile+region"), 2).
+atom(liveIn("Reith+Chuol", "Upper+Nile+region"), 2).

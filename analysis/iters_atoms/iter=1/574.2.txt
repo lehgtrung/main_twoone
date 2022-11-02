@@ -1,0 +1,10 @@
+atom(peop("Booth"), 2).
+atom(peop("Lincoln"), 2).
+atom(other("Ford"), 2).
+atom(other("Theatre"), 2).
+atom(loc("Washington+,+D.C."), 2).
+atom(other("April"), 2).
+atom(peop("Gen.+Robert+E.+Lee"), 2).
+atom(loc("Appomattox"), 2).
+atom(liveIn("Gen.+Robert+E.+Lee", "Appomattox"), 2).
+atom(kill("Booth", "Lincoln"), 2).

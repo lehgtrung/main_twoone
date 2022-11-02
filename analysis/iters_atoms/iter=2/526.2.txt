@@ -1,0 +1,8 @@
+atom(loc("Gabcikovo"), 2).
+atom(org("International+Court+of+Justice"), 2).
+atom(loc("Hague"), 2).
+atom(loc("Bratislava"), 2).
+atom(loc("Budapest"), 2).
+atom(org("Danube"), 2).
+atom(loc("Hague"), 2).
+atom(orgbasedIn("International+Court+of+Justice", "Hague"), 2).

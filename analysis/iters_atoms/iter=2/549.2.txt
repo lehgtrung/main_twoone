@@ -1,0 +1,4 @@
+atom(loc("America"), 2).
+atom(org("Statue"), 2).
+atom(other("June+5"), 2).
+atom(orgbasedIn("Statue", "America"), 2).

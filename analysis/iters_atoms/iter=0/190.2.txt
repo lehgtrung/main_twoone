@@ -1,0 +1,2 @@
+atom(loc("LANCASTER+,"), 2).
+atom(loc("Ky."), 2).

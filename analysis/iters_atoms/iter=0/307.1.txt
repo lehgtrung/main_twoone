@@ -1,0 +1,5 @@
+atom(loc("Mountain+Empire"), 1).
+atom(org("Unified+School+District"), 1).
+atom(loc("San+Diego+County"), 1).
+atom(orgbasedIn("Unified+School+District", "San+Diego+County"), 1).
+atom(orgbasedIn("Mountain+Empire", "San+Diego+County"), 1).

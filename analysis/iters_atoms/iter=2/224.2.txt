@@ -1,0 +1,5 @@
+atom(other("200+acres"), 2).
+atom(loc("Orange+County"), 2).
+atom(org("county+Fire+Department"), 2).
+atom(peop("Hugh+Madlock"), 2).
+atom(workFor("Hugh+Madlock", "county+Fire+Department"), 2).

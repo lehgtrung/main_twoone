@@ -1,0 +1,8 @@
+atom(loc("Brazil"), 2).
+atom(org("Brazilian+Space+Program"), 2).
+atom(loc("Sao+Paulo"), 2).
+atom(org("GAZETA+MERCANTIL"), 2).
+atom(other("27-29+Nov+93"), 2).
+atom(orgbasedIn("Brazilian+Space+Program", "Brazil"), 2).
+atom(orgbasedIn("GAZETA+MERCANTIL", "Sao+Paulo"), 2).
+atom(orgbasedIn("Brazilian+Space+Program", "Sao+Paulo"), 2).

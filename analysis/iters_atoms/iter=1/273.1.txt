@@ -1,0 +1,6 @@
+atom(loc("Dayton+International+Airport"), 1).
+atom(other("4"), 1).
+atom(other("45+a.m."), 1).
+atom(peop("James+Francis"), 1).
+atom(loc("Dayton"), 1).
+atom(liveIn("James+Francis", "Dayton"), 1).

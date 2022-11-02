@@ -1,0 +1,3 @@
+atom(peop("Samih"), 2).
+atom(loc("Asyut"), 2).
+atom(liveIn("Samih", "Asyut"), 2).

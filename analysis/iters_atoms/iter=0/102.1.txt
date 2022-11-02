@@ -1,0 +1,9 @@
+atom(loc("South+Korean"), 1).
+atom(loc("South+Korean"), 1).
+atom(loc("Alaska+pollock"), 1).
+atom(loc("Kamchatka"), 1).
+atom(loc("Okhotsk+Sea"), 1).
+atom(loc("Kamchatka"), 1).
+atom(peop("Kuzmenko"), 1).
+atom(loc("Okhotsk"), 1).
+atom(peop("Korochkin"), 1).

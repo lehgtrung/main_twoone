@@ -1,0 +1,6 @@
+atom(loc("Mount+Blanc"), 2).
+atom(loc("Europe"), 2).
+atom(other("10.6+feet"), 2).
+atom(org("Italian+army"), 2).
+atom(org("Geographic+Institute"), 2).
+atom(locatedIn("Mount+Blanc", "Europe"), 2).

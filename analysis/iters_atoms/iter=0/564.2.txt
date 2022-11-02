@@ -1,0 +1,2 @@
+atom(peop("Mohamed+Ahmed+Issa"), 2).
+atom(peop("Cheiko"), 2).

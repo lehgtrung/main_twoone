@@ -1,0 +1,7 @@
+atom(peop("Aldrin"), 1).
+atom(loc("Montclair"), 1).
+atom(loc("N.J."), 1).
+atom(peop("Edwin+E.+Aldrin+Jr"), 1).
+atom(locatedIn("Montclair", "N.J."), 1).
+atom(liveIn("Aldrin", "N.J."), 1).
+atom(liveIn("Aldrin", "Montclair"), 1).

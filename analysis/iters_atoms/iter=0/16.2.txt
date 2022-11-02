@@ -1,0 +1,7 @@
+atom(peop("Peter+Butler"), 2).
+atom(other("A.+Copeland+Enterprises+Inc."), 2).
+atom(loc("New"), 2).
+atom(peop("Henry+A.+Politz"), 2).
+atom(loc("U.S.+Circuit+Court"), 2).
+atom(workFor("Henry+A.+Politz", "U.S.+Circuit+Court"), 2).
+atom(workFor("Peter+Butler", "A.+Copeland+Enterprises+Inc."), 2).

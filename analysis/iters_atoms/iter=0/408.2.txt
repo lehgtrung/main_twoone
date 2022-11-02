@@ -1,0 +1,4 @@
+atom(loc("Cuenca"), 2).
+atom(loc("Ecuador"), 2).
+atom(other("26+May"), 2).
+atom(locatedIn("Cuenca", "Ecuador"), 2).

@@ -1,0 +1,4 @@
+atom(loc("CARACAS"), 2).
+atom(loc("Venezuela"), 2).
+atom(org("AP"), 2).
+atom(locatedIn("CARACAS", "Venezuela"), 2).

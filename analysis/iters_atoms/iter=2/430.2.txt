@@ -1,0 +1,6 @@
+atom(loc("Tokyo"), 2).
+atom(other("June+20"), 2).
+atom(org("KYODO"), 2).
+atom(loc("North+Korea"), 2).
+atom(peop("Koji+Kakizawa"), 2).
+atom(orgbasedIn("KYODO", "Tokyo"), 2).

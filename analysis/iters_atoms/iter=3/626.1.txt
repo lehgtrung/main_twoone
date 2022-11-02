@@ -1,0 +1,5 @@
+atom(loc("Jakarta"), 1).
+atom(org("Radio+Republik+Indonesia+Network"), 1).
+atom(other("1200+GMT"), 1).
+atom(other("21+Jun+94"), 1).
+atom(orgbasedIn("Radio+Republik+Indonesia+Network", "Jakarta"), 1).

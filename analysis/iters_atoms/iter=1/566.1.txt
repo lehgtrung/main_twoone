@@ -1,0 +1,2 @@
+atom(peop("Me+'ir+Kohen"), 1).
+atom(org("IDF"), 1).

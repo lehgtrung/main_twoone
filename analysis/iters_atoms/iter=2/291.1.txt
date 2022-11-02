@@ -1,0 +1,6 @@
+atom(peop("Ray"), 1).
+atom(peop("King"), 1).
+atom(loc("Lorraine+Motel"), 1).
+atom(loc("Memphis"), 1).
+atom(kill("Ray", "King"), 1).
+atom(locatedIn("Lorraine+Motel", "Memphis"), 1).

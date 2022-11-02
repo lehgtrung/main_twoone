@@ -1,0 +1,2 @@
+atom(peop("Hernandez+Galicia"), 1).
+atom(loc("Ciudad+Madero"), 1).

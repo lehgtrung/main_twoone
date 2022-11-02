@@ -1,0 +1,5 @@
+atom(peop("Ciacelli"), 2).
+atom(loc("Dallas+County+Historical+Association"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(peop("Kennedy"), 2).
+atom(kill("Lee+Harvey+Oswald", "Kennedy"), 2).

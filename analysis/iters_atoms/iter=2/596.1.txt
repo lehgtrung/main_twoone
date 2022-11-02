@@ -1,0 +1,10 @@
+atom(peop("Yount"), 1).
+atom(loc("Coeur"), 1).
+atom(peop("James+Marvin+Forsgren"), 1).
+atom(peop("Pamela+Sue+Rimer"), 1).
+atom(loc("Luthersberg"), 1).
+atom(loc("Pa"), 1).
+atom(liveIn("Pamela+Sue+Rimer", "Pa"), 1).
+atom(locatedIn("Luthersberg", "Pa"), 1).
+atom(liveIn("Pamela+Sue+Rimer", "Luthersberg"), 1).
+atom(liveIn("Yount", "Coeur"), 1).

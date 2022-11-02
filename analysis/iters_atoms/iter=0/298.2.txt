@@ -1,0 +1,10 @@
+atom(peop("Stone"), 2).
+atom(peop("Garrison"), 2).
+atom(peop("Earl+Warren"), 2).
+atom(org("Warren+Commission"), 2).
+atom(peop("Oswald"), 2).
+atom(peop("Kennedy"), 2).
+atom(loc("Dallas"), 2).
+atom(other("Nov."), 2).
+atom(workFor("Earl+Warren", "Warren+Commission"), 2).
+atom(kill("Oswald", "Kennedy"), 2).

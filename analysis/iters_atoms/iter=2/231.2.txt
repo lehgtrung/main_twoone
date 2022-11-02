@@ -1,0 +1,7 @@
+atom(peop("Dean+Falk"), 2).
+atom(org("State+University+of+New+York"), 2).
+atom(loc("Albany"), 2).
+atom(loc("Kebara"), 2).
+atom(org("Science+News"), 2).
+atom(orgbasedIn("State+University+of+New+York", "Albany"), 2).
+atom(workFor("Dean+Falk", "State+University+of+New+York"), 2).

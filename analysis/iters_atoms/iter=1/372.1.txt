@@ -1,0 +1,5 @@
+atom(peop("Weerts"), 1).
+atom(peop("Tanya"), 1).
+atom(org("Shands+Hospital"), 1).
+atom(loc("Gainesville"), 1).
+atom(orgbasedIn("Shands+Hospital", "Gainesville"), 1).

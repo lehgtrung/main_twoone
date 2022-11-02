@@ -1,0 +1,3 @@
+atom(peop("Mr.+Vishnu+Hari+Dalmia"), 1).
+atom(org("VHP"), 1).
+atom(workFor("Mr.+Vishnu+Hari+Dalmia", "VHP"), 1).

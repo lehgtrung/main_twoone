@@ -1,0 +1,5 @@
+atom(peop("Sirhan"), 1).
+atom(loc("Soledad+Prison"), 1).
+atom(peop("Kennedy"), 1).
+atom(loc("California"), 1).
+atom(kill("Sirhan", "Kennedy"), 1).

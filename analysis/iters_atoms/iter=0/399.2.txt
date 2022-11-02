@@ -1,0 +1,7 @@
+atom(loc("Cairo"), 2).
+atom(other("2+May"), 2).
+atom(org("MENA"), 2).
+atom(peop("Husni+Mubarak"), 2).
+atom(loc("Egypt"), 2).
+atom(liveIn("Husni+Mubarak", "Egypt"), 2).
+atom(orgbasedIn("MENA", "Cairo"), 2).

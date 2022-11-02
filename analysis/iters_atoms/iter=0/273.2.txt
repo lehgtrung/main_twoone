@@ -1,0 +1,4 @@
+atom(loc("Dayton+International+Airport"), 2).
+atom(peop("James+Francis"), 2).
+atom(loc("Dayton"), 2).
+atom(liveIn("James+Francis", "Dayton"), 2).

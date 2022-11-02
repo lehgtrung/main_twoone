@@ -1,0 +1,5 @@
+atom(peop("Michael+Holtcamp"), 2).
+atom(loc("Huntsville"), 2).
+atom(loc("Alabama"), 2).
+atom(locatedIn("Huntsville", "Alabama"), 2).
+atom(liveIn("Michael+Holtcamp", "Alabama"), 2).

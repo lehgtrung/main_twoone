@@ -1,0 +1,6 @@
+atom(peop("Warner"), 2).
+atom(loc("U.S."), 2).
+atom(loc("Switzerland"), 2).
+atom(loc("Ohio"), 2).
+atom(loc("Home+State"), 2).
+atom(liveIn("Warner", "Ohio"), 2).

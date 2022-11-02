@@ -1,0 +1,4 @@
+atom(peop("Quayle"), 1).
+atom(org("Huntington+Herald-Press"), 1).
+atom(peop("George+Bush"), 1).
+atom(workFor("Quayle", "Huntington+Herald-Press"), 1).

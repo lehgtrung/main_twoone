@@ -1,0 +1,4 @@
+atom(loc("U.S.+District+Court"), 1).
+atom(peop("Carl+Rubin"), 1).
+atom(other("Feb."), 1).
+atom(workFor("Carl+Rubin", "U.S.+District+Court"), 1).

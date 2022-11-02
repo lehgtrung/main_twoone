@@ -1,0 +1,5 @@
+atom(loc("Hague"), 1).
+atom(loc("Bratislava"), 1).
+atom(loc("Budapest"), 1).
+atom(org("Danube"), 1).
+atom(loc("Hague"), 1).

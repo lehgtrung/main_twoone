@@ -1,0 +1,4 @@
+atom(loc("Shanghai"), 1).
+atom(loc("San+Francisco"), 1).
+atom(loc("Shanghai"), 1).
+atom(loc("United+States."), 1).

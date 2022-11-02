@@ -1,0 +1,8 @@
+atom(peop("Kennedy"), 1).
+atom(peop("Oswald"), 1).
+atom(peop("President+Kennedy"), 1).
+atom(peop("Officer+Tippit"), 1).
+atom(peop("Earl+Warren"), 1).
+atom(org("Warren+Commission."), 1).
+atom(kill("Oswald", "Officer+Tippit"), 1).
+atom(kill("Oswald", "President+Kennedy"), 1).

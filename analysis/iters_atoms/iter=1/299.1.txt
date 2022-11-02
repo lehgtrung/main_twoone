@@ -1,0 +1,5 @@
+atom(peop("John+Ray"), 1).
+atom(org("District+of+Columbia+Council"), 1).
+atom(other("$218+,+592"), 1).
+atom(other("January"), 1).
+atom(workFor("John+Ray", "District+of+Columbia+Council"), 1).

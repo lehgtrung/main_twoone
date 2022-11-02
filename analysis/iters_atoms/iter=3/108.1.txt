@@ -1,0 +1,2 @@
+atom(loc("Quebec"), 1).
+atom(loc("North+America"), 1).

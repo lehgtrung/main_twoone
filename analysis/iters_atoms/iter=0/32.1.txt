@@ -1,0 +1,3 @@
+atom(loc("Sofia"), 1).
+atom(org("BTA"), 1).
+atom(orgbasedIn("BTA", "Sofia"), 1).

@@ -1,0 +1,7 @@
+atom(peop("Phillip+Lieberman"), 2).
+atom(org("Brown+Univeristy"), 2).
+atom(loc("Providence"), 2).
+atom(loc("Kebara"), 2).
+atom(orgbasedIn("Brown+Univeristy", "Providence"), 2).
+atom(workFor("Phillip+Lieberman", "Brown+Univeristy"), 2).
+atom(liveIn("Phillip+Lieberman", "Providence"), 2).

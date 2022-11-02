@@ -1,0 +1,5 @@
+atom(peop("Kennedy"), 2).
+atom(peop("John+Connally"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(org("Texas+School+Book+Depository"), 2).
+atom(kill("John+Connally", "Lee+Harvey+Oswald"), 2).

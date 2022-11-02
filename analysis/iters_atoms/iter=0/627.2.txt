@@ -1,0 +1,4 @@
+atom(peop("Baruch+Arensberg"), 2).
+atom(loc("Tel+Aviv"), 2).
+atom(loc("Israel."), 2).
+atom(liveIn("Baruch+Arensberg", "Tel+Aviv"), 2).

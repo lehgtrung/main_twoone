@@ -1,0 +1,6 @@
+atom(loc("Moscow"), 1).
+atom(loc("State"), 1).
+atom(peop("Konstantin+Zatulin"), 1).
+atom(loc("Crimea"), 1).
+atom(liveIn("Konstantin+Zatulin", "Moscow"), 1).
+atom(liveIn("Konstantin+Zatulin", "State"), 1).

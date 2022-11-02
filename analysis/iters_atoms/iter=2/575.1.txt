@@ -1,0 +1,4 @@
+atom(peop("Mubarak"), 1).
+atom(loc("Saudi+Arabia"), 1).
+atom(peop("King+Fahd-Bin-"), 1).
+atom(loc("kingdom"), 1).

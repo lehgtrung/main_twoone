@@ -1,0 +1,3 @@
+atom(loc("Texas"), 2).
+atom(peop("President+Nixon"), 2).
+atom(loc("U.S."), 2).

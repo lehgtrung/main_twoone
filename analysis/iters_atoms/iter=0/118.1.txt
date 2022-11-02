@@ -1,0 +1,2 @@
+atom(loc("Mlita+hill"), 1).
+atom(loc("Iqlim+al-Tuffah"), 1).

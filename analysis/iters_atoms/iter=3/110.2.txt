@@ -1,0 +1,5 @@
+atom(peop("Sturholm"), 2).
+atom(peop("Kathryn+Rich"), 2).
+atom(org("KIRO."), 2).
+atom(workFor("Kathryn+Rich", "KIRO."), 2).
+atom(workFor("Sturholm", "KIRO."), 2).

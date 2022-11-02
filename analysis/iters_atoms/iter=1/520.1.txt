@@ -1,0 +1,4 @@
+atom(peop("Brutus"), 1).
+atom(peop("Julius+Caesar"), 1).
+atom(other("$99"), 1).
+atom(kill("Brutus", "Julius+Caesar"), 1).

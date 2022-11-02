@@ -1,0 +1,6 @@
+atom(peop("Judy+Kaye"), 2).
+atom(other("Tony"), 2).
+atom(loc("Broadway"), 2).
+atom(org("New+York+Opera+Repertory+Theater"), 2).
+atom(peop("Abbie"), 2).
+atom(workFor("Judy+Kaye", "New+York+Opera+Repertory+Theater"), 2).

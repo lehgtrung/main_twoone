@@ -1,0 +1,5 @@
+atom(org("U.N."), 1).
+atom(peop("Fred+Eckhard"), 1).
+atom(other("$394.9+million"), 1).
+atom(other("$355.2+million"), 1).
+atom(workFor("Fred+Eckhard", "U.N."), 1).

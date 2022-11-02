@@ -1,0 +1,7 @@
+atom(peop("Darci+Alves+Pereira"), 1).
+atom(peop("Mendes"), 1).
+atom(other("Dec."), 1).
+atom(loc("Bolivia"), 1).
+atom(other("650+miles"), 1).
+atom(loc("Rio+de+Janeiro"), 1).
+atom(kill("Darci+Alves+Pereira", "Mendes"), 1).

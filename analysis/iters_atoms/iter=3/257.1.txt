@@ -1,0 +1,3 @@
+atom(loc("West+Germany"), 1).
+atom(peop("Leica"), 1).
+atom(org("Rollei"), 1).

@@ -1,0 +1,4 @@
+atom(peop("Jack+Ruby"), 1).
+atom(loc("Dallas"), 1).
+atom(peop("Oswald"), 1).
+atom(peop("Kennedy"), 1).

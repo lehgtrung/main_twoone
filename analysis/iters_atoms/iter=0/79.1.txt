@@ -1,0 +1,6 @@
+atom(other("24-31+May"), 1).
+atom(loc("valley"), 1).
+atom(org("National+Action+Party"), 1).
+atom(peop("Fernandez+de+Cevallos"), 1).
+atom(other("42+percent"), 1).
+atom(workFor("Fernandez+de+Cevallos", "National+Action+Party"), 1).

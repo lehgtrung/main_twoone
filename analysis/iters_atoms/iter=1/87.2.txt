@@ -1,0 +1,2 @@
+atom(peop("Birand"), 2).
+atom(loc("Germany"), 2).

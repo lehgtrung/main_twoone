@@ -1,0 +1,7 @@
+atom(other("8.28+percent"), 2).
+atom(other("8.39+percent"), 2).
+atom(peop("Donoghue"), 2).
+atom(org("Money+Fund+Report"), 2).
+atom(loc("Holliston+,+Mass"), 2).
+atom(liveIn("Donoghue", "Holliston+,+Mass"), 2).
+atom(workFor("Donoghue", "Money+Fund+Report"), 2).

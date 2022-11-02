@@ -1,0 +1,7 @@
+atom(org("Army"), 2).
+atom(peop("Samuel+Mudd"), 2).
+atom(peop("Lincoln"), 2).
+atom(peop("John+Wilkes+Booth"), 2).
+atom(peop("Booth"), 2).
+atom(kill("Samuel+Mudd", "Lincoln"), 2).
+atom(kill("John+Wilkes+Booth", "Lincoln"), 2).

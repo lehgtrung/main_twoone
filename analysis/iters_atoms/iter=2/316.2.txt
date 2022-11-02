@@ -1,0 +1,3 @@
+atom(peop("Mark+David+Chapman"), 2).
+atom(peop("John+Lennon"), 2).
+atom(kill("Mark+David+Chapman", "John+Lennon"), 2).

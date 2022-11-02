@@ -1,0 +1,4 @@
+atom(peop("Me"), 2).
+atom(peop("Kohen"), 2).
+atom(loc("Israel+Defense+Forces"), 2).
+atom(workFor("Kohen", "Israel+Defense+Forces"), 2).

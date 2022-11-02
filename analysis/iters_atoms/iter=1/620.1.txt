@@ -1,0 +1,6 @@
+atom(peop("Maxwell"), 1).
+atom(loc("Plum"), 1).
+atom(loc("New+Yorkers"), 1).
+atom(other("1960s"), 1).
+atom(loc("Manhattan"), 1).
+atom(liveIn("Maxwell", "Plum"), 1).

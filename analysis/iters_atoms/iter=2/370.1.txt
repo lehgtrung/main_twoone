@@ -1,0 +1,6 @@
+atom(loc("Jakarta"), 1).
+atom(peop("Hun+Sen"), 1).
+atom(loc("Cambodia"), 1).
+atom(loc("Phnom+Penh"), 1).
+atom(org("Khmer+Rouge"), 1).
+atom(liveIn("Hun+Sen", "Cambodia"), 1).

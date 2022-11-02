@@ -1,0 +1,5 @@
+atom(peop("Wright"), 2).
+atom(peop("Barry+Goldwater"), 2).
+atom(loc("Arizona"), 2).
+atom(liveIn("Barry+Goldwater", "Arizona"), 2).
+atom(kill("Wright", "Barry+Goldwater"), 2).

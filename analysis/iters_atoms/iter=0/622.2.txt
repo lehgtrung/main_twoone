@@ -1,0 +1,6 @@
+atom(loc("Freeport"), 2).
+atom(loc("Texas"), 2).
+atom(loc("Morgan+City"), 2).
+atom(loc("La."), 2).
+atom(locatedIn("Morgan+City", "La."), 2).
+atom(locatedIn("Freeport", "Texas"), 2).

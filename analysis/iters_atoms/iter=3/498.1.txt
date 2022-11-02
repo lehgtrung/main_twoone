@@ -1,0 +1,7 @@
+atom(loc("San+Antonio"), 1).
+atom(loc("Texas"), 1).
+atom(org("Popeyes"), 1).
+atom(peop("Church"), 1).
+atom(other("Nov."), 1).
+atom(org("Popeyes"), 1).
+atom(locatedIn("San+Antonio", "Texas"), 1).

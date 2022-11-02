@@ -1,0 +1,4 @@
+atom(loc("Argentina"), 1).
+atom(other("31+million"), 1).
+atom(loc("Buenos+Aires"), 1).
+atom(peop("Antonio+Cafiero."), 1).

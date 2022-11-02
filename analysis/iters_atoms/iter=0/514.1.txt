@@ -1,0 +1,1 @@
+atom(loc("Cuba"), 1).

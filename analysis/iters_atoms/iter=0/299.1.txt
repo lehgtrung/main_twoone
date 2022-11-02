@@ -1,0 +1,4 @@
+atom(peop("John+Ray"), 1).
+atom(loc("District+of+Columbia+Council"), 1).
+atom(other("$218+,+592"), 1).
+atom(liveIn("John+Ray", "District+of+Columbia+Council"), 1).

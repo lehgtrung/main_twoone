@@ -1,0 +1,7 @@
+atom(other("$100+,+000"), 2).
+atom(org("Cox+Packing+Co."), 2).
+atom(loc("Devine"), 2).
+atom(loc("San+Antonio"), 2).
+atom(org("TSW"), 2).
+atom(loc("Liverpool"), 2).
+atom(orgbasedIn("Cox+Packing+Co.", "Devine"), 2).

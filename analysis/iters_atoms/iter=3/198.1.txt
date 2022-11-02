@@ -1,0 +1,5 @@
+atom(peop("Pereira"), 1).
+atom(peop("Darly+Alves+da+Silva"), 1).
+atom(peop("Mendes"), 1).
+atom(kill("Darly+Alves+da+Silva", "Mendes"), 1).
+atom(kill("Pereira", "Mendes"), 1).

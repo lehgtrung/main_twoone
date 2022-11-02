@@ -1,0 +1,7 @@
+atom(peop("Derwinski"), 2).
+atom(org("House"), 2).
+atom(peop("Sohn"), 2).
+atom(org("KCIA"), 2).
+atom(org("Times"), 2).
+atom(workFor("Sohn", "KCIA"), 2).
+atom(workFor("Derwinski", "House"), 2).

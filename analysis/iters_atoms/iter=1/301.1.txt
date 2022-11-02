@@ -1,0 +1,4 @@
+atom(org("Israel+television"), 1).
+atom(peop("Tuvia+Tzafir"), 1).
+atom(other("Israeli"), 1).
+atom(workFor("Tuvia+Tzafir", "Israel+television"), 1).

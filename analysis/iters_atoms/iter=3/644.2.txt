@@ -1,0 +1,6 @@
+atom(loc("Geneva"), 2).
+atom(peop("Ejup+Ganic"), 2).
+atom(loc("Bosnia-Herzegovina"), 2).
+atom(loc("Bosnia-Herzegovina+Radio"), 2).
+atom(peop("Ganic"), 2).
+atom(liveIn("Ejup+Ganic", "Bosnia-Herzegovina"), 2).

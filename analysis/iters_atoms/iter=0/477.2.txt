@@ -1,0 +1,5 @@
+atom(loc("Moscow"), 2).
+atom(org("INTERFAX"), 2).
+atom(other("1322+GMT"), 2).
+atom(other("23+Apr+94"), 2).
+atom(orgbasedIn("INTERFAX", "Moscow"), 2).

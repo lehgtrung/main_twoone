@@ -1,0 +1,6 @@
+atom(org("Vanderbilt"), 1).
+atom(peop("Fred+Coe"), 1).
+atom(loc("Nashville"), 1).
+atom(other("Philco"), 1).
+atom(other("Producer"), 1).
+atom(liveIn("Fred+Coe", "Nashville"), 1).

@@ -1,0 +1,7 @@
+atom(peop("Barry"), 1).
+atom(loc("Los+Angeles"), 1).
+atom(peop("Sen.+Robert+F.+Kennedy"), 1).
+atom(peop("Kennedy"), 1).
+atom(peop("Sirhan+Sirhan"), 1).
+atom(kill("Sirhan+Sirhan", "Sen.+Robert+F.+Kennedy"), 1).
+atom(kill("Sirhan+Sirhan", "Kennedy"), 1).

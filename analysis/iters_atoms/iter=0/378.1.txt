@@ -1,0 +1,5 @@
+atom(other("June+23"), 1).
+atom(loc("Washington"), 1).
+atom(loc("U.S."), 1).
+atom(loc("Ethiopia"), 1).
+atom(locatedIn("U.S.", "Ethiopia"), 1).

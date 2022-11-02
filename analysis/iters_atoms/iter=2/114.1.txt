@@ -1,0 +1,5 @@
+atom(org("Pacific+Marine+Inc."), 1).
+atom(loc("Houston"), 1).
+atom(other("15+miles"), 1).
+atom(loc("Grand+Isle."), 1).
+atom(orgbasedIn("Pacific+Marine+Inc.", "Houston"), 1).

@@ -1,0 +1,4 @@
+atom(peop("Copland"), 2).
+atom(loc("Brooklyn"), 2).
+atom(loc("New+York"), 2).
+atom(liveIn("Copland", "Brooklyn"), 2).

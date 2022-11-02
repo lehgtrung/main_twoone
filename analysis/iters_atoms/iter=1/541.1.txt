@@ -1,0 +1,8 @@
+atom(peop("Larry+Jinks"), 1).
+atom(org("San+Jose+Mercury+News"), 1).
+atom(peop("William+A.+Ott"), 1).
+atom(org("the+Knight-Ridder+,+Inc."), 1).
+atom(workFor("Larry+Jinks", "the+Knight-Ridder+,+Inc."), 1).
+atom(workFor("William+A.+Ott", "the+Knight-Ridder+,+Inc."), 1).
+atom(workFor("William+A.+Ott", "San+Jose+Mercury+News"), 1).
+atom(workFor("Larry+Jinks", "San+Jose+Mercury+News"), 1).

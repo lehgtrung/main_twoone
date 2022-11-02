@@ -1,0 +1,5 @@
+atom(loc("Croatian"), 2).
+atom(peop("Franjo+Tudjman"), 2).
+atom(loc("Geneva"), 2).
+atom(loc("republic+of+Croatia"), 2).
+atom(liveIn("Franjo+Tudjman", "Croatian"), 2).

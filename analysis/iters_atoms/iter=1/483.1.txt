@@ -1,0 +1,5 @@
+atom(loc("Niagara+County"), 1).
+atom(peop("Thomas+Viscomi"), 1).
+atom(peop("Norma+Viscomi"), 1).
+atom(loc("Niagara+Falls"), 1).
+atom(liveIn("Norma+Viscomi", "Niagara+Falls"), 1).

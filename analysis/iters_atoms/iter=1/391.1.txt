@@ -1,0 +1,5 @@
+atom(org("FAA"), 1).
+atom(peop("Allan+McArtor"), 1).
+atom(org("British+Civil+Aviation+Authority"), 1).
+atom(org("Airbus"), 1).
+atom(workFor("Allan+McArtor", "FAA"), 1).

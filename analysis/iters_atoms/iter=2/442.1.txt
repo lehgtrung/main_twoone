@@ -1,0 +1,7 @@
+atom(peop("Mason"), 1).
+atom(org("Centers+for+Disease+Control"), 1).
+atom(loc("Atlanta"), 1).
+atom(peop("President+Bush"), 1).
+atom(other("$30+million"), 1).
+atom(orgbasedIn("Centers+for+Disease+Control", "Atlanta"), 1).
+atom(workFor("Mason", "Centers+for+Disease+Control"), 1).

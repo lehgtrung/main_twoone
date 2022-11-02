@@ -1,0 +1,3 @@
+atom(loc("Zambia"), 1).
+atom(loc("Kafue+River"), 1).
+atom(locatedIn("Kafue+River", "Zambia"), 1).

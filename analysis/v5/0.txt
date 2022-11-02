@@ -1,0 +1,24 @@
+atom(org("CDT"), 1).
+atom(loc("Port+Ather"), 1).
+atom(loc("Texas"), 1).
+atom(loc("Gaveston"), 1).
+atom(locatedIn("Port+Ather", "Gaveston"), 1).
+atom(locatedIn("Gaveston", "Texas"), 1).
+atom(locatedIn("Port+Ather", "Texas"), 1).
+atom(locatedIn("CDT", "Texas"), 1).
+
+%atom(org("CDT"), 1).
+%atom(loc("Port+Ather"), 1).
+%atom(loc("Texas"), 1).
+%atom(loc("Gaveston"), 1).
+%atom(locatedIn("Port+Ather", "Gaveston"), 1).
+%atom(locatedIn("Gaveston", "Texas"), 1).
+%atom(locatedIn("Port+Ather", "Texas"), 1).
+%atom(orgBasedIn("CDT", "Texas"), 1).
+
+atom(loc("Port+Ather"), 2).
+atom(loc("Texas"), 2).
+atom(loc("Gaveston"), 2).
+atom(locatedIn("Port+Ather", "Gaveston"), 2).
+atom(locatedIn("Gaveston", "Texas"), 2).
+atom(locatedIn("Port+Ather", "Texas"), 2).

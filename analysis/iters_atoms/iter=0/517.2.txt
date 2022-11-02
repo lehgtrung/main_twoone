@@ -1,0 +1,15 @@
+atom(peop("Dwight+D.+Eisenhower"), 2).
+atom(loc("President"), 2).
+atom(other("Oct."), 2).
+atom(loc("Denison"), 2).
+atom(loc("Tex."), 2).
+atom(other("Eisenhower+State+Historic"), 2).
+atom(loc("Day+St."), 2).
+atom(loc("Denison"), 2).
+atom(loc("Tex."), 2).
+atom(locatedIn("Denison", "Tex."), 2).
+atom(liveIn("Dwight+D.+Eisenhower", "Denison"), 2).
+atom(locatedIn("Denison", "Tex."), 2).
+atom(locatedIn("Day+St.", "Denison"), 2).
+atom(locatedIn("Day+St.", "Tex."), 2).
+atom(liveIn("Dwight+D.+Eisenhower", "Tex."), 2).

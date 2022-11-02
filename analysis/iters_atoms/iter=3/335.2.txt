@@ -1,0 +1,3 @@
+atom(peop("Giuseppe+Zangara"), 2).
+atom(loc("Chicago"), 2).
+atom(peop("Anton+Cermak"), 2).

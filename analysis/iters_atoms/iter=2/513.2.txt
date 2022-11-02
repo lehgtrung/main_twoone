@@ -1,0 +1,7 @@
+atom(org("Navy"), 2).
+atom(org("Aramar+Experimental+Center"), 2).
+atom(loc("Ipero"), 2).
+atom(loc("Sao+Paulo"), 2).
+atom(orgbasedIn("Aramar+Experimental+Center", "Ipero"), 2).
+atom(locatedIn("Ipero", "Sao+Paulo"), 2).
+atom(orgbasedIn("Aramar+Experimental+Center", "Sao+Paulo"), 2).

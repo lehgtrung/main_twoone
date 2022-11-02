@@ -1,0 +1,8 @@
+atom(peop("Bradley+First+Air"), 2).
+atom(loc("Carp"), 2).
+atom(loc("Ontario"), 2).
+atom(loc("Montreal"), 2).
+atom(loc("Ottawa"), 2).
+atom(liveIn("Bradley+First+Air", "Carp"), 2).
+atom(liveIn("Bradley+First+Air", "Ontario"), 2).
+atom(locatedIn("Carp", "Ontario"), 2).

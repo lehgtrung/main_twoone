@@ -1,0 +1,7 @@
+atom(loc("STOCKTON-ON-TEES"), 2).
+atom(loc("England"), 2).
+atom(org("AP"), 2).
+atom(peop("Michael+Minns"), 2).
+atom(locatedIn("STOCKTON-ON-TEES", "England"), 2).
+atom(orgbasedIn("AP", "STOCKTON-ON-TEES"), 2).
+atom(liveIn("Michael+Minns", "STOCKTON-ON-TEES"), 2).

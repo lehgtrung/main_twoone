@@ -1,0 +1,4 @@
+atom(loc("HIGH+ISLAND"), 2).
+atom(loc("Texas"), 2).
+atom(org("AP"), 2).
+atom(locatedIn("HIGH+ISLAND", "Texas"), 2).

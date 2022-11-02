@@ -1,0 +1,6 @@
+atom(peop("Tanya"), 2).
+atom(other("Saturday"), 2).
+atom(org("Shands+Hospital"), 2).
+atom(loc("Gainesville"), 2).
+atom(locatedIn("Shands+Hospital", "Gainesville"), 2).
+atom(liveIn("Tanya", "Shands+Hospital"), 2).

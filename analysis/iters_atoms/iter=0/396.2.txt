@@ -1,0 +1,2 @@
+atom(peop("Bush"), 2).
+atom(org("White+House"), 2).

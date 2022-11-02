@@ -1,0 +1,3 @@
+atom(loc("Cambodia"), 1).
+atom(loc("Phnom+Penh"), 1).
+atom(loc("Jakarta"), 1).

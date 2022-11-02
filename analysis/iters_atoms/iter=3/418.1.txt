@@ -1,0 +1,5 @@
+atom(loc("South+Africans"), 1).
+atom(loc("South+Africa"), 1).
+atom(loc("Russia"), 1).
+atom(org("Foreign+Ministry"), 1).
+atom(orgbasedIn("Foreign+Ministry", "Russia"), 1).

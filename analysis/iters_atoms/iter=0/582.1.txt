@@ -1,0 +1,25 @@
+atom(loc("Mexico"), 1).
+atom(loc("Guadalajara"), 1).
+atom(loc("Monterrey"), 1).
+atom(loc("Tijuana"), 1).
+atom(loc("Ciudad+Juarez"), 1).
+atom(loc("Villahermosa"), 1).
+atom(loc("Hermosillo"), 1).
+atom(loc("Culiacan"), 1).
+atom(loc("Morelia"), 1).
+atom(loc("Veracruz"), 1).
+atom(loc("Acapulco"), 1).
+atom(loc("Torreon"), 1).
+atom(loc("Puebla"), 1).
+atom(loc("Merida"), 1).
+atom(loc("Chihuahua"), 1).
+atom(loc("Oaxaca"), 1).
+atom(loc("Tampico"), 1).
+atom(loc("Leon"), 1).
+atom(loc("Tapachula."), 1).
+atom(loc("Valley"), 1).
+atom(loc("Mexico"), 1).
+atom(other("31+May"), 1).
+atom(other("42+percent"), 1).
+atom(locatedIn("Chihuahua", "Tampico"), 1).
+atom(locatedIn("Oaxaca", "Tampico"), 1).

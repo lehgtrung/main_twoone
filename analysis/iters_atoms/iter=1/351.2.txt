@@ -1,0 +1,6 @@
+atom(loc("Apollo"), 2).
+atom(other("1970s"), 2).
+atom(loc("U.S.+National+Aeronautics"), 2).
+atom(org("NASA"), 2).
+atom(org("Space+Shuttle+reusable+space+transport"), 2).
+atom(loc("MTKS"), 2).

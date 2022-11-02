@@ -1,0 +1,5 @@
+atom(loc("Beijing"), 2).
+atom(org("XINHUA+Domestic+Service"), 2).
+atom(other("1149+GMT"), 2).
+atom(other("29+Apr+94"), 2).
+atom(orgbasedIn("XINHUA+Domestic+Service", "Beijing"), 2).

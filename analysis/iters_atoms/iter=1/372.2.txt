@@ -1,0 +1,4 @@
+atom(peop("Tanya"), 2).
+atom(loc("Shands+Hospital"), 2).
+atom(loc("Gainesville"), 2).
+atom(locatedIn("Shands+Hospital", "Gainesville"), 2).

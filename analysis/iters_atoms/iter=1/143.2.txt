@@ -1,0 +1,4 @@
+atom(loc("San+Diego+County"), 2).
+atom(other("60+mph"), 2).
+atom(loc("Ramona"), 2).
+atom(org("California+Department+of+Forestry"), 2).

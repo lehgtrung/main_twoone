@@ -1,0 +1,3 @@
+atom(other("37+percent"), 2).
+atom(peop("Cardenas"), 2).
+atom(other("9+percent"), 2).

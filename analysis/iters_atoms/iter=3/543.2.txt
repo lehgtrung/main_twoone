@@ -1,0 +1,6 @@
+atom(loc("Ohio"), 2).
+atom(peop("Richard+Celeste"), 2).
+atom(org("Democratic+Governors"), 2).
+atom(other("January."), 2).
+atom(workFor("Richard+Celeste", "Democratic+Governors"), 2).
+atom(liveIn("Richard+Celeste", "Ohio"), 2).

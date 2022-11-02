@@ -1,0 +1,11 @@
+atom(loc("Bosnia"), 1).
+atom(loc("Hague"), 1).
+atom(org("ANP+Database"), 1).
+atom(loc("Hague"), 1).
+atom(other("9+Feb"), 1).
+atom(org("ANP"), 1).
+atom(loc("Netherlands+Air+Force"), 1).
+atom(other("7+February"), 1).
+atom(loc("Vlieland"), 1).
+atom(orgbasedIn("ANP+Database", "Hague"), 1).
+atom(orgbasedIn("ANP", "Hague"), 1).

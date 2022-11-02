@@ -1,0 +1,5 @@
+atom(org("Massachusetts+Department"), 2).
+atom(org("Public+Health"), 2).
+atom(peop("Al+Comproni."), 2).
+atom(workFor("Al+Comproni.", "Massachusetts+Department"), 2).
+atom(workFor("Al+Comproni.", "Public+Health"), 2).

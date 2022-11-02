@@ -1,0 +1,6 @@
+atom(loc("Moscow"), 1).
+atom(org("State+Duma"), 1).
+atom(peop("Konstantin+Zatulin"), 1).
+atom(loc("Crimea"), 1).
+atom(orgbasedIn("State+Duma", "Moscow"), 1).
+atom(workFor("Konstantin+Zatulin", "State+Duma"), 1).

@@ -1,0 +1,4 @@
+atom(loc("Blaze"), 1).
+atom(peop("Paul+Newman"), 1).
+atom(loc("Louisiana+Gov.+Earl+Long"), 1).
+atom(kill("Paul+Newman", "Louisiana+Gov.+Earl+Long"), 1).

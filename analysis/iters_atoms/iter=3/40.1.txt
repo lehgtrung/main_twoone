@@ -1,0 +1,4 @@
+atom(peop("Edward+Marks"), 1).
+atom(org("Montgomery+County+Democratic+Party"), 1).
+atom(peop("Ms.+Toth"), 1).
+atom(workFor("Edward+Marks", "Montgomery+County+Democratic+Party"), 1).

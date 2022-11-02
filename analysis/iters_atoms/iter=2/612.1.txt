@@ -1,0 +1,6 @@
+atom(org("Warren+Commission"), 1).
+atom(peop("Lee+Harvey+Oswald"), 1).
+atom(peop("Kennedy"), 1).
+atom(peop("Texas+Gov.+John+Connally"), 1).
+atom(kill("Lee+Harvey+Oswald", "Texas+Gov.+John+Connally"), 1).
+atom(kill("Lee+Harvey+Oswald", "Kennedy"), 1).

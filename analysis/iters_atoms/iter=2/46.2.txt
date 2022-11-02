@@ -1,0 +1,3 @@
+atom(peop("Wright"), 2).
+atom(peop("Barry+Goldwater"), 2).
+atom(loc("Arizona"), 2).

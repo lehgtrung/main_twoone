@@ -1,0 +1,3 @@
+atom(peop("Redman"), 1).
+atom(org("U.S.+Immigration+and+Naturalization+Service"), 1).
+atom(loc("Moscow"), 1).

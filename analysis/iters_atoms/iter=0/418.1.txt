@@ -1,0 +1,3 @@
+atom(loc("South"), 1).
+atom(loc("South+Africa"), 1).
+atom(loc("Russia"), 1).

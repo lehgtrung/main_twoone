@@ -1,0 +1,4 @@
+atom(peop("Cetin"), 2).
+atom(peop("Warren+Christopher"), 2).
+atom(loc("Turkey"), 2).
+atom(loc("Balkans"), 2).

@@ -1,0 +1,4 @@
+atom(loc("America"), 1).
+atom(other("Statue"), 1).
+atom(other("Army"), 1).
+atom(other("June+5"), 1).

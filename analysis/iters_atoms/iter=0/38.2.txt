@@ -1,0 +1,8 @@
+atom(other("University"), 2).
+atom(loc("Nigeria"), 2).
+atom(loc("Nsukka"), 2).
+atom(peop("U.+Umeh"), 2).
+atom(workFor("U.+Umeh", "University"), 2).
+atom(locatedIn("Nsukka", "Nigeria"), 2).
+atom(orgbasedIn("University", "Nsukka"), 2).
+atom(liveIn("U.+Umeh", "Nsukka"), 2).

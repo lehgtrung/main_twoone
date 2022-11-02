@@ -1,0 +1,3 @@
+atom(loc("Fort+Snelling"), 2).
+atom(loc("Minn."), 2).
+atom(locatedIn("Fort+Snelling", "Minn."), 2).

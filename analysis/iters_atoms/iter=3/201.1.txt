@@ -1,0 +1,6 @@
+atom(loc("Djibouti"), 1).
+atom(loc("Afar"), 1).
+atom(loc("Arhiba"), 1).
+atom(peop("Djama+Elabe"), 1).
+atom(org("Party+for+Democratic+Renewal"), 1).
+atom(workFor("Djama+Elabe", "Party+for+Democratic+Renewal"), 1).

@@ -1,0 +1,4 @@
+atom(peop("Bob+Boyd"), 1).
+atom(loc("Chattanooga"), 1).
+atom(other("35+years"), 1).
+atom(liveIn("Bob+Boyd", "Chattanooga"), 1).

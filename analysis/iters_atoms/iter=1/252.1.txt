@@ -1,0 +1,4 @@
+atom(peop("Ileana+Ros-Lehtinen"), 1).
+atom(peop("Carlos+Perez"), 1).
+atom(org("National+Security+Council"), 1).
+atom(peop("Oliver+North."), 1).

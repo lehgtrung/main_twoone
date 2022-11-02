@@ -1,0 +1,13 @@
+atom(loc("Rocky+Flats+Plant"), 2).
+atom(loc("Denver"), 2).
+atom(loc("Hanford"), 2).
+atom(loc("Richland"), 2).
+atom(loc("Wash."), 2).
+atom(loc("Fernald+,+Ohio"), 2).
+atom(loc("Mound+Plant"), 2).
+atom(loc("Ohio"), 2).
+atom(locatedIn("Richland", "Wash."), 2).
+atom(liveIn("Hanford", "Richland"), 2).
+atom(locatedIn("Mound+Plant", "Ohio"), 2).
+atom(locatedIn("Rocky+Flats+Plant", "Denver"), 2).
+atom(liveIn("Hanford", "Wash."), 2).

@@ -1,0 +1,7 @@
+atom(peop("Anderson"), 2).
+atom(org("GE"), 2).
+atom(other("June"), 2).
+atom(other("May+1988"), 2).
+atom(org("GEAE"), 2).
+atom(org("General+Electric+Aircraft+Engine"), 2).
+atom(workFor("Anderson", "GE"), 2).

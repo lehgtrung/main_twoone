@@ -1,0 +1,4 @@
+atom(peop("Maxwell"), 2).
+atom(loc("New+Yorkers"), 2).
+atom(loc("Manhattan"), 2).
+atom(other("1980s"), 2).

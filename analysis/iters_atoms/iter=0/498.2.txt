@@ -1,0 +1,4 @@
+atom(loc("San+Antonio"), 2).
+atom(loc("Texas"), 2).
+atom(other("Nov."), 2).
+atom(locatedIn("San+Antonio", "Texas"), 2).

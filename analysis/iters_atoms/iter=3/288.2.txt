@@ -1,0 +1,8 @@
+atom(peop("Mr.+Tavaya"), 2).
+atom(peop("Moi"), 2).
+atom(peop("Robert+Mugabe"), 2).
+atom(loc("Zimbabwe"), 2).
+atom(org("COMESA"), 2).
+atom(org("Common+Market+for+East+and+Southern+Africa"), 2).
+atom(peop("Moi"), 2).
+atom(liveIn("Robert+Mugabe", "Zimbabwe"), 2).

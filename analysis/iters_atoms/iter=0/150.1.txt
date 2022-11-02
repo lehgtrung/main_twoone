@@ -1,0 +1,2 @@
+atom(peop("Ernest+L.+Boyer"), 1).
+atom(org("Carnegie+Foundation"), 1).

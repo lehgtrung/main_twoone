@@ -1,0 +1,6 @@
+atom(peop("James+Earl+Ray"), 2).
+atom(loc("Memphis"), 2).
+atom(loc("Tenn."), 2).
+atom(peop("Martin+Luther+King+Junior"), 2).
+atom(kill("James+Earl+Ray", "Martin+Luther+King+Junior"), 2).
+atom(locatedIn("Memphis", "Tenn."), 2).

@@ -1,0 +1,6 @@
+atom(org("Indemerc-Louis+Harris"), 1).
+atom(peop("Vicente+Licona"), 1).
+atom(org("Labor+Party"), 1).
+atom(peop("Cecilia+Soto"), 1).
+atom(workFor("Cecilia+Soto", "Labor+Party"), 1).
+atom(workFor("Vicente+Licona", "Indemerc-Louis+Harris"), 1).

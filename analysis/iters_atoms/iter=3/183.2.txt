@@ -1,0 +1,6 @@
+atom(loc("U.S."), 2).
+atom(peop("Felix+S.+Bloch"), 2).
+atom(loc("Soviets"), 2).
+atom(other("45+minutes"), 2).
+atom(loc("Austria."), 2).
+atom(liveIn("Felix+S.+Bloch", "U.S."), 2).

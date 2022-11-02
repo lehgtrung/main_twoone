@@ -1,0 +1,4 @@
+atom(loc("Djibouti"), 2).
+atom(loc("Arhiba"), 2).
+atom(peop("Djama+Elabe"), 2).
+atom(locatedIn("Arhiba", "Djibouti"), 2).

@@ -1,0 +1,2 @@
+atom(peop("James+O.+Mason"), 2).
+atom(org("Congress"), 2).

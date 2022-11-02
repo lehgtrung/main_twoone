@@ -1,0 +1,7 @@
+atom(peop("Malcolm+O+'Neill"), 2).
+atom(org("Ballistic+Missile+Development+Organization"), 2).
+atom(loc("U.S."), 2).
+atom(org("Congress"), 2).
+atom(loc("Israel"), 2).
+atom(loc("U.S."), 2).
+atom(workFor("Malcolm+O+'Neill", "Ballistic+Missile+Development+Organization"), 2).

@@ -1,0 +1,6 @@
+atom(loc("Middletown"), 2).
+atom(loc("New+York+City"), 2).
+atom(peop("Robert+Thompson"), 2).
+atom(org("Eaglebrook"), 2).
+atom(workFor("Robert+Thompson", "Eaglebrook"), 2).
+atom(liveIn("Robert+Thompson", "Middletown"), 2).

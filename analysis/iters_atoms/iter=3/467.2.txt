@@ -1,0 +1,5 @@
+atom(loc("America"), 2).
+atom(peop("Fred+Bauman"), 2).
+atom(org("Habitat+for+Humanity"), 2).
+atom(loc("Yakima+Valley+Partners"), 2).
+atom(workFor("Fred+Bauman", "Habitat+for+Humanity"), 2).

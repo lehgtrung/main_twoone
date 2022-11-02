@@ -1,0 +1,9 @@
+atom(peop("Franca+Chlistovsky"), 2).
+atom(org("Brera"), 2).
+atom(org("metereologic+institute"), 2).
+atom(loc("Milan"), 2).
+atom(orgbasedIn("metereologic+institute", "Milan"), 2).
+atom(orgbasedIn("Brera", "Milan"), 2).
+atom(liveIn("Franca+Chlistovsky", "Milan"), 2).
+atom(workFor("Franca+Chlistovsky", "Brera"), 2).
+atom(workFor("Franca+Chlistovsky", "metereologic+institute"), 2).

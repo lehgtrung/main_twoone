@@ -1,0 +1,4 @@
+atom(other("80+mph"), 2).
+atom(loc("Covington"), 2).
+atom(loc("Okla."), 2).
+atom(locatedIn("Covington", "Okla."), 2).

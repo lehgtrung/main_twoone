@@ -1,0 +1,7 @@
+atom(loc("Broadway"), 1).
+atom(org("Royal+Alexandra+Theatre"), 1).
+atom(loc("Toronto"), 1).
+atom(loc("Canada"), 1).
+atom(loc("Williamstown"), 1).
+atom(orgbasedIn("Royal+Alexandra+Theatre", "Toronto"), 1).
+atom(orgbasedIn("Royal+Alexandra+Theatre", "Canada"), 1).

@@ -1,0 +1,6 @@
+atom(loc("Bratislava"), 1).
+atom(other("June+22"), 1).
+atom(loc("Slovakia"), 1).
+atom(other("12+billion"), 1).
+atom(other("three+percent"), 1).
+atom(peop("Rudolf+Filkus"), 1).

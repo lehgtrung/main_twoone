@@ -1,0 +1,3 @@
+atom(peop("Buddy+Holly"), 1).
+atom(peop("Charles+Hardin+Holley"), 1).
+atom(loc("Lubbock+,+Texas"), 1).

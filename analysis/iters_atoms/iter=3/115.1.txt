@@ -1,0 +1,5 @@
+atom(loc("The"), 1).
+atom(loc("Hague"), 1).
+atom(org("ANP"), 1).
+atom(orgbasedIn("ANP", "The"), 1).
+atom(orgbasedIn("ANP", "Hague"), 1).

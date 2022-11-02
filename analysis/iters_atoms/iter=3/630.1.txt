@@ -1,0 +1,5 @@
+atom(peop("Pramot"), 1).
+atom(peop("Suraphong+Khemasingkhi"), 1).
+atom(org("BPP+Unit"), 1).
+atom(org("BPP"), 1).
+atom(workFor("Suraphong+Khemasingkhi", "BPP+Unit"), 1).

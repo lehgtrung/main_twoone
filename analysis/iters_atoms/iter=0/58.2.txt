@@ -1,0 +1,12 @@
+atom(peop("Lee"), 2).
+atom(other("Army"), 2).
+atom(loc("Northern+Virginia"), 2).
+atom(peop("Booth"), 2).
+atom(peop("Lincoln"), 2).
+atom(peop("Tidwell"), 2).
+atom(org("CIA"), 2).
+atom(kill("Booth", "Lincoln"), 2).
+atom(kill("Tidwell", "Lincoln"), 2).
+atom(workFor("Tidwell", "CIA"), 2).
+atom(liveIn("Lee", "Northern+Virginia"), 2).
+atom(kill("Lee", "Lincoln"), 2).

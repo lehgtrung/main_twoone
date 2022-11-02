@@ -1,0 +1,3 @@
+atom(loc("Geneva"), 2).
+atom(peop("Ejup+Ganic"), 2).
+atom(loc("Bosnia-Herzegovina+Radio"), 2).

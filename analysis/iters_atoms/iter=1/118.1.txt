@@ -1,0 +1,2 @@
+atom(other("Israeli"), 1).
+atom(loc("Iqlim"), 1).

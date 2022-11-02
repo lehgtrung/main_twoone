@@ -1,0 +1,8 @@
+atom(peop("Dan+Quayle"), 1).
+atom(loc("Caracas"), 1).
+atom(loc("Venezuela"), 1).
+atom(peop("Carlos+Andres+Perez"), 1).
+atom(other("Feb."), 1).
+atom(peop("Bush"), 1).
+atom(liveIn("Carlos+Andres+Perez", "Venezuela"), 1).
+atom(locatedIn("Caracas", "Venezuela"), 1).

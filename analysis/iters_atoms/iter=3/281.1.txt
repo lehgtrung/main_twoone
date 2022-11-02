@@ -1,0 +1,7 @@
+atom(org("ANSA"), 1).
+atom(loc("Umbria"), 1).
+atom(loc("Lazio"), 1).
+atom(loc("Italy"), 1).
+atom(loc("Campania"), 1).
+atom(locatedIn("Lazio", "Italy"), 1).
+atom(locatedIn("Umbria", "Italy"), 1).

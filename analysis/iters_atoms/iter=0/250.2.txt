@@ -1,0 +1,8 @@
+atom(other("Thirty+Seconds"), 2).
+atom(loc("Tokyo"), 2).
+atom(peop("Pearl+Harbor"), 2).
+atom(loc("Hawaii"), 2).
+atom(other("Dec."), 2).
+atom(loc("U.S."), 2).
+atom(loc("Tokyo"), 2).
+atom(liveIn("Pearl+Harbor", "Hawaii"), 2).

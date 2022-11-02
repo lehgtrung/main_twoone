@@ -1,0 +1,4 @@
+atom(loc("London"), 2).
+atom(peop("James+Earl+Ray"), 2).
+atom(peop("Dr.+Martin+Luther+King+Jr"), 2).
+atom(kill("James+Earl+Ray", "Dr.+Martin+Luther+King+Jr"), 2).

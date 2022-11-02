@@ -1,0 +1,4 @@
+atom(loc("BUENOS+AIRES"), 2).
+atom(loc("Argentina"), 2).
+atom(org("AP"), 2).
+atom(locatedIn("BUENOS+AIRES", "Argentina"), 2).

@@ -1,0 +1,3 @@
+atom(loc("BLYTHE"), 2).
+atom(loc("Calif+."), 2).
+atom(locatedIn("BLYTHE", "Calif+."), 2).

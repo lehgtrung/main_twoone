@@ -1,0 +1,9 @@
+atom(org("Bellona"), 1).
+atom(peop("Nils+Bemer"), 1).
+atom(peop("Tomas+Nilsen"), 1).
+atom(org("Northern+Fleet"), 1).
+atom(other("START"), 1).
+atom(loc("Russia"), 1).
+atom(liveIn("Nils+Bemer", "Russia"), 1).
+atom(workFor("Tomas+Nilsen", "Bellona"), 1).
+atom(workFor("Nils+Bemer", "Bellona"), 1).

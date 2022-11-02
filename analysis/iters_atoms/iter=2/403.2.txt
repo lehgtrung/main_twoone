@@ -1,0 +1,9 @@
+atom(loc("Gyandzha"), 2).
+atom(loc("Shamkhor"), 2).
+atom(loc("Azerbaijan"), 2).
+atom(loc("Soviet"), 2).
+atom(locatedIn("Shamkhor", "Soviet"), 2).
+atom(locatedIn("Azerbaijan", "Soviet"), 2).
+atom(locatedIn("Gyandzha", "Azerbaijan"), 2).
+atom(locatedIn("Shamkhor", "Azerbaijan"), 2).
+atom(locatedIn("Gyandzha", "Soviet"), 2).

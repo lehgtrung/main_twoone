@@ -1,0 +1,4 @@
+atom(peop("President+James+Garfield"), 2).
+atom(peop("Charles+Guiteau"), 2).
+atom(peop("Jonathan+Hadary"), 2).
+atom(kill("Charles+Guiteau", "President+James+Garfield"), 2).

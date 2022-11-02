@@ -1,0 +1,6 @@
+atom(loc("United+States"), 2).
+atom(peop("Millard+Fillmore"), 2).
+atom(loc("Summerhill+,+N.Y."), 2).
+atom(loc("New+York"), 2).
+atom(loc("London"), 2).
+atom(liveIn("Millard+Fillmore", "Summerhill+,+N.Y."), 2).

@@ -1,0 +1,4 @@
+atom(peop("Albrecht"), 1).
+atom(other("University"), 1).
+atom(loc("Iowa"), 1).
+atom(org("CFTC"), 1).

@@ -1,0 +1,3 @@
+atom(loc("Miami"), 2).
+atom(loc("Dade+County"), 2).
+atom(locatedIn("Dade+County", "Miami"), 2).

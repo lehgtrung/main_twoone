@@ -1,0 +1,9 @@
+atom(peop("Holmes"), 1).
+atom(peop("Fritz"), 1).
+atom(peop("President+Kennedy"), 1).
+atom(peop("Officer+Tippit"), 1).
+atom(loc("Dallas"), 1).
+atom(peop("Oswald"), 1).
+atom(other("45+minutes"), 1).
+atom(peop("Kennedy"), 1).
+atom(org("Rosetta+Stone"), 1).

@@ -1,0 +1,11 @@
+atom(org("NRC"), 2).
+atom(loc("Rockville"), 2).
+atom(loc("Md."), 2).
+atom(peop("Sam+Rousso"), 2).
+atom(org("Energy+Department"), 2).
+atom(peop("Bernero"), 2).
+atom(orgbasedIn("NRC", "Rockville"), 2).
+atom(workFor("Sam+Rousso", "Energy+Department"), 2).
+atom(orgbasedIn("NRC", "Md."), 2).
+atom(workFor("Bernero", "Energy+Department"), 2).
+atom(locatedIn("Rockville", "Md."), 2).

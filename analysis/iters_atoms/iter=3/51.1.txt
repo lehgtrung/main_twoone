@@ -1,0 +1,8 @@
+atom(loc("Placerville"), 1).
+atom(peop("Kenneth+Earl+Millikan"), 1).
+atom(org("Bay+Area+Rapid+Transit+District"), 1).
+atom(peop("Peter+J.+Martinelli"), 1).
+atom(org("BART"), 1).
+atom(peop("Nello+Bianco."), 1).
+atom(workFor("Nello+Bianco.", "BART"), 1).
+atom(workFor("Kenneth+Earl+Millikan", "Bay+Area+Rapid+Transit+District"), 1).

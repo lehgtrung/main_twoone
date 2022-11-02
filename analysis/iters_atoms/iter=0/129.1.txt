@@ -1,0 +1,3 @@
+atom(peop("Sevket+Kazan"), 1).
+atom(org("Welfare+Party"), 1).
+atom(workFor("Sevket+Kazan", "Welfare+Party"), 1).

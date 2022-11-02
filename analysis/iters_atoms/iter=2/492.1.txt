@@ -1,0 +1,4 @@
+atom(peop("Mason"), 1).
+atom(org("Public+Health+Service"), 1).
+atom(org("National+Insitutes+of+Health"), 1).
+atom(org("O+and+Drug+Administration"), 1).

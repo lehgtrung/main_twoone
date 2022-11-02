@@ -1,0 +1,5 @@
+atom(loc("U.S.+Bankruptcy"), 1).
+atom(peop("Harold+Abramson"), 1).
+atom(peop("William+Herbert"), 1).
+atom(peop("Nancy+Hunt"), 1).
+atom(liveIn("Harold+Abramson", "U.S.+Bankruptcy"), 1).

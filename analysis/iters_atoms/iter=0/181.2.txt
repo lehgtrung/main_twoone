@@ -1,0 +1,6 @@
+atom(peop("Jim+Moore"), 2).
+atom(peop("Oswald"), 2).
+atom(peop("Kennedy."), 2).
+atom(kill("Oswald", "Kennedy."), 2).
+atom(kill("Jim+Moore", "Kennedy."), 2).
+atom(kill("Jim+Moore", "Oswald"), 2).

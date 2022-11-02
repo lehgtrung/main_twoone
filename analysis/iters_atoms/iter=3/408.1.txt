@@ -1,0 +1,7 @@
+atom(loc("Cuenca"), 1).
+atom(loc("Ecuador"), 1).
+atom(other("26+May"), 1).
+atom(loc("Cartagena"), 1).
+atom(org("Andean+Group"), 1).
+atom(locatedIn("Cuenca", "Ecuador"), 1).
+atom(orgbasedIn("Andean+Group", "Cartagena"), 1).

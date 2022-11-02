@@ -1,0 +1,3 @@
+atom(loc("WASHINGTON"), 2).
+atom(org("AP"), 2).
+atom(orgbasedIn("AP", "WASHINGTON"), 2).

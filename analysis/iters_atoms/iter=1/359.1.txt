@@ -1,0 +1,6 @@
+atom(org("Justice+Department"), 1).
+atom(loc("U.S.+District+Court"), 1).
+atom(peop("Carl+Rubin"), 1).
+atom(org("Justice+Department"), 1).
+atom(other("Feb.+1"), 1).
+atom(liveIn("Carl+Rubin", "U.S.+District+Court"), 1).

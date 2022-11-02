@@ -1,0 +1,5 @@
+atom(peop("Vyacheslav+Chornovil"), 2).
+atom(org("Ukrainian"), 2).
+atom(other("26+June"), 2).
+atom(org("Rukh"), 2).
+atom(org("INTERFAX-Ukraine"), 2).

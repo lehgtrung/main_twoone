@@ -1,0 +1,8 @@
+atom(loc("North"), 1).
+atom(loc("Dakota"), 1).
+atom(peop("Miss+Dickinson"), 1).
+atom(loc("Kulm"), 1).
+atom(loc("Jamestown"), 1).
+atom(locatedIn("Kulm", "Jamestown"), 1).
+atom(liveIn("Miss+Dickinson", "Jamestown"), 1).
+atom(liveIn("Miss+Dickinson", "Kulm"), 1).

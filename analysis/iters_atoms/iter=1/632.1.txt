@@ -1,0 +1,4 @@
+atom(peop("Edward+Roybal"), 1).
+atom(org("House"), 1).
+atom(peop("Mrs.+Quayle"), 1).
+atom(workFor("Edward+Roybal", "House"), 1).

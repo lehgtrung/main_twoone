@@ -1,0 +1,4 @@
+atom(peop("William+Leonard+Jennings"), 2).
+atom(loc("West+Yorkshire"), 2).
+atom(peop("Stephen"), 2).
+atom(other("Dec."), 2).

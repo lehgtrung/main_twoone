@@ -1,0 +1,7 @@
+atom(peop("Diego+Fernandez+de+Cevallos"), 1).
+atom(peop("Ernesto+Zedillo"), 1).
+atom(org("Institutional+Revolutionary+Party"), 1).
+atom(other("5+percent"), 1).
+atom(org("Opinion+Research+Center"), 1).
+atom(other("University"), 1).
+atom(workFor("Ernesto+Zedillo", "Institutional+Revolutionary+Party"), 1).

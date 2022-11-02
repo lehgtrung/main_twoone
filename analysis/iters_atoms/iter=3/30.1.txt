@@ -1,0 +1,7 @@
+atom(peop("Prince+Ranariddh"), 1).
+atom(loc("Cambodia"), 1).
+atom(loc("Phnom+Penh"), 1).
+atom(org("Cambodian+Embassy"), 1).
+atom(loc("Jakarta"), 1).
+atom(orgbasedIn("Cambodian+Embassy", "Jakarta"), 1).
+atom(liveIn("Prince+Ranariddh", "Cambodia"), 1).

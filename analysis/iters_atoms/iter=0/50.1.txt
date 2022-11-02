@@ -1,0 +1,6 @@
+atom(loc("BELGRADE"), 1).
+atom(loc("Yugoslavia"), 1).
+atom(org("AP"), 1).
+atom(locatedIn("BELGRADE", "Yugoslavia"), 1).
+atom(orgbasedIn("AP", "Yugoslavia"), 1).
+atom(orgbasedIn("AP", "BELGRADE"), 1).

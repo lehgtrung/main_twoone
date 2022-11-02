@@ -1,0 +1,2 @@
+atom(loc("Paris"), 2).
+atom(peop("Edouard+Balladur"), 2).

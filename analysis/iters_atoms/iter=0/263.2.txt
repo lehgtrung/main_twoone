@@ -1,0 +1,11 @@
+atom(other("23"), 2).
+atom(peop("Barry"), 2).
+atom(loc("Ambassador"), 2).
+atom(loc("Los+Angeles"), 2).
+atom(peop("Robert+F.+Kennedy"), 2).
+atom(peop("Kennedy"), 2).
+atom(peop("Sirhan+Sirhan"), 2).
+atom(locatedIn("Ambassador", "Los+Angeles"), 2).
+atom(kill("Sirhan+Sirhan", "Robert+F.+Kennedy"), 2).
+atom(kill("Barry", "Robert+F.+Kennedy"), 2).
+atom(kill("Sirhan+Sirhan", "Kennedy"), 2).

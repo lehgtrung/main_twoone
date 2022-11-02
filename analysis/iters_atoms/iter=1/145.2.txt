@@ -1,0 +1,5 @@
+atom(peop("Jim+Bowell"), 2).
+atom(org("Butler+Township+Fire+Department"), 2).
+atom(other("4+:+45+a.m."), 2).
+atom(other("100+yards"), 2).
+atom(workFor("Jim+Bowell", "Butler+Township+Fire+Department"), 2).

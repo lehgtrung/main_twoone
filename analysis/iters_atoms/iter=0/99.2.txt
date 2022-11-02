@@ -1,0 +1,6 @@
+atom(peop("Derwinski"), 2).
+atom(org("Senate"), 2).
+atom(org("Veterans+Department"), 2).
+atom(peop("Alan+Cranston"), 2).
+atom(org("Senate"), 2).
+atom(workFor("Alan+Cranston", "Senate"), 2).

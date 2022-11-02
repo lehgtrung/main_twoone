@@ -1,0 +1,6 @@
+atom(other("One+year"), 1).
+atom(org("Senate"), 1).
+atom(peop("Bob+Dole"), 1).
+atom(loc("Russell+,+Kan"), 1).
+atom(liveIn("Bob+Dole", "Russell+,+Kan"), 1).
+atom(workFor("Bob+Dole", "Senate"), 1).

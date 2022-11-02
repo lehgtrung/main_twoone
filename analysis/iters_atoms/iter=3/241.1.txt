@@ -1,0 +1,6 @@
+atom(org("CBS"), 1).
+atom(peop("Harry+Reasoner"), 1).
+atom(loc("Iowa"), 1).
+atom(other("Saturday"), 1).
+atom(liveIn("Harry+Reasoner", "Iowa"), 1).
+atom(workFor("Harry+Reasoner", "CBS"), 1).

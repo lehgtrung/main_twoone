@@ -1,0 +1,5 @@
+atom(loc("Hefei"), 2).
+atom(other("February+11"), 2).
+atom(org("XINHUA"), 2).
+atom(loc("Anhui"), 2).
+atom(orgbasedIn("XINHUA", "Hefei"), 2).

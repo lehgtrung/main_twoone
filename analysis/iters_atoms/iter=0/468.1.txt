@@ -1,0 +1,1 @@
+atom(loc("Cedar+City+,+Utah"), 1).

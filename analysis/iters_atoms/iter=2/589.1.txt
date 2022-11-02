@@ -1,0 +1,4 @@
+atom(peop("Abraham+Lincoln"), 1).
+atom(other("Feb."), 1).
+atom(loc("Hodgenville+,+Ky."), 1).
+atom(liveIn("Abraham+Lincoln", "Hodgenville+,+Ky."), 1).

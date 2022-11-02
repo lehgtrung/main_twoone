@@ -1,0 +1,4 @@
+atom(peop("Lawrence+Welk"), 2).
+atom(loc("North+Dakota"), 2).
+atom(org("Congress"), 2).
+atom(liveIn("Lawrence+Welk", "North+Dakota"), 2).

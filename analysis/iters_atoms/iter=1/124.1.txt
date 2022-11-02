@@ -1,0 +1,7 @@
+atom(peop("Mrs.+Rose"), 1).
+atom(peop("Abebe+Worke"), 1).
+atom(loc("Ethiopia"), 1).
+atom(org("High+Court"), 1).
+atom(workFor("Abebe+Worke", "High+Court"), 1).
+atom(liveIn("Abebe+Worke", "Ethiopia"), 1).
+atom(liveIn("Mrs.+Rose", "Ethiopia"), 1).

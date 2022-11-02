@@ -1,0 +1,5 @@
+atom(org("State+Department"), 1).
+atom(org("Harvard"), 1).
+atom(peop("_Ronald"), 1).
+atom(loc("U.S."), 1).
+atom(liveIn("_Ronald", "U.S."), 1).

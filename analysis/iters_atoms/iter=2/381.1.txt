@@ -1,0 +1,3 @@
+atom(loc("Grand+Isle"), 1).
+atom(loc("Louisiana"), 1).
+atom(locatedIn("Grand+Isle", "Louisiana"), 1).

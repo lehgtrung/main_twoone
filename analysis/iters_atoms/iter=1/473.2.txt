@@ -1,0 +1,6 @@
+atom(org("Chevron"), 2).
+atom(org("Avis+Bourg+Co."), 2).
+atom(loc("Folsom"), 2).
+atom(other("25+feet"), 2).
+atom(org("Coast+Guard"), 2).
+atom(orgbasedIn("Avis+Bourg+Co.", "Folsom"), 2).

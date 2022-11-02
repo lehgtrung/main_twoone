@@ -1,0 +1,5 @@
+atom(peop("Mary+Campbell"), 2).
+atom(loc("Clover"), 2).
+atom(org("Town+Council"), 2).
+atom(workFor("Mary+Campbell", "Town+Council"), 2).
+atom(liveIn("Mary+Campbell", "Clover"), 2).

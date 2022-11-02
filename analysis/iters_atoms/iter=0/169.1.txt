@@ -1,0 +1,4 @@
+atom(peop("Nils+Bemer"), 1).
+atom(peop("Tomas+Nilsen"), 1).
+atom(other("START+II"), 1).
+atom(loc("Russia"), 1).

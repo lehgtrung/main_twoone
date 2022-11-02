@@ -1,0 +1,6 @@
+atom(loc("U.S."), 1).
+atom(peop("Marvin+Feuerwerger"), 1).
+atom(org("Washington+Institute"), 1).
+atom(org("Near+East+Policy"), 1).
+atom(workFor("Marvin+Feuerwerger", "Near+East+Policy"), 1).
+atom(workFor("Marvin+Feuerwerger", "Washington+Institute"), 1).

@@ -1,0 +1,4 @@
+atom(peop("King"), 2).
+atom(peop("James+Earl+Ray"), 2).
+atom(other("April"), 2).
+atom(kill("James+Earl+Ray", "King"), 2).

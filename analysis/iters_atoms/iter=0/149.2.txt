@@ -1,0 +1,4 @@
+atom(peop("President+Kennedy"), 2).
+atom(org("Texas+Schoolbook+Depository"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(loc("Presidents"), 2).

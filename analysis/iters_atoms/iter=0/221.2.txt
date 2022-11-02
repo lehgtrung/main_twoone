@@ -1,0 +1,7 @@
+atom(other("5+mph"), 2).
+atom(loc("California"), 2).
+atom(org("Highway+Patrol"), 2).
+atom(peop("James+O"), 2).
+atom(orgbasedIn("Highway+Patrol", "California"), 2).
+atom(liveIn("James+O", "California"), 2).
+atom(workFor("James+O", "Highway+Patrol"), 2).

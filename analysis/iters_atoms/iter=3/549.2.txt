@@ -1,0 +1,3 @@
+atom(loc("America"), 2).
+atom(other("Army"), 2).
+atom(other("June"), 2).

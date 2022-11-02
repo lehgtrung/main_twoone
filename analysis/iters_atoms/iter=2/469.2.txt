@@ -1,0 +1,3 @@
+atom(loc("San+Bernardino+County"), 2).
+atom(loc("Rancho+Cucamonga"), 2).
+atom(peop("Denise+Garland"), 2).

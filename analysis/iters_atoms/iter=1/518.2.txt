@@ -1,0 +1,4 @@
+atom(peop("Morihiro+Hosokawa"), 2).
+atom(loc("Japan"), 2).
+atom(loc("North+Korea"), 2).
+atom(liveIn("Morihiro+Hosokawa", "Japan"), 2).

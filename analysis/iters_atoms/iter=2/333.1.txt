@@ -1,0 +1,7 @@
+atom(loc("CHICAGO"), 1).
+atom(peop("Jesse+Jackson"), 1).
+atom(other("Sunday"), 1).
+atom(loc("South+Carolina"), 1).
+atom(loc("Illinois"), 1).
+atom(peop("Paul+Simon"), 1).
+atom(liveIn("Paul+Simon", "Illinois"), 1).

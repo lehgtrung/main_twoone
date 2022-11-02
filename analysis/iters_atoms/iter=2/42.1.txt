@@ -1,0 +1,9 @@
+atom(peop("Aleksandr+Kruhlow"), 1).
+atom(loc("Sevastopol"), 1).
+atom(loc("Nakhimov+Square"), 1).
+atom(loc("Sevastopol"), 1).
+atom(loc("Crimea"), 1).
+atom(loc("Russia"), 1).
+atom(liveIn("Aleksandr+Kruhlow", "Sevastopol"), 1).
+atom(locatedIn("Sevastopol", "Russia"), 1).
+atom(locatedIn("Crimea", "Russia"), 1).

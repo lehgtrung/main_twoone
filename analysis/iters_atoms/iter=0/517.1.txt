@@ -1,0 +1,7 @@
+atom(peop("Dwight+D.+Eisenhower"), 1).
+atom(other("Oct."), 1).
+atom(loc("Denison+,+Tex."), 1).
+atom(org("Eisenhower+State+Historic+Site"), 1).
+atom(loc("Day+St."), 1).
+atom(loc("Denison+,+Tex."), 1).
+atom(liveIn("Dwight+D.+Eisenhower", "Denison+,+Tex."), 1).

@@ -1,0 +1,5 @@
+atom(peop("President+William+McKinley"), 2).
+atom(peop("Leon+Czolgosz"), 2).
+atom(other("Exposition"), 2).
+atom(loc("Buffalo+,+N.Y."), 2).
+atom(kill("Leon+Czolgosz", "President+William+McKinley"), 2).

@@ -1,0 +1,2 @@
+atom(loc("Angola"), 2).
+atom(loc("United+Nations"), 2).

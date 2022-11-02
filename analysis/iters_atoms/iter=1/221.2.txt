@@ -1,0 +1,6 @@
+atom(other("Interstates"), 2).
+atom(other("10"), 2).
+atom(other("5+mph"), 2).
+atom(loc("California+Highway+Patrol"), 2).
+atom(peop("James+O+'Brien"), 2).
+atom(workFor("James+O+'Brien", "California+Highway+Patrol"), 2).

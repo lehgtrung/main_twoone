@@ -1,0 +1,6 @@
+atom(loc("Guatemala+City"), 1).
+atom(other("2+Feb"), 1).
+atom(org("ACAN-EFE"), 1).
+atom(peop("Ramiro+de+Leon+Carpio"), 1).
+atom(other("1+February"), 1).
+atom(orgbasedIn("ACAN-EFE", "Guatemala+City"), 1).

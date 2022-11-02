@@ -1,0 +1,5 @@
+atom(peop("John+Lennon"), 1).
+atom(peop("Chapman"), 1).
+atom(loc("Attica+state+prison"), 1).
+atom(other("20+years"), 1).
+atom(kill("Chapman", "John+Lennon"), 1).

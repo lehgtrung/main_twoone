@@ -1,0 +1,8 @@
+atom(loc("Beijing"), 2).
+atom(other("February+21"), 2).
+atom(org("XINHUA"), 2).
+atom(peop("Qian+Qichen"), 2).
+atom(loc("Pakistan"), 2).
+atom(loc("Sri+Lanka"), 2).
+atom(loc("Iran"), 2).
+atom(orgbasedIn("XINHUA", "Beijing"), 2).

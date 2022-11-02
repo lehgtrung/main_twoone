@@ -1,0 +1,2 @@
+atom(loc("Mlita"), 2).
+atom(loc("Iqlim"), 2).

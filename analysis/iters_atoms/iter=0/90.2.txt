@@ -1,0 +1,6 @@
+atom(loc("Carbondale"), 2).
+atom(loc("Carterville"), 2).
+atom(loc("Ill."), 2).
+atom(locatedIn("Carbondale", "Carterville"), 2).
+atom(locatedIn("Carbondale", "Ill."), 2).
+atom(locatedIn("Carterville", "Ill."), 2).

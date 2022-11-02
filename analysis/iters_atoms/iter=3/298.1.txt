@@ -1,0 +1,9 @@
+atom(peop("Stone"), 1).
+atom(peop("Garrison"), 1).
+atom(peop("Justice+Earl+Warren"), 1).
+atom(other("Warren+Commission+Report"), 1).
+atom(peop("Oswald"), 1).
+atom(peop("Kennedy"), 1).
+atom(loc("Dallas"), 1).
+atom(other("Nov."), 1).
+atom(kill("Oswald", "Kennedy"), 1).

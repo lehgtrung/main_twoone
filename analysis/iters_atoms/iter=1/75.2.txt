@@ -1,0 +1,7 @@
+atom(loc("Cape+Town"), 2).
+atom(org("Supreme+Court"), 2).
+atom(peop("J.H.+Berman"), 2).
+atom(loc("Port+Nolloth"), 2).
+atom(orgbasedIn("Supreme+Court", "Cape+Town"), 2).
+atom(workFor("J.H.+Berman", "Supreme+Court"), 2).
+atom(liveIn("J.H.+Berman", "Cape+Town"), 2).

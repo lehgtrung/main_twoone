@@ -1,0 +1,4 @@
+atom(peop("James+Madison"), 1).
+atom(loc("United+States"), 1).
+atom(loc("Port+Conway+,+Va."), 1).
+atom(liveIn("James+Madison", "Port+Conway+,+Va."), 1).

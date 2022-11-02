@@ -1,0 +1,6 @@
+atom(loc("Ciego+de+Avila"), 1).
+atom(loc("Havana"), 1).
+atom(org("Radio+Rebelde+Network"), 1).
+atom(other("1255+GMT"), 1).
+atom(other("18+Feb+94"), 1).
+atom(orgbasedIn("Radio+Rebelde+Network", "Havana"), 1).

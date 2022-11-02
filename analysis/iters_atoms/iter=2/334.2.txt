@@ -1,0 +1,6 @@
+atom(loc("Fort+Hamilton"), 2).
+atom(loc("Brooklyn"), 2).
+atom(loc("N.Y."), 2).
+atom(locatedIn("Brooklyn", "N.Y."), 2).
+atom(locatedIn("Fort+Hamilton", "N.Y."), 2).
+atom(locatedIn("Fort+Hamilton", "Brooklyn"), 2).

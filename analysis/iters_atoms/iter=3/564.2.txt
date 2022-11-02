@@ -1,0 +1,5 @@
+atom(org("United+Djibouti+Opposition+Front"), 2).
+atom(peop("Mohamed+Ahmed+Issa"), 2).
+atom(peop("Cheiko"), 2).
+atom(workFor("Mohamed+Ahmed+Issa", "United+Djibouti+Opposition+Front"), 2).
+atom(workFor("Cheiko", "United+Djibouti+Opposition+Front"), 2).

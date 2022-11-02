@@ -1,0 +1,8 @@
+atom(loc("Pittsburgh"), 2).
+atom(loc("Dade+County"), 2).
+atom(loc("Fla."), 2).
+atom(loc("Rochester"), 2).
+atom(loc("N.Y."), 2).
+atom(locatedIn("Pittsburgh", "Fla."), 2).
+atom(locatedIn("Rochester", "N.Y."), 2).
+atom(locatedIn("Dade+County", "Fla."), 2).

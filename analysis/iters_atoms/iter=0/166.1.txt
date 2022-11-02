@@ -1,0 +1,7 @@
+atom(peop("Anderson"), 1).
+atom(peop("E.+Howard+Hunt"), 1).
+atom(peop("James+Earl+Ray"), 1).
+atom(peop("Martin+Luther+King+Jr"), 1).
+atom(kill("James+Earl+Ray", "E.+Howard+Hunt"), 1).
+atom(kill("E.+Howard+Hunt", "Martin+Luther+King+Jr"), 1).
+atom(kill("James+Earl+Ray", "Martin+Luther+King+Jr"), 1).

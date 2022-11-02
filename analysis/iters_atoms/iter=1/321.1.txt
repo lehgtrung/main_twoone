@@ -1,0 +1,8 @@
+atom(loc("Dallas"), 1).
+atom(org("Internal+Revenue+Service"), 1).
+atom(other("Jan.+15"), 1).
+atom(peop("Jack+Ruby"), 1).
+atom(peop("Lee+Harvey+Oswald"), 1).
+atom(peop("President+John+F.+Kennedy"), 1).
+atom(kill("Lee+Harvey+Oswald", "President+John+F.+Kennedy"), 1).
+atom(kill("Jack+Ruby", "Lee+Harvey+Oswald"), 1).

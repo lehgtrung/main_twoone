@@ -1,0 +1,5 @@
+atom(peop("Lehi"), 2).
+atom(org("Stern"), 2).
+atom(peop("British"), 2).
+atom(peop("Lord+Moyne"), 2).
+atom(peop("Count+Folke+Bernadotte."), 2).

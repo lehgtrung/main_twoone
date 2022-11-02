@@ -1,0 +1,9 @@
+atom(peop("Warner"), 1).
+atom(org("Home+State+Savings+Bank+of"), 1).
+atom(loc("Cincinnati"), 1).
+atom(other("October+1987"), 1).
+atom(loc("Chapter"), 1).
+atom(loc("Federal+Bankruptcy"), 1).
+atom(liveIn("Warner", "Cincinnati"), 1).
+atom(workFor("Warner", "Home+State+Savings+Bank+of"), 1).
+atom(orgbasedIn("Home+State+Savings+Bank+of", "Cincinnati"), 1).

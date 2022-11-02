@@ -1,0 +1,10 @@
+atom(loc("Panama+City"), 2).
+atom(org("Circuito+RPC+Television"), 2).
+atom(other("0200+GMT"), 2).
+atom(other("9+March"), 2).
+atom(peop("Ruben+Blades"), 2).
+atom(org("Papa+Egoro+Movement"), 2).
+atom(peop("Hugo+Enrique+Famania"), 2).
+atom(orgbasedIn("Circuito+RPC+Television", "Panama+City"), 2).
+atom(workFor("Hugo+Enrique+Famania", "Papa+Egoro+Movement"), 2).
+atom(workFor("Ruben+Blades", "Papa+Egoro+Movement"), 2).

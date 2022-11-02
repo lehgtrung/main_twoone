@@ -1,0 +1,9 @@
+atom(loc("Carbondale"), 1).
+atom(org("Mining+Technology+Center"), 1).
+atom(loc("Carterville"), 1).
+atom(loc("Ill."), 1).
+atom(locatedIn("Carbondale", "Ill."), 1).
+atom(orgbasedIn("Mining+Technology+Center", "Ill."), 1).
+atom(orgbasedIn("Mining+Technology+Center", "Carterville"), 1).
+atom(locatedIn("Carbondale", "Carterville"), 1).
+atom(locatedIn("Carterville", "Ill."), 1).

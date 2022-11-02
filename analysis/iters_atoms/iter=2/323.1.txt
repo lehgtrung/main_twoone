@@ -1,0 +1,6 @@
+atom(peop("Cetin"), 1).
+atom(peop("Warren+Christopher"), 1).
+atom(loc("Turkey"), 1).
+atom(loc("Balkans"), 1).
+atom(locatedIn("Turkey", "Balkans"), 1).
+atom(liveIn("Warren+Christopher", "Turkey"), 1).

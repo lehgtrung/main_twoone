@@ -1,0 +1,5 @@
+atom(loc("Phnom+Penh"), 1).
+atom(org("Khmer+Rouge"), 1).
+atom(loc("Pyongyang"), 1).
+atom(org("Khmer+Rouge"), 1).
+atom(loc("Cambodia"), 1).

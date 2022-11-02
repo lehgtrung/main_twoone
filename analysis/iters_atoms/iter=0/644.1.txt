@@ -1,0 +1,3 @@
+atom(loc("Geneva"), 1).
+atom(peop("Ejup+Ganic"), 1).
+atom(org("TV"), 1).

@@ -1,0 +1,5 @@
+atom(peop("Martina+Matzar"), 1).
+atom(loc("Santa+Catarina+Palopo"), 1).
+atom(loc("Solola"), 1).
+atom(liveIn("Martina+Matzar", "Santa+Catarina+Palopo"), 1).
+atom(locatedIn("Santa+Catarina+Palopo", "Solola"), 1).

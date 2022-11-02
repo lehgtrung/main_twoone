@@ -1,0 +1,11 @@
+atom(loc("America"), 1).
+atom(loc("Europe"), 1).
+atom(peop("Jimmy+Doolittle"), 1).
+atom(other("30"), 1).
+atom(loc("Tokyo"), 1).
+atom(loc("Anzio"), 1).
+atom(loc("Italy"), 1).
+atom(loc("Normandy"), 1).
+atom(loc("France"), 1).
+atom(liveIn("Jimmy+Doolittle", "Italy"), 1).
+atom(locatedIn("Anzio", "Italy"), 1).

@@ -1,0 +1,2 @@
+atom(org("Supreme+Council"), 1).
+atom(loc("Ukraine"), 1).

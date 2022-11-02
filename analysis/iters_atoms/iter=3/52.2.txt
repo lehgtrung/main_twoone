@@ -1,0 +1,5 @@
+atom(peop("Mrs.+Vogt"), 2).
+atom(loc("Akron+,Ohio"), 2).
+atom(peop("Ulysses+S.+Grant"), 2).
+atom(liveIn("Mrs.+Vogt", "Akron+,Ohio"), 2).
+atom(liveIn("Ulysses+S.+Grant", "Akron+,Ohio"), 2).

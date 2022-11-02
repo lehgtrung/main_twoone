@@ -1,0 +1,6 @@
+atom(peop("Buddy+Holly"), 2).
+atom(peop("Charles+Hardin+Holley"), 2).
+atom(loc("Lubbock"), 2).
+atom(loc("Texas"), 2).
+atom(kill("Buddy+Holly", "Charles+Hardin+Holley"), 2).
+atom(locatedIn("Lubbock", "Texas"), 2).

@@ -1,0 +1,4 @@
+atom(other("5+mph"), 1).
+atom(org("California+Highway+Patrol"), 1).
+atom(peop("James+O+'Brien"), 1).
+atom(workFor("James+O+'Brien", "California+Highway+Patrol"), 1).

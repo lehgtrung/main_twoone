@@ -1,0 +1,2 @@
+atom(peop("Higgins"), 2).
+atom(loc("United+Nations"), 2).

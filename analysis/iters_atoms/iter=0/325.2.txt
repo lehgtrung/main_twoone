@@ -1,0 +1,7 @@
+atom(peop("Warner"), 2).
+atom(loc("U.S."), 2).
+atom(loc("Switzerland"), 2).
+atom(other("Ohio"), 2).
+atom(liveIn("Warner", "U.S."), 2).
+atom(liveIn("Warner", "Switzerland"), 2).
+atom(locatedIn("U.S.", "Switzerland"), 2).

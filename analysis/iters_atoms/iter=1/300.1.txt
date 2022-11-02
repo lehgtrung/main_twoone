@@ -1,0 +1,7 @@
+atom(peop("Gerald+R.+Ford"), 1).
+atom(loc("President"), 1).
+atom(other("July"), 1).
+atom(loc("Omaha"), 1).
+atom(loc("Neb"), 1).
+atom(liveIn("Gerald+R.+Ford", "Neb"), 1).
+atom(locatedIn("Omaha", "Neb"), 1).

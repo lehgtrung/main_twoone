@@ -1,0 +1,3 @@
+atom(org("DIMA"), 1).
+atom(peop("Jose+Tulio+Gomez"), 1).
+atom(workFor("Jose+Tulio+Gomez", "DIMA"), 1).

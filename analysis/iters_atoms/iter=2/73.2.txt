@@ -1,0 +1,7 @@
+atom(peop("Leroy+Ivy"), 2).
+atom(loc("Oxford"), 2).
+atom(peop("John+Henry+Ivy"), 2).
+atom(loc("Tupelo"), 2).
+atom(loc("Lee+County"), 2).
+atom(liveIn("John+Henry+Ivy", "Tupelo"), 2).
+atom(liveIn("Leroy+Ivy", "Oxford"), 2).

@@ -1,0 +1,9 @@
+atom(org("Cox+Packing+Co."), 2).
+atom(loc("Devine"), 2).
+atom(loc("San+Antonio"), 2).
+atom(org("TSW+Meats+Ltd."), 2).
+atom(loc("Liverpool"), 2).
+atom(orgbasedIn("TSW+Meats+Ltd.", "Liverpool"), 2).
+atom(locatedIn("Devine", "San+Antonio"), 2).
+atom(orgbasedIn("Cox+Packing+Co.", "Devine"), 2).
+atom(orgbasedIn("Cox+Packing+Co.", "San+Antonio"), 2).

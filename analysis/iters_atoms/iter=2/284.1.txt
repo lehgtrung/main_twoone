@@ -1,0 +1,7 @@
+atom(org("WPA"), 1).
+atom(loc("America"), 1).
+atom(peop("Walker+Evans"), 1).
+atom(loc("North+Carolina"), 1).
+atom(peop("Thomas+Wolfe"), 1).
+atom(org("Wall+Street"), 1).
+atom(loc("Monroe"), 1).

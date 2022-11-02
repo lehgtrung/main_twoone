@@ -1,0 +1,8 @@
+atom(loc("Highway"), 2).
+atom(other("50"), 2).
+atom(loc("Salida"), 2).
+atom(loc("Gunnison"), 2).
+atom(loc("Colorado"), 2).
+atom(locatedIn("Highway", "Colorado"), 2).
+atom(locatedIn("Gunnison", "Colorado"), 2).
+atom(locatedIn("Salida", "Colorado"), 2).

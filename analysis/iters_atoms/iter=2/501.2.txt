@@ -1,0 +1,8 @@
+atom(peop("Sirhan"), 2).
+atom(loc("Jerusalem-born"), 2).
+atom(other("Christian+Arab"), 2).
+atom(peop("Kennedy"), 2).
+atom(loc("San+Quentin"), 2).
+atom(loc("California"), 2).
+atom(org("Supreme+Court"), 2).
+atom(kill("Sirhan", "Kennedy"), 2).

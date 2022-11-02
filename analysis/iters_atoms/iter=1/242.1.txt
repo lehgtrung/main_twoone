@@ -1,0 +1,5 @@
+atom(peop("Antonio+Vasquez+Ochoa"), 1).
+atom(peop("John+Walker"), 1).
+atom(peop("Alberto+Radelat"), 1).
+atom(other("Jan."), 1).
+atom(loc("Guadalajara"), 1).

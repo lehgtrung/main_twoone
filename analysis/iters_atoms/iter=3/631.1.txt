@@ -1,0 +1,11 @@
+atom(other("11+April+Jakarta"), 1).
+atom(org("BISNIS+INDONESIA"), 1).
+atom(org("East+Asian+Growth+Area"), 1).
+atom(loc("Indonesia"), 1).
+atom(loc("Sabah"), 1).
+atom(loc("Sarawak"), 1).
+atom(loc("Brunei"), 1).
+atom(loc("Mindanao"), 1).
+atom(loc("Philippines"), 1).
+atom(loc("Indonesia"), 1).
+atom(locatedIn("Mindanao", "Philippines"), 1).

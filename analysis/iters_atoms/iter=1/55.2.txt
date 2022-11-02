@@ -1,0 +1,3 @@
+atom(peop("John+Lennon"), 2).
+atom(peop("Chapman"), 2).
+atom(loc("Attica+state+prison"), 2).

@@ -1,0 +1,4 @@
+atom(loc("BAYONNE"), 1).
+atom(loc("France"), 1).
+atom(org("AP"), 1).
+atom(locatedIn("BAYONNE", "France"), 1).

@@ -1,0 +1,7 @@
+atom(peop("President"), 1).
+atom(peop("Gerald+R.+Ford"), 1).
+atom(org("Warren+Commission"), 1).
+atom(peop("President+John+F.+Kennedy"), 1).
+atom(org("House"), 1).
+atom(peop("Lee+Harvey+Oswald"), 1).
+atom(kill("Lee+Harvey+Oswald", "President+John+F.+Kennedy"), 1).

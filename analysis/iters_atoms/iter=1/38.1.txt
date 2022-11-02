@@ -1,0 +1,6 @@
+atom(other("University"), 1).
+atom(loc("Nigeria"), 1).
+atom(loc("Nsukka"), 1).
+atom(peop("U.+Umeh"), 1).
+atom(liveIn("U.+Umeh", "Nsukka"), 1).
+atom(locatedIn("Nsukka", "Nigeria"), 1).

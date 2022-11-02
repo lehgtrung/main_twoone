@@ -1,0 +1,7 @@
+atom(peop("SOLEDAD"), 2).
+atom(loc("Calif.+_"), 2).
+atom(peop("Sirhan+B.+Sirhan"), 2).
+atom(peop("Robert+F.+Kennedy"), 2).
+atom(kill("Sirhan+B.+Sirhan", "SOLEDAD"), 2).
+atom(kill("Sirhan+B.+Sirhan", "Robert+F.+Kennedy"), 2).
+atom(locatedIn("SOLEDAD", "Calif.+_"), 2).

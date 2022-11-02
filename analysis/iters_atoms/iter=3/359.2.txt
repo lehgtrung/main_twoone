@@ -1,0 +1,7 @@
+atom(org("Justice+Department"), 2).
+atom(loc("U.S.+District+Court"), 2).
+atom(peop("Carl+Rubin"), 2).
+atom(org("Justice+Department"), 2).
+atom(other("Feb.+1"), 2).
+atom(workFor("Carl+Rubin", "U.S.+District+Court"), 2).
+atom(workFor("Carl+Rubin", "Justice+Department"), 2).

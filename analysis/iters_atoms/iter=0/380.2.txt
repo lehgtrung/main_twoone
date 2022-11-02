@@ -1,0 +1,5 @@
+atom(peop("Sydney+J.+Freedberg"), 2).
+atom(loc("Boston"), 2).
+atom(org("Harvard"), 2).
+atom(loc("Wellesley+College."), 2).
+atom(liveIn("Sydney+J.+Freedberg", "Boston"), 2).

@@ -1,0 +1,8 @@
+atom(org("HOSPODARSKE+NOVINY"), 1).
+atom(peop("Jozef+Moravcik"), 1).
+atom(loc("Slovakia"), 1).
+atom(other("13+percent"), 1).
+atom(other("23.1+percent"), 1).
+atom(other("14+billion"), 1).
+atom(liveIn("Jozef+Moravcik", "Slovakia"), 1).
+atom(workFor("Jozef+Moravcik", "HOSPODARSKE+NOVINY"), 1).

@@ -1,0 +1,14 @@
+atom(loc("Japan"), 2).
+atom(org("Renewal+Party"), 2).
+atom(peop("Takeshi+Sasaki"), 2).
+atom(loc("Tokyo+University"), 2).
+atom(other("13+February"), 2).
+atom(peop("Shoichi+Oikawa"), 2).
+atom(org("YOMIURI+SHIMBUN"), 2).
+atom(peop("YOMIURI+SHIMBUN"), 2).
+atom(peop("YOMIURI+SHIMBUN"), 2).
+atom(peop("Ichiro+Ozawa"), 2).
+atom(other("13+February"), 2).
+atom(workFor("Shoichi+Oikawa", "YOMIURI+SHIMBUN"), 2).
+atom(workFor("Takeshi+Sasaki", "Tokyo+University"), 2).
+atom(orgbasedIn("Renewal+Party", "Japan"), 2).

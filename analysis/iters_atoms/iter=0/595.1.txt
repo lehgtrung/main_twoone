@@ -1,0 +1,4 @@
+atom(peop("President+Bush"), 1).
+atom(loc("United+States"), 1).
+atom(other("$50+million"), 1).
+atom(loc("Poland"), 1).

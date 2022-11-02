@@ -1,0 +1,2 @@
+atom(org("Massachusetts+Department"), 1).
+atom(peop("Al+Comproni."), 1).

@@ -1,0 +1,11 @@
+atom(peop("Christophersen"), 2).
+atom(org("ANSA"), 2).
+atom(loc("Brussels"), 2).
+atom(other("May+25"), 2).
+atom(other("2-3+percent"), 2).
+atom(org("European+Commission"), 2).
+atom(loc("Italy"), 2).
+atom(peop("Henning+Christophersen"), 2).
+atom(orgbasedIn("European+Commission", "Italy"), 2).
+atom(orgbasedIn("ANSA", "Brussels"), 2).
+atom(workFor("Henning+Christophersen", "European+Commission"), 2).

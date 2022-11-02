@@ -1,0 +1,13 @@
+atom(org("OSHA"), 2).
+atom(org("S.A.+Healy+Co."), 2).
+atom(loc("McCook"), 2).
+atom(loc("Ill."), 2).
+atom(org("CH2M+Hill"), 2).
+atom(loc("Corvallis"), 2).
+atom(loc("Ore."), 2).
+atom(locatedIn("Corvallis", "Ore."), 2).
+atom(orgbasedIn("CH2M+Hill", "Ore."), 2).
+atom(orgbasedIn("S.A.+Healy+Co.", "McCook"), 2).
+atom(orgbasedIn("S.A.+Healy+Co.", "Ill."), 2).
+atom(locatedIn("McCook", "Ill."), 2).
+atom(orgbasedIn("CH2M+Hill", "Corvallis"), 2).

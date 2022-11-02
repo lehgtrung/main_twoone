@@ -1,0 +1,6 @@
+atom(peop("Shi+Liming"), 1).
+atom(org("Institute+of+Zoology"), 1).
+atom(loc("Kunming"), 1).
+atom(liveIn("Shi+Liming", "Kunming"), 1).
+atom(workFor("Shi+Liming", "Institute+of+Zoology"), 1).
+atom(orgbasedIn("Institute+of+Zoology", "Kunming"), 1).

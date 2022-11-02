@@ -1,0 +1,5 @@
+atom(loc("MILLINOCKET"), 2).
+atom(loc("Maine"), 2).
+atom(org("AP"), 2).
+atom(orgbasedIn("AP", "MILLINOCKET"), 2).
+atom(locatedIn("MILLINOCKET", "Maine"), 2).

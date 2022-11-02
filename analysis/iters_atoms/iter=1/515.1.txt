@@ -1,0 +1,5 @@
+atom(org("Associated+Press"), 1).
+atom(org("IAI"), 1).
+atom(loc("Washington"), 1).
+atom(peop("Klemow"), 1).
+atom(orgbasedIn("IAI", "Washington"), 1).

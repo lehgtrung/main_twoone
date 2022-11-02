@@ -1,0 +1,5 @@
+atom(org("JPL"), 2).
+atom(loc("America"), 2).
+atom(org("National+Aeronautics"), 2).
+atom(orgbasedIn("National+Aeronautics", "America"), 2).
+atom(orgbasedIn("JPL", "America"), 2).

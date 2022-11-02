@@ -1,0 +1,7 @@
+atom(peop("Thelma+Ann+Miller"), 2).
+atom(peop("Toby+Miller"), 2).
+atom(other("1+-LCB-+miles"), 2).
+atom(loc("Pinedale"), 2).
+atom(loc("New+Mexico"), 2).
+atom(peop("Alex+Ashley"), 2).
+atom(locatedIn("Pinedale", "New+Mexico"), 2).

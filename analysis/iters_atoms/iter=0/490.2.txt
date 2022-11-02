@@ -1,0 +1,2 @@
+atom(loc("United+States"), 2).
+atom(org("FBI"), 2).

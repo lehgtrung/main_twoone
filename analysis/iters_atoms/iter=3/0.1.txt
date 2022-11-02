@@ -1,0 +1,7 @@
+atom(peop("Annie+Oakley"), 1).
+atom(peop("Phoebe+Ann+Moses"), 1).
+atom(loc("Willowdell"), 1).
+atom(loc("Darke+County"), 1).
+atom(liveIn("Phoebe+Ann+Moses", "Willowdell"), 1).
+atom(liveIn("Phoebe+Ann+Moses", "Darke+County"), 1).
+atom(locatedIn("Willowdell", "Darke+County"), 1).

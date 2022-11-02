@@ -1,0 +1,3 @@
+atom(peop("Bob+Baker"), 1).
+atom(org("Prudential-Bache+Securities+Inc."), 1).
+atom(workFor("Bob+Baker", "Prudential-Bache+Securities+Inc."), 1).

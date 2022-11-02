@@ -1,0 +1,6 @@
+atom(org("Pepco"), 1).
+atom(peop("Sharon+Pratt+Dixon"), 1).
+atom(other("$100+,"), 1).
+atom(peop("David+Clarke"), 1).
+atom(other("$48"), 1).
+atom(workFor("Sharon+Pratt+Dixon", "Pepco"), 1).

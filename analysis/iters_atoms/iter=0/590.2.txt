@@ -1,0 +1,4 @@
+atom(other("University"), 2).
+atom(loc("Texas"), 2).
+atom(peop("Wright"), 2).
+atom(peop("Nixon"), 2).

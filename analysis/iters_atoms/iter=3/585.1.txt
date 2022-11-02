@@ -1,0 +1,12 @@
+atom(peop("John+Deutschendorf"), 1).
+atom(loc("Roswell"), 1).
+atom(loc("N.M."), 1).
+atom(loc("Oklahoma"), 1).
+atom(loc("Arizona"), 1).
+atom(loc("Texas"), 1).
+atom(org("Air+Force"), 1).
+atom(peop("Denver"), 1).
+atom(loc("Los+Angeles"), 1).
+atom(liveIn("John+Deutschendorf", "Roswell"), 1).
+atom(locatedIn("Roswell", "N.M."), 1).
+atom(liveIn("John+Deutschendorf", "N.M."), 1).

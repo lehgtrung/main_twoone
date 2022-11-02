@@ -1,0 +1,3 @@
+atom(loc("WHITEFISH"), 2).
+atom(loc("Mont."), 2).
+atom(locatedIn("WHITEFISH", "Mont."), 2).

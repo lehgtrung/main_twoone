@@ -1,0 +1,8 @@
+atom(loc("Mississippi"), 2).
+atom(loc("Tennessee+valleys"), 2).
+atom(loc("Tennessee"), 2).
+atom(loc("Kentucky"), 2).
+atom(loc("Alabama"), 2).
+atom(loc("Memphis"), 2).
+atom(loc("Tenn."), 2).
+atom(locatedIn("Memphis", "Tenn."), 2).

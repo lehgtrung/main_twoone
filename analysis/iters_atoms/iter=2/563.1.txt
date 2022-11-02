@@ -1,0 +1,8 @@
+atom(org("Bradley+First+Air"), 1).
+atom(loc("Carp"), 1).
+atom(loc("Ontario"), 1).
+atom(loc("Montreal"), 1).
+atom(loc("Ottawa"), 1).
+atom(orgbasedIn("Bradley+First+Air", "Ontario"), 1).
+atom(locatedIn("Carp", "Ontario"), 1).
+atom(orgbasedIn("Bradley+First+Air", "Carp"), 1).

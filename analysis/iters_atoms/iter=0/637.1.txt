@@ -1,0 +1,2 @@
+atom(peop("Lord+Moyne"), 1).
+atom(peop("Folke+Bernadotte."), 1).

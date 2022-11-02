@@ -1,0 +1,5 @@
+atom(loc("KHARTOUM"), 2).
+atom(loc("Sudan"), 2).
+atom(org("AP"), 2).
+atom(locatedIn("KHARTOUM", "Sudan"), 2).
+atom(orgbasedIn("AP", "KHARTOUM"), 2).

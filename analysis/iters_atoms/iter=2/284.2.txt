@@ -1,0 +1,7 @@
+atom(loc("America"), 2).
+atom(peop("Walker+Evans"), 2).
+atom(loc("North+Carolina"), 2).
+atom(peop("Thomas+Wolfe"), 2).
+atom(org("Wall+Street"), 2).
+atom(loc("Monroe"), 2).
+atom(liveIn("Thomas+Wolfe", "North+Carolina"), 2).

@@ -1,0 +1,2 @@
+atom(loc("Chinatown"), 1).
+atom(loc("Beijing"), 1).

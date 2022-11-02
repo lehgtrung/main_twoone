@@ -1,0 +1,6 @@
+atom(peop("An+Wang"), 2).
+atom(loc("Shanghai"), 2).
+atom(loc("China"), 2).
+atom(liveIn("An+Wang", "Shanghai"), 2).
+atom(locatedIn("Shanghai", "China"), 2).
+atom(liveIn("An+Wang", "China"), 2).

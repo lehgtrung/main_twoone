@@ -1,0 +1,5 @@
+atom(loc("Knin"), 2).
+atom(other("12+Feb"), 2).
+atom(loc("Krajina"), 2).
+atom(peop("Milan+Martic"), 2).
+atom(loc("republic+of+Serbian+Krajina"), 2).

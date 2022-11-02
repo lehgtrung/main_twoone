@@ -1,0 +1,4 @@
+atom(org("SOVETSKAYA+ROSSIA"), 1).
+atom(loc("Russia"), 1).
+atom(org("Russian+Statistics+Committee"), 1).
+atom(loc("Kremlin"), 1).

@@ -1,0 +1,5 @@
+atom(peop("Andric"), 1).
+atom(peop("Gavrilo+Princip"), 1).
+atom(peop("Archduke+Ferdinand"), 1).
+atom(loc("Sarajevo"), 1).
+atom(kill("Gavrilo+Princip", "Archduke+Ferdinand"), 1).

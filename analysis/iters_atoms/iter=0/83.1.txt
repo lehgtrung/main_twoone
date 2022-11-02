@@ -1,0 +1,7 @@
+atom(other("Ten+years"), 1).
+atom(peop("James+Earl+Ray"), 1).
+atom(peop("Martin+Luther+King+Jr."), 1).
+atom(peop("Anna+Sandhu"), 1).
+atom(loc("Brushy+Mountain+Penitentiary"), 1).
+atom(kill("James+Earl+Ray", "Martin+Luther+King+Jr."), 1).
+atom(liveIn("Anna+Sandhu", "Brushy+Mountain+Penitentiary"), 1).

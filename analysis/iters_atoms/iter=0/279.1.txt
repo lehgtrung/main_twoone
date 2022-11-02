@@ -1,0 +1,9 @@
+atom(org("Congress"), 1).
+atom(loc("Yucca+Mountain"), 1).
+atom(other("100+miles"), 1).
+atom(loc("Las+Vegas"), 1).
+atom(loc("Nev."), 1).
+atom(other("10+,"), 1).
+atom(locatedIn("Yucca+Mountain", "Las+Vegas"), 1).
+atom(locatedIn("Yucca+Mountain", "Nev."), 1).
+atom(locatedIn("Las+Vegas", "Nev."), 1).

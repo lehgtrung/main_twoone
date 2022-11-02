@@ -1,0 +1,5 @@
+atom(loc("San+Diego+County"), 2).
+atom(other("60+mph"), 2).
+atom(loc("Ramona"), 2).
+atom(loc("California+Department"), 2).
+atom(locatedIn("Ramona", "California+Department"), 2).

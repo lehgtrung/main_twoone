@@ -1,0 +1,7 @@
+atom(peop("Marvin+Dunn"), 1).
+atom(peop("Sonny+Wright"), 1).
+atom(peop("Bernard+Anscher"), 1).
+atom(org("Eastern+Airlines"), 1).
+atom(peop("John+Paul+Rosser."), 1).
+atom(workFor("Bernard+Anscher", "Eastern+Airlines"), 1).
+atom(workFor("John+Paul+Rosser.", "Eastern+Airlines"), 1).

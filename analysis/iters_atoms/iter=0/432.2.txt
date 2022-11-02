@@ -1,0 +1,8 @@
+atom(other("$40+million"), 2).
+atom(loc("New+Orleans"), 2).
+atom(peop("Jim+Garrison"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(peop("President+Kennedy"), 2).
+atom(org("Central+Intelligence+Agency"), 2).
+atom(liveIn("Jim+Garrison", "New+Orleans"), 2).
+atom(kill("Lee+Harvey+Oswald", "President+Kennedy"), 2).

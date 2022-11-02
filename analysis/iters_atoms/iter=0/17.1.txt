@@ -1,0 +1,3 @@
+atom(loc("PURCHASE"), 1).
+atom(loc("N.Y+."), 1).
+atom(locatedIn("PURCHASE", "N.Y+."), 1).

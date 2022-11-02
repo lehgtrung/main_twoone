@@ -1,0 +1,5 @@
+atom(peop("Oswald"), 2).
+atom(other("80+minutes"), 2).
+atom(peop("Kennedy"), 2).
+atom(other("Nov."), 2).
+atom(kill("Oswald", "Kennedy"), 2).

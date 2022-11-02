@@ -1,0 +1,10 @@
+atom(peop("Winter"), 1).
+atom(org("Yale+University"), 1).
+atom(peop("Starr"), 1).
+atom(peop("William+French+Smith"), 1).
+atom(org("D.C.+Circuit"), 1).
+atom(org("Supreme+Court"), 1).
+atom(peop("Lewis+Powell"), 1).
+atom(workFor("Lewis+Powell", "Supreme+Court"), 1).
+atom(workFor("Winter", "Yale+University"), 1).
+atom(workFor("William+French+Smith", "D.C.+Circuit"), 1).

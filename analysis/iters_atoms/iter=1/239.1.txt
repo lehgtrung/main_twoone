@@ -1,0 +1,3 @@
+atom(peop("Samih+al-Sa"), 1).
+atom(org("Asyut"), 1).
+atom(workFor("Samih+al-Sa", "Asyut"), 1).

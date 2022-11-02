@@ -1,0 +1,2 @@
+--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | tr " " "\n"
+--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | sed 's/],/]\n/g' | sed 's/, /,\n/g'  

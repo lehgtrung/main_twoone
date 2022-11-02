@@ -1,0 +1,4 @@
+atom(peop("Lincoln"), 1).
+atom(peop("John+Wilkes+Booth"), 1).
+atom(loc("Ford"), 1).
+atom(other("April"), 1).

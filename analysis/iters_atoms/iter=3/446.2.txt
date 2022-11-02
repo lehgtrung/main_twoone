@@ -1,0 +1,4 @@
+atom(peop("James+Earl+Ray"), 2).
+atom(peop("Rev.+Martin+Luther+King"), 2).
+atom(org("Supreme+Court"), 2).
+atom(kill("James+Earl+Ray", "Rev.+Martin+Luther+King"), 2).

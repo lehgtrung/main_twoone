@@ -1,0 +1,2 @@
+atom(peop("John+Harvey+Adamson"), 1).
+atom(peop("Don+Bolles"), 1).

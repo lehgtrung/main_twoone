@@ -1,0 +1,9 @@
+atom(org("Committee-General+Command"), 1).
+atom(org("Zapatist+National+Liberation+Army"), 1).
+atom(other("15+March"), 1).
+atom(other("15+March+1994"), 1).
+atom(loc("Mexico"), 1).
+atom(org("Revolutionary+Clandestine+Committee-General+Command"), 1).
+atom(org("EZLN"), 1).
+atom(org("Zapatist+National+Liberation+Army"), 1).
+atom(loc("San+Cristobal"), 1).

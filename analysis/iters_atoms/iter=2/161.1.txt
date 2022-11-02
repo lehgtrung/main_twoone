@@ -1,0 +1,5 @@
+atom(other("15+December+1993"), 1).
+atom(loc("Marrackech"), 1).
+atom(loc("Morocco"), 1).
+atom(other("12+April"), 1).
+atom(locatedIn("Marrackech", "Morocco"), 1).

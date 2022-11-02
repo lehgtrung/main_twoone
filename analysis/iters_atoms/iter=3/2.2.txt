@@ -1,0 +1,3 @@
+atom(peop("Shi+Liming"), 2).
+atom(org("Institute+of+Zoology+of+Kunming"), 2).
+atom(workFor("Shi+Liming", "Institute+of+Zoology+of+Kunming"), 2).

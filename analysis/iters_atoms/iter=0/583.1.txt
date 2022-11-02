@@ -1,0 +1,8 @@
+atom(peop("Winter"), 1).
+atom(org("Yale+University+law"), 1).
+atom(peop("Starr"), 1).
+atom(peop("William+French+Smith"), 1).
+atom(loc("D.C.+Circuit"), 1).
+atom(org("Supreme+Court"), 1).
+atom(peop("Justice+Lewis+Powell"), 1).
+atom(workFor("Winter", "Yale+University+law"), 1).

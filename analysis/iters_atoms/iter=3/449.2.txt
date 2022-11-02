@@ -1,0 +1,6 @@
+atom(peop("Franca+Chlistovsky"), 2).
+atom(org("Brera+metereologic+institute"), 2).
+atom(loc("Milan"), 2).
+atom(other("1950"), 2).
+atom(workFor("Franca+Chlistovsky", "Brera+metereologic+institute"), 2).
+atom(orgbasedIn("Brera+metereologic+institute", "Milan"), 2).

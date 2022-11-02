@@ -1,0 +1,2 @@
+atom(peop("Mason"), 2).
+atom(org("Public+Health+Service"), 2).

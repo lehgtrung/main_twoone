@@ -1,0 +1,5 @@
+atom(peop("Prasong+Sunsiri"), 1).
+atom(loc("Thailand"), 1).
+atom(loc("North"), 1).
+atom(loc("South+Korea"), 1).
+atom(liveIn("Prasong+Sunsiri", "Thailand"), 1).

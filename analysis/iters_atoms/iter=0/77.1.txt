@@ -1,0 +1,3 @@
+atom(peop("George+Gershwin"), 1).
+atom(loc("Brooklyn+,+N.Y."), 1).
+atom(liveIn("George+Gershwin", "Brooklyn+,+N.Y."), 1).

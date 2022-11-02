@@ -1,0 +1,7 @@
+atom(peop("Weiss"), 2).
+atom(peop("Huey+Long"), 2).
+atom(peop("Weiss"), 2).
+atom(peop("Johnston"), 2).
+atom(loc("Washington."), 2).
+atom(liveIn("Johnston", "Washington."), 2).
+atom(kill("Weiss", "Huey+Long"), 2).

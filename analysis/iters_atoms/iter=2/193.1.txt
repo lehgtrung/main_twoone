@@ -1,0 +1,4 @@
+atom(peop("George+Washington"), 1).
+atom(other("Feb."), 1).
+atom(loc("Westmoreland+County"), 1).
+atom(liveIn("George+Washington", "Westmoreland+County"), 1).

@@ -1,0 +1,3 @@
+atom(loc("Santa"), 1).
+atom(other("100+mph"), 1).
+atom(loc("Southern+California"), 1).

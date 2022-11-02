@@ -1,0 +1,4 @@
+atom(peop("Donald+W.+Riegle+Jr."), 1).
+atom(org("Senate+Banking+Committee"), 1).
+atom(peop("Gramm-Rudman."), 1).
+atom(workFor("Donald+W.+Riegle+Jr.", "Senate+Banking+Committee"), 1).

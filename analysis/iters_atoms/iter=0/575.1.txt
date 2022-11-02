@@ -1,0 +1,2 @@
+atom(loc("Saudi+Arabia"), 1).
+atom(loc("the"), 1).

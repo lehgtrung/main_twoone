@@ -1,0 +1,6 @@
+atom(loc("DES+MOINES"), 1).
+atom(loc("Iowa"), 1).
+atom(org("AP"), 1).
+atom(orgbasedIn("AP", "Iowa"), 1).
+atom(orgbasedIn("AP", "DES+MOINES"), 1).
+atom(locatedIn("DES+MOINES", "Iowa"), 1).

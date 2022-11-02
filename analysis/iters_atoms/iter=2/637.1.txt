@@ -1,0 +1,5 @@
+atom(org("Stern+Gang"), 1).
+atom(peop("Lord+Moyne"), 1).
+atom(org("U.N."), 1).
+atom(peop("Count+Folke+Bernadotte."), 1).
+atom(workFor("Count+Folke+Bernadotte.", "U.N."), 1).

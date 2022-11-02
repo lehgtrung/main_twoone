@@ -1,0 +1,4 @@
+atom(loc("Paris"), 1).
+atom(loc("French"), 1).
+atom(peop("Edouard+Balladur"), 1).
+atom(liveIn("Edouard+Balladur", "French"), 1).

@@ -1,0 +1,5 @@
+atom(peop("Marvin+Dunn"), 2).
+atom(peop("Sonny+Wright"), 2).
+atom(peop("Bernard+Anscher"), 2).
+atom(org("Eastern+Airlines"), 2).
+atom(peop("John+Paul+Rosser."), 2).

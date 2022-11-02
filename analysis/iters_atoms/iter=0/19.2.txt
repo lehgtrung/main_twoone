@@ -1,0 +1,12 @@
+atom(loc("U.S."), 2).
+atom(org("Coast+Guard"), 2).
+atom(loc("Training+Center"), 2).
+atom(loc("Petaluma"), 2).
+atom(loc("Calif."), 2).
+atom(locatedIn("U.S.", "Calif."), 2).
+atom(orgbasedIn("Coast+Guard", "Petaluma"), 2).
+atom(locatedIn("Training+Center", "Petaluma"), 2).
+atom(locatedIn("Petaluma", "Calif."), 2).
+atom(locatedIn("U.S.", "Petaluma"), 2).
+atom(orgbasedIn("Coast+Guard", "Calif."), 2).
+atom(locatedIn("Training+Center", "Calif."), 2).

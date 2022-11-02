@@ -1,0 +1,4 @@
+atom(peop("David+Leahy"), 2).
+atom(loc("Dade+County"), 2).
+atom(other("18+percent"), 2).
+atom(liveIn("David+Leahy", "Dade+County"), 2).

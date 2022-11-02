@@ -1,0 +1,5 @@
+atom(other("2"), 1).
+atom(other(",+500"), 1).
+atom(loc("Grand+Isle"), 1).
+atom(loc("Louisiana"), 1).
+atom(locatedIn("Grand+Isle", "Louisiana"), 1).

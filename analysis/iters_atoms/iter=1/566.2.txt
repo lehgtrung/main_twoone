@@ -1,0 +1,4 @@
+atom(peop("Me+'ir+Kohen"), 2).
+atom(org("IDF"), 2).
+atom(org("Israel+Defense+Forces"), 2).
+atom(workFor("Me+'ir+Kohen", "Israel+Defense+Forces"), 2).

@@ -1,0 +1,9 @@
+atom(loc("Andrews+Lock"), 1).
+atom(loc("Dam"), 1).
+atom(loc("Henry+County"), 1).
+atom(loc("Ala."), 1).
+atom(locatedIn("Andrews+Lock", "Henry+County"), 1).
+atom(locatedIn("Dam", "Ala."), 1).
+atom(locatedIn("Andrews+Lock", "Ala."), 1).
+atom(locatedIn("Henry+County", "Ala."), 1).
+atom(locatedIn("Dam", "Henry+County"), 1).

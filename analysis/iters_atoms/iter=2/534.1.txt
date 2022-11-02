@@ -1,0 +1,6 @@
+atom(peop("Higgins"), 1).
+atom(peop("Mary+Fisher"), 1).
+atom(loc("Louisville"), 1).
+atom(loc("Okolona"), 1).
+atom(peop("Higgins"), 1).
+atom(liveIn("Mary+Fisher", "Okolona"), 1).

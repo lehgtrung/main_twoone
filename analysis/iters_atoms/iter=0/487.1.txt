@@ -1,0 +1,8 @@
+atom(loc("Andrews+Lock"), 1).
+atom(loc("Dam"), 1).
+atom(loc("Early+County"), 1).
+atom(loc("Ga."), 1).
+atom(locatedIn("Dam", "Ga."), 1).
+atom(locatedIn("Andrews+Lock", "Ga."), 1).
+atom(locatedIn("Early+County", "Ga."), 1).
+atom(locatedIn("Andrews+Lock", "Early+County"), 1).

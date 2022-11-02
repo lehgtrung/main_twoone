@@ -1,0 +1,2 @@
+atom(peop("Ferhat+Chibout"), 2).
+atom(other("January"), 2).

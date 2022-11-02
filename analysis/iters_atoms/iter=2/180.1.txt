@@ -1,0 +1,2 @@
+atom(loc("Heuchelheim"), 1).
+atom(other("Jan."), 1).

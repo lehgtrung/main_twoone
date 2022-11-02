@@ -1,0 +1,5 @@
+atom(other("Apollo"), 1).
+atom(org("U.S.+National+Aeronautics+and+Space+Administration"), 1).
+atom(org("NASA"), 1).
+atom(org("Department+of+Defense"), 1).
+atom(org("Space+Shuttle"), 1).

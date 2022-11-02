@@ -1,0 +1,5 @@
+atom(peop("Viscomi"), 2).
+atom(peop("John+Hoopsick"), 2).
+atom(org("K+mart"), 2).
+atom(loc("Niagara+Falls"), 2).
+atom(orgbasedIn("K+mart", "Niagara+Falls"), 2).

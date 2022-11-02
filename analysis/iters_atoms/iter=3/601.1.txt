@@ -1,0 +1,5 @@
+atom(peop("Sirhan+Sirhan"), 1).
+atom(peop("Sen.+Robert+F.+Kennedy"), 1).
+atom(peop("Kennedy"), 1).
+atom(loc("Israel"), 1).
+atom(kill("Sirhan+Sirhan", "Sen.+Robert+F.+Kennedy"), 1).

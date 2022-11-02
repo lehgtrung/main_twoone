@@ -1,0 +1,5 @@
+atom(peop("Frank+D.+Cuevas"), 1).
+atom(peop("James+Miller"), 1).
+atom(peop("Miller"), 1).
+atom(other("10+:+40+p.m."), 1).
+atom(peop("Frank+Martinez"), 1).

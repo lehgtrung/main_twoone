@@ -1,0 +1,7 @@
+atom(peop("Bob+Dole"), 2).
+atom(org("Republican"), 2).
+atom(loc("Russell"), 2).
+atom(loc("Kan"), 2).
+atom(liveIn("Bob+Dole", "Kan"), 2).
+atom(workFor("Bob+Dole", "Republican"), 2).
+atom(locatedIn("Russell", "Kan"), 2).

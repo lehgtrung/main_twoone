@@ -1,0 +1,4 @@
+atom(peop("Minox"), 1).
+atom(loc("West+Germany"), 1).
+atom(peop("Leica"), 1).
+atom(peop("Rollei"), 1).

@@ -1,0 +1,3 @@
+atom(loc("U.S.+National+Aeronautics"), 1).
+atom(org("NASA"), 1).
+atom(org("Space+Shuttle+reusable+space+transport+system"), 1).

@@ -1,0 +1,6 @@
+atom(peop("Redman"), 1).
+atom(org("U.S."), 1).
+atom(org("Immigration"), 1).
+atom(org("Naturalization+Service"), 1).
+atom(loc("Moscow"), 1).
+atom(workFor("Redman", "Naturalization+Service"), 1).

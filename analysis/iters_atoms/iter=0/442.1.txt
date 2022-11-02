@@ -1,0 +1,10 @@
+atom(peop("Mason"), 1).
+atom(org("Centers"), 1).
+atom(org("Disease+Control"), 1).
+atom(loc("Atlanta"), 1).
+atom(org("HHS"), 1).
+atom(peop("President+Bush"), 1).
+atom(other("fiscal+1990"), 1).
+atom(other("$30+million"), 1).
+atom(orgbasedIn("Disease+Control", "Atlanta"), 1).
+atom(orgbasedIn("Centers", "Atlanta"), 1).

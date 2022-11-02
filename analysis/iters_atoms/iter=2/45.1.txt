@@ -1,0 +1,3 @@
+atom(loc("St.+Petersburg"), 1).
+atom(org("Atomenergoproekt+institute"), 1).
+atom(orgbasedIn("Atomenergoproekt+institute", "St.+Petersburg"), 1).

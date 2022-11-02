@@ -1,0 +1,6 @@
+atom(peop("William+Carlos+Williams"), 2).
+atom(peop("Ginsberg"), 2).
+atom(loc("New+Jersey"), 2).
+atom(peop("Ginsberg"), 2).
+atom(liveIn("Ginsberg", "New+Jersey"), 2).
+atom(liveIn("William+Carlos+Williams", "New+Jersey"), 2).

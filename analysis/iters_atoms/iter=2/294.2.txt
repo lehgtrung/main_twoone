@@ -1,0 +1,8 @@
+atom(org("ITAR-TASS"), 2).
+atom(other("5+Mar"), 2).
+atom(loc("Moscow"), 2).
+atom(org("ITAR-TASS"), 2).
+atom(other("0548+GMT"), 2).
+atom(other("5+Mar+94"), 2).
+atom(orgbasedIn("ITAR-TASS", "Moscow"), 2).
+atom(orgbasedIn("ITAR-TASS", "Moscow"), 2).

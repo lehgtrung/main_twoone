@@ -1,0 +1,5 @@
+atom(peop("Aleksander+Alekseev"), 1).
+atom(loc("Cuba"), 1).
+atom(loc("Soviet"), 1).
+atom(liveIn("Aleksander+Alekseev", "Cuba"), 1).
+atom(liveIn("Aleksander+Alekseev", "Soviet"), 1).

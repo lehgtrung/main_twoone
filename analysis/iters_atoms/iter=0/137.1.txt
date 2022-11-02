@@ -1,0 +1,6 @@
+atom(loc("Bangkok"), 1).
+atom(org("DAO"), 1).
+atom(loc("SIAM"), 1).
+atom(other("20+Nov+93"), 1).
+atom(orgbasedIn("DAO", "Bangkok"), 1).
+atom(orgbasedIn("SIAM", "Bangkok"), 1).

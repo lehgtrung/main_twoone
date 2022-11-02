@@ -1,0 +1,5 @@
+atom(peop("Woodrow+Wilson"), 1).
+atom(loc("President"), 1).
+atom(other("Dec."), 1).
+atom(loc("Staunton+,+Va"), 1).
+atom(liveIn("Woodrow+Wilson", "Staunton+,+Va"), 1).

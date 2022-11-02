@@ -1,0 +1,7 @@
+atom(peop("John+Wilkes+Booth"), 2).
+atom(peop("President+Abraham+Lincoln"), 2).
+atom(other("Ford"), 2).
+atom(other("Theater"), 2).
+atom(loc("Washington+,+D.C."), 2).
+atom(other("30+miles"), 2).
+atom(kill("John+Wilkes+Booth", "President+Abraham+Lincoln"), 2).

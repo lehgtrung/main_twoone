@@ -1,0 +1,3 @@
+atom(loc("Panama+City"), 1).
+atom(org("ACAN"), 1).
+atom(orgbasedIn("ACAN", "Panama+City"), 1).

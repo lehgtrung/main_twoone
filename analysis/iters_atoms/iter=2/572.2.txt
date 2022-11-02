@@ -1,0 +1,3 @@
+atom(peop("Dole"), 2).
+atom(loc("North+Carolina"), 2).
+atom(peop("Elizabeth"), 2).

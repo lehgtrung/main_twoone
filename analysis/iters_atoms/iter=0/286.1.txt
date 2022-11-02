@@ -1,0 +1,5 @@
+atom(loc("Clear"), 1).
+atom(org("Air+Force+Station"), 1).
+atom(loc("Alaska"), 1).
+atom(orgbasedIn("Air+Force+Station", "Alaska"), 1).
+atom(locatedIn("Clear", "Alaska"), 1).

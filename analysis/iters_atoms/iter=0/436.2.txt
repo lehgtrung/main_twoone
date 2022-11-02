@@ -1,0 +1,6 @@
+atom(loc("Valparaiso"), 2).
+atom(loc("Madrid"), 2).
+atom(org("EFE"), 2).
+atom(other("1419+GMT"), 2).
+atom(other("26+Dec+93"), 2).
+atom(orgbasedIn("EFE", "Madrid"), 2).

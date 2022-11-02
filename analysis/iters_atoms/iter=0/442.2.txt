@@ -1,0 +1,6 @@
+atom(peop("Mason"), 2).
+atom(loc("Atlanta"), 2).
+atom(org("HHS"), 2).
+atom(peop("Bush"), 2).
+atom(other("$30+million"), 2).
+atom(workFor("Bush", "HHS"), 2).

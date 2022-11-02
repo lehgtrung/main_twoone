@@ -129,6 +129,10 @@ def select_agreement(in_path1, in_path2, in_path3, out_path, with_disagreement=F
         relations2 = set([(e[0], e[1], e[2], e[3]) for e in dataset2[i]['relations']])
         entities3 = set([(e[0], e[1]) for e in dataset3[i]['entities']])
         relations3 = set([(e[0], e[1], e[2], e[3]) for e in dataset3[i]['relations']])
+
+        # Do not allow sentence with 0 relations
+        if len(relations1) == 0 or len(relations2) == 0:
+            continue
         if with_disagreement:
             if (entities1 == entities2 and relations1 == relations2) and \
                     (entities1 != entities3 or relations1 != relations3):
@@ -296,6 +300,8 @@ def tri_training(labeled_path,
                                          log_path=log_path)
             logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
             subprocess.run(script, shell=True, check=True)
+
+        # TODO: Step 7: aggregate 3 models and check performance
 
         iteration += 1
 

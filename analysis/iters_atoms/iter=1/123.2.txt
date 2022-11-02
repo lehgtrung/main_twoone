@@ -1,0 +1,3 @@
+atom(peop("President+Reagan"), 2).
+atom(org("State+Department"), 2).
+atom(loc("U.S."), 2).

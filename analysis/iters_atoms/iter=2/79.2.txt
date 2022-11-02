@@ -1,0 +1,5 @@
+atom(loc("Mexico"), 2).
+atom(org("National+Action+Party"), 2).
+atom(peop("Fernandez+de+Cevallos"), 2).
+atom(other("42+percent"), 2).
+atom(workFor("Fernandez+de+Cevallos", "National+Action+Party"), 2).

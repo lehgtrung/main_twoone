@@ -1,0 +1,3 @@
+atom(loc("PASADENA"), 2).
+atom(loc("Calif."), 2).
+atom(locatedIn("PASADENA", "Calif."), 2).

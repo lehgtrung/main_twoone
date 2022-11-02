@@ -1,0 +1,3 @@
+atom(loc("TRENTON"), 1).
+atom(loc("N.J."), 1).
+atom(locatedIn("TRENTON", "N.J."), 1).

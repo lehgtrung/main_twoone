@@ -1,0 +1,4 @@
+atom(peop("Epps"), 2).
+atom(peop("Norman+Vaughan"), 2).
+atom(loc("Trapper+Creek+,+Alaska"), 2).
+atom(liveIn("Norman+Vaughan", "Trapper+Creek+,+Alaska"), 2).

@@ -1,0 +1,3 @@
+atom(peop("Jacobs"), 1).
+atom(loc("Robeson+County+,+N.C."), 1).
+atom(liveIn("Jacobs", "Robeson+County+,+N.C."), 1).

@@ -1,0 +1,7 @@
+atom(peop("Peter+Butler"), 1).
+atom(other("A.+Copeland+Enterprises+Inc."), 1).
+atom(loc("New"), 1).
+atom(org("Popeyes"), 1).
+atom(peop("Henry+A.+Politz"), 1).
+atom(loc("U.S.+Circuit+Court"), 1).
+atom(orgbasedIn("Popeyes", "New"), 1).

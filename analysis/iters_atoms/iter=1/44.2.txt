@@ -1,0 +1,4 @@
+atom(loc("U.S."), 2).
+atom(peop("Marvin+Feuerwerger"), 2).
+atom(org("Washington+Institute"), 2).
+atom(workFor("Marvin+Feuerwerger", "Washington+Institute"), 2).

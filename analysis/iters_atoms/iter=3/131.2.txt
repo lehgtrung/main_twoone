@@ -1,0 +1,4 @@
+atom(peop("Angie+Dickinson"), 2).
+atom(loc("Kulm+,+N.D."), 2).
+atom(other("Academy+Awards"), 2).
+atom(liveIn("Angie+Dickinson", "Kulm+,+N.D."), 2).

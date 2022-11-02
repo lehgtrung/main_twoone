@@ -1,0 +1,4 @@
+atom(loc("Southern+California"), 2).
+atom(loc("Gulf+Coast"), 2).
+atom(loc("Florida"), 2).
+atom(loc("Atlantic+Coast"), 2).

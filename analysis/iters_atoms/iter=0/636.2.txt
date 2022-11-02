@@ -1,0 +1,7 @@
+atom(loc("Riga"), 2).
+atom(org("Radio"), 2).
+atom(loc("Riga+Network"), 2).
+atom(other("1700+GMT"), 2).
+atom(other("7+Jun+94"), 2).
+atom(orgbasedIn("Radio", "Riga"), 2).
+atom(orgbasedIn("Riga+Network", "Riga"), 2).

@@ -1,0 +1,5 @@
+atom(loc("ADDIS+ABABA"), 2).
+atom(loc("Ethiopia"), 2).
+atom(org("AP"), 2).
+atom(locatedIn("ADDIS+ABABA", "Ethiopia"), 2).
+atom(orgbasedIn("AP", "ADDIS+ABABA"), 2).

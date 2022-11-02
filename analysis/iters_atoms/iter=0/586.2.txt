@@ -1,0 +1,10 @@
+atom(peop("Bush"), 2).
+atom(peop("Dukakis"), 2).
+atom(loc("Massachusetts"), 2).
+atom(loc("Norfolk+County"), 2).
+atom(peop("John+Adams"), 2).
+atom(peop("John+Quincy+Adams"), 2).
+atom(peop("John+Fitzgerald+Kennedy"), 2).
+atom(liveIn("Bush", "Massachusetts"), 2).
+atom(kill("John+Quincy+Adams", "John+Fitzgerald+Kennedy"), 2).
+atom(liveIn("Dukakis", "Massachusetts"), 2).

@@ -1,0 +1,4 @@
+atom(peop("Baruch+Arensberg"), 2).
+atom(loc("Tel+Aviv+Univerisity"), 2).
+atom(loc("Israel."), 2).
+atom(workFor("Baruch+Arensberg", "Tel+Aviv+Univerisity"), 2).

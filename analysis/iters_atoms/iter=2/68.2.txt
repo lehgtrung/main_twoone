@@ -1,0 +1,8 @@
+atom(org("Russian+Pacific+Fleet"), 2).
+atom(peop("Igor+Khmelnov"), 2).
+atom(org("Pacific+Fleet"), 2).
+atom(loc("air"), 2).
+atom(org("Russian+Defence+Ministry"), 2).
+atom(org("ITAR-TASS"), 2).
+atom(workFor("Igor+Khmelnov", "Russian+Pacific+Fleet"), 2).
+atom(workFor("Igor+Khmelnov", "Pacific+Fleet"), 2).

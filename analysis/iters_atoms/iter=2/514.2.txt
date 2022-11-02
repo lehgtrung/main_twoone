@@ -1,0 +1,3 @@
+atom(loc("Cuba"), 2).
+atom(loc("Turiguano"), 2).
+atom(locatedIn("Turiguano", "Cuba"), 2).

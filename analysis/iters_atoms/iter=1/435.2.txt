@@ -1,0 +1,8 @@
+atom(org("Vanderbilt"), 2).
+atom(peop("Fred+Coe"), 2).
+atom(loc("Nashville"), 2).
+atom(other("Philco"), 2).
+atom(other("Playhouse"), 2).
+atom(other("Playhouse+90"), 2).
+atom(other("Producer"), 2).
+atom(liveIn("Fred+Coe", "Nashville"), 2).

@@ -1,0 +1,7 @@
+atom(peop("Gerald+R.+Ford"), 2).
+atom(org("Warren+Commission"), 2).
+atom(peop("President+John+F.+Kennedy"), 2).
+atom(other("House"), 2).
+atom(peop("Lee+Harvey+Oswald"), 2).
+atom(workFor("Gerald+R.+Ford", "Warren+Commission"), 2).
+atom(kill("Lee+Harvey+Oswald", "President+John+F.+Kennedy"), 2).

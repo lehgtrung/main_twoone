@@ -1,0 +1,2 @@
+atom(peop("Nick+Rufford"), 1).
+atom(loc("Far"), 1).

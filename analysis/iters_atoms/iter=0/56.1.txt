@@ -1,0 +1,9 @@
+atom(loc("STOCKTON-ON-TEES"), 1).
+atom(loc("England"), 1).
+atom(org("AP"), 1).
+atom(peop("Michael+Minns"), 1).
+atom(other("$160+,+000"), 1).
+atom(other("World+War+II"), 1).
+atom(locatedIn("STOCKTON-ON-TEES", "England"), 1).
+atom(orgbasedIn("AP", "England"), 1).
+atom(orgbasedIn("AP", "STOCKTON-ON-TEES"), 1).

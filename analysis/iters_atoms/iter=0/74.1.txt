@@ -1,0 +1,6 @@
+atom(peop("Madonna"), 1).
+atom(loc("Bay+City"), 1).
+atom(loc("Mich."), 1).
+atom(liveIn("Madonna", "Mich."), 1).
+atom(liveIn("Madonna", "Bay+City"), 1).
+atom(locatedIn("Bay+City", "Mich."), 1).

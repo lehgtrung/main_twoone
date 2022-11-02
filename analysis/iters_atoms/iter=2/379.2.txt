@@ -1,0 +1,3 @@
+atom(loc("YAKIMA"), 2).
+atom(loc("Wash."), 2).
+atom(locatedIn("YAKIMA", "Wash."), 2).
