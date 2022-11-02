@@ -21,7 +21,8 @@ if __name__ == '__main__':
                         type=int,
                         action='store')
     parser.add_argument('--with_disagreement',
-                        required=True,
+                        required=False,
+                        default=0,
                         type=int,
                         action='store')
     args = parser.parse_args()
