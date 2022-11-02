@@ -1,6 +1,9 @@
 
 .idea/
 
+analysis/iters/
+analysis/iters_atoms/
+
 configs.json
 logs/
 asp/p3.lp
