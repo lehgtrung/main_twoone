@@ -199,7 +199,7 @@ def tri_training(labeled_path,
                  logger,
                  log_path,
                  with_disagreement,
-                 max_iteration=4):
+                 max_iteration=15):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
