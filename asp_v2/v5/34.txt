@@ -1,0 +1,34 @@
+Original
+org("GSA+Depot")
+loc("Davisville")
+loc("R.I.")
+loc("Mineral+Wells")
+loc("Texas")
+orgbasedIn("GSA+Depot", "Davisville")
+locatedIn("GSA+Depot", "R.I.")
+locatedIn("Mineral+Wells", "Texas")
+locatedIn("Davisville", "R.I.")
+
+After ASP:
+Common atoms
+org("GSA+Depot")
+loc("Davisville")
+loc("R.I.")
+loc("Mineral+Wells")
+loc("Texas")
+locatedIn("Mineral+Wells","Texas")
+
+
+Only in answer set 0:
+locatedIn("Davisville","R.I.")
+
+
+Only in answer set 1:
+orgbasedIn("GSA+Depot","Davisville")
+
+
+Only answer set 2:
+orgbasedIn("GSA+Depot","Davisville")
+locatedIn("Davisville","R.I.")
+orgbasedIn("GSA+Depot","R.I.")
+

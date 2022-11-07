@@ -88,7 +88,6 @@ bad(kill(X,X),I):- atom(kill(X,X),I).
 :- ok(kill(P,Q),I), ok(org(Q),I).
 :- ok(kill(P,Q),I), ok(other(Q),I).
 
-
 %% Other requirements
 
 :- ok(liveIn(X,X),I).
@@ -104,21 +103,10 @@ bad(kill(X,X),I):- atom(kill(X,X),I).
 :- ok(loc(X),I), ok(other(X),I).
 :- ok(org(X),I), ok(other(X),I).
 
-%% Trung: Restrict entity to be head/tail of 2 different relations
-%% locatedIn/orgBasedIn/liveIn/workFor/kill
-:- ok(locatedIn(X,_), I), ok(orgBasedIn(X,_), I).
-:- ok(locatedIn(X,_), I), ok(liveIn(X,_), I).
-:- ok(locatedIn(X,_), I), ok(workFor(X,_), I).
-:- ok(locatedIn(X,_), I), ok(kill(X,_), I).
-
-:- ok(orgBasedIn(X,_), I), ok(liveIn(X,_), I).
-:- ok(orgBasedIn(X,_), I), ok(workFor(X,_), I).
-:- ok(orgBasedIn(X,_), I), ok(kill(X,_), I).
-
 
 %% Determine whether set of atom I (atom(X, I)) is inconsistent 
 
-inconsistency(I) :- atom(X, I), bad(X, I).
+%% inconsistency(I) :- atom(X, I), bad(X, I).
 
 %% Uncommented the line below if we do not want to use the output 
 %% whenever model 2 is inconsistent. 
@@ -148,14 +136,17 @@ nok(X, 1) :- inf_atom(X, 1), not ok(X, 1).
 inSetDifference(X) :- atom(X, 1), ok(X, 1), not atom(X, 2). 
 inSetDifference(X) :- atom(X, 2), nok(X, 1). 
 
+%%inSetDifference(X) :- ok(X, 1), not atom(X, 1). 
+%%inSetDifference(X) :- atom(X, 1), nok(X, 1). 
+
 %%% keeping the maximal number of atoms that can be kept 
 
-nOfOKAtoms(N) :- N = #count{1,X : inSetDifference(X)}.
+nOfAtoms(N) :- N = #count{1,X : inSetDifference(X)}.
 
-#minimize {N : nOfOKAtoms(N)}.
+#minimize {N : nOfAtoms(N)}.
 
 #show ok/2.
-%% #show nOfOKAtoms/1.
+%% #show nOfAtoms/1.
 %% #show bad/1.  
 %% #show atom/1. 
 %% #show dependency/2. 
@@ -178,18 +169,6 @@ rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
 rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):- 
 	atom(liveIn(X,P),1), atom(workFor(X,O),1).
 
-%% Trung: infer types for relations after they are selected
-%% locatedIn/orgBasedIn/liveIn/workFor/kill
-ok(loc(P1), 1) :- ok(locatedIn(P1,P2),1).
-ok(loc(P2), 1) :- ok(locatedIn(P1,P2),1).
-ok(org(O), 1) :- ok(orgBasedIn(O,P),1).
-ok(loc(P), 1) :- ok(orgBasedIn(O,P),1).
-ok(peop(X), 1) :- ok(liveIn(X,P),1).
-ok(loc(P), 1) :- ok(liveIn(X,P),1).
-ok(peop(X), 1) :- ok(workFor(X,O),1).
-ok(org(O), 1) :- ok(workFor(X,O),1).
-ok(peop(X), 1) :- ok(kill(X,Y),1).
-ok(peop(Y), 1) :- ok(kill(X,Y),1).
 
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
@@ -201,3 +180,34 @@ ok(peop(Y), 1) :- ok(kill(X,Y),1).
 :- ok(Y, 1), inf_atom(Y,1), dependency(X,Y), not ok(X, 1).
 :- rule(X, Y, Z), ok(X, 1), ok(Y, 1), not ok(Z, 1).
  
+
+%% Trung: Restrict entity to be head/tail of 2 different relations
+%% locatedIn/orgbasedIn/liveIn/workFor/kill
+%:- ok(locatedIn(X,_), 1), ok(orgbasedIn(X,_), 1).
+%:- ok(locatedIn(X,_), 1), ok(liveIn(X,_), 1).
+%:- ok(locatedIn(X,_), 1), ok(workFor(X,_), 1).
+%:- ok(locatedIn(X,_), 1), ok(kill(X,_), 1).
+
+%:- ok(orgbasedIn(X,_), 1), ok(liveIn(X,_), 1).
+%:- ok(orgbasedIn(X,_), 1), ok(workFor(X,_), 1).
+%:- ok(orgbasedIn(X,_), 1), ok(kill(X,_), 1).
+
+
+%% Trung: For every x, if ok(x) then selected(x)
+%selected(X, 1) :- ok(X, 1).
+
+
+
+%% Trung: infer types for relations only after they are selected
+%% locatedIn/orgbasedIn/liveIn/workFor/kill
+
+ok(loc(P1), 1) :- ok(locatedIn(P1,P2),1).
+ok(loc(P2), 1) :- ok(locatedIn(P1,P2),1).
+ok(org(O), 1) :- ok(orgbasedIn(O,P),1).
+ok(loc(P), 1) :- ok(orgbasedIn(O,P),1).
+ok(peop(X), 1) :- ok(liveIn(X,P),1).
+ok(loc(P), 1) :- ok(liveIn(X,P),1).
+ok(peop(X), 1) :- ok(workFor(X,O),1).
+ok(org(O), 1) :- ok(workFor(X,O),1).
+ok(peop(X), 1) :- ok(kill(X,Y),1).
+ok(peop(Y), 1) :- ok(kill(X,Y),1).
