@@ -3,6 +3,10 @@
 
 analysis/iters/
 analysis/iters_atoms/
+asp_v2/v5/iters_atoms/
+asp_v2/v5/answersets/
+asp_v2/v5/atomed_preds
+asp_v2/v5/selected_answersets
 
 configs.json
 logs/
