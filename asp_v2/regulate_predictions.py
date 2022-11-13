@@ -87,10 +87,11 @@ def split_at_values(lst, value):
     return [e[:-1] for e in split_lst if e != []]
 
 
-def parse_answersets_from_file(path):
+def parse_answersets_from_file(path, with_break):
     with open(path, 'r') as f:
         answersets = [e.strip('\n').replace(' ', '') for e in f.readlines()]
-    answersets = split_at_values(answersets, 'BREAK')
+    if with_break:
+        answersets = split_at_values(answersets, 'BREAK')
     return list(answersets)
 
 
@@ -125,10 +126,10 @@ def find_center_vertex(model_number1, model_number2, sent_number):
     # Read 2 files, parse them and create a graph
     path = answerset_output_path.format(model_number=model_number1,
                                         sent_number=sent_number)
-    answersets0 = parse_answersets_from_file(path)
+    answersets0 = parse_answersets_from_file(path, with_break=True)
     path = answerset_output_path.format(model_number=model_number2,
                                         sent_number=sent_number)
-    answersets1 = parse_answersets_from_file(path)
+    answersets1 = parse_answersets_from_file(path, with_break=True)
     graph = create_dist_graph(answersets0, answersets1, self=False)
     centrality = nx.closeness_centrality(graph)
     center = max(centrality, key=centrality.get)
@@ -164,38 +165,94 @@ def compare_with_gt(gt_path, model_number1, model_number2):
     for row in gt:
         gt_atoms = convert_to_atoms(row, prefix='ok')
         all_gt_atoms.append(gt_atoms)
-    count = 0
     total_set_diff = []
     for i in range(len(all_gt_atoms)):
         path = selected_path.format(model_number1=model_number1,
                                     model_number2=model_number2,
                                     sent_number=i)
-        answerset = parse_answersets_from_file(path)[0]
+        answerset = parse_answersets_from_file(path, with_break=False)
         set_diff = compute_set_diff(all_gt_atoms[i], answerset)
-        # print(answerset)
-        # print(all_gt_atoms[i])
-        # print(set_diff)
-        # print('======================')
-        # input()
-        if set_diff == 0:
-            count += 1
         total_set_diff.append(set_diff)
-    print(count)
-    # print(total_set_diff)
-    print(np.mean(total_set_diff))
+    print('Number of hard match: ', len([e for e in total_set_diff if e == 0]))
+    print('Average set diff: ', np.mean(total_set_diff))
+
+
+def compare_raw_with_gt(raw_path, gt_path):
+    with open(raw_path, 'r') as f:
+        raw = json.load(f)
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    all_gt_atoms = []
+    for row in gt:
+        gt_atoms = convert_to_atoms(row, prefix='ok')
+        all_gt_atoms.append(gt_atoms)
+    all_raw_atoms = []
+    for row in raw:
+        raw_atoms = convert_to_atoms(row, prefix='ok')
+        all_raw_atoms.append(raw_atoms)
+    total_set_diff = []
+    for i, (gt_atoms, raw_atoms) in enumerate(zip(all_gt_atoms, all_raw_atoms)):
+        set_diff = compute_set_diff(gt_atoms, raw_atoms)
+        total_set_diff.append(set_diff)
+    print('Number of hard match: ', len([e for e in total_set_diff if e == 0]))
+    print('Average set diff: ', np.mean(total_set_diff))
 
 
 if __name__ == '__main__':
+    # TODO:
+    # Combine 3 models instead of 2 models
+    _iter = 1
     _model_number = 0
-    convert_to_consistent_answersets(f'asp_v2/v5/preds/prediction_{_model_number}.json',
+    convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
                                      _model_number)
     _model_number = 1
-    convert_to_consistent_answersets(f'asp_v2/v5/preds/prediction_{_model_number}.json',
+    convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
                                      _model_number)
     select_answerset(model_number1=0,
                      model_number2=1)
-    # print(find_center_vertex(0, 1, 97))
+
+    _model_number = 0
+    convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+                                     _model_number)
+    _model_number = 2
+    convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+                                     _model_number)
+    select_answerset(model_number1=0,
+                     model_number2=2)
+
+    _model_number = 1
+    convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+                                     _model_number)
+    _model_number = 2
+    convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+                                     _model_number)
+    select_answerset(model_number1=1,
+                     model_number2=2)
+
+    print('Compare joint M0,M1 with gt')
     compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
                     model_number1=0,
                     model_number2=1)
+    print('===================================')
+    print('Compare joint M0,M2 with gt')
+    compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+                    model_number1=0,
+                    model_number2=2)
+    print('===================================')
+    print('Compare joint M1,M2 with gt')
+    compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+                    model_number1=1,
+                    model_number2=2)
+    print('===================================')
+    print('Compare M0 with gt')
+    compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_0.json',
+                        gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    print('===================================')
+    print('Compare M1 with gt')
+    compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_1.json',
+                        gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    print('===================================')
+    print('Compare M2 with gt')
+    compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_2.json',
+                        gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
 
