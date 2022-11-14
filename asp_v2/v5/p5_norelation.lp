@@ -136,8 +136,8 @@ nok(X, 1) :- inf_atom(X, 1), not ok(X, 1).
 %%inSetDifference(X) :- atom(X, 1), ok(X, 1), not atom(X, 2). 
 %%inSetDifference(X) :- atom(X, 2), nok(X, 1). 
 
-inSetDifference(X) :- ok(X, 1), not atom(X, 1).
-inSetDifference(X) :- atom(X, 1), nok(X, 1).
+inSetDifference(X) :- ok(X, 1), not atom(X, 1). 
+inSetDifference(X) :- atom(X, 1), nok(X, 1). 
 
 %%% keeping the maximal number of atoms that can be kept 
 
@@ -154,7 +154,7 @@ nOfAtoms(N) :- N = #count{1,X : inSetDifference(X)}.
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 
-rule(locatedIn(P1,P2), orgbasedIn(O,P1), orgbasedIn(O, P2)):-
+rule(locatedIn(P1,P2), orgbasedIn(O,P1), orgbasedIn(O, P2)):- 
 	atom(locatedIn(P1,P2),1), atom(orgbasedIn(O,P1),1), P1 != P2.
 
 rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
@@ -163,18 +163,18 @@ rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
 rule(liveIn(X,P1), locatedIn(P1,P2), liveIn(X,P2)):-
 	atom(liveIn(X,P1),1), atom(locatedIn(P1,P2),1), P1!=P2.
 
-%rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
-%	atom(workFor(X,O),1), atom(orgbasedIn(O,P),1).
+rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
+	atom(workFor(X,O),1), atom(orgbasedIn(O,P),1).
 
-%rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):-
-%	atom(liveIn(X,P),1), atom(workFor(X,O),1).
+rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):- 
+	atom(liveIn(X,P),1), atom(workFor(X,O),1).
 
 
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
 
-6 {bad(X,1); bad(Y,1); bad(Z,1); inf_atom(Z,1);
-    dependency(X, Z); dependency(Y, Z) } :-
+6 {bad(X,1); bad(Y,1); bad(Z,1); inf_atom(Z,1); 
+    dependency(X, Z); dependency(Y, Z) } :- 
        	rule(X, Y, Z), atom(X, 1), atom(Y, 1), not atom(Z,1).
 
 :- ok(Y, 1), inf_atom(Y,1), dependency(X,Y), not ok(X, 1).
@@ -211,3 +211,53 @@ ok(peop(X), 1) :- ok(workFor(X,O),1).
 ok(org(O), 1) :- ok(workFor(X,O),1).
 ok(peop(X), 1) :- ok(kill(X,Y),1).
 ok(peop(Y), 1) :- ok(kill(X,Y),1).
+
+
+%% Every sentence must have at least 1 relation
+isRelation :- atom(locatedIn(X,Y),1).
+isRelation :- atom(orgbasedIn(X,Y),1).
+isRelation :- atom(liveIn(X,Y),1).
+isRelation :- atom(workFor(X,Y),1).
+isRelation :- atom(kill(X,Y),1).
+
+%% Program is inconsistent if there is no relation
+:- not isRelation.
+
+%% When program is inconsistent then we generate some relations
+1{atom(locatedIn(X,Y),1); atom(locatedIn(Y,X),1)} :- atom(loc(X),1), atom(loc(Y),1),
+#count{1,Z : atom(locatedIn(X, Z),1)}==0,
+#count{1,Z : atom(locatedIn(Z, X),1)}==0,
+#count{1,Z : atom(liveIn(Z, X),1)}==0,
+#count{1,Z : atom(orgbasedIn(Z, X),1)}==0,
+#count{1,Z : atom(locatedIn(Y, Z),1)}==0,
+#count{1,Z : atom(locatedIn(Z, Y),1)}==0,
+#count{1,Z : atom(liveIn(Z, Y),1)}==0,
+#count{1,Z : atom(orgbasedIn(Z, Y),1)}==0.
+
+1{atom(orgbasedIn(X,Y),1)} :- atom(org(X),1), atom(loc(Y),1).
+1{atom(liveIn(X,Y),1)} :- atom(peop(X),1), atom(loc(Y),1).
+1{atom(workFor(X,Y),1)} :- atom(peop(X),1), atom(org(Y),1).
+1{atom(kill(X,Y),1); atom(kill(Y,X),1)} :- atom(peop(X),1), atom(peop(Y),1).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

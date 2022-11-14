@@ -1,9 +1,0 @@
-atom(org("GSA+Depot"), 2).
-atom(loc("Davisville"), 2).
-atom(loc("R.I."), 2).
-atom(loc("Mineral+Wells"), 2).
-atom(loc("Texas"), 2).
-atom(locatedIn("Mineral+Wells", "Texas"), 2).
-atom(orgbasedIn("GSA+Depot", "R.I."), 2).
-atom(locatedIn("Davisville", "R.I."), 2).
-atom(orgbasedIn("GSA+Depot", "Davisville"), 2).

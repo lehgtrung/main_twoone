@@ -6,6 +6,8 @@ import os
 import networkx as nx
 from tqdm import tqdm
 import numpy as np
+import glob
+import random
 
 
 atomed_output_path = 'asp_v2/v5/atomed_preds/{iter_number}/{model_number}/{sent_number}.txt'
@@ -34,13 +36,13 @@ def convert_to_atoms(pred, prefix):
     entities = pred['entities']
     relations = pred['relations']
     for ent in entities:
-        c = '{}({}("{}"),1).'.format(prefix, ent[2].lower(), "+".join(tokens[ent[0]:ent[1]]))
+        c = '{}({}("{}"),1).'.format(prefix, ent[2].lower(), '{}+{}'.format(ent[0], ent[1]))
         atoms.append(c)
     for rel in relations:
         c = '{}({}("{}","{}"),1).'.format(prefix,
-                                            ''.join([rel[4].split('_')[0].lower(), *rel[4].split('_')[1:]]),
-                                            '+'.join(tokens[rel[0]:rel[1]]),
-                                            '+'.join(tokens[rel[2]:rel[3]]))
+                                          ''.join([rel[4].split('_')[0].lower(), *rel[4].split('_')[1:]]),
+                                          '{}+{}'.format(rel[0], rel[1]),
+                                          '{}+{}'.format(rel[2], rel[3]))
         atoms.append(c)
     return atoms
 
@@ -122,7 +124,7 @@ def create_dist_graph(all_answersets, self=False):
             for j in range(len(answersets)):
                 for k in range(len(answersets)):
                     if k > j:
-                        weight = compute_set_diff(answersets[i], answersets[j])
+                        weight = compute_set_diff(answersets[j], answersets[k])
                         graph.add_edge(f'{i}.{j}', f'{i}.{k}', weight=weight)
     return graph
 
@@ -182,7 +184,7 @@ def compare_with_gt(gt_path, iter_number, model_numbers):
         answerset = parse_answersets_from_file(path, with_break=False)
         set_diff = compute_set_diff(all_gt_atoms[i], answerset)
         total_set_diff.append(set_diff)
-    print('Number of hard match: ', len([e for e in total_set_diff if e == 0]))
+    print('Number of hard matches: ', len([e for e in total_set_diff if e == 0]))
     print('Average set diff: ', np.mean(total_set_diff))
 
 
@@ -203,46 +205,259 @@ def compare_raw_with_gt(raw_path, gt_path):
     for i, (gt_atoms, raw_atoms) in enumerate(zip(all_gt_atoms, all_raw_atoms)):
         set_diff = compute_set_diff(gt_atoms, raw_atoms)
         total_set_diff.append(set_diff)
-    print('Number of hard match: ', len([e for e in total_set_diff if e == 0]))
+    print('Number of hard matches: ', len([e for e in total_set_diff if e == 0]))
     print('Average set diff: ', np.mean(total_set_diff))
 
 
+def compare_raw_selection_with_gt(raw_path1, raw_path2, gt_path):
+    with open(raw_path1, 'r') as f:
+        raw1 = json.load(f)
+    with open(raw_path2, 'r') as f:
+        raw2 = json.load(f)
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    all_gt_atoms = []
+    for row in gt:
+        gt_atoms = convert_to_atoms(row, prefix='ok')
+        all_gt_atoms.append(gt_atoms)
+    selected_raw_indices = []
+    selected_answersets = []
+    for i, (row1, row2) in enumerate(zip(raw1, raw2)):
+        raw_atoms1 = convert_to_atoms(row1, prefix='ok')
+        raw_atoms2 = convert_to_atoms(row2, prefix='ok')
+        set_diff = compute_set_diff(raw_atoms1, raw_atoms2)
+        if set_diff == 0:
+            selected_raw_indices.append(i)
+            selected_answersets.append(raw_atoms1)
+
+    num_agreements = len(selected_raw_indices)
+    print('Number of agreements: ', num_agreements)
+    print('Percentage of agreements: ', num_agreements/len(gt))
+    total_set_diff = []
+    for i, idx in enumerate(selected_raw_indices):
+        set_diff = compute_set_diff(all_gt_atoms[idx], selected_answersets[i])
+        total_set_diff.append(set_diff)
+    num_hard_matches = len([e for e in total_set_diff if e == 0])
+    print('Number of hard matches: ', num_hard_matches)
+    print('Average set diff: ', np.mean(total_set_diff))
+    print('Ratio hard matches/agreements: ', num_hard_matches/num_agreements)
+
+
+def compare_asp_selection_with_gt(iter_number,
+                                  model_number1,
+                                  model_number2,
+                                  gt_path):
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    all_gt_atoms = []
+    for row in gt:
+        gt_atoms = convert_to_atoms(row, prefix='ok')
+        all_gt_atoms.append(gt_atoms)
+    meta_paths1 = glob.glob(answerset_output_path.format(iter_number=iter_number,
+                                                         model_number=model_number1,
+                                                         sent_number='*'))
+    meta_paths2 = glob.glob(answerset_output_path.format(iter_number=iter_number,
+                                                         model_number=model_number2,
+                                                         sent_number='*'))
+    meta_paths1 = sorted(meta_paths1)
+    meta_paths2 = sorted(meta_paths2)
+    assert len(meta_paths1) == len(meta_paths2)
+    selected_indices = []
+    selected_answersets = []
+    for path1, path2 in zip(meta_paths1, meta_paths2):
+        i = int(os.path.basename(path1).split('.')[0])
+        all_answersets1 = parse_answersets_from_file(path1, with_break=True)
+        all_answersets2 = parse_answersets_from_file(path2, with_break=True)
+        set_all_answersets1 = list(map(tuple, all_answersets1))
+        set_all_answersets2 = list(map(tuple, all_answersets2))
+        intersection = list(set(set_all_answersets1).intersection(set_all_answersets2))
+        # if len(intersection) > 1:
+        #     print('MORE THAN 1 AGREEMENTS')
+        #     print(intersection)
+        if len(intersection) > 0:
+            if len(intersection) > 1:
+                print('MORE THAN 1 AGREEMENTS')
+            selected_indices.append(i)
+            selected_answersets.append(intersection[random.choice(range(len(intersection)))])
+
+    num_agreements = len(selected_indices)
+    print('Number of agreements: ', num_agreements)
+    print('Percentage of agreements: ', num_agreements/len(gt))
+    total_set_diff = []
+    for i, idx in enumerate(selected_indices):
+        set_diff = compute_set_diff(all_gt_atoms[idx], selected_answersets[i])
+        total_set_diff.append(set_diff)
+    num_hard_matches = len([e for e in total_set_diff if e == 0])
+    print('Number of hard matches: ', num_hard_matches)
+    print('Average set diff: ', np.mean(total_set_diff))
+    print('Ratio hard matches/agreements: ', num_hard_matches/num_agreements)
+
+
+def does_every_entity_has_relation(gt_path):
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    for row in gt:
+        tokens = row['tokens']
+        entities = row['entities']
+        relations = row['relations']
+        for ent in entities:
+            start, end, etype = ent
+            if etype != 'Other':
+                flag = False
+                for rel in relations:
+                    head_start, head_end, tail_start, tail_end, rtype = rel
+                    if (start, end) == (head_start, head_end) or (start, end) == (tail_start, tail_end):
+                        flag = True
+                if not flag:
+                    print(tokens)
+                    print(f'{etype}({" ".join(tokens[start:end])})')
+                    print('=================')
+
+
+def convert_json_to_asp_form(json_path, prefix='ok'):
+    with open(json_path, 'r') as f:
+        rows = json.load(f)
+    all_atoms = []
+    for row in rows:
+        atoms = convert_to_atoms(row, prefix=prefix)
+        all_atoms.append(atoms)
+    return all_atoms
+
+
+def compare_triple_sets(control, treatment1, treatment2):
+    intersect = set.intersection(set(control), set(treatment1), set(treatment2))
+    unique2set1 = set(treatment1) - set(control)
+    unique2set2 = set(treatment2) - set(control)
+    return intersect, unique2set1, unique2set2
+
+
+def how_many_sentences_are_modified(iter_number, model_number):
+    raw_path = f'asp_v2/v5/preds/iter={iter_number}/prediction_{model_number}.json'
+    gt_path = 'datasets/core_conll04/conll04_30/fold=1/unlabeled.json'
+    all_raw_atoms = convert_json_to_asp_form(raw_path)
+    all_gt_atoms = convert_json_to_asp_form(gt_path)
+
+    mod_count = 0
+    for i in range(len(all_raw_atoms)):
+        path = answerset_output_path.format(iter_number=iter_number,
+                                            model_number=model_number,
+                                            sent_number=i)
+        answersets = parse_answersets_from_file(path, with_break=True)
+        if len(answersets) > 1:
+            mod_count += 1
+            continue
+        set_diff = compute_set_diff(all_raw_atoms[i], answersets[0])
+        if set_diff > 0:
+            # print('ASP: ', answersets[0])
+            # print('RAW: ', all_raw_atoms[i])
+            # print('GT: ', all_gt_atoms[i])
+            # diff_asp_raw = compute_set_diff(all_raw_atoms[i], answersets[0])
+            # diff_asp_gt = compute_set_diff(all_gt_atoms[i], answersets[0])
+            # diff_gt_raw = compute_set_diff(all_gt_atoms[i], all_raw_atoms[i])
+            # print('Diff(asp, raw) = ', diff_asp_raw)
+            # print('Diff(asp, gt) = ', diff_asp_gt)
+            # print('Diff(gt, raw) = ', diff_gt_raw)
+            # intersect, unique2asp, unique2raw = compare_triple_sets(all_gt_atoms[i],
+            #                                                         answersets[0],
+            #                                                         all_raw_atoms[i])
+            # print('Common atoms: ', intersect)
+            # print('Unique 2 asp: ', unique2asp)
+            # print('Unique 2 raw: ', unique2raw)
+            # if diff_asp_gt < diff_gt_raw:
+            #     print('ASP wins')
+            # elif diff_asp_gt > diff_gt_raw:
+            #     print('Raw win')
+            # else:
+            #     print('Draw')
+            # print('======================')
+            # input()
+            mod_count += 1
+    print(mod_count)
+
+
 if __name__ == '__main__':
-    _iter = 1
+    _iter = 2
     for _model_number in range(3):
         convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
                                          iter_number=_iter,
                                          model_number=_model_number)
-    select_answerset(_iter, [0, 1])
-    select_answerset(_iter, [0, 2])
-    select_answerset(_iter, [1, 2])
-    select_answerset(_iter, [0, 1, 2])
+    # select_answerset(_iter, [0, 1])
+    # select_answerset(_iter, [0, 2])
+    # select_answerset(_iter, [1, 2])
+    # select_answerset(_iter, [0, 1, 2])
 
-    print('Compare joint M0,M1 with gt')
-    compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
-                    _iter, [0, 1])
-    print('===================================')
-    print('Compare joint M0,M2 with gt')
-    compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
-                    _iter, [0, 2])
-    print('===================================')
-    print('Compare joint M1,M2 with gt')
-    compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
-                    _iter, [1, 2])
-    print('===================================')
-    print('Compare joint M0,M1,M2 with gt')
-    compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
-                    _iter, [0, 1, 2])
+    # print('Compare joint M0,M1 with gt')
+    # compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+    #                 _iter, [0, 1])
+    # print('===================================')
+    # print('Compare joint M0,M2 with gt')
+    # compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+    #                 _iter, [0, 2])
+    # print('===================================')
+    # print('Compare joint M1,M2 with gt')
+    # compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+    #                 _iter, [1, 2])
+    # print('===================================')
+    # print('Compare joint M0,M1,M2 with gt')
+    # compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+    #                 _iter, [0, 1, 2])
+    # print('***********************************')
+    # print('Compare M0 with gt')
+    # compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_0.json',
+    #                     gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # print('===================================')
+    # print('Compare M1 with gt')
+    # compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_1.json',
+    #                     gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # print('===================================')
+    # print('Compare M2 with gt')
+    # compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_2.json',
+    #                     gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+
+    model_number1 = 0
+    model_number2 = 1
+    print(f'MODEL NUMBER = {model_number1},{model_number2}')
+    print('RAW SELECTION')
+    compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
+                                  raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
+                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
     print('***********************************')
-    print('Compare M0 with gt')
-    compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_0.json',
-                        gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-    print('===================================')
-    print('Compare M1 with gt')
-    compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_1.json',
-                        gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-    print('===================================')
-    print('Compare M2 with gt')
-    compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_2.json',
-                        gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    print('ASP SELECTION')
+    compare_asp_selection_with_gt(iter_number=_iter,
+                                  model_number1=model_number1,
+                                  model_number2=model_number2,
+                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
 
+    print('**********************************************')
+    model_number1 = 0
+    model_number2 = 2
+    print(f'MODEL NUMBER = {model_number1},{model_number2}')
+    print('RAW SELECTION')
+    compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
+                                  raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
+                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    print('***********************************')
+    print('ASP SELECTION')
+    compare_asp_selection_with_gt(iter_number=_iter,
+                                  model_number1=model_number1,
+                                  model_number2=model_number2,
+                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    print('**********************************************')
+    model_number1 = 1
+    model_number2 = 2
+    print(f'MODEL NUMBER = {model_number1},{model_number2}')
+    print('RAW SELECTION')
+    compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
+                                  raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
+                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    print('***********************************')
+    print('ASP SELECTION')
+    compare_asp_selection_with_gt(iter_number=_iter,
+                                  model_number1=model_number1,
+                                  model_number2=model_number2,
+                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+
+    # does_every_entity_has_relation(gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # _iter = 0
+    # _model_number = 0
+    # how_many_sentences_are_modified(_iter, _model_number)

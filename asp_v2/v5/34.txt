@@ -1,34 +1,24 @@
-Original
-org("GSA+Depot")
-loc("Davisville")
-loc("R.I.")
-loc("Mineral+Wells")
-loc("Texas")
-orgbasedIn("GSA+Depot", "Davisville")
-locatedIn("GSA+Depot", "R.I.")
-locatedIn("Mineral+Wells", "Texas")
-locatedIn("Davisville", "R.I.")
+%org("GSA+Depot")
+%loc("Davisville")
+%loc("R.I.")
+%loc("Mineral+Wells")
+%loc("Texas")
+%orgbasedIn("GSA+Depot", "Davisville")
+%locatedIn("GSA+Depot", "R.I.")
+%locatedIn("Mineral+Wells", "Texas")
+%locatedIn("Davisville", "R.I.")
 
-After ASP:
-Common atoms
-org("GSA+Depot")
-loc("Davisville")
-loc("R.I.")
-loc("Mineral+Wells")
-loc("Texas")
-locatedIn("Mineral+Wells","Texas")
+atom(loc("13+14"),1).
+atom(org("15+18"),1).
+atom(loc("22+25"),1).
+atom(liveIn("15+18","22+25"),1).
 
 
-Only in answer set 0:
-locatedIn("Davisville","R.I.")
+%atom(loc("13+14"),1).
+%atom(org("15+18"),1).
+%atom(loc("22+25"),1).
 
-
-Only in answer set 1:
-orgbasedIn("GSA+Depot","Davisville")
-
-
-Only answer set 2:
-orgbasedIn("GSA+Depot","Davisville")
-locatedIn("Davisville","R.I.")
-orgbasedIn("GSA+Depot","R.I.")
-
+%atom(loc("13+14"),1).
+%atom(peop("15+18"),1).
+%atom(loc("22+25"),1).
+%atom(liveIn("15+18","22+25"),1).
