@@ -105,6 +105,8 @@ def aggregate_multiple_models(inputs, models):
     # feed each input to each model via predict_step and compute f1
     outputs = []
     n = len(models)
+    for model in models:
+        model.eval()
     for row in inputs:
         tokens = row['tokens']
         step_input = {
