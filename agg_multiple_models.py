@@ -119,9 +119,20 @@ def evaluate_multiple_models(inputs, model1, model2, model3):
         entity_preds = process_ner_logits(model1, ner_tag_logits, pred1['masks'])
         relation_preds = process_re_logits(model1, re_tag_logits, entity_preds)
 
-        prediction = model1.predict_step(step_input)
-        print(prediction['entity_preds'])
-        print(prediction['relation_preds'])
+        prediction1 = model1.predict_step(step_input)
+        print('prediction 1')
+        print(prediction1['entity_preds'])
+        print(prediction1['relation_preds'])
+
+        prediction2 = model2.predict_step(step_input)
+        print('prediction 2')
+        print(prediction2['entity_preds'])
+        print(prediction2['relation_preds'])
+
+        prediction3 = model3.predict_step(step_input)
+        print('prediction 3')
+        print(prediction3['entity_preds'])
+        print(prediction3['relation_preds'])
 
         output = {
             'tokens': step_input['tokens'],
