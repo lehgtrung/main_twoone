@@ -122,7 +122,7 @@ def aggregate_multiple_models(inputs, models):
             lst_ner_tag_logits.append(_ner_tag_logits)
             lst_re_tag_logits.append(_re_tag_logits)
 
-        for ten in lst_re_tag_logits:
+        for ten in lst_ner_tag_logits:
             print(torch.norm(ten))
         for ten in lst_re_tag_logits:
             print(torch.norm(ten))
@@ -176,7 +176,7 @@ if __name__ == '__main__':
     #     gts = json.load(f)
 
     model_paths = [
-        # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
     ]
