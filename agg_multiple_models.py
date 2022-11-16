@@ -159,27 +159,27 @@ def evaluate_multiple_models(eval_path,
 
 
 if __name__ == '__main__':
-    pred_path = 'datasets/core_conll04/temp.conll04.json'
-    gt_path = 'datasets/core_conll04/valid.conll04.json'
-    with open(pred_path, 'r') as f:
-        preds = json.load(f)
-
-    with open(gt_path, 'r') as f:
-        gts = json.load(f)
-
-    # model_paths = [
-    #     'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
-    #     # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
-    #     # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
-    # ]
-    # DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
-    # DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
+    # pred_path = 'datasets/core_conll04/temp.conll04.json'
+    # gt_path = 'datasets/core_conll04/test.conll04.json'
+    # with open(pred_path, 'r') as f:
+    #     preds = json.load(f)
     #
-    # evaluate_multiple_models(DEFAULT_VALID_PATH,
-    #                          DEFAULT_TEST_PATH,
-    #                          model_paths)
+    # with open(gt_path, 'r') as f:
+    #     gts = json.load(f)
 
-    evaluate_model(preds, gts, logger=None)
+    model_paths = [
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
+        # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
+        # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+    ]
+    DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
+    DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
+
+    evaluate_multiple_models(DEFAULT_VALID_PATH,
+                             DEFAULT_TEST_PATH,
+                             model_paths)
+
+    # evaluate_model(preds, gts, logger=None)
 
 
 
