@@ -145,6 +145,8 @@ if __name__ == '__main__':
     model2 = load_model(path=model_path2)
     model3 = load_model(path=model_path3)
 
+    print('FINISH LOADING MODELS')
+
     print(evaluate_multiple_models(gts, model1, model2, model3))
 
 
