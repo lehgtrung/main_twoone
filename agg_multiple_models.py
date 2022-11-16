@@ -116,9 +116,6 @@ def aggregate_multiple_models(inputs, models):
         pred = models[0].forward_step(step_input)
         ner_tag_logits, re_tag_logits = pred['ner_tag_logits'], pred['re_tag_logits']
 
-        print(ner_tag_logits.shape)
-        print(re_tag_logits.shape)
-
         # for model in models[1:]:
         #     _pred = model.forward_step(step_input)
         #     _ner_tag_logits, _re_tag_logits = _pred['ner_tag_logits'], _pred['re_tag_logits']
@@ -175,7 +172,7 @@ if __name__ == '__main__':
     model_paths = [
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
-        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+        # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
     ]
     DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
     DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
