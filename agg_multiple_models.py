@@ -150,6 +150,8 @@ def evaluate_multiple_models(eval_path,
 
     eval_outputs = aggregate_multiple_models(eval_set, models)
     test_outputs = aggregate_multiple_models(test_set, models)
+    print(eval_outputs[:10])
+    print(test_outputs[:10])
     logger.info('Eval results')
     evaluate_model(eval_outputs, eval_set, logger=logger)
     logger.info('Test results')
