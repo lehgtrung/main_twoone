@@ -209,8 +209,8 @@ def tri_training(labeled_path,
     PREDICT_SCRIPT = SCRIPT['predict']
     EVAL_SCRIPT = SCRIPT['eval']
 
-    DEFAULT_TEST_PATH = './datasets/core_{conll04}/test.{conll04}.json'
-    DEFAULT_VALID_PATH = './datasets/core_{conll04}/valid.{conll04}.json'
+    DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
+    DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
 
     logger.info(f'Labeled path: {labeled_path}')
     # Step 0: Bootstrap sample 3 models
