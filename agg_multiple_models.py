@@ -126,10 +126,13 @@ def aggregate_multiple_models(inputs, models):
             print(torch.norm(ten))
         for ten in lst_re_tag_logits:
             print(torch.norm(ten))
-        exit()
 
         ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits), dim=0)
         re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits), dim=0)
+
+        print(torch.norm(ner_tag_logits))
+        print(torch.norm(re_tag_logits))
+        exit()
 
         entity_preds = process_ner_logits(models[0], ner_tag_logits, _pred['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
