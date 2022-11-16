@@ -2,7 +2,7 @@
 import json
 import torch
 import numpy as np
-from ..prediction_helper import make_prediction, load_model
+from prediction_helper import load_model
 
 
 def get_metrics(sent_list, preds_list, labels_list):
