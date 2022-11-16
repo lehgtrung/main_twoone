@@ -113,19 +113,30 @@ def aggregate_multiple_models(inputs, models):
             'tokens': [tokens]
         }
 
-        pred = models[0].forward_step(step_input)
-        ner_tag_logits, re_tag_logits = pred['ner_tag_logits'], pred['re_tag_logits']
+        # pred = models[0].forward_step(step_input)
+        # ner_tag_logits, re_tag_logits = pred['ner_tag_logits'], pred['re_tag_logits']
 
-        for model in models[1:]:
-            _pred = model.forward_step(step_input)
-            _ner_tag_logits, _re_tag_logits = _pred['ner_tag_logits'], _pred['re_tag_logits']
-            ner_tag_logits += _ner_tag_logits
-            re_tag_logits += _re_tag_logits
+        pred0 = models[0].forward_step(step_input)
+        ner_tag_logits0, re_tag_logits0 = pred0['ner_tag_logits'], pred0['re_tag_logits']
 
-        ner_tag_logits = ner_tag_logits / n
-        re_tag_logits = re_tag_logits / n
+        pred1 = models[1].forward_step(step_input)
+        ner_tag_logits1, re_tag_logits1 = pred1['ner_tag_logits'], pred1['re_tag_logits']
 
-        entity_preds = process_ner_logits(models[0], ner_tag_logits, pred['masks'])
+        pred2 = models[2].forward_step(step_input)
+        ner_tag_logits2, re_tag_logits2 = pred2['ner_tag_logits'], pred2['re_tag_logits']
+
+        # for model in models[1:]:
+        #     _pred = model.forward_step(step_input)
+        #     _ner_tag_logits, _re_tag_logits = _pred['ner_tag_logits'], _pred['re_tag_logits']
+        #     ner_tag_logits += _ner_tag_logits
+        #     re_tag_logits += _re_tag_logits
+
+        # ner_tag_logits = ner_tag_logits / n
+        # re_tag_logits = re_tag_logits / n
+        ner_tag_logits = (ner_tag_logits0 + ner_tag_logits1 + ner_tag_logits2) / 3
+        re_tag_logits = (re_tag_logits0 + re_tag_logits1 + re_tag_logits2) / 3
+
+        entity_preds = process_ner_logits(models[0], ner_tag_logits, pred0['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
 
         output = {
