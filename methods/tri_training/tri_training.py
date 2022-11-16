@@ -237,82 +237,83 @@ def tri_training(labeled_path,
             json.dump(sample, f)
 
     # Step 1: Train on labeled data
-    for i in range(3):
-        if not model_exists(boostrap_labeled_model_paths[i]):
-            script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
-                                         train_path=boostrap_labeled_paths[i],
-                                         log_path=log_path)
-            logger.info(f'Train on labeled data on model #{i}')
-            subprocess.run(script, shell=True, check=True)
-            # Eval the trained model
-            script = EVAL_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
-                                        log_path=log_path)
-            subprocess.run(script, shell=True, check=True)
-        else:
-            logger.info(f'Labeled model #{i} exists, skip training ...')
+    # for i in range(3):
+    #     if not model_exists(boostrap_labeled_model_paths[i]):
+    #         script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
+    #                                      train_path=boostrap_labeled_paths[i],
+    #                                      log_path=log_path)
+    #         logger.info(f'Train on labeled data on model #{i}')
+    #         subprocess.run(script, shell=True, check=True)
+    #         # Eval the trained model
+    #         script = EVAL_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
+    #                                     log_path=log_path)
+    #         subprocess.run(script, shell=True, check=True)
+    #     else:
+    #         logger.info(f'Labeled model #{i} exists, skip training ...')
 
     iteration = 0
     while True:
-        formatted_boostrap_prediction_paths = []
-        for i in range(3):
-            formatted_boostrap_prediction_paths.append(boostrap_prediction_paths[i].format(iteration))
-        os.makedirs(os.path.dirname(formatted_boostrap_prediction_paths[0]), exist_ok=True)
-        if iteration == max_iteration:
-            break
-        # Step 2: make prediction for each model
-        for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
-                                           predict_input_path=unlabeled_path,
-                                           predict_output_path=formatted_boostrap_prediction_paths[i])
-            logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
-            subprocess.run(script, shell=True, check=True)
-
-        # Step 3: stop when predictions from differs under a small ratio
-        agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
-        logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
-        if agreement_ratio >= 0.9:
-            logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
-            break
-
-        # Step 4: otherwise, find agreements between models
-        for i in range(2):
-            for j in range(i+1, 3):
-                if not stop_update[sum(range(3))-(i+j)]:
-                    agree_ratio = select_agreement(in_path1=formatted_boostrap_prediction_paths[i],
-                                                   in_path2=formatted_boostrap_prediction_paths[j],
-                                                   in_path3=formatted_boostrap_prediction_paths[sum(range(3))-(i+j)],
-                                                   out_path=agreement_paths[sum(range(3))-(i+j)],
-                                                   with_disagreement=with_disagreement)
-                    if agree_ratio >= 0.9:
-                        stop_update[sum(range(3))-(i+j)] = True
-                        logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
-                                    f'{round(agree_ratio * 100, 3)}, stop update')
-                        logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                    f'{percentage_correct(agreement_paths[sum(range(3)) - (i + j)])}')
-                    logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
-                                f'{round(agree_ratio*100, 3)}')
-                    logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                f'{percentage_correct(agreement_paths[sum(range(3))-(i+j)])}')
-
-        # Step 5: transfer
-        for i in range(3):
-            transfer_data(in_path1=labeled_path,
-                          in_path2=agreement_paths[i],
-                          out_path=boostrap_temp_labeled_paths[i])
-
-        # Step 6: train on transfer data
-        for i in range(3):
-            script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
-                                         train_path=boostrap_temp_labeled_paths[i],
-                                         log_path=log_path)
-            logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
-            subprocess.run(script, shell=True, check=True)
+        # formatted_boostrap_prediction_paths = []
+        # for i in range(3):
+        #     formatted_boostrap_prediction_paths.append(boostrap_prediction_paths[i].format(iteration))
+        # os.makedirs(os.path.dirname(formatted_boostrap_prediction_paths[0]), exist_ok=True)
+        # if iteration == max_iteration:
+        #     break
+        # # Step 2: make prediction for each model
+        # for i in range(3):
+        #     script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
+        #                                    predict_input_path=unlabeled_path,
+        #                                    predict_output_path=formatted_boostrap_prediction_paths[i])
+        #     logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
+        #     subprocess.run(script, shell=True, check=True)
+        #
+        # # Step 3: stop when predictions from differs under a small ratio
+        # agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
+        # logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
+        # if agreement_ratio >= 0.9:
+        #     logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
+        #     break
+        #
+        # # Step 4: otherwise, find agreements between models
+        # for i in range(2):
+        #     for j in range(i+1, 3):
+        #         if not stop_update[sum(range(3))-(i+j)]:
+        #             agree_ratio = select_agreement(in_path1=formatted_boostrap_prediction_paths[i],
+        #                                            in_path2=formatted_boostrap_prediction_paths[j],
+        #                                            in_path3=formatted_boostrap_prediction_paths[sum(range(3))-(i+j)],
+        #                                            out_path=agreement_paths[sum(range(3))-(i+j)],
+        #                                            with_disagreement=with_disagreement)
+        #             if agree_ratio >= 0.9:
+        #                 stop_update[sum(range(3))-(i+j)] = True
+        #                 logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
+        #                             f'{round(agree_ratio * 100, 3)}, stop update')
+        #                 logger.info(f'Round #{iteration}: Percent match of selected set: '
+        #                             f'{percentage_correct(agreement_paths[sum(range(3)) - (i + j)])}')
+        #             logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
+        #                         f'{round(agree_ratio*100, 3)}')
+        #             logger.info(f'Round #{iteration}: Percent match of selected set: '
+        #                         f'{percentage_correct(agreement_paths[sum(range(3))-(i+j)])}')
+        #
+        # # Step 5: transfer
+        # for i in range(3):
+        #     transfer_data(in_path1=labeled_path,
+        #                   in_path2=agreement_paths[i],
+        #                   out_path=boostrap_temp_labeled_paths[i])
+        #
+        # # Step 6: train on transfer data
+        # for i in range(3):
+        #     script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
+        #                                  train_path=boostrap_temp_labeled_paths[i],
+        #                                  log_path=log_path)
+        #     logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
+        #     subprocess.run(script, shell=True, check=True)
 
         # TODO: Step 7: aggregate 3 models and check performance
         evaluate_multiple_models(DEFAULT_VALID_PATH,
                                  DEFAULT_TEST_PATH,
                                  [boostrap_labeled_model_paths[i] for i in range(3)],
                                  logger)
+        exit()
         iteration += 1
 
 
