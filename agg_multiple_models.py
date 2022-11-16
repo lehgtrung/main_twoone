@@ -133,6 +133,14 @@ def aggregate_multiple_models(inputs, models):
             'entities': entity_preds[0],
             'relations': relation_preds[0]
         }
+        print(output)
+
+        for i in range(len(models)):
+            print(f'Model {i} predicts')
+            pred0 = models[i].predict_step(step_input)
+            print(pred0['entity_preds'])
+            print(pred0['relation_preds'])
+        exit()
         outputs.append(output)
     return outputs
 
