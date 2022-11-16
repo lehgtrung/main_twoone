@@ -116,6 +116,9 @@ def aggregate_multiple_models(inputs, models):
         pred = models[0].forward_step(step_input)
         ner_tag_logits, re_tag_logits = pred['ner_tag_logits'], pred['re_tag_logits']
 
+        print(ner_tag_logits.shape)
+        print(re_tag_logits.shape)
+
         # for model in models[1:]:
         #     _pred = model.forward_step(step_input)
         #     _ner_tag_logits, _re_tag_logits = _pred['ner_tag_logits'], _pred['re_tag_logits']
