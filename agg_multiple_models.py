@@ -122,6 +122,11 @@ def aggregate_multiple_models(inputs, models):
             lst_ner_tag_logits.append(_ner_tag_logits)
             lst_re_tag_logits.append(_re_tag_logits)
 
+        for ten in lst_re_tag_logits:
+            print(torch.norm(ten))
+        for ten in lst_re_tag_logits:
+            print(torch.norm(ten))
+
         ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits), dim=0)
         re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits), dim=0)
 
