@@ -99,9 +99,10 @@ def process_re_logits(model, re_tag_logits, entity_preds):
 def evaluate_multiple_models(inputs, model1, model2, model3):
     # feed each input to each model via predict_step and compute f1
     outputs = []
-    for i in range(len(inputs)):
+    for row in inputs:
+        tokens = row['tokens']
         step_input = {
-            'tokens': [inputs[i]['tokens']]
+            'tokens': [tokens]
         }
         pred1 = model1.forward_step(step_input)
         ner_tag_logits1, re_tag_logits1 = pred1['ner_tag_logits'], pred1['re_tag_logits']
