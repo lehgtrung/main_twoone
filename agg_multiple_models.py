@@ -113,19 +113,19 @@ def aggregate_multiple_models(inputs, models):
             'tokens': [tokens]
         }
 
-        pred = models[0].forward_step(step_input)
-        ner_tag_logits, re_tag_logits = pred['ner_tag_logits'], pred['re_tag_logits']
+        lst_ner_tag_logits = []
+        lst_re_tag_logits = []
 
-        for model in models[1:]:
+        for model in models:
             _pred = model.forward_step(step_input)
             _ner_tag_logits, _re_tag_logits = _pred['ner_tag_logits'], _pred['re_tag_logits']
-            ner_tag_logits += _ner_tag_logits
-            re_tag_logits += _re_tag_logits
+            lst_ner_tag_logits.append(_ner_tag_logits)
+            lst_re_tag_logits.append(_re_tag_logits)
 
-        ner_tag_logits = ner_tag_logits / n
-        re_tag_logits = re_tag_logits / n
+        ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits))
+        re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits))
 
-        entity_preds = process_ner_logits(models[0], ner_tag_logits, pred['masks'])
+        entity_preds = process_ner_logits(models[0], ner_tag_logits, _pred['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
 
         output = {
