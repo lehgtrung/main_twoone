@@ -122,17 +122,8 @@ def aggregate_multiple_models(inputs, models):
             lst_ner_tag_logits.append(_ner_tag_logits)
             lst_re_tag_logits.append(_re_tag_logits)
 
-        for ten in lst_ner_tag_logits:
-            print(torch.norm(ten))
-        for ten in lst_re_tag_logits:
-            print(torch.norm(ten))
-
         ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits), dim=0)
         re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits), dim=0)
-
-        print(torch.norm(ner_tag_logits))
-        print(torch.norm(re_tag_logits))
-        exit()
 
         entity_preds = process_ner_logits(models[0], ner_tag_logits, _pred['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
@@ -180,8 +171,8 @@ if __name__ == '__main__':
 
     model_paths = [
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
-        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
-        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0'
     ]
     DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
     DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
