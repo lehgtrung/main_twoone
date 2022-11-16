@@ -80,6 +80,7 @@ if __name__ == '__main__':
                  labeled_model_path=configs['LABELED_MODEL_PATH'],
                  logger=logger,
                  log_path=configs['LOG_PATH'],
-                 with_disagreement=configs['WITH_DISAGREEMENT'])
+                 with_disagreement=configs['WITH_DISAGREEMENT'],
+                 *args)
 
 

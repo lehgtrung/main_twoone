@@ -25,7 +25,7 @@ def get_metrics(sent_list, preds_list, labels_list):
     return precision, recall, f1
 
 
-def evaluate_model(preds, gts):
+def evaluate_model(preds, gts, logger=None):
     with torch.no_grad():
         sents = []
         pred_entities = []
@@ -74,6 +74,11 @@ def evaluate_model(preds, gts):
     precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
     print(f">> relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
+    if logger:
+        logger.info(f">> entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+        logger.info(f">> relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+
 
 def process_ner_logits(model, ner_tag_logits, mask):
     mask_np = mask.cpu().detach().numpy()
@@ -96,53 +101,59 @@ def process_re_logits(model, re_tag_logits, entity_preds):
     return relation_preds
 
 
-def evaluate_multiple_models(inputs, model1, model2, model3):
+def aggregate_multiple_models(inputs, models):
     # feed each input to each model via predict_step and compute f1
     outputs = []
+    n = len(models)
     for row in inputs:
         tokens = row['tokens']
         step_input = {
             'tokens': [tokens]
         }
-        pred1 = model1.forward_step(step_input)
-        ner_tag_logits1, re_tag_logits1 = pred1['ner_tag_logits'], pred1['re_tag_logits']
 
-        pred2 = model2.forward_step(step_input)
-        ner_tag_logits2, re_tag_logits2 = pred2['ner_tag_logits'], pred2['re_tag_logits']
+        pred = models[0].forward_step(step_input)
+        ner_tag_logits, re_tag_logits = pred['ner_tag_logits'], pred['re_tag_logits']
 
-        pred3 = model3.forward_step(step_input)
-        ner_tag_logits3, re_tag_logits3 = pred3['ner_tag_logits'], pred3['re_tag_logits']
+        for model in models[1:]:
+            _pred = model.forward_step(step_input)
+            _ner_tag_logits, _re_tag_logits = _pred['ner_tag_logits'], _pred['re_tag_logits']
+            ner_tag_logits += _ner_tag_logits
+            re_tag_logits += _re_tag_logits
 
-        ner_tag_logits = (ner_tag_logits1 + ner_tag_logits2 + ner_tag_logits3) / 3
-        re_tag_logits = (re_tag_logits1 + re_tag_logits2 + re_tag_logits3) / 3
+        ner_tag_logits = ner_tag_logits / n
+        re_tag_logits = re_tag_logits / n
 
-        entity_preds = process_ner_logits(model1, ner_tag_logits, pred1['masks'])
-        relation_preds = process_re_logits(model1, re_tag_logits, entity_preds)
-
-        prediction1 = model1.predict_step(step_input)
-        print('prediction 1')
-        print(prediction1['entity_preds'])
-        print(prediction1['relation_preds'])
-
-        prediction2 = model2.predict_step(step_input)
-        print('prediction 2')
-        print(prediction2['entity_preds'])
-        print(prediction2['relation_preds'])
-
-        prediction3 = model3.predict_step(step_input)
-        print('prediction 3')
-        print(prediction3['entity_preds'])
-        print(prediction3['relation_preds'])
+        entity_preds = process_ner_logits(models[0], ner_tag_logits, pred['masks'])
+        relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
 
         output = {
             'tokens': step_input['tokens'],
             'entities': entity_preds[0],
             'relations': relation_preds[0]
         }
-        print(output)
-        exit()
         outputs.append(output)
     return outputs
+
+
+def evaluate_multiple_models(eval_path,
+                             test_path,
+                             model_paths,
+                             logger):
+    with open(eval_path, 'r') as f:
+        eval_set = json.load(f)
+    with open(test_path, 'r') as f:
+        test_set = json.load(f)
+    models = []
+    for path in model_paths:
+        model = load_model(path=path)
+        models.append(model)
+
+    eval_outputs = aggregate_multiple_models(eval_set, models)
+    test_outputs = aggregate_multiple_models(test_set, models)
+    logger.info('Eval results')
+    evaluate_model(eval_outputs, eval_set, logger=logger)
+    logger.info('Test results')
+    evaluate_model(test_outputs, test_set, logger=logger)
 
 
 if __name__ == '__main__':
@@ -154,18 +165,18 @@ if __name__ == '__main__':
     with open(gt_path, 'r') as f:
         gts = json.load(f)
 
-    model_path1 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0'
-    model_path2 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1'
-    model_path3 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+    # model_path1 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0'
+    # model_path2 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1'
+    # model_path3 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
 
     # evaluate_model(preds, gts)
-    model1 = load_model(path=model_path1)
-    model2 = load_model(path=model_path2)
-    model3 = load_model(path=model_path3)
-
-    print('FINISH LOADING MODELS')
-
-    print(evaluate_multiple_models(gts, model1, model2, model3))
+    # model1 = load_model(path=model_path1)
+    # model2 = load_model(path=model_path2)
+    # model3 = load_model(path=model_path3)
+    #
+    # print('FINISH LOADING MODELS')
+    #
+    # aggregate_multiple_models(gts, model1, model2, model3)
 
 
 

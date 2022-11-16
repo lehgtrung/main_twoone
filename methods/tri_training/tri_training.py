@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import json
 import os
+from agg_multiple_models import evaluate_multiple_models
 torch.manual_seed(0)
 random.seed(0)
 np.random.seed(0)
@@ -82,9 +83,11 @@ def conll04_script():
     }
     return CONLL04_SCRIPT
 
+
 def check_size(path):
     with open(path, 'r') as f:
         return len(json.load(f))
+
 
 def add_suffix_to_path(path, suffix, split_by):
     dir_name = os.path.dirname(path)
@@ -199,11 +202,15 @@ def tri_training(labeled_path,
                  logger,
                  log_path,
                  with_disagreement,
-                 max_iteration=15):
+                 max_iteration=15,
+                 *args):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
     EVAL_SCRIPT = SCRIPT['eval']
+
+    DEFAULT_TEST_PATH = f'./datasets/core_{args.dataset.lower()}/test.{args.dataset.lower()}.json'
+    DEFAULT_VALID_PATH = f'./datasets/core_{args.dataset.lower()}/valid.{args.dataset.lower()}.json'
 
     logger.info(f'Labeled path: {labeled_path}')
     # Step 0: Bootstrap sample 3 models
@@ -302,7 +309,10 @@ def tri_training(labeled_path,
             subprocess.run(script, shell=True, check=True)
 
         # TODO: Step 7: aggregate 3 models and check performance
-
+        evaluate_multiple_models(DEFAULT_VALID_PATH,
+                                 DEFAULT_TEST_PATH,
+                                 [boostrap_labeled_model_paths[i] for i in range(3)],
+                                 logger)
         iteration += 1
 
 
