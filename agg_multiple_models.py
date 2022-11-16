@@ -125,7 +125,6 @@ def evaluate_multiple_models(inputs, model1, model2, model3):
 
         output = {
             'tokens': step_input['tokens'],
-            'index': step_input['index'],
             'entities': entity_preds[0],
             'relations': relation_preds[0]
         }
