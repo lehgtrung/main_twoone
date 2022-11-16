@@ -140,7 +140,7 @@ def aggregate_multiple_models(inputs, models):
             pred0 = models[i].predict_step(step_input)
             print(pred0['entity_preds'])
             print(pred0['relation_preds'])
-        exit()
+        print('======================')
         outputs.append(output)
     return outputs
 
