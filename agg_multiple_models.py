@@ -126,6 +126,7 @@ def aggregate_multiple_models(inputs, models):
             print(torch.norm(ten))
         for ten in lst_re_tag_logits:
             print(torch.norm(ten))
+        exit()
 
         ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits), dim=0)
         re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits), dim=0)
@@ -177,7 +178,7 @@ if __name__ == '__main__':
     model_paths = [
         # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
-        # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
     ]
     DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
     DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
