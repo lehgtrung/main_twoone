@@ -122,8 +122,8 @@ def aggregate_multiple_models(inputs, models):
             lst_ner_tag_logits.append(_ner_tag_logits)
             lst_re_tag_logits.append(_re_tag_logits)
 
-        ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits))
-        re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits))
+        ner_tag_logits = torch.mean(torch.stack(lst_ner_tag_logits), dim=0)
+        re_tag_logits = torch.mean(torch.stack(lst_re_tag_logits), dim=0)
 
         entity_preds = process_ner_logits(models[0], ner_tag_logits, _pred['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
