@@ -98,9 +98,11 @@ def process_re_logits(model, re_tag_logits, entity_preds):
 
 def evaluate_multiple_models(inputs, model1, model2, model3):
     # feed each input to each model via predict_step and compute f1
-    kept_fields = []
     outputs = []
-    for step_input in inputs:
+    for i in range(len(inputs)):
+        step_input = {
+            'tokens': [inputs[i]['tokens']]
+        }
         pred1 = model1.forward_step(step_input)
         ner_tag_logits1, re_tag_logits1 = pred1['ner_tag_logits'], pred1['re_tag_logits']
 
@@ -119,7 +121,6 @@ def evaluate_multiple_models(inputs, model1, model2, model3):
         prediction = model1.predict_step(step_input)
         print(prediction['entity_preds'])
         print(prediction['relation_preds'])
-        exit()
 
         output = {
             'tokens': step_input['tokens'],
@@ -128,6 +129,7 @@ def evaluate_multiple_models(inputs, model1, model2, model3):
             'relations': relation_preds[0]
         }
         print(output)
+        exit()
         outputs.append(output)
     return outputs
 
