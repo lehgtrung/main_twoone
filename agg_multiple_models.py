@@ -170,7 +170,7 @@ if __name__ == '__main__':
     #     gts = json.load(f)
 
     model_paths = [
-        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
+        # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
         # 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
     ]
