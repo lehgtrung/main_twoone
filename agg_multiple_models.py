@@ -138,7 +138,7 @@ def aggregate_multiple_models(inputs, models):
 def evaluate_multiple_models(eval_path,
                              test_path,
                              model_paths,
-                             logger):
+                             logger=None):
     with open(eval_path, 'r') as f:
         eval_set = json.load(f)
     with open(test_path, 'r') as f:
@@ -150,11 +150,11 @@ def evaluate_multiple_models(eval_path,
 
     eval_outputs = aggregate_multiple_models(eval_set, models)
     test_outputs = aggregate_multiple_models(test_set, models)
-    print(eval_outputs[:10])
-    print(test_outputs[:10])
-    logger.info('Eval results')
+    if logger:
+        logger.info('Eval results')
     evaluate_model(eval_outputs, eval_set, logger=logger)
-    logger.info('Test results')
+    if logger:
+        logger.info('Test results')
     evaluate_model(test_outputs, test_set, logger=logger)
 
 
@@ -167,18 +167,17 @@ if __name__ == '__main__':
     with open(gt_path, 'r') as f:
         gts = json.load(f)
 
-    # model_path1 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0'
-    # model_path2 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1'
-    # model_path3 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+    model_paths = [
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
+        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+    ]
+    DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
+    DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
 
-    # evaluate_model(preds, gts)
-    # model1 = load_model(path=model_path1)
-    # model2 = load_model(path=model_path2)
-    # model3 = load_model(path=model_path3)
-    #
-    # print('FINISH LOADING MODELS')
-    #
-    # aggregate_multiple_models(gts, model1, model2, model3)
+    evaluate_multiple_models(DEFAULT_VALID_PATH,
+                             DEFAULT_TEST_PATH,
+                             model_paths)
 
 
 
