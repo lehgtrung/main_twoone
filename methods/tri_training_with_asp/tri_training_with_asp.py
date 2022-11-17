@@ -4,7 +4,9 @@ import numpy as np
 import torch
 import json
 import os
-from asp_utils import evaluate_model
+import glob
+from agg_multiple_models import evaluate_model
+from asp_utils import *
 torch.manual_seed(0)
 random.seed(0)
 np.random.seed(0)
@@ -115,16 +117,13 @@ def transfer_data(in_path1, in_path2, out_path):
         json.dump(data1 + data2, f)
 
 
-def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
-                     out_path, logger, with_disagreement=False):
+def select_agreement(in_path1, in_path2, in_path3, out_path, with_disagreement=False):
     with open(in_path1, 'r') as f:
         dataset1 = json.load(f)
     with open(in_path2, 'r') as f:
         dataset2 = json.load(f)
     with open(in_path3, 'r') as f:
         dataset3 = json.load(f)
-    with open(unlabeled_path, 'r') as f:
-        unlabeled_data = json.load(f)
 
     agreements = []
     dataset_size = len(dataset1)
@@ -143,7 +142,6 @@ def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
         else:
             if entities1 == entities2 and relations1 == relations2:
                 agreements.append(dataset1[i])
-    evaluate_model(agreements, unlabeled_data, logger)
     with open(out_path, 'w') as f:
         json.dump(agreements, f)
     return len(agreements) / dataset_size
@@ -194,16 +192,23 @@ def percentage_correct(path):
     return match / len(data)
 
 
-def tri_training(labeled_path,
-                 unlabeled_path,
-                 prediction_path,
-                 agreement_path,
-                 temp_labeled_path,
-                 labeled_model_path,
-                 logger,
-                 log_path,
-                 with_disagreement,
-                 max_iteration=15):
+def report_f1(path, unlabeled_path, logger):
+    with open(path, 'r') as f:
+        preds = json.load(f)
+    with open(unlabeled_path, 'r') as f:
+        gts = json.load(f)
+    evaluate_model(preds, gts, logger)
+
+
+def tri_training_with_asp(labeled_path,
+                          unlabeled_path,
+                          prediction_path,
+                          agreement_path,
+                          temp_labeled_path,
+                          labeled_model_path,
+                          logger,
+                          log_path,
+                          max_iteration=15):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -274,17 +279,22 @@ def tri_training(labeled_path,
             logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
             break
 
+        # Step 3.5: convert predictions to answersets
+        for i in range(3):
+            convert_to_consistent_answersets(formatted_boostrap_prediction_paths[i],
+                                             iter_number=iteration,
+                                             model_number=i)
+
         # Step 4: otherwise, find agreements between models
         for i in range(2):
             for j in range(i+1, 3):
                 if not stop_update[sum(range(3))-(i+j)]:
-                    agree_ratio = select_agreement(in_path1=formatted_boostrap_prediction_paths[i],
-                                                   in_path2=formatted_boostrap_prediction_paths[j],
-                                                   in_path3=formatted_boostrap_prediction_paths[sum(range(3))-(i+j)],
-                                                   out_path=agreement_paths[sum(range(3))-(i+j)],
-                                                   unlabeled_path=unlabeled_path,
-                                                   logger=logger,
-                                                   with_disagreement=with_disagreement)
+                    agree_ratio = select_agreement_with_asp(iter_number=iteration,
+                                                            model_number1=formatted_boostrap_prediction_paths[i],
+                                                            model_number2=formatted_boostrap_prediction_paths[j],
+                                                            unlabeled_path=unlabeled_path,
+                                                            out_path=agreement_paths[sum(range(3))-(i+j)],
+                                                            logger=logger)
                     if agree_ratio >= 0.9:
                         stop_update[sum(range(3))-(i+j)] = True
                         logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
@@ -295,6 +305,8 @@ def tri_training(labeled_path,
                                 f'{round(agree_ratio*100, 3)}')
                     logger.info(f'Round #{iteration}: Percent match of selected set: '
                                 f'{percentage_correct(agreement_paths[sum(range(3))-(i+j)])}')
+                    logger.info(f'Round #{iteration}: F1 on selected set')
+                    report_f1(agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
 
         # Step 5: transfer
         for i in range(3):
