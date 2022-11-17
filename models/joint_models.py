@@ -18,6 +18,8 @@ from data import *
 from .base import *
 
 import copy
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="1"
 
 
 class TabEncoding(nn.Module):
