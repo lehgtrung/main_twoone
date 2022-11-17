@@ -39,8 +39,7 @@ class Tagger(nn.Module):
         self.check_attrs()
         
         # put to device
-        self.device = "cuda:1"
-        # self.device = self.config.device
+        self.device = self.config.device
         self.to(self.device)
         
         self.after_init()
