@@ -2,7 +2,6 @@
 import json
 import torch
 import numpy as np
-from prediction_helper import load_model
 
 
 def get_metrics(sent_list, preds_list, labels_list):
@@ -75,56 +74,6 @@ def evaluate_model(preds, gts):
     print(f">> relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
 
-def process_ner_logits(model, ner_tag_logits, mask):
-    mask_np = mask.cpu().detach().numpy()
-    if model.config.crf == 'CRF':
-        ner_tag_preds = model.crf_layer.decode(ner_tag_logits, mask=mask)
-    elif not model.config.crf:
-        ner_tag_preds = ner_tag_logits.argmax(dim=-1).cpu().detach().numpy()
-    else:
-        raise Exception('not a compatible decode')
-
-    ner_tag_preds = np.array(ner_tag_preds)
-    ner_tag_preds *= mask_np
-    ner_tag_preds = model.ner_tag_indexing.inv(ner_tag_preds)
-    entity_preds = model._postprocess_entities(ner_tag_preds)
-    return entity_preds
-
-
-def process_re_logits(model, re_tag_logits, entity_preds):
-    relation_preds = model._postprocess_relations(re_tag_logits, entity_preds)
-    return relation_preds
-
-
-def evaluate_multiple_models(inputs, model1, model2, model3):
-    # feed each input to each model via predict_step and compute f1
-    kept_fields = []
-    outputs = []
-    for step_input in inputs:
-        pred1 = model1.forward_step(step_input)
-        ner_tag_logits1, re_tag_logits1 = pred1['ner_tag_logits'], pred1['re_tag_logits']
-
-        pred2 = model2.forward_step(step_input)
-        ner_tag_logits2, re_tag_logits2 = pred2['ner_tag_logits'], pred2['re_tag_logits']
-
-        pred3 = model3.forward_step(step_input)
-        ner_tag_logits3, re_tag_logits3 = pred3['ner_tag_logits'], pred3['re_tag_logits']
-
-        ner_tag_logits = (ner_tag_logits1 + ner_tag_logits2 + ner_tag_logits3) / 3
-        re_tag_logits = (re_tag_logits1 + re_tag_logits2 + re_tag_logits3) / 3
-
-        entity_preds = process_ner_logits(model1, ner_tag_logits, pred1['masks'])
-        relation_preds = process_re_logits(model1, re_tag_logits, entity_preds)
-
-        outputs.append({
-            'tokens': step_input['tokens'],
-            'index': step_input['index'],
-            'entities': entity_preds[0],
-            'relations': relation_preds[0]
-        })
-    return outputs
-
-
 if __name__ == '__main__':
     pred_path = 'datasets/core_conll04/train.CoNLL04.json'
     gt_path = 'datasets/core_conll04/train.CoNLL04.json'
@@ -133,17 +82,6 @@ if __name__ == '__main__':
 
     with open(gt_path, 'r') as f:
         gts = json.load(f)
-
-    model_path1 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0'
-    model_path2 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1'
-    model_path3 = 'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
-
-    # evaluate_model(preds, gts)
-    model1 = load_model(path=model_path1)
-    model2 = load_model(path=model_path2)
-    model3 = load_model(path=model_path3)
-
-    print(evaluate_multiple_models(gts, model1, model2, model3))
 
 
 
