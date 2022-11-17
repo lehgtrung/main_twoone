@@ -122,9 +122,6 @@ def aggregate_multiple_models(inputs, models):
             ner_tag_logits += _ner_tag_logits
             re_tag_logits += _re_tag_logits
 
-        ner_tag_logits = ner_tag_logits / 3
-        re_tag_logits = re_tag_logits / 3
-
         entity_preds = process_ner_logits(models[0], ner_tag_logits, pred['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
 
@@ -179,8 +176,8 @@ if __name__ == '__main__':
 
     model_paths = [
         'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_0',
-        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
-        'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
+        #'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_1',
+        #'datasets/methods/tri_training/conll04_30/fold=1/models/labeled_2'
     ]
     DEFAULT_TEST_PATH = './datasets/core_conll04/test.conll04.json'
     DEFAULT_VALID_PATH = './datasets/core_conll04/valid.conll04.json'
