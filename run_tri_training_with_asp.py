@@ -40,7 +40,6 @@ if __name__ == '__main__':
     )
     AGREEMENT_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/agreement.json'
     LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
-    WITH_DISAGREEMENT = args.with_disagreement
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
 
     configs = {
@@ -50,7 +49,6 @@ if __name__ == '__main__':
         'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
         'AGREEMENT_PATH': AGREEMENT_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
-        'WITH_DISAGREEMENT': WITH_DISAGREEMENT,
         'LOG_PATH': LOG_PATH
     }
 
