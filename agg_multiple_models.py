@@ -122,6 +122,9 @@ def aggregate_multiple_models(inputs, models):
             ner_tag_logits += _ner_tag_logits
             re_tag_logits += _re_tag_logits
 
+        ner_tag_logits = ner_tag_logits / 3
+        re_tag_logits = re_tag_logits / 3
+
         entity_preds = process_ner_logits(models[0], ner_tag_logits, pred['masks'])
         relation_preds = process_re_logits(models[0], re_tag_logits, entity_preds)
 
