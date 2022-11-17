@@ -74,9 +74,6 @@ config = Config(**args.__dict__)
 ModelClass = eval(args.model_class)
 model = ModelClass(config)
 
-print(args.device)
-exit()
-
 
 if args.model_read_ckpt:
     print(f"reading params from {args.model_read_ckpt}")

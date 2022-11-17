@@ -40,6 +40,7 @@ class Tagger(nn.Module):
         
         # put to device
         self.device = self.config.device
+        print('self.device: ', self.device)
         self.to(self.device)
         
         self.after_init()
