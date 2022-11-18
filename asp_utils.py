@@ -140,8 +140,8 @@ def convert_atoms_to_file_form(tokens_list, atoms_list):
                 relations.append(obj)
         data.append({
             'tokens': tokens,
-            'entities': entities,
-            'relations': relations
+            'entities': [list(e) for e in entities],
+            'relations': [list(r) for r in relations]
         })
     return data
 
@@ -253,8 +253,6 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     # Convert selected sentences
     gts = [unlabeled_data[i] for i in selected_indices]
     preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
-    print(selected_indices)
-    print(selected_answersets[:10])
     evaluate_model(preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(preds, f)
