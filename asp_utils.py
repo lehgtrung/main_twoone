@@ -231,13 +231,6 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     meta_paths2 = glob.glob(answerset_output_path.format(iter_number=iter_number,
                                                          model_number=model_number2,
                                                          sent_number='*'))
-    print(answerset_output_path.format(iter_number=iter_number,
-                                       model_number=model_number1,
-                                       sent_number='*'))
-    print(answerset_output_path.format(iter_number=iter_number,
-                                       model_number=model_number2,
-                                       sent_number='*'))
-    exit()
     meta_paths1 = sorted(meta_paths1)
     meta_paths2 = sorted(meta_paths2)
     assert len(meta_paths1) == len(meta_paths2)
@@ -259,6 +252,8 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     # Convert selected sentences
     gts = [unlabeled_data[i] for i in selected_indices]
     preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
+    print(selected_indices)
+    print(preds[:10])
     evaluate_model(preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(preds, f)
