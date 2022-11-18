@@ -118,7 +118,7 @@ def transfer_data(in_path1, in_path2, out_path):
 
 
 def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
-                     out_path, logger, with_disagreement=False):
+                     logger, with_disagreement=False):
     with open(in_path1, 'r') as f:
         dataset1 = json.load(f)
     with open(in_path2, 'r') as f:
@@ -151,8 +151,6 @@ def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
     gts = [unlabeled_data[i] for i in agreement_indices]
     for_eval_preds = copy.deepcopy(agreements)
     evaluate_model(for_eval_preds, gts, logger)
-    with open(out_path, 'w') as f:
-        json.dump(agreements, f)
     return len(agreements) / dataset_size
 
 
@@ -312,7 +310,6 @@ def tri_training_with_asp(labeled_path,
                                      in_path2=formatted_boostrap_prediction_paths[j],
                                      in_path3=formatted_boostrap_prediction_paths[
                                          sum(range(3)) - (i + j)],
-                                     out_path=agreement_paths[sum(range(3)) - (i + j)],
                                      unlabeled_path=unlabeled_path,
                                      logger=logger)
                     if agree_ratio >= 0.9:
