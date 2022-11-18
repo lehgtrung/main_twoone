@@ -259,8 +259,10 @@ def tri_training_with_asp(labeled_path,
     iteration = 0
     while True:
         formatted_boostrap_prediction_paths = []
+        formatted_agreement_paths = []
         for i in range(3):
             formatted_boostrap_prediction_paths.append(boostrap_prediction_paths[i].format(iteration))
+            formatted_agreement_paths.append(agreement_paths[i].format(iteration))
         os.makedirs(os.path.dirname(formatted_boostrap_prediction_paths[0]), exist_ok=True)
         if iteration == max_iteration:
             break
@@ -293,25 +295,25 @@ def tri_training_with_asp(labeled_path,
                                                             model_number1=formatted_boostrap_prediction_paths[i],
                                                             model_number2=formatted_boostrap_prediction_paths[j],
                                                             unlabeled_path=unlabeled_path,
-                                                            out_path=agreement_paths[sum(range(3))-(i+j)],
+                                                            out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
                                                             logger=logger)
                     if agree_ratio >= 0.9:
                         stop_update[sum(range(3))-(i+j)] = True
                         logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
                                     f'{round(agree_ratio * 100, 3)}, stop update')
                         logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                    f'{percentage_correct(agreement_paths[sum(range(3))-(i+j)])}')
+                                    f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
                     logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
                                 f'{round(agree_ratio*100, 3)}')
                     logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                f'{percentage_correct(agreement_paths[sum(range(3))-(i+j)])}')
+                                f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
                     logger.info(f'Round #{iteration}: F1 on selected set')
-                    report_f1(agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
+                    report_f1(formatted_agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
 
         # Step 5: transfer
         for i in range(3):
             transfer_data(in_path1=labeled_path,
-                          in_path2=agreement_paths[i],
+                          in_path2=formatted_agreement_paths[i],
                           out_path=boostrap_temp_labeled_paths[i])
 
         # Step 6: train on transfer data
