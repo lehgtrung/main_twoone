@@ -253,7 +253,7 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     gts = [unlabeled_data[i] for i in selected_indices]
     preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
     print(selected_indices)
-    print(preds[:10])
+    print(selected_answersets[:10])
     evaluate_model(preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(preds, f)
