@@ -292,8 +292,8 @@ def tri_training_with_asp(labeled_path,
             for j in range(i+1, 3):
                 if not stop_update[sum(range(3))-(i+j)]:
                     agree_ratio = select_agreement_with_asp(iter_number=iteration,
-                                                            model_number1=formatted_boostrap_prediction_paths[i],
-                                                            model_number2=formatted_boostrap_prediction_paths[j],
+                                                            model_number1=i,
+                                                            model_number2=j,
                                                             unlabeled_path=unlabeled_path,
                                                             out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
                                                             logger=logger)
