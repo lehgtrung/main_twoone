@@ -117,16 +117,20 @@ def transfer_data(in_path1, in_path2, out_path):
         json.dump(data1 + data2, f)
 
 
-def select_agreement(in_path1, in_path2, in_path3, out_path, with_disagreement=False):
+def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
+                     out_path, logger, with_disagreement=False):
     with open(in_path1, 'r') as f:
         dataset1 = json.load(f)
     with open(in_path2, 'r') as f:
         dataset2 = json.load(f)
     with open(in_path3, 'r') as f:
         dataset3 = json.load(f)
+    with open(unlabeled_path, 'r') as f:
+        unlabeled_data = json.load(f)
 
     agreements = []
     dataset_size = len(dataset1)
+    agreement_indices = []
     for i in range(dataset_size):
         entities1 = set([(e[0], e[1]) for e in dataset1[i]['entities']])
         relations1 = set([(e[0], e[1], e[2], e[3]) for e in dataset1[i]['relations']])
@@ -139,9 +143,14 @@ def select_agreement(in_path1, in_path2, in_path3, out_path, with_disagreement=F
             if (entities1 == entities2 and relations1 == relations2) and \
                     (entities1 != entities3 or relations1 != relations3):
                 agreements.append(dataset1[i])
+                agreement_indices.append(i)
         else:
             if entities1 == entities2 and relations1 == relations2:
                 agreements.append(dataset1[i])
+                agreement_indices.append(i)
+    gts = [unlabeled_data[i] for i in agreement_indices]
+    for_eval_preds = copy.deepcopy(agreements)
+    evaluate_model(for_eval_preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(agreements, f)
     return len(agreements) / dataset_size
@@ -267,36 +276,45 @@ def tri_training_with_asp(labeled_path,
         if iteration == max_iteration:
             break
         # Step 2: make prediction for each model
-        # for i in range(3):
-        #     script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
-        #                                    predict_input_path=unlabeled_path,
-        #                                    predict_output_path=formatted_boostrap_prediction_paths[i])
-        #     logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
-        #     subprocess.run(script, shell=True, check=True)
-        #
-        # # Step 3: stop when predictions from differs under a small ratio
-        # agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
-        # logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
-        # if agreement_ratio >= 0.9:
-        #     logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
-        #     break
-        #
-        # # Step 3.5: convert predictions to answersets
-        # for i in range(3):
-        #     convert_to_consistent_answersets(formatted_boostrap_prediction_paths[i],
-        #                                      iter_number=iteration,
-        #                                      model_number=i)
+        for i in range(3):
+            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
+                                           predict_input_path=unlabeled_path,
+                                           predict_output_path=formatted_boostrap_prediction_paths[i])
+            logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
+            subprocess.run(script, shell=True, check=True)
+
+        # Step 3: stop when predictions from differs under a small ratio
+        agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
+        logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
+        if agreement_ratio >= 0.9:
+            logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
+            break
+
+        # Step 3.5: convert predictions to answersets
+        for i in range(3):
+            convert_to_consistent_answersets(formatted_boostrap_prediction_paths[i],
+                                             iter_number=iteration,
+                                             model_number=i)
 
         # Step 4: otherwise, find agreements between models
         for i in range(2):
             for j in range(i+1, 3):
                 if not stop_update[sum(range(3))-(i+j)]:
+                    logger.info(f'Round #{iteration}: F1 on with ASP selection')
                     agree_ratio = select_agreement_with_asp(iter_number=iteration,
                                                             model_number1=i,
                                                             model_number2=j,
                                                             unlabeled_path=unlabeled_path,
                                                             out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
                                                             logger=logger)
+                    logger.info(f'Round #{iteration}: F1 on with raw selection')
+                    select_agreement(in_path1=formatted_boostrap_prediction_paths[i],
+                                     in_path2=formatted_boostrap_prediction_paths[j],
+                                     in_path3=formatted_boostrap_prediction_paths[
+                                         sum(range(3)) - (i + j)],
+                                     out_path=agreement_paths[sum(range(3)) - (i + j)],
+                                     unlabeled_path=unlabeled_path,
+                                     logger=logger)
                     if agree_ratio >= 0.9:
                         stop_update[sum(range(3))-(i+j)] = True
                         logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
@@ -307,9 +325,8 @@ def tri_training_with_asp(labeled_path,
                                 f'{round(agree_ratio*100, 3)}')
                     # logger.info(f'Round #{iteration}: Percent match of selected set: '
                     #             f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
-                    logger.info(f'Round #{iteration}: F1 on selected set')
-                    report_f1(formatted_agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
-                    exit()
+                    # logger.info(f'Round #{iteration}: F1 on selected set')
+                    # report_f1(formatted_agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
 
         # Step 5: transfer
         for i in range(3):

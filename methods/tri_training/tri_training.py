@@ -8,6 +8,7 @@ from asp_utils import evaluate_model
 torch.manual_seed(0)
 random.seed(0)
 np.random.seed(0)
+import copy
 
 
 def conll04_script():
@@ -128,6 +129,7 @@ def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
 
     agreements = []
     dataset_size = len(dataset1)
+    agreement_indices = []
     for i in range(dataset_size):
         entities1 = set([(e[0], e[1]) for e in dataset1[i]['entities']])
         relations1 = set([(e[0], e[1], e[2], e[3]) for e in dataset1[i]['relations']])
@@ -140,10 +142,14 @@ def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
             if (entities1 == entities2 and relations1 == relations2) and \
                     (entities1 != entities3 or relations1 != relations3):
                 agreements.append(dataset1[i])
+                agreement_indices.append(i)
         else:
             if entities1 == entities2 and relations1 == relations2:
                 agreements.append(dataset1[i])
-    evaluate_model(agreements, unlabeled_data, logger)
+                agreement_indices.append(i)
+    gts = [unlabeled_data[i] for i in agreement_indices]
+    for_eval_preds = copy.deepcopy(agreements)
+    evaluate_model(for_eval_preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(agreements, f)
     return len(agreements) / dataset_size
