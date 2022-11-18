@@ -218,8 +218,8 @@ def evaluate_model(preds, gts, logger=None):
 
     if logger:
         logger.info(
-            f">> entity prec:{e_precision:.4f}, rec:{e_recall:.4f}, f1:{e_f1:.4f}"
-            f">> relation prec:{r_precision:.4f}, rec:{r_recall:.4f}, f1:{r_f1:.4f}"
+            f">> entity prec:{e_precision:.4f}, rec:{e_recall:.4f}, f1:{e_f1:.4f}\n"
+            f">> relation prec:{r_precision:.4f}, rec:{r_recall:.4f}, f1:{r_f1:.4f}\n"
             f">> relation prec:{rwe_precision:.4f}, rec:{rwe_recall:.4f}, f1:{rwe_f1:.4f}"
         )
 
