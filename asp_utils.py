@@ -231,8 +231,12 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     meta_paths2 = glob.glob(answerset_output_path.format(iter_number=iter_number,
                                                          model_number=model_number2,
                                                          sent_number='*'))
-    print(meta_paths1)
-    print(meta_paths2)
+    print(answerset_output_path.format(iter_number=iter_number,
+                                       model_number=model_number1,
+                                       sent_number='*'))
+    print(answerset_output_path.format(iter_number=iter_number,
+                                       model_number=model_number2,
+                                       sent_number='*'))
     exit()
     meta_paths1 = sorted(meta_paths1)
     meta_paths2 = sorted(meta_paths2)
