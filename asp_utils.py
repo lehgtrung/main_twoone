@@ -257,7 +257,7 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     with open(out_path, 'w') as f:
         json.dump(preds, f)
     agree_ratio = len(selected_indices) / len(gts)
-    return agree_ratio
+    return selected_indices, agree_ratio
 
 
 
