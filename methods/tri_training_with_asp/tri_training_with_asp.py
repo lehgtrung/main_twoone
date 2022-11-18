@@ -303,7 +303,7 @@ def tri_training_with_asp(labeled_path,
                     selected_indices, _ = select_agreement(
                         in_path1=formatted_boostrap_prediction_paths[i],
                         in_path2=formatted_boostrap_prediction_paths[j],
-                        out_path=formatted_boostrap_prediction_paths[
+                        out_path=formatted_agreement_paths[
                                 sum(range(3)) - (i + j)] + '.bk',
                         unlabeled_path=unlabeled_path
                     )
