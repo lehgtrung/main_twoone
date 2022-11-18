@@ -243,6 +243,7 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
         all_answersets2 = parse_answersets_from_file(path2, with_break=True)
         set_all_answersets1 = list(map(tuple, all_answersets1))
         set_all_answersets2 = list(map(tuple, all_answersets2))
+        input()
         intersection = list(set(set_all_answersets1).intersection(set_all_answersets2))
         if len(intersection) > 0:
             selected_indices.append(i)

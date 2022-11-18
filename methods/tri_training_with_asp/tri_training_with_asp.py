@@ -267,25 +267,25 @@ def tri_training_with_asp(labeled_path,
         if iteration == max_iteration:
             break
         # Step 2: make prediction for each model
-        for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
-                                           predict_input_path=unlabeled_path,
-                                           predict_output_path=formatted_boostrap_prediction_paths[i])
-            logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
-            subprocess.run(script, shell=True, check=True)
-
-        # Step 3: stop when predictions from differs under a small ratio
-        agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
-        logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
-        if agreement_ratio >= 0.9:
-            logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
-            break
-
-        # Step 3.5: convert predictions to answersets
-        for i in range(3):
-            convert_to_consistent_answersets(formatted_boostrap_prediction_paths[i],
-                                             iter_number=iteration,
-                                             model_number=i)
+        # for i in range(3):
+        #     script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
+        #                                    predict_input_path=unlabeled_path,
+        #                                    predict_output_path=formatted_boostrap_prediction_paths[i])
+        #     logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
+        #     subprocess.run(script, shell=True, check=True)
+        #
+        # # Step 3: stop when predictions from differs under a small ratio
+        # agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
+        # logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
+        # if agreement_ratio >= 0.9:
+        #     logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
+        #     break
+        #
+        # # Step 3.5: convert predictions to answersets
+        # for i in range(3):
+        #     convert_to_consistent_answersets(formatted_boostrap_prediction_paths[i],
+        #                                      iter_number=iteration,
+        #                                      model_number=i)
 
         # Step 4: otherwise, find agreements between models
         for i in range(2):
