@@ -38,7 +38,14 @@ if __name__ == '__main__':
         fold=fold,
         iter='{}'
     )
-    AGREEMENT_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/iter={iter}/agreement.json'
+    AGREEMENT_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/iter={iter}/agreement.json'
+    AGREEMENT_PATH = AGREEMENT_PATH.format(
+        method=method,
+        dataset=dataset,
+        percent=percent,
+        fold=fold,
+        iter='{}'
+    )
     LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
 
