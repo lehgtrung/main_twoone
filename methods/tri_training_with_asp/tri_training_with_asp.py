@@ -5,7 +5,6 @@ import torch
 import json
 import os
 import glob
-from agg_multiple_models import evaluate_model
 from asp_utils import *
 torch.manual_seed(0)
 random.seed(0)
