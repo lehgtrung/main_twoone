@@ -117,14 +117,12 @@ def transfer_data(in_path1, in_path2, out_path):
         json.dump(data1 + data2, f)
 
 
-def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
-                     logger, with_disagreement=False):
+def select_agreement(in_path1, in_path2, unlabeled_path,
+                     out_path):
     with open(in_path1, 'r') as f:
         dataset1 = json.load(f)
     with open(in_path2, 'r') as f:
         dataset2 = json.load(f)
-    with open(in_path3, 'r') as f:
-        dataset3 = json.load(f)
     with open(unlabeled_path, 'r') as f:
         unlabeled_data = json.load(f)
 
@@ -136,22 +134,12 @@ def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
         relations1 = set([(e[0], e[1], e[2], e[3]) for e in dataset1[i]['relations']])
         entities2 = set([(e[0], e[1]) for e in dataset2[i]['entities']])
         relations2 = set([(e[0], e[1], e[2], e[3]) for e in dataset2[i]['relations']])
-        entities3 = set([(e[0], e[1]) for e in dataset3[i]['entities']])
-        relations3 = set([(e[0], e[1], e[2], e[3]) for e in dataset3[i]['relations']])
-
-        if with_disagreement:
-            if (entities1 == entities2 and relations1 == relations2) and \
-                    (entities1 != entities3 or relations1 != relations3):
-                agreements.append(dataset1[i])
-                agreement_indices.append(i)
-        else:
-            if entities1 == entities2 and relations1 == relations2:
-                agreements.append(dataset1[i])
-                agreement_indices.append(i)
-    gts = [unlabeled_data[i] for i in agreement_indices]
-    for_eval_preds = copy.deepcopy(agreements)
-    evaluate_model(for_eval_preds, gts, logger)
-    return len(agreements) / dataset_size
+        if entities1 == entities2 and relations1 == relations2:
+            agreements.append(dataset1[i])
+            agreement_indices.append(i)
+    with open(out_path, 'w') as f:
+        json.dump(agreements, f)
+    return agreement_indices, len(agreements) / len(unlabeled_data)
 
 
 def global_agreement_ratio(paths):
@@ -199,11 +187,12 @@ def percentage_correct(path):
     return match / len(data)
 
 
-def report_f1(path, unlabeled_path, logger):
+def report_f1(path, selected_indices, unlabeled_path, logger):
     with open(path, 'r') as f:
         preds = json.load(f)
     with open(unlabeled_path, 'r') as f:
-        gts = json.load(f)
+        unlabeled_data = json.load(f)
+    gts = [unlabeled_data[i] for i in selected_indices]
     evaluate_model(preds, gts, logger)
 
 
@@ -298,20 +287,30 @@ def tri_training_with_asp(labeled_path,
         for i in range(2):
             for j in range(i+1, 3):
                 if not stop_update[sum(range(3))-(i+j)]:
+                    selected_indices, agree_ratio = select_agreement_with_asp(
+                        iter_number=iteration,
+                        model_number1=i,
+                        model_number2=j,
+                        unlabeled_path=unlabeled_path,
+                        out_path=formatted_agreement_paths[sum(range(3))-(i+j)]
+                    )
                     logger.info(f'Round #{iteration}: F1 on with ASP selection')
-                    agree_ratio = select_agreement_with_asp(iter_number=iteration,
-                                                            model_number1=i,
-                                                            model_number2=j,
-                                                            unlabeled_path=unlabeled_path,
-                                                            out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
-                                                            logger=logger)
+                    report_f1(path=formatted_agreement_paths[sum(range(3))-(i+j)],
+                              selected_indices=selected_indices,
+                              unlabeled_path=unlabeled_path,
+                              logger=logger)
                     logger.info(f'Round #{iteration}: F1 on with raw selection')
-                    select_agreement(in_path1=formatted_boostrap_prediction_paths[i],
-                                     in_path2=formatted_boostrap_prediction_paths[j],
-                                     in_path3=formatted_boostrap_prediction_paths[
-                                         sum(range(3)) - (i + j)],
-                                     unlabeled_path=unlabeled_path,
-                                     logger=logger)
+                    selected_indices, _ = select_agreement(
+                        in_path1=formatted_boostrap_prediction_paths[i],
+                        in_path2=formatted_boostrap_prediction_paths[j],
+                        out_path=formatted_boostrap_prediction_paths[
+                                sum(range(3)) - (i + j)] + '.bk',
+                        unlabeled_path=unlabeled_path
+                    )
+                    report_f1(path=formatted_agreement_paths[sum(range(3)) - (i + j)] + '.bk',
+                              selected_indices=selected_indices,
+                              unlabeled_path=unlabeled_path,
+                              logger=logger)
                     if agree_ratio >= 0.9:
                         stop_update[sum(range(3))-(i+j)] = True
                         logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '

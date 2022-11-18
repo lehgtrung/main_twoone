@@ -152,7 +152,7 @@ def select_agreement(in_path1, in_path2, in_path3, unlabeled_path,
     evaluate_model(for_eval_preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(agreements, f)
-    return len(agreements) / dataset_size
+    return agreement_indices, len(agreement_indices) / len(unlabeled_data)
 
 
 def global_agreement_ratio(paths):
