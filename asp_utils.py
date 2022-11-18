@@ -231,6 +231,9 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     meta_paths2 = glob.glob(answerset_output_path.format(iter_number=iter_number,
                                                          model_number=model_number2,
                                                          sent_number='*'))
+    print(meta_paths1)
+    print(meta_paths2)
+    exit()
     meta_paths1 = sorted(meta_paths1)
     meta_paths2 = sorted(meta_paths2)
     assert len(meta_paths1) == len(meta_paths2)
@@ -243,7 +246,6 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
         all_answersets2 = parse_answersets_from_file(path2, with_break=True)
         set_all_answersets1 = list(map(tuple, all_answersets1))
         set_all_answersets2 = list(map(tuple, all_answersets2))
-        input()
         intersection = list(set(set_all_answersets1).intersection(set_all_answersets2))
         if len(intersection) > 0:
             selected_indices.append(i)
