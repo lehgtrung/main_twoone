@@ -248,6 +248,7 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
             selected_indices.append(i)
             choice = random.choice(range(len(intersection)))
             selected_answersets.append(intersection[choice])
+            tokens_list.append(unlabeled_data[i]['tokens'])
 
     # Convert selected sentences
     gts = [unlabeled_data[i] for i in selected_indices]
