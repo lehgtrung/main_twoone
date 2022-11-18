@@ -301,12 +301,12 @@ def tri_training_with_asp(labeled_path,
                         stop_update[sum(range(3))-(i+j)] = True
                         logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
                                     f'{round(agree_ratio * 100, 3)}, stop update')
-                        logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                    f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
+                        # logger.info(f'Round #{iteration}: Percent match of selected set: '
+                        #             f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
                     logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
                                 f'{round(agree_ratio*100, 3)}')
-                    logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
+                    # logger.info(f'Round #{iteration}: Percent match of selected set: '
+                    #             f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
                     logger.info(f'Round #{iteration}: F1 on selected set')
                     report_f1(formatted_agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
                     exit()

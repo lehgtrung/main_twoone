@@ -254,8 +254,8 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     # Convert selected sentences
     gts = [unlabeled_data[i] for i in selected_indices]
     preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
-    # for_eval_preds = copy.copy(preds)
-    # evaluate_model(for_eval_preds, gts, logger)
+    for_eval_preds = copy.deepcopy(preds)
+    evaluate_model(for_eval_preds, gts, logger)
     with open(out_path, 'w') as f:
         json.dump(preds, f)
     agree_ratio = len(selected_indices) / len(gts)
