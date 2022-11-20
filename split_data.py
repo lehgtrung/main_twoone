@@ -38,8 +38,8 @@ def gen_data_folds(in_path, out_path, percent, num_folds):
 
 
 if __name__ == '__main__':
-    num_folds = int(sys.argv[1])
-    percent = int(sys.argv[2])
+    num_folds = 5
+    percent = int(sys.argv[1])
     gen_data_folds(in_path='./datasets/core_conll04/train.conll04.json',
                    out_path='./datasets/core_conll04/conll04_{percent}/fold={fold}',
                    percent=percent,
