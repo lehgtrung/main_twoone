@@ -24,7 +24,7 @@ def get_metrics(sent_list, preds_list, labels_list):
     return precision, recall, f1
 
 
-def evaluate_model(preds, gts):
+def evaluate_model(preds, gts, rel_with_ners=True):
     with torch.no_grad():
         sents = []
         pred_entities = []
@@ -45,16 +45,17 @@ def evaluate_model(preds, gts):
             pred_relations += pred['relations']
             label_relations += gt['relations']
 
-            pred_relations_wNER += [
-                [
-                    (ib, ie, m[(ib, ie)], jb, je, m[(jb, je)], rtype) for ib, ie, jb, je, rtype in x
-                ] for x, m in zip(pred['relations'], pred_span_to_etype)
-            ]
-            label_relations_wNER += [
-                [
-                    (ib, ie, m[(ib, ie)], jb, je, m[(jb, je)], rtype) for ib, ie, jb, je, rtype in x
-                ] for x, m in zip(gt['relations'], label_span_to_etype)
-            ]
+            if rel_with_ners:
+                pred_relations_wNER += [
+                    [
+                        (ib, ie, m[(ib, ie)], jb, je, m[(jb, je)], rtype) for ib, ie, jb, je, rtype in x
+                    ] for x, m in zip(pred['relations'], pred_span_to_etype)
+                ]
+                label_relations_wNER += [
+                    [
+                        (ib, ie, m[(ib, ie)], jb, je, m[(jb, je)], rtype) for ib, ie, jb, je, rtype in x
+                    ] for x, m in zip(gt['relations'], label_span_to_etype)
+                ]
 
             sents += [pred['tokens']]
 
@@ -63,15 +64,18 @@ def evaluate_model(preds, gts):
             sents, pred_entities, label_entities)
         rets['relation_p'], rets['relation_r'], rets['relation_f1'] = get_metrics(
             sents, pred_relations, label_relations)
-        rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = get_metrics(
-            sents, pred_relations_wNER, label_relations_wNER)
+
+        if rel_with_ners:
+            rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER'] = get_metrics(
+                sents, pred_relations_wNER, label_relations_wNER)
 
     precision, recall, f1 = rets['entity_p'], rets['entity_r'], rets['entity_f1']
     print(f">> entity prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
     precision, recall, f1 = rets['relation_p'], rets['relation_r'], rets['relation_f1']
     print(f">> relation prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
-    precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
-    print(f">> relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
+    if rel_with_ners:
+        precision, recall, f1 = rets['relation_p_wNER'], rets['relation_r_wNER'], rets['relation_f1_wNER']
+        print(f">> relation with NER prec:{precision:.4f}, rec:{recall:.4f}, f1:{f1:.4f}")
 
 
 if __name__ == '__main__':

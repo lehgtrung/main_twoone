@@ -3,6 +3,7 @@ import json
 import torch
 import numpy as np
 from prediction_helper import load_model
+from collections import Counter
 
 
 def get_metrics(sent_list, preds_list, labels_list):
@@ -101,6 +102,45 @@ def process_ner_logits(model, ner_tag_logits, mask):
 def process_re_logits(model, re_tag_logits, entity_preds):
     relation_preds = model._postprocess_relations(re_tag_logits, entity_preds)
     return relation_preds
+
+
+def calc_symbol_freq(symbols, n, threshold=0.5):
+    counter = Counter(symbols)
+    final_symbols = []
+    for symbol in symbols:
+        if counter[symbol] >= threshold:
+            final_symbols.append(symbol)
+    return final_symbols
+
+
+def collect_symbols(preds, field):
+    collection = []
+    for pred in preds:
+        collection.extend(pred[field])
+    return collection
+
+
+def aggregate_on_symbols(model_paths):
+    preds = {}
+    outputs = []
+    n = len(model_paths)
+    for i, path in enumerate(model_paths):
+        if i not in preds:
+            preds[i] = []
+        with open(path, 'r') as f:
+            preds[i].append(json.load(f))
+    for i in range(len(preds[0])):
+        tokens = preds[i][0]['tokens']
+        symbols = collect_symbols(preds, 'entities')
+        entities = calc_symbol_freq(symbols, n)
+        symbols = collect_symbols(preds, 'relations')
+        relations = calc_symbol_freq(symbols, n)
+        outputs.append({
+            'tokens': tokens,
+            'entities': entities,
+            'relations': relations
+        })
+    return outputs
 
 
 def aggregate_multiple_models(inputs, models):

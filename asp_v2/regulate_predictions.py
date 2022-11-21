@@ -1,4 +1,4 @@
-
+import copy
 import subprocess
 import json
 import ast
@@ -9,6 +9,7 @@ import numpy as np
 import glob
 import random
 import re
+from collections import Counter
 from independent_evaluation import evaluate_model
 
 
@@ -336,6 +337,43 @@ def compare_asp_selection_with_gt(iter_number,
     evaluate_model(preds, gts)
 
 
+def calc_symbol_freq(symbols, n, threshold=0.5):
+    counter = Counter(map(tuple, symbols))
+    final_symbols = []
+    for symbol in symbols:
+        if counter[tuple(symbol)]/n >= threshold:
+            final_symbols.append(symbol)
+    return final_symbols
+
+
+def collect_symbols(preds, i, field):
+    collection = []
+    for pred in preds:
+        collection.extend(pred[i][field])
+    return collection
+
+
+def aggregate_on_symbols(model_paths):
+    preds = []
+    outputs = []
+    n = len(model_paths)
+    for path in model_paths:
+        with open(path, 'r') as f:
+            preds.append(json.load(f))
+    for i in range(len(preds[0])):
+        tokens = preds[0][i]['tokens']
+        symbols = collect_symbols(preds, i, 'entities')
+        entities = calc_symbol_freq(symbols, n)
+        symbols = collect_symbols(preds, i, 'relations')
+        relations = calc_symbol_freq(symbols, n)
+        outputs.append({
+            'tokens': tokens,
+            'entities': [tuple(e) for e in entities],
+            'relations': [tuple(r) for r in relations]
+        })
+    return outputs
+
+
 def compare_selection_with_gt(gt_path,
                               pred_path1,
                               pred_path2,
@@ -376,11 +414,18 @@ def compare_selection_with_gt(gt_path,
         answerset_list.append(answerset)
         tokens_list.append(gt[i]['tokens'])
     preds = convert_atoms_to_file_form(tokens_list, answerset_list)
+    bk_preds = copy.deepcopy(preds)
 
     with open(gt_path, 'r') as f:
         gt = json.load(f)
-    print('Model AGG')
+    print('Model AGG by ASP')
     evaluate_model(preds, gt)
+
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    print('Model AGG by symbols')
+    symbol_agg = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
+    evaluate_model(symbol_agg, gt, False)
 
 
 def does_every_entity_has_relation(gt_path):
@@ -438,42 +483,19 @@ def how_many_sentences_are_modified(iter_number, model_number):
             continue
         set_diff = compute_set_diff(all_raw_atoms[i], answersets[0])
         if set_diff > 0:
-            # print('ASP: ', answersets[0])
-            # print('RAW: ', all_raw_atoms[i])
-            # print('GT: ', all_gt_atoms[i])
-            # diff_asp_raw = compute_set_diff(all_raw_atoms[i], answersets[0])
-            # diff_asp_gt = compute_set_diff(all_gt_atoms[i], answersets[0])
-            # diff_gt_raw = compute_set_diff(all_gt_atoms[i], all_raw_atoms[i])
-            # print('Diff(asp, raw) = ', diff_asp_raw)
-            # print('Diff(asp, gt) = ', diff_asp_gt)
-            # print('Diff(gt, raw) = ', diff_gt_raw)
-            # intersect, unique2asp, unique2raw = compare_triple_sets(all_gt_atoms[i],
-            #                                                         answersets[0],
-            #                                                         all_raw_atoms[i])
-            # print('Common atoms: ', intersect)
-            # print('Unique 2 asp: ', unique2asp)
-            # print('Unique 2 raw: ', unique2raw)
-            # if diff_asp_gt < diff_gt_raw:
-            #     print('ASP wins')
-            # elif diff_asp_gt > diff_gt_raw:
-            #     print('Raw win')
-            # else:
-            #     print('Draw')
-            # print('======================')
-            # input()
             mod_count += 1
     print(mod_count)
 
 
 if __name__ == '__main__':
-    _iter = 3
+    _iter = 2
     for _model_number in range(3):
         convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
                                          iter_number=_iter,
                                          model_number=_model_number)
-    # select_answerset(_iter, [0, 1])
-    # select_answerset(_iter, [0, 2])
-    # select_answerset(_iter, [1, 2])
+    # # select_answerset(_iter, [0, 1])
+    # # select_answerset(_iter, [0, 2])
+    # # select_answerset(_iter, [1, 2])
     select_answerset(_iter, [0, 1, 2])
 
     compare_selection_with_gt(gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
