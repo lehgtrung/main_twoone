@@ -75,8 +75,8 @@ def evaluate_model(preds, gts):
 
 
 if __name__ == '__main__':
-    pred_path = 'datasets/core_conll04/train.CoNLL04.json'
-    gt_path = 'datasets/core_conll04/train.CoNLL04.json'
+    pred_path = 'datasets/core_conll04/train.conll04.json'
+    gt_path = 'datasets/core_conll04/train.conll04.json'
     with open(pred_path, 'r') as f:
         preds = json.load(f)
 

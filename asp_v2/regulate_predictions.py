@@ -336,6 +336,53 @@ def compare_asp_selection_with_gt(iter_number,
     evaluate_model(preds, gts)
 
 
+def compare_selection_with_gt(gt_path,
+                              pred_path1,
+                              pred_path2,
+                              pred_path3,
+                              iter_number):
+    with open(pred_path1, 'r') as f:
+        pred1 = json.load(f)
+    with open(pred_path2, 'r') as f:
+        pred2 = json.load(f)
+    with open(pred_path3, 'r') as f:
+        pred3 = json.load(f)
+
+
+    # Evaluate each of them
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    print('Model 1')
+    evaluate_model(pred1, gt)
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    print('Model 2')
+    evaluate_model(pred2, gt)
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    print('Model 3')
+    evaluate_model(pred3, gt)
+
+    # aggregate 3 models
+    answerset_list = []
+    tokens_list = []
+
+    for i in range(len(gt)):
+        combined_model_numbers = '.'.join(map(str, range(3)))
+        path = selected_path.format(iter_number=iter_number,
+                                    combined_model_numbers=combined_model_numbers,
+                                    sent_number=i)
+        answerset = parse_answersets_from_file(path, with_break=False)
+        answerset_list.append(answerset)
+        tokens_list.append(gt[i]['tokens'])
+    preds = convert_atoms_to_file_form(tokens_list, answerset_list)
+
+    with open(gt_path, 'r') as f:
+        gt = json.load(f)
+    print('Model AGG')
+    evaluate_model(preds, gt)
+
+
 def does_every_entity_has_relation(gt_path):
     with open(gt_path, 'r') as f:
         gt = json.load(f)
@@ -419,15 +466,22 @@ def how_many_sentences_are_modified(iter_number, model_number):
 
 
 if __name__ == '__main__':
-    _iter = 3
-    for _model_number in range(3):
-        convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
-                                         iter_number=_iter,
-                                         model_number=_model_number)
+    _iter = 0
+    # for _model_number in range(3):
+    #     convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+    #                                      iter_number=_iter,
+    #                                      model_number=_model_number)
     # select_answerset(_iter, [0, 1])
     # select_answerset(_iter, [0, 2])
     # select_answerset(_iter, [1, 2])
-    # select_answerset(_iter, [0, 1, 2])
+    select_answerset(_iter, [0, 1, 2])
+
+    compare_selection_with_gt(gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
+                              pred_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_0.json',
+                              pred_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_1.json',
+                              pred_path3=f'asp_v2/v5/preds/iter={_iter}/prediction_2.json',
+                              iter_number=_iter)
+
     #
     # print('Compare joint M0,M1 with gt')
     # compare_with_gt('datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
@@ -457,48 +511,48 @@ if __name__ == '__main__':
     # compare_raw_with_gt(raw_path=f'asp_v2/v5/preds/iter={_iter}/prediction_2.json',
     #                     gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
 
-    model_number1 = 0
-    model_number2 = 1
-    print(f'MODEL NUMBER = {model_number1},{model_number2}')
-    print('RAW SELECTION')
-    compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
-                                  raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
-                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-    print('++++++++++++++++++++++++++++++++++')
-    print('ASP SELECTION')
-    compare_asp_selection_with_gt(iter_number=_iter,
-                                  model_number1=model_number1,
-                                  model_number2=model_number2,
-                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-
-    print('**********************************************')
-    model_number1 = 0
-    model_number2 = 2
-    print(f'MODEL NUMBER = {model_number1},{model_number2}')
-    print('RAW SELECTION')
-    compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
-                                  raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
-                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-    print('++++++++++++++++++++++++++++++++++')
-    print('ASP SELECTION')
-    compare_asp_selection_with_gt(iter_number=_iter,
-                                  model_number1=model_number1,
-                                  model_number2=model_number2,
-                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-    print('**********************************************')
-    model_number1 = 1
-    model_number2 = 2
-    print(f'MODEL NUMBER = {model_number1},{model_number2}')
-    print('RAW SELECTION')
-    compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
-                                  raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
-                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
-    print('++++++++++++++++++++++++++++++++++')
-    print('ASP SELECTION')
-    compare_asp_selection_with_gt(iter_number=_iter,
-                                  model_number1=model_number1,
-                                  model_number2=model_number2,
-                                  gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # model_number1 = 0
+    # model_number2 = 1
+    # print(f'MODEL NUMBER = {model_number1},{model_number2}')
+    # print('RAW SELECTION')
+    # compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
+    #                               raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
+    #                               gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # print('++++++++++++++++++++++++++++++++++')
+    # print('ASP SELECTION')
+    # compare_asp_selection_with_gt(iter_number=_iter,
+    #                               model_number1=model_number1,
+    #                               model_number2=model_number2,
+    #                               gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    #
+    # print('**********************************************')
+    # model_number1 = 0
+    # model_number2 = 2
+    # print(f'MODEL NUMBER = {model_number1},{model_number2}')
+    # print('RAW SELECTION')
+    # compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
+    #                               raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
+    #                               gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # print('++++++++++++++++++++++++++++++++++')
+    # print('ASP SELECTION')
+    # compare_asp_selection_with_gt(iter_number=_iter,
+    #                               model_number1=model_number1,
+    #                               model_number2=model_number2,
+    #                               gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # print('**********************************************')
+    # model_number1 = 1
+    # model_number2 = 2
+    # print(f'MODEL NUMBER = {model_number1},{model_number2}')
+    # print('RAW SELECTION')
+    # compare_raw_selection_with_gt(raw_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number1}.json',
+    #                               raw_path2=f'asp_v2/v5/preds/iter={_iter}/prediction_{model_number2}.json',
+    #                               gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
+    # print('++++++++++++++++++++++++++++++++++')
+    # print('ASP SELECTION')
+    # compare_asp_selection_with_gt(iter_number=_iter,
+    #                               model_number1=model_number1,
+    #                               model_number2=model_number2,
+    #                               gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
 
     # does_every_entity_has_relation(gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json')
     # _iter = 0
