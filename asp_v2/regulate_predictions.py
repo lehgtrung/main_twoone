@@ -15,7 +15,7 @@ from independent_evaluation import evaluate_model
 atomed_output_path = 'asp_v2/v5/atomed_preds/{iter_number}/{model_number}/{sent_number}.txt'
 answerset_output_path = 'asp_v2/v5/answersets/{iter_number}/{model_number}/{sent_number}.txt'
 selected_path = 'asp_v2/v5/selected_answersets/{iter_number}/{combined_model_numbers}/{sent_number}.txt'
-command = 'clingo --opt-mode=optN asp_v2/v5/p5.lp ' + atomed_output_path + \
+command = 'clingo --opt-mode=optN asp_v2/v5/p5_with_rules.lp ' + atomed_output_path + \
           ' --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
 
 
@@ -466,11 +466,11 @@ def how_many_sentences_are_modified(iter_number, model_number):
 
 
 if __name__ == '__main__':
-    _iter = 0
-    # for _model_number in range(3):
-    #     convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
-    #                                      iter_number=_iter,
-    #                                      model_number=_model_number)
+    _iter = 3
+    for _model_number in range(3):
+        convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+                                         iter_number=_iter,
+                                         model_number=_model_number)
     # select_answerset(_iter, [0, 1])
     # select_answerset(_iter, [0, 2])
     # select_answerset(_iter, [1, 2])
