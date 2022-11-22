@@ -265,7 +265,11 @@ def tri_training(labeled_path,
     for i in range(3):
         # if not model_exists(boostrap_labeled_model_paths[i].format(0)):
         if start_iter == 0:
+            print(formatted_boostrap_labeled_model_paths[i])
+            print(os.path.dirname(formatted_boostrap_labeled_model_paths[0]))
+            exit()
             os.makedirs(os.path.dirname(formatted_boostrap_labeled_model_paths[0]), exist_ok=True)
+
             script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_boostrap_labeled_model_paths[i],
                                          train_path=boostrap_labeled_paths[i],
                                          log_path=log_path)
