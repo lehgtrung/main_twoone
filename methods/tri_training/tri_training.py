@@ -262,6 +262,8 @@ def tri_training(labeled_path,
     formatted_boostrap_labeled_model_paths = []
     for i in range(3):
         formatted_boostrap_labeled_model_paths.append(boostrap_labeled_model_paths[i].format(0))
+    print(formatted_boostrap_labeled_model_paths)
+    exit()
     for i in range(3):
         # if not model_exists(boostrap_labeled_model_paths[i].format(0)):
         if start_iter == 0:
