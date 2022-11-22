@@ -367,10 +367,10 @@ def tri_training(labeled_path,
 
         logger.info('Check F1 on valid data')
         model_agg = aggregate_on_symbols(model_paths=valid_prediction_paths)
-        evaluate_model(model_agg, json.load(open(DEFAULT_VALID_PATH)))
+        evaluate_model(model_agg, json.load(open(DEFAULT_VALID_PATH)), logger)
         logger.info('Check F1 on test data')
         model_agg = aggregate_on_symbols(model_paths=test_prediction_paths)
-        evaluate_model(model_agg, json.load(open(DEFAULT_TEST_PATH)))
+        evaluate_model(model_agg, json.load(open(DEFAULT_TEST_PATH)), logger)
         iteration += 1
         exit()
 
