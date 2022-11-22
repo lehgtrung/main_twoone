@@ -488,15 +488,15 @@ def how_many_sentences_are_modified(iter_number, model_number):
 
 
 if __name__ == '__main__':
-    _iter = 2
-    for _model_number in range(3):
-        convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
-                                         iter_number=_iter,
-                                         model_number=_model_number)
+    _iter = 3
+    # for _model_number in range(3):
+    #     convert_to_consistent_answersets(f'asp_v2/v5/preds/iter={_iter}/prediction_{_model_number}.json',
+    #                                      iter_number=_iter,
+    #                                      model_number=_model_number)
     # # select_answerset(_iter, [0, 1])
     # # select_answerset(_iter, [0, 2])
     # # select_answerset(_iter, [1, 2])
-    select_answerset(_iter, [0, 1, 2])
+    # select_answerset(_iter, [0, 1, 2])
 
     compare_selection_with_gt(gt_path='datasets/core_conll04/conll04_30/fold=1/unlabeled.json',
                               pred_path1=f'asp_v2/v5/preds/iter={_iter}/prediction_0.json',

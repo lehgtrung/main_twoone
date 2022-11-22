@@ -46,10 +46,27 @@ if __name__ == '__main__':
         fold=fold,
         iter='{}'
     )
-    AGREEMENT_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/agreement.json'
-    LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
+    AGREEMENT_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/iter={iter}/agreement.json'
+    AGREEMENT_PATH = AGREEMENT_PATH.format(
+        method=method,
+        dataset=dataset,
+        percent=percent,
+        fold=fold,
+        iter='{}'
+    )
+    LABELED_MODEL_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/iter={iter}/labeled'
+    LABELED_MODEL_PATH = LABELED_MODEL_PATH.format(
+        method=method,
+        dataset=dataset,
+        percent=percent,
+        fold=fold,
+        iter='{}'
+    )
     WITH_DISAGREEMENT = args.with_disagreement
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
+
+    VALID_PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/valid_preds.json'
+    TEST_PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/test_preds.json'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,
@@ -59,7 +76,9 @@ if __name__ == '__main__':
         'AGREEMENT_PATH': AGREEMENT_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
         'WITH_DISAGREEMENT': WITH_DISAGREEMENT,
-        'LOG_PATH': LOG_PATH
+        'LOG_PATH': LOG_PATH,
+        'VALID_PREDICTION_PATH': VALID_PREDICTION_PATH,
+        'TEST_PREDICTION_PATH': TEST_PREDICTION_PATH
     }
 
     # Create paths
@@ -80,6 +99,8 @@ if __name__ == '__main__':
                  labeled_model_path=configs['LABELED_MODEL_PATH'],
                  logger=logger,
                  log_path=configs['LOG_PATH'],
+                 valid_prediction_path=configs['VALID_PREDICTION_PATH'],
+                 test_prediction_path=configs['TEST_PREDICTION_PATH'],
                  with_disagreement=configs['WITH_DISAGREEMENT'])
 
 

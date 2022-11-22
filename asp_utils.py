@@ -8,7 +8,7 @@ import random
 import re
 import torch
 import copy
-
+from collections import Counter
 
 atomed_output_path = 'methods/tri_training_with_asp/atomed_preds/{iter_number}/{model_number}/{sent_number}.txt'
 answerset_output_path = 'methods/tri_training_with_asp/answersets/{iter_number}/{model_number}/{sent_number}.txt'
@@ -262,4 +262,39 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     return selected_indices, agree_ratio
 
 
+def calc_symbol_freq(symbols, n, threshold=0.5):
+    counter = Counter(map(tuple, symbols))
+    final_symbols = []
+    for symbol in symbols:
+        if counter[tuple(symbol)]/n >= threshold:
+            final_symbols.append(symbol)
+    return final_symbols
+
+
+def collect_symbols(preds, i, field):
+    collection = []
+    for pred in preds:
+        collection.extend(pred[i][field])
+    return collection
+
+
+def aggregate_on_symbols(model_paths):
+    preds = []
+    outputs = []
+    n = len(model_paths)
+    for path in model_paths:
+        with open(path, 'r') as f:
+            preds.append(json.load(f))
+    for i in range(len(preds[0])):
+        tokens = preds[0][i]['tokens']
+        symbols = collect_symbols(preds, i, 'entities')
+        entities = calc_symbol_freq(symbols, n)
+        symbols = collect_symbols(preds, i, 'relations')
+        relations = calc_symbol_freq(symbols, n)
+        outputs.append({
+            'tokens': tokens,
+            'entities': [tuple(e) for e in entities],
+            'relations': [tuple(r) for r in relations]
+        })
+    return outputs
 
