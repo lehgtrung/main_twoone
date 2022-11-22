@@ -25,6 +25,11 @@ if __name__ == '__main__':
                         default=0,
                         type=int,
                         action='store')
+    parser.add_argument('--start_iter',
+                        required=False,
+                        default=0,
+                        type=int,
+                        action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
@@ -101,6 +106,7 @@ if __name__ == '__main__':
                  log_path=configs['LOG_PATH'],
                  valid_prediction_path=configs['VALID_PREDICTION_PATH'],
                  test_prediction_path=configs['TEST_PREDICTION_PATH'],
+                 start_iter=args.start_iter,
                  with_disagreement=configs['WITH_DISAGREEMENT'])
 
 
