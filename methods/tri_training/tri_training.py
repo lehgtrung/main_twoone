@@ -292,63 +292,65 @@ def tri_training(labeled_path,
         if iteration == max_iteration:
             break
         # Step 2: make prediction for each model
-        for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
-                                           predict_input_path=unlabeled_path,
-                                           predict_output_path=formatted_boostrap_prediction_paths[i])
-            logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
-            subprocess.run(script, shell=True, check=True)
-
-        # Step 3: stop when predictions from differs under a small ratio
-        agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
-        logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
-        if agreement_ratio >= 0.9:
-            logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
-            break
-
-        # Step 4: otherwise, find agreements between models
-        for i in range(2):
-            for j in range(i+1, 3):
-                if not stop_update[sum(range(3))-(i+j)]:
-                    selected_indices, agree_ratio = select_agreement(
-                        in_path1=formatted_boostrap_prediction_paths[i],
-                        in_path2=formatted_boostrap_prediction_paths[j],
-                        in_path3=formatted_boostrap_prediction_paths[sum(range(3))-(i+j)],
-                        out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
-                        unlabeled_path=unlabeled_path,
-                        logger=logger,
-                        with_disagreement=with_disagreement
-                    )
-                    logger.info(f'Round #{iteration}: Selection size: {len(selected_indices)}')
-                    logger.info(f'Round #{iteration}: F1 on selection')
-                    report_f1(path=formatted_agreement_paths[sum(range(3)) - (i + j)],
-                              selected_indices=selected_indices,
-                              unlabeled_path=unlabeled_path,
-                              logger=logger)
-                    if agree_ratio >= 0.9:
-                        stop_update[sum(range(3))-(i+j)] = True
-                        logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
-                                    f'{round(agree_ratio * 100, 3)}, stop update')
-                        logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                    f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
-                    logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
-                                f'{round(agree_ratio*100, 3)}')
-                    logger.info(f'Round #{iteration}: Percent match of selected set: '
-                                f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
-
-        # Step 5: transfer
-        for i in range(3):
-            transfer_data(in_path1=labeled_path,
-                          in_path2=formatted_agreement_paths[i],
-                          out_path=boostrap_temp_labeled_paths[i])
-
-        # Step 6: train on transfer data
-        for i in range(3):
-            script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_boostrap_labeled_model_paths[i],
-                                         train_path=boostrap_temp_labeled_paths[i],
-                                         log_path=log_path)
-            logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
-            subprocess.run(script, shell=True, check=True)
+        # for i in range(3):
+        #     script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+        #                                    predict_input_path=unlabeled_path,
+        #                                    predict_output_path=formatted_boostrap_prediction_paths[i])
+        #     logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
+        #     subprocess.run(script, shell=True, check=True)
+        #
+        # # Step 3: stop when predictions from differs under a small ratio
+        # agreement_ratio = global_agreement_ratio(formatted_boostrap_prediction_paths)
+        # logger.info(f'Round #{iteration}: Global agreement between 3 models: {agreement_ratio}')
+        # if agreement_ratio >= 0.9:
+        #     logger.info(f'Round #{iteration}: Reach global agreement between 3 models')
+        #     break
+        #
+        # # Step 4: otherwise, find agreements between models
+        # for i in range(2):
+        #     for j in range(i+1, 3):
+        #         if not stop_update[sum(range(3))-(i+j)]:
+        #             selected_indices, agree_ratio = select_agreement(
+        #                 in_path1=formatted_boostrap_prediction_paths[i],
+        #                 in_path2=formatted_boostrap_prediction_paths[j],
+        #                 in_path3=formatted_boostrap_prediction_paths[sum(range(3))-(i+j)],
+        #                 out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
+        #                 unlabeled_path=unlabeled_path,
+        #                 logger=logger,
+        #                 with_disagreement=with_disagreement
+        #             )
+        #             if agree_ratio >= 0.9:
+        #                 stop_update[sum(range(3))-(i+j)] = True
+        #                 logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
+        #                             f'{round(agree_ratio * 100, 3)}, stop update')
+        #                 logger.info(f'Round #{iteration}: Percent match of selected set: '
+        #                             f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
+        #             logger.info('########################################################')
+        #             logger.info(f'Round #{iteration}: Agreement ratio between model_{i} and model_{j}: '
+        #                         f'{round(agree_ratio*100, 3)}')
+        #             logger.info(f'Round #{iteration}: Percent match of selected set: '
+        #                         f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
+        #             logger.info(f'Round #{iteration}: Selection size: {len(selected_indices)}')
+        #             logger.info(f'Round #{iteration}: F1 on selection')
+        #             report_f1(path=formatted_agreement_paths[sum(range(3)) - (i + j)],
+        #                       selected_indices=selected_indices,
+        #                       unlabeled_path=unlabeled_path,
+        #                       logger=logger)
+        #             logger.info('########################################################')
+        #
+        # # Step 5: transfer
+        # for i in range(3):
+        #     transfer_data(in_path1=labeled_path,
+        #                   in_path2=formatted_agreement_paths[i],
+        #                   out_path=boostrap_temp_labeled_paths[i])
+        #
+        # # Step 6: train on transfer data
+        # for i in range(3):
+        #     script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_boostrap_labeled_model_paths[i],
+        #                                  train_path=boostrap_temp_labeled_paths[i],
+        #                                  log_path=log_path)
+        #     logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
+        #     subprocess.run(script, shell=True, check=True)
 
         # Step 7: aggregate 3 models and check performance
         for i in range(3):

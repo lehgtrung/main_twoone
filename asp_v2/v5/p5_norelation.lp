@@ -214,30 +214,35 @@ ok(peop(Y), 1) :- ok(kill(X,Y),1).
 
 
 %% Every sentence must have at least 1 relation
-isRelation :- atom(locatedIn(X,Y),1).
-isRelation :- atom(orgbasedIn(X,Y),1).
-isRelation :- atom(liveIn(X,Y),1).
-isRelation :- atom(workFor(X,Y),1).
-isRelation :- atom(kill(X,Y),1).
+real_relation :- atom(locatedIn(X,Y),1).
+real_relation :- atom(orgbasedIn(X,Y),1).
+real_relation :- atom(liveIn(X,Y),1).
+real_relation :- atom(workFor(X,Y),1).
+real_relation :- atom(kill(X,Y),1).
 
 %% Program is inconsistent if there is no relation
-:- not isRelation.
+1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1)} :- not real_relation.
+
+%1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1);
+%   atom(orgbasedIn(X,Y),1) : atom(org(X),1), atom(loc(Y),1);
+%   atom(workFor(X,Y),1) : atom(peop(X),1), atom(org(Y),1);
+%   atom(kill(X,Y),1), atom(kill(Y,X),1) : atom(peop(X),1), atom(peop(Y),1)} :- not real_relation.
 
 %% When program is inconsistent then we generate some relations
-1{atom(locatedIn(X,Y),1); atom(locatedIn(Y,X),1)} :- atom(loc(X),1), atom(loc(Y),1),
-#count{1,Z : atom(locatedIn(X, Z),1)}==0,
-#count{1,Z : atom(locatedIn(Z, X),1)}==0,
-#count{1,Z : atom(liveIn(Z, X),1)}==0,
-#count{1,Z : atom(orgbasedIn(Z, X),1)}==0,
-#count{1,Z : atom(locatedIn(Y, Z),1)}==0,
-#count{1,Z : atom(locatedIn(Z, Y),1)}==0,
-#count{1,Z : atom(liveIn(Z, Y),1)}==0,
-#count{1,Z : atom(orgbasedIn(Z, Y),1)}==0.
+%1{atom(locatedIn(X,Y),1); atom(locatedIn(Y,X),1)} :- atom(loc(X),1), atom(loc(Y),1),
+%#count{1,Z : atom(locatedIn(X, Z),1)}==0,
+%#count{1,Z : atom(locatedIn(Z, X),1)}==0,
+%#count{1,Z : atom(liveIn(Z, X),1)}==0,
+%#count{1,Z : atom(orgbasedIn(Z, X),1)}==0,
+%#count{1,Z : atom(locatedIn(Y, Z),1)}==0,
+%#count{1,Z : atom(locatedIn(Z, Y),1)}==0,
+%#count{1,Z : atom(liveIn(Z, Y),1)}==0,
+%#count{1,Z : atom(orgbasedIn(Z, Y),1)}==0.
 
-1{atom(orgbasedIn(X,Y),1)} :- atom(org(X),1), atom(loc(Y),1).
-1{atom(liveIn(X,Y),1)} :- atom(peop(X),1), atom(loc(Y),1).
-1{atom(workFor(X,Y),1)} :- atom(peop(X),1), atom(org(Y),1).
-1{atom(kill(X,Y),1); atom(kill(Y,X),1)} :- atom(peop(X),1), atom(peop(Y),1).
+%1{atom(orgbasedIn(X,Y),1)} :- atom(org(X),1), atom(loc(Y),1).
+%1{atom(liveIn(X,Y),1)} :- atom(peop(X),1), atom(loc(Y),1).
+%1{atom(workFor(X,Y),1)} :- atom(peop(X),1), atom(org(Y),1).
+%1{atom(kill(X,Y),1); atom(kill(Y,X),1)} :- atom(peop(X),1), atom(peop(Y),1).
 
 
 
