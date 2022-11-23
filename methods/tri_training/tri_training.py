@@ -249,14 +249,15 @@ def tri_training(labeled_path,
         valid_prediction_paths.append(add_suffix_to_path(valid_prediction_path, suffix=i, split_by='.'))
         test_prediction_paths.append(add_suffix_to_path(test_prediction_path, suffix=i, split_by='.'))
 
-    # for i in range(3):
-    #     with open(labeled_path, 'r') as f:
-    #         data = json.load(f)
-    #         sample = np.random.choice(data, len(data)).tolist()
-    #     with open(boostrap_labeled_paths[i], 'w') as f:
-    #         # first iteration
-    #         logger.info(f'Boostrap #{i} size: {len(sample)}')
-    #         json.dump(sample, f)
+    if not model_exists(boostrap_labeled_model_paths[i].format(0)):
+        for i in range(3):
+            with open(labeled_path, 'r') as f:
+                data = json.load(f)
+                sample = np.random.choice(data, len(data)).tolist()
+            with open(boostrap_labeled_paths[i], 'w') as f:
+                # first iteration
+                logger.info(f'Boostrap #{i} size: {len(sample)}')
+                json.dump(sample, f)
 
     # Step 1: Train on labeled data
     # formatted_boostrap_labeled_model_paths = []
@@ -352,13 +353,13 @@ def tri_training(labeled_path,
         #     logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
         #     subprocess.run(script, shell=True, check=True)
         #
-        # Step 7: aggregate 3 models and check performance
-        for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
-                                           predict_input_path=DEFAULT_VALID_PATH,
-                                           predict_output_path=valid_prediction_paths[i])
-            logger.info(f'Round #{iteration}: Predict on valid data on model m{i}')
-            subprocess.run(script, shell=True, check=True)
+        # # Step 7: aggregate 3 models and check performance
+        # for i in range(3):
+        #     script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+        #                                    predict_input_path=DEFAULT_VALID_PATH,
+        #                                    predict_output_path=valid_prediction_paths[i])
+        #     logger.info(f'Round #{iteration}: Predict on valid data on model m{i}')
+        #     subprocess.run(script, shell=True, check=True)
 
         for i in range(3):
             script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
