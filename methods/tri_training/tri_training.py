@@ -294,7 +294,7 @@ def tri_training(labeled_path,
             break
         # Step 2: make prediction for each model
         for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i].format(max(iteration-1, 0)),
                                            predict_input_path=unlabeled_path,
                                            predict_output_path=formatted_boostrap_prediction_paths[i])
             logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
