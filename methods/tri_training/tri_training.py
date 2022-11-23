@@ -352,20 +352,20 @@ def tri_training(labeled_path,
         #     logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
         #     subprocess.run(script, shell=True, check=True)
         #
-        # # Step 7: aggregate 3 models and check performance
-        # for i in range(3):
-        #     script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
-        #                                    predict_input_path=DEFAULT_VALID_PATH,
-        #                                    predict_output_path=valid_prediction_paths[i])
-        #     logger.info(f'Round #{iteration}: Predict on valid data on model m{i}')
-        #     subprocess.run(script, shell=True, check=True)
-        #
-        # for i in range(3):
-        #     script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
-        #                                    predict_input_path=DEFAULT_TEST_PATH,
-        #                                    predict_output_path=test_prediction_paths[i])
-        #     logger.info(f'Round #{iteration}: Predict on test data on model m{i}')
-        #     subprocess.run(script, shell=True, check=True)
+        # Step 7: aggregate 3 models and check performance
+        for i in range(3):
+            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+                                           predict_input_path=DEFAULT_VALID_PATH,
+                                           predict_output_path=valid_prediction_paths[i])
+            logger.info(f'Round #{iteration}: Predict on valid data on model m{i}')
+            subprocess.run(script, shell=True, check=True)
+
+        for i in range(3):
+            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+                                           predict_input_path=DEFAULT_TEST_PATH,
+                                           predict_output_path=test_prediction_paths[i])
+            logger.info(f'Round #{iteration}: Predict on test data on model m{i}')
+            subprocess.run(script, shell=True, check=True)
 
         logger.info('Check F1 on valid data')
         model_agg = aggregate_on_symbols(model_paths=valid_prediction_paths)
