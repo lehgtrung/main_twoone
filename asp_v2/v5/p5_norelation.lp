@@ -221,12 +221,12 @@ real_relation :- atom(workFor(X,Y),1).
 real_relation :- atom(kill(X,Y),1).
 
 %% Program is inconsistent if there is no relation
-1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1)} :- not real_relation.
+%1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1)} :- not real_relation.
 
-%1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1);
-%   atom(orgbasedIn(X,Y),1) : atom(org(X),1), atom(loc(Y),1);
-%   atom(workFor(X,Y),1) : atom(peop(X),1), atom(org(Y),1);
-%   atom(kill(X,Y),1), atom(kill(Y,X),1) : atom(peop(X),1), atom(peop(Y),1)} :- not real_relation.
+1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1);
+   atom(orgbasedIn(X,Y),1) : atom(org(X),1), atom(loc(Y),1);
+   atom(workFor(X,Y),1) : atom(peop(X),1), atom(org(Y),1);
+   atom(kill(X,Y),1), atom(kill(Y,X),1) : atom(peop(X),1), atom(peop(Y),1)} :- not real_relation.
 
 %% When program is inconsistent then we generate some relations
 %1{atom(locatedIn(X,Y),1); atom(locatedIn(Y,X),1)} :- atom(loc(X),1), atom(loc(Y),1),

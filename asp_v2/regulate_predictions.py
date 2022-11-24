@@ -401,20 +401,22 @@ def compare_selection_with_gt(gt_path,
     print('Model 3')
     evaluate_model(pred3, gt)
 
-    # aggregate 3 models
-    answerset_list = []
-    tokens_list = []
+    # aggregate 3 models in graph way
+    # answerset_list = []
+    # tokens_list = []
+    #
+    # for i in range(len(gt)):
+    #     combined_model_numbers = '.'.join(map(str, range(3)))
+    #     path = selected_path.format(iter_number=iter_number,
+    #                                 combined_model_numbers=combined_model_numbers,
+    #                                 sent_number=i)
+    #     answerset = parse_answersets_from_file(path, with_break=False)
+    #     answerset_list.append(answerset)
+    #     tokens_list.append(gt[i]['tokens'])
+    # preds = convert_atoms_to_file_form(tokens_list, answerset_list)
 
-    for i in range(len(gt)):
-        combined_model_numbers = '.'.join(map(str, range(3)))
-        path = selected_path.format(iter_number=iter_number,
-                                    combined_model_numbers=combined_model_numbers,
-                                    sent_number=i)
-        answerset = parse_answersets_from_file(path, with_break=False)
-        answerset_list.append(answerset)
-        tokens_list.append(gt[i]['tokens'])
-    preds = convert_atoms_to_file_form(tokens_list, answerset_list)
-    bk_preds = copy.deepcopy(preds)
+    # aggregate 3 models on symbols
+
 
     with open(gt_path, 'r') as f:
         gt = json.load(f)
