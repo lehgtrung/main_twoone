@@ -74,7 +74,7 @@ def convert_to_consistent_answersets(preds_path, iter_number, model_number, conf
         model_number=model_number,
         sent_number='{sent_number}'
     )
-    command = 'clingo --opt-mode=optN asp_v2/v5/p5_norelation.lp ' + atomed_output_path + \
+    command = 'clingo --opt-mode=optN asp_v2/v5/p5_with_rules.lp ' + atomed_output_path + \
               ' --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
     shutil.rmtree(os.path.dirname(atomed_output_path.format(sent_number=0)))
     shutil.rmtree(os.path.dirname(answerset_output_path.format(sent_number=0)))
