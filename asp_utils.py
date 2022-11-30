@@ -22,7 +22,7 @@ GLOBAL_ANSWERSET_OUTPUT_PATH = './datasets/methods/{method}/{dataset}_{percent}/
 
 
 
-def solve(command, model_number, iter_number, sent_number):
+def solve(command, sent_number):
     # Write the program to a file
     process = subprocess.Popen(command.format(sent_number=sent_number).split(),
                                stdin=subprocess.PIPE,
@@ -93,8 +93,6 @@ def convert_to_consistent_answersets(preds_path, iter_number, model_number, conf
     for i in tqdm(range(len(preds))):
         path = answerset_output_path.format(sent_number=i)
         answersets = solve(command=command,
-                           model_number=model_number,
-                           iter_number=iter_number,
                            sent_number=i)
         with open(path, 'w') as f:
             for answerset in answersets:

@@ -313,11 +313,12 @@ def tri_training_with_asp(labeled_path,
                         configs=configs
                     )
                     logger.info(f'Round #{iteration}: F1 on with ASP selection')
+                    logger.info(f'Round #{iteration}: Num sentences ASP selection: {len(selected_indices)}')
                     report_f1(path=formatted_agreement_paths[sum(range(3))-(i+j)],
                               selected_indices=selected_indices,
                               unlabeled_path=unlabeled_path,
                               logger=logger)
-                    logger.info(f'Round #{iteration}: F1 on with raw selection')
+                    logger.info(f'Round #{iteration}: F1 on with RAW selection')
                     selected_indices, _ = select_agreement(
                         in_path1=formatted_boostrap_prediction_paths[i],
                         in_path2=formatted_boostrap_prediction_paths[j],
@@ -325,6 +326,7 @@ def tri_training_with_asp(labeled_path,
                                 sum(range(3)) - (i + j)] + '.bk',
                         unlabeled_path=unlabeled_path
                     )
+                    logger.info(f'Round #{iteration}: Num sentences RAW selection: {len(selected_indices)}')
                     report_f1(path=formatted_agreement_paths[sum(range(3)) - (i + j)] + '.bk',
                               selected_indices=selected_indices,
                               unlabeled_path=unlabeled_path,
