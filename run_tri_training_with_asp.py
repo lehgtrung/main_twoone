@@ -46,8 +46,18 @@ if __name__ == '__main__':
         fold=fold,
         iter='{}'
     )
-    LABELED_MODEL_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/labeled'
+    LABELED_MODEL_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/iter={iter}/labeled'
+    LABELED_MODEL_PATH = LABELED_MODEL_PATH.format(
+        method=method,
+        dataset=dataset,
+        percent=percent,
+        fold=fold,
+        iter='{}'
+    )
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
+
+    VALID_PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/valid_preds.json'
+    TEST_PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/test_preds.json'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,
@@ -56,7 +66,9 @@ if __name__ == '__main__':
         'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
         'AGREEMENT_PATH': AGREEMENT_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
-        'LOG_PATH': LOG_PATH
+        'LOG_PATH': LOG_PATH,
+        'VALID_PREDICTION_PATH': VALID_PREDICTION_PATH,
+        'TEST_PREDICTION_PATH': TEST_PREDICTION_PATH
     }
 
     # Create paths
@@ -75,6 +87,8 @@ if __name__ == '__main__':
                           agreement_path=configs['AGREEMENT_PATH'],
                           temp_labeled_path=configs['TEMP_LABELED_PATH'],
                           labeled_model_path=configs['LABELED_MODEL_PATH'],
+                          valid_prediction_path=configs['VALID_PREDICTION_PATH'],
+                          test_prediction_path=configs['TEST_PREDICTION_PATH'],
                           logger=logger,
                           log_path=configs['LOG_PATH'])
 
