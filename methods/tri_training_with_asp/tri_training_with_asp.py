@@ -341,6 +341,7 @@ def tri_training_with_asp(labeled_path,
                     #             f'{percentage_correct(formatted_agreement_paths[sum(range(3))-(i+j)])}')
                     # logger.info(f'Round #{iteration}: F1 on selected set')
                     # report_f1(formatted_agreement_paths[sum(range(3))-(i+j)], unlabeled_path, logger)
+        exit()
 
         # Step 5: transfer
         for i in range(3):
