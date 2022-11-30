@@ -201,9 +201,12 @@ def tri_training_with_asp(labeled_path,
                           agreement_path,
                           temp_labeled_path,
                           labeled_model_path,
+                          valid_prediction_path,
+                          test_prediction_path,
                           logger,
                           log_path,
-                          max_iteration=15):
+                          start_iter=0,
+                          max_iteration=7):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -220,45 +223,58 @@ def tri_training_with_asp(labeled_path,
     agreement_paths = []
     boostrap_temp_labeled_paths = []
     stop_update = [False for _ in range(3)]
+    valid_prediction_paths = []
+    test_prediction_paths = []
     for i in range(3):
         boostrap_labeled_paths.append(add_suffix_to_path(labeled_path, suffix=i, split_by='.'))
         boostrap_labeled_model_paths.append(add_suffix_to_path(labeled_model_path, suffix=i, split_by=''))
         boostrap_prediction_paths.append(add_suffix_to_path(prediction_path, suffix=i, split_by='.'))
         boostrap_temp_labeled_paths.append(add_suffix_to_path(temp_labeled_path, suffix=i, split_by='.'))
         agreement_paths.append(add_suffix_to_path(agreement_path, suffix=i, split_by='.'))
+        valid_prediction_paths.append(add_suffix_to_path(valid_prediction_path, suffix=i, split_by='.'))
+        test_prediction_paths.append(add_suffix_to_path(test_prediction_path, suffix=i, split_by='.'))
 
-    for i in range(3):
-        with open(labeled_path, 'r') as f:
-            data = json.load(f)
-            # sample = random.sample(data, int(0.632 * len(data)))
-            sample = np.random.choice(data, len(data)).tolist()
-        with open(boostrap_labeled_paths[i], 'w') as f:
-            logger.info(f'Boostrap #{i} size: {len(sample)}')
-            json.dump(sample, f)
+    if start_iter == 0:
+        for i in range(3):
+            with open(labeled_path, 'r') as f:
+                data = json.load(f)
+                sample = np.random.choice(data, len(data)).tolist()
+            with open(boostrap_labeled_paths[i], 'w') as f:
+                # first iteration
+                logger.info(f'Boostrap #{i} size: {len(sample)}')
+                json.dump(sample, f)
 
     # Step 1: Train on labeled data
+    formatted_boostrap_labeled_model_paths = []
     for i in range(3):
-        if not model_exists(boostrap_labeled_model_paths[i]):
-            script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
+        formatted_boostrap_labeled_model_paths.append(boostrap_labeled_model_paths[i].format(0))
+    for i in range(3):
+        if not model_exists(boostrap_labeled_model_paths[i].format(0)):
+            os.makedirs(os.path.dirname(formatted_boostrap_labeled_model_paths[0]), exist_ok=True)
+
+            script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_boostrap_labeled_model_paths[i],
                                          train_path=boostrap_labeled_paths[i],
                                          log_path=log_path)
             logger.info(f'Train on labeled data on model #{i}')
             subprocess.run(script, shell=True, check=True)
             # Eval the trained model
-            script = EVAL_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i],
+            script = EVAL_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
                                         log_path=log_path)
             subprocess.run(script, shell=True, check=True)
         else:
             logger.info(f'Labeled model #{i} exists, skip training ...')
 
-    iteration = 0
+    iteration = start_iter
     while True:
         formatted_boostrap_prediction_paths = []
         formatted_agreement_paths = []
+        formatted_boostrap_labeled_model_paths = []
         for i in range(3):
             formatted_boostrap_prediction_paths.append(boostrap_prediction_paths[i].format(iteration))
             formatted_agreement_paths.append(agreement_paths[i].format(iteration))
+            formatted_boostrap_labeled_model_paths.append(boostrap_labeled_model_paths[i].format(iteration))
         os.makedirs(os.path.dirname(formatted_boostrap_prediction_paths[0]), exist_ok=True)
+        os.makedirs(os.path.dirname(formatted_boostrap_labeled_model_paths[0]), exist_ok=True)
         if iteration == max_iteration:
             break
         # Step 2: make prediction for each model
@@ -331,17 +347,33 @@ def tri_training_with_asp(labeled_path,
 
         # Step 6: train on transfer data
         for i in range(3):
-            script = TRAIN_SCRIPT.format(model_write_ckpt=boostrap_labeled_model_paths[i],
+            script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_boostrap_labeled_model_paths[i],
                                          train_path=boostrap_temp_labeled_paths[i],
                                          log_path=log_path)
             logger.info(f'Round #{iteration}: Train on labeled data on model #{i}')
             subprocess.run(script, shell=True, check=True)
 
-        # TODO: Step 7: aggregate 3 models and check performance
-        # evaluate_multiple_models(DEFAULT_VALID_PATH,
-        #                          DEFAULT_TEST_PATH,
-        #                          [boostrap_labeled_model_paths[i] for i in range(3)],
-        #                          logger)
+        # Step 7: aggregate 3 models and check performance
+        for i in range(3):
+            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+                                           predict_input_path=DEFAULT_VALID_PATH,
+                                           predict_output_path=valid_prediction_paths[i])
+            logger.info(f'Round #{iteration}: Predict on valid data on model m{i}')
+            subprocess.run(script, shell=True, check=True)
+
+        for i in range(3):
+            script = PREDICT_SCRIPT.format(model_read_ckpt=formatted_boostrap_labeled_model_paths[i],
+                                           predict_input_path=DEFAULT_TEST_PATH,
+                                           predict_output_path=test_prediction_paths[i])
+            logger.info(f'Round #{iteration}: Predict on test data on model m{i}')
+            subprocess.run(script, shell=True, check=True)
+
+        logger.info('Check F1 on valid data')
+        model_agg = aggregate_on_symbols(model_paths=valid_prediction_paths)
+        evaluate_model(model_agg, json.load(open(DEFAULT_VALID_PATH)), logger)
+        logger.info('Check F1 on test data')
+        model_agg = aggregate_on_symbols(model_paths=test_prediction_paths)
+        evaluate_model(model_agg, json.load(open(DEFAULT_TEST_PATH)), logger)
         iteration += 1
 
 

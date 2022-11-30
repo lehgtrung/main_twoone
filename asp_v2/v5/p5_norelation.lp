@@ -126,20 +126,23 @@ ok(X, 1)  :- atom(X, 1), not bad(X, 1).
 
 { ok(X, 1) } :- inf_atom(X, 1), bad(X, 1).
 
-%%% when an atom is not kept then it is not okay 
+ok(X, 1)  :- new_atom(X, 1).
 
-nok(X, 1) :- atom(X, 1), not ok(X, 1). 
-nok(X, 1) :- inf_atom(X, 1), not ok(X, 1). 
+%%% when an atom is not kept then it is not okay
 
-%%% computing set difference 
+nok(X, 1) :- atom(X, 1), not ok(X, 1).
+nok(X, 1) :- inf_atom(X, 1), not ok(X, 1).
 
-%%inSetDifference(X) :- atom(X, 1), ok(X, 1), not atom(X, 2). 
-%%inSetDifference(X) :- atom(X, 2), nok(X, 1). 
+%%% computing set difference
 
-inSetDifference(X) :- ok(X, 1), not atom(X, 1). 
-inSetDifference(X) :- atom(X, 1), nok(X, 1). 
+%%inSetDifference(X) :- atom(X, 1), ok(X, 1), not atom(X, 2).
+%%inSetDifference(X) :- atom(X, 2), nok(X, 1).
 
-%%% keeping the maximal number of atoms that can be kept 
+inSetDifference(X) :- ok(X, 1), not atom(X, 1).
+inSetDifference(X) :- atom(X, 1), nok(X, 1).
+inSetDifference(X) :- new_atom(X, 1), ok(X, 1).
+
+%%% keeping the maximal number of atoms that can be kept
 
 nOfAtoms(N) :- N = #count{1,X : inSetDifference(X)}.
 
@@ -147,14 +150,14 @@ nOfAtoms(N) :- N = #count{1,X : inSetDifference(X)}.
 
 #show ok/2.
 %% #show nOfAtoms/1.
-%% #show bad/1.  
-%% #show atom/1. 
-%% #show dependency/2. 
-%% #show rule/3. 
+%% #show bad/1.
+%% #show new_atom/2.
+%% #show dependency/2.
+%% #show rule/3.
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 
-rule(locatedIn(P1,P2), orgbasedIn(O,P1), orgbasedIn(O, P2)):- 
+rule(locatedIn(P1,P2), orgbasedIn(O,P1), orgbasedIn(O, P2)):-
 	atom(locatedIn(P1,P2),1), atom(orgbasedIn(O,P1),1), P1 != P2.
 
 rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
@@ -163,23 +166,23 @@ rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
 rule(liveIn(X,P1), locatedIn(P1,P2), liveIn(X,P2)):-
 	atom(liveIn(X,P1),1), atom(locatedIn(P1,P2),1), P1!=P2.
 
-rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
-	atom(workFor(X,O),1), atom(orgbasedIn(O,P),1).
+%rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
+%	atom(workFor(X,O),1), atom(orgbasedIn(O,P),1).
 
-rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):- 
-	atom(liveIn(X,P),1), atom(workFor(X,O),1).
+%rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):-
+%	atom(liveIn(X,P),1), atom(workFor(X,O),1).
 
 
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
 
-6 {bad(X,1); bad(Y,1); bad(Z,1); inf_atom(Z,1); 
-    dependency(X, Z); dependency(Y, Z) } :- 
+6 {bad(X,1); bad(Y,1); bad(Z,1); inf_atom(Z,1);
+    dependency(X, Z); dependency(Y, Z) } :-
        	rule(X, Y, Z), atom(X, 1), atom(Y, 1), not atom(Z,1).
 
 :- ok(Y, 1), inf_atom(Y,1), dependency(X,Y), not ok(X, 1).
 :- rule(X, Y, Z), ok(X, 1), ok(Y, 1), not ok(Z, 1).
- 
+
 
 %% Trung: Restrict entity to be head/tail of 2 different relations
 %% locatedIn/orgbasedIn/liveIn/workFor/kill
@@ -223,10 +226,12 @@ real_relation :- atom(kill(X,Y),1).
 %% Program is inconsistent if there is no relation
 %1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1)} :- not real_relation.
 
-1 {atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1);
-   atom(orgbasedIn(X,Y),1) : atom(org(X),1), atom(loc(Y),1);
-   atom(workFor(X,Y),1) : atom(peop(X),1), atom(org(Y),1);
-   atom(kill(X,Y),1), atom(kill(Y,X),1) : atom(peop(X),1), atom(peop(Y),1)} :- not real_relation.
+1 {new_atom(liveIn(X,Y),1) : atom(peop(X),1), atom(loc(Y),1);
+   new_atom(orgbasedIn(X,Y),1) : atom(org(X),1), atom(loc(Y),1);
+   new_atom(workFor(X,Y),1) : atom(peop(X),1), atom(org(Y),1);
+   new_atom(kill(Y,X),1) : atom(peop(X),1), atom(peop(Y),1), X!=Y} :- not real_relation.
+
+% :- not real_relation, #count {X : new_atom(X, 1)} < 0.
 
 %% When program is inconsistent then we generate some relations
 %1{atom(locatedIn(X,Y),1); atom(locatedIn(Y,X),1)} :- atom(loc(X),1), atom(loc(Y),1),

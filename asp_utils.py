@@ -12,7 +12,7 @@ from collections import Counter
 
 atomed_output_path = 'methods/tri_training_with_asp/atomed_preds/{iter_number}/{model_number}/{sent_number}.txt'
 answerset_output_path = 'methods/tri_training_with_asp/answersets/{iter_number}/{model_number}/{sent_number}.txt'
-command = 'clingo --opt-mode=optN methods/tri_training_with_asp/p5.lp ' + atomed_output_path + \
+command = 'clingo --opt-mode=optN methods/tri_training_with_asp/p5_norelation.lp ' + atomed_output_path + \
           ' --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
 
 
