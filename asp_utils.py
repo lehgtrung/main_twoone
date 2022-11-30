@@ -242,6 +242,7 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     tokens_list = []
     for path1, path2 in zip(meta_paths1, meta_paths2):
         i = int(os.path.basename(path1).split('.')[0])
+        print(i)
         all_answersets1 = parse_answersets_from_file(path1, with_break=True)
         all_answersets2 = parse_answersets_from_file(path2, with_break=True)
         set_all_answersets1 = list(map(tuple, all_answersets1))
