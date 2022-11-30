@@ -23,7 +23,7 @@ GLOBAL_ANSWERSET_OUTPUT_PATH = './datasets/methods/{method}/{dataset}_{percent}/
 
 def solve(command, model_number, iter_number, sent_number):
     # Write the program to a file
-    print(command.format(sent_number=sent_number).split())
+    print(command.format(sent_number=sent_number))
     process = subprocess.Popen(command.format(sent_number=sent_number).split(),
                                stdin=subprocess.PIPE,
                                stderr=subprocess.PIPE,
