@@ -72,7 +72,11 @@ def convert_to_consistent_answersets(preds_path, iter_number, model_number):
         path = atomed_output_path.format(iter_number=iter_number,
                                          model_number=model_number,
                                          sent_number=i)
+        print(i)
+        print('path')
+        print('====================================')
         write_down_a_list(path, atoms)
+    exit()
     # Convert the atomed preds to answersets
     for i in tqdm(range(len(preds))):
         path = answerset_output_path.format(iter_number=iter_number,
