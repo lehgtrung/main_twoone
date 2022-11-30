@@ -73,7 +73,7 @@ def convert_to_consistent_answersets(preds_path, iter_number, model_number):
                                          model_number=model_number,
                                          sent_number=i)
         print(i)
-        print('path')
+        print('path: ', path)
         print('====================================')
         write_down_a_list(path, atoms)
     exit()
