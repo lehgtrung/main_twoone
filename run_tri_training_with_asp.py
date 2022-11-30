@@ -90,6 +90,7 @@ if __name__ == '__main__':
                           valid_prediction_path=configs['VALID_PREDICTION_PATH'],
                           test_prediction_path=configs['TEST_PREDICTION_PATH'],
                           logger=logger,
+                          start_iter=args.start_iter,
                           log_path=configs['LOG_PATH'])
 
 
