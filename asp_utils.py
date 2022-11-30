@@ -23,9 +23,8 @@ GLOBAL_ANSWERSET_OUTPUT_PATH = './datasets/methods/{method}/{dataset}_{percent}/
 
 def solve(command, model_number, iter_number, sent_number):
     # Write the program to a file
-    process = subprocess.Popen(command.format(model_number=model_number,
-                                              iter_number=iter_number,
-                                              sent_number=sent_number).split(),
+    print(command.format(sent_number=sent_number).split())
+    process = subprocess.Popen(command.format(sent_number=sent_number).split(),
                                stdin=subprocess.PIPE,
                                stderr=subprocess.PIPE,
                                stdout=subprocess.PIPE)
@@ -86,15 +85,11 @@ def convert_to_consistent_answersets(preds_path, iter_number, model_number, conf
     for i, row in enumerate(preds):
         atoms = convert_to_atoms(row, prefix='atom')
         # Path to write the atomed preds down
-        path = atomed_output_path.format(iter_number=iter_number,
-                                         model_number=model_number,
-                                         sent_number=i)
+        path = atomed_output_path.format(sent_number=i)
         write_down_a_list(path, atoms)
     # Convert the atomed preds to answersets
     for i in tqdm(range(len(preds))):
-        path = answerset_output_path.format(iter_number=iter_number,
-                                            model_number=model_number,
-                                            sent_number=i)
+        path = answerset_output_path.format(sent_number=i)
         answersets = solve(command=command,
                            model_number=model_number,
                            iter_number=iter_number,
