@@ -77,7 +77,8 @@ if __name__ == '__main__':
     }
 
     # Create paths
-    os.makedirs(os.path.dirname(LABELED_MODEL_PATH), exist_ok=True)
+    # Create paths
+    os.makedirs(f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models', exist_ok=True)
 
     with open('configs.json', 'w') as f:
         json.dump(configs, f)
