@@ -73,7 +73,11 @@ if __name__ == '__main__':
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
         'LOG_PATH': LOG_PATH,
         'VALID_PREDICTION_PATH': VALID_PREDICTION_PATH,
-        'TEST_PREDICTION_PATH': TEST_PREDICTION_PATH
+        'TEST_PREDICTION_PATH': TEST_PREDICTION_PATH,
+        'dataset': args.dataset,
+        'fold': args.fold,
+        'percent': args.percent,
+        'method': 'tri_training_with_asp'
     }
 
     # Create paths
@@ -97,6 +101,7 @@ if __name__ == '__main__':
                           test_prediction_path=configs['TEST_PREDICTION_PATH'],
                           logger=logger,
                           start_iter=args.start_iter,
-                          log_path=configs['LOG_PATH'])
+                          log_path=configs['LOG_PATH'],
+                          configs=configs)
 
 

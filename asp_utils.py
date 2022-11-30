@@ -10,13 +10,18 @@ import torch
 import copy
 from collections import Counter
 
-atomed_output_path = 'methods/tri_training_with_asp/atomed_preds/{iter_number}/{model_number}/{sent_number}.txt'
-answerset_output_path = 'methods/tri_training_with_asp/answersets/{iter_number}/{model_number}/{sent_number}.txt'
-command = 'clingo --opt-mode=optN methods/tri_training_with_asp/p5_norelation.lp ' + atomed_output_path + \
-          ' --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
+# atomed_output_path = 'methods/tri_training_with_asp/atomed_preds/{iter_number}/{model_number}/{sent_number}.txt'
+# answerset_output_path = 'methods/tri_training_with_asp/answersets/{iter_number}/{model_number}/{sent_number}.txt'
+# command = 'clingo --opt-mode=optN methods/tri_training_with_asp/p5_norelation.lp ' + atomed_output_path + \
+#           ' --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
+GLOBAL_ATOMED_OUTPUT_PATH = './datasets/methods/{method}/{dataset}_{percent}/' \
+                            'fold={fold}/iter={iter}/atomed_preds/{model_number}/{sent_number}.txt'
+GLOBAL_ANSWERSET_OUTPUT_PATH = './datasets/methods/{method}/{dataset}_{percent}/' \
+                            'fold={fold}/iter={iter}/answersets/{model_number}/{sent_number}.txt'
 
 
-def solve(model_number, iter_number, sent_number):
+
+def solve(command, model_number, iter_number, sent_number):
     # Write the program to a file
     process = subprocess.Popen(command.format(model_number=model_number,
                                               iter_number=iter_number,
@@ -51,17 +56,29 @@ def write_down_a_list(path, lst):
         f.writelines(map(lambda x: x + '\n', lst))
 
 
-def convert_to_consistent_answersets(preds_path, iter_number, model_number):
-    os.makedirs(os.path.dirname(atomed_output_path.format(
-            iter_number=iter_number,
-            model_number=model_number,
-            sent_number=0)),
-        exist_ok=True)
-    os.makedirs(os.path.dirname(answerset_output_path.format(
-            iter_number=iter_number,
-            model_number=model_number,
-            sent_number=0)),
-        exist_ok=True)
+def convert_to_consistent_answersets(preds_path, iter_number, model_number, configs):
+    atomed_output_path = GLOBAL_ATOMED_OUTPUT_PATH.format(
+        method=configs['method'],
+        dataset=configs['dataset'],
+        percent=configs['percent'],
+        fold=configs['fold'],
+        iter=iter_number,
+        model_number=model_number,
+        sent_number='{sent_number}'
+    )
+    answerset_output_path = GLOBAL_ANSWERSET_OUTPUT_PATH.format(
+        method=configs['method'],
+        dataset=configs['dataset'],
+        percent=configs['percent'],
+        fold=configs['fold'],
+        iter=iter_number,
+        model_number=model_number,
+        sent_number='{sent_number}'
+    )
+    command = 'clingo --opt-mode=optN methods/tri_training_with_asp/p5_norelation.lp ' + atomed_output_path + \
+              ' --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
+    os.makedirs(os.path.dirname(atomed_output_path.format(sent_number=0)), exist_ok=True)
+    os.makedirs(os.path.dirname(answerset_output_path.format(sent_number=0)), exist_ok=True)
     # Load the predictions
     with open(preds_path, 'r') as f:
         preds = json.load(f)
@@ -72,17 +89,14 @@ def convert_to_consistent_answersets(preds_path, iter_number, model_number):
         path = atomed_output_path.format(iter_number=iter_number,
                                          model_number=model_number,
                                          sent_number=i)
-        print(i)
-        print('path: ', path)
-        print('====================================')
         write_down_a_list(path, atoms)
-    exit()
     # Convert the atomed preds to answersets
     for i in tqdm(range(len(preds))):
         path = answerset_output_path.format(iter_number=iter_number,
                                             model_number=model_number,
                                             sent_number=i)
-        answersets = solve(model_number=model_number,
+        answersets = solve(command=command,
+                           model_number=model_number,
                            iter_number=iter_number,
                            sent_number=i)
         with open(path, 'w') as f:
@@ -229,7 +243,16 @@ def evaluate_model(preds, gts, logger=None):
 
 
 def select_agreement_with_asp(iter_number, model_number1, model_number2,
-                              unlabeled_path, out_path):
+                              unlabeled_path, out_path, configs):
+    answerset_output_path = GLOBAL_ANSWERSET_OUTPUT_PATH.format(
+        method=configs['method'],
+        dataset=configs['dataset'],
+        percent=configs['percent'],
+        fold=configs['fold'],
+        iter=iter_number,
+        model_number='{model_number}',
+        sent_number='{sent_number}'
+    )
     with open(unlabeled_path, 'r') as f:
         unlabeled_data = json.load(f)
     meta_paths1 = glob.glob(answerset_output_path.format(iter_number=iter_number,

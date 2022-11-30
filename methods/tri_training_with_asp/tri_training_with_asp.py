@@ -205,6 +205,7 @@ def tri_training_with_asp(labeled_path,
                           test_prediction_path,
                           logger,
                           log_path,
+                          configs,
                           start_iter=0,
                           max_iteration=7):
     SCRIPT = conll04_script()
@@ -296,7 +297,8 @@ def tri_training_with_asp(labeled_path,
         for i in range(3):
             convert_to_consistent_answersets(formatted_boostrap_prediction_paths[i],
                                              iter_number=iteration,
-                                             model_number=i)
+                                             model_number=i,
+                                             configs=configs)
 
         # Step 4: otherwise, find agreements between models
         for i in range(2):
@@ -307,7 +309,8 @@ def tri_training_with_asp(labeled_path,
                         model_number1=i,
                         model_number2=j,
                         unlabeled_path=unlabeled_path,
-                        out_path=formatted_agreement_paths[sum(range(3))-(i+j)]
+                        out_path=formatted_agreement_paths[sum(range(3))-(i+j)],
+                        configs=configs
                     )
                     logger.info(f'Round #{iteration}: F1 on with ASP selection')
                     report_f1(path=formatted_agreement_paths[sum(range(3))-(i+j)],
