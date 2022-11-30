@@ -20,6 +20,11 @@ if __name__ == '__main__':
                         required=True,
                         type=int,
                         action='store')
+    parser.add_argument('--start_iter',
+                        required=False,
+                        default=0,
+                        type=int,
+                        action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
