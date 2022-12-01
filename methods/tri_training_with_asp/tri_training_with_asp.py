@@ -207,7 +207,7 @@ def tri_training_with_asp(labeled_path,
                           log_path,
                           configs,
                           start_iter=0,
-                          max_iteration=7):
+                          max_iteration=5):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -248,9 +248,9 @@ def tri_training_with_asp(labeled_path,
     # Step 1: Train on labeled data
     formatted_boostrap_labeled_model_paths = []
     for i in range(3):
-        formatted_boostrap_labeled_model_paths.append(boostrap_labeled_model_paths[i].format(0))
+        formatted_boostrap_labeled_model_paths.append(boostrap_labeled_model_paths[i].format(-1))
     for i in range(3):
-        if not model_exists(boostrap_labeled_model_paths[i].format(0)):
+        if not model_exists(boostrap_labeled_model_paths[i].format(-1)):
             os.makedirs(os.path.dirname(formatted_boostrap_labeled_model_paths[0]), exist_ok=True)
 
             script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_boostrap_labeled_model_paths[i],
@@ -280,7 +280,7 @@ def tri_training_with_asp(labeled_path,
             break
         # Step 2: make prediction for each model
         for i in range(3):
-            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i].format(max(iteration-1, 0)),
+            script = PREDICT_SCRIPT.format(model_read_ckpt=boostrap_labeled_model_paths[i].format(iteration-1),
                                            predict_input_path=unlabeled_path,
                                            predict_output_path=formatted_boostrap_prediction_paths[i])
             logger.info(f'Round #{iteration}: Predict on unlabeled data on model m{i}')
