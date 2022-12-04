@@ -92,8 +92,8 @@ if __name__ == '__main__':
     with open('configs.json', 'w') as f:
         json.dump(configs, f)
 
-    with open(configs['LOG_PATH'], 'w') as f:
-        f.write('Start training\n')
+    # with open(configs['LOG_PATH'], 'w') as f:
+    #     f.write('Start training\n')
     logger = Logger(path=configs['LOG_PATH'])
 
     tri_training(labeled_path=configs['LABELED_PATH'],
