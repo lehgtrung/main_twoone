@@ -263,7 +263,8 @@ def tri_training_with_asp(labeled_path,
                                         log_path=log_path)
             subprocess.run(script, shell=True, check=True)
         else:
-            logger.info(f'Labeled model #{i} exists, skip training ...')
+            if start_iter == -1:
+                logger.info(f'Labeled model #{i} exists, skip training ...')
 
     iteration = start_iter
     while True:
