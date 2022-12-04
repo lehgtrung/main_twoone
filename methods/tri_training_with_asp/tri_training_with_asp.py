@@ -207,7 +207,7 @@ def tri_training_with_asp(labeled_path,
                           log_path,
                           configs,
                           start_iter=0,
-                          max_iteration=5):
+                          max_iteration=7):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
