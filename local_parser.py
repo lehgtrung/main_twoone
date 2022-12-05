@@ -169,6 +169,10 @@ def set_conll04_arguments_main(parser):
     parser.add_argument('--predict_output_path',
                         default=None, type=none_or_str,
                         action='store', )
+
+    parser.add_argument('--test_type',
+                        default=None, type=none_or_str,
+                        action='store', )
     return parser
 
 
