@@ -83,7 +83,11 @@ if __name__ == '__main__':
         'WITH_DISAGREEMENT': WITH_DISAGREEMENT,
         'LOG_PATH': LOG_PATH,
         'VALID_PREDICTION_PATH': VALID_PREDICTION_PATH,
-        'TEST_PREDICTION_PATH': TEST_PREDICTION_PATH
+        'TEST_PREDICTION_PATH': TEST_PREDICTION_PATH,
+        'dataset': args.dataset,
+        'fold': args.fold,
+        'percent': args.percent,
+        'method': method
     }
 
     # Create paths

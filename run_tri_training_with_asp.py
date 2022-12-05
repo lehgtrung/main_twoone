@@ -77,7 +77,7 @@ if __name__ == '__main__':
         'dataset': args.dataset,
         'fold': args.fold,
         'percent': args.percent,
-        'method': 'tri_training_with_asp'
+        'method': method
     }
 
     # Create paths

@@ -288,6 +288,37 @@ def select_agreement_with_asp(iter_number, model_number1, model_number2,
     return selected_indices, agree_ratio
 
 
+def convert_one_answersets_to_file_form(unlabeled_path,
+                                        iter_number,
+                                        model_number,
+                                        out_path,
+                                        configs):
+    answerset_output_path = GLOBAL_ANSWERSET_OUTPUT_PATH.format(
+        method=configs['method'],
+        dataset=configs['dataset'],
+        percent=configs['percent'],
+        fold=configs['fold'],
+        iter=iter_number,
+        model_number='{model_number}',
+        sent_number='{sent_number}'
+    )
+    with open(unlabeled_path, 'r') as f:
+        unlabeled_data = json.load(f)
+    meta_paths = glob.glob(answerset_output_path.format(iter_number=iter_number,
+                                                        model_number=model_number,
+                                                        sent_number='*'))
+    tokens_list = []
+    selected_answersets = []
+    for path in meta_paths:
+        i = int(os.path.basename(path).split('.')[0])
+        all_answersets = parse_answersets_from_file(path, with_break=True)
+        tokens_list.append(unlabeled_data[i]['tokens'])
+        selected_answersets.append(all_answersets)
+    preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
+    with open(out_path, 'w') as f:
+        json.dump(preds, f)
+
+
 def calc_symbol_freq(symbols, n, threshold=0.5):
     counter = Counter(map(tuple, symbols))
     final_symbols = []

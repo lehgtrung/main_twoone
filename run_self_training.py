@@ -1,4 +1,5 @@
 from methods.self_training.self_training import self_training
+from methods.self_training.self_training_with_asp import self_training_with_asp
 import logging
 import os
 import argparse
@@ -20,6 +21,10 @@ if __name__ == '__main__':
                         required=True,
                         type=int,
                         action='store')
+    parser.add_argument('--with_asp',
+                        required=True,
+                        type=int,
+                        action='store')
     parser.add_argument('--start_iter',
                         required=False,
                         default=0,
@@ -30,7 +35,11 @@ if __name__ == '__main__':
     dataset = args.dataset
     fold = args.fold
     percent = args.percent
-    method = 'self_training'
+
+    if args.with_asp == 1:
+        method = 'self_training_with_asp'
+    else:
+        method = 'self_training'
 
     LABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/labeled.json'
     TEMP_LABELED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/temp_labeled.json'
@@ -53,7 +62,11 @@ if __name__ == '__main__':
         'PREDICTION_PATH': PREDICTION_PATH,
         'SELECTED_PATH': SELECTED_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
-        'LOG_PATH': LOG_PATH
+        'LOG_PATH': LOG_PATH,
+        'dataset': args.dataset,
+        'fold': args.fold,
+        'percent': args.percent,
+        'method': method
     }
 
     # Create paths
@@ -64,13 +77,22 @@ if __name__ == '__main__':
 
     logger = Logger(path=configs['LOG_PATH'])
 
-    self_training(labeled_path=configs['LABELED_PATH'],
-                  unlabeled_path=configs['UNLABELED_PATH'],
-                  prediction_path=configs['PREDICTION_PATH'],
-                  selected_path=configs['SELECTED_PATH'],
-                  labeled_model_path=configs['LABELED_MODEL_PATH'],
-                  logger=logger,
-                  log_path=configs['LOG_PATH'],
-                  start_iter=args.start_iter)
-
-
+    if method == 'self_training_with_asp':
+        self_training_with_asp(labeled_path=configs['LABELED_PATH'],
+                               unlabeled_path=configs['UNLABELED_PATH'],
+                               prediction_path=configs['PREDICTION_PATH'],
+                               selected_path=configs['SELECTED_PATH'],
+                               labeled_model_path=configs['LABELED_MODEL_PATH'],
+                               logger=logger,
+                               log_path=configs['LOG_PATH'],
+                               start_iter=args.start_iter,
+                               configs=configs)
+    else:
+        self_training(labeled_path=configs['LABELED_PATH'],
+                      unlabeled_path=configs['UNLABELED_PATH'],
+                      prediction_path=configs['PREDICTION_PATH'],
+                      selected_path=configs['SELECTED_PATH'],
+                      labeled_model_path=configs['LABELED_MODEL_PATH'],
+                      logger=logger,
+                      log_path=configs['LOG_PATH'],
+                      start_iter=args.start_iter)
