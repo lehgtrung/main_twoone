@@ -170,6 +170,7 @@ def self_training(labeled_path,
 
     # Step 1: Train on labeled data
     if not model_exists(labeled_model_path.format(-1)):
+        os.makedirs(os.path.dirname(labeled_model_path.format(-1)), exist_ok=True)
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path.format(-1),
                                      train_path=labeled_path,
                                      log_path=log_path)
@@ -211,6 +212,8 @@ def self_training(labeled_path,
                   selected_indices=selected_indices,
                   unlabeled_path=unlabeled_path,
                   logger=logger)
+
+        os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
 
         # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
