@@ -312,8 +312,9 @@ def convert_one_answersets_to_file_form(unlabeled_path,
     for path in meta_paths:
         i = int(os.path.basename(path).split('.')[0])
         all_answersets = parse_answersets_from_file(path, with_break=True)
+        choice = random.choice(range(len(all_answersets)))
         tokens_list.append(unlabeled_data[i]['tokens'])
-        selected_answersets.append(all_answersets)
+        selected_answersets.append(all_answersets[choice])
     preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
     with open(out_path, 'w') as f:
         json.dump(preds, f)
