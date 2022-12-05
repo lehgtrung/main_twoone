@@ -220,7 +220,7 @@ def self_training_with_asp(labeled_path,
         transfer_data(in_path1=labeled_path,
                       in_path2=prediction_path,
                       out_path=selected_path)
-        logger.info(f'Round #{iteration}: Percent match of selected set: {percentage_correct(selected_path)}')
+        # logger.info(f'Round #{iteration}: Percent match of selected set: {percentage_correct(selected_path)}')
         logger.info(f'Round #{iteration}: F1 on selection')
         selected_indices = list(range(check_size(unlabeled_path)))
         report_f1(path=prediction_path,
