@@ -228,6 +228,7 @@ def self_training_with_asp(labeled_path,
                   unlabeled_path=unlabeled_path,
                   logger=logger)
 
+        os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
         # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
         script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path.format(iteration),
