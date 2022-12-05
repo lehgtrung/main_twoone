@@ -40,7 +40,10 @@ def evaluate(args):
         tag_form=args.tag_form,
         num_workers=0,
     )
-    rets = trainer.evaluate_model(model=model, test_type='test')
+    if not args.test_type:
+        rets = trainer.evaluate_model(model=model, test_type='test')
+    else:
+        rets = trainer.evaluate_model(model=model, test_type=args.test_type)
     print(rets)
 
 

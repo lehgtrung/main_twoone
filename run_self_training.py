@@ -20,6 +20,11 @@ if __name__ == '__main__':
                         required=True,
                         type=int,
                         action='store')
+    parser.add_argument('--start_iter',
+                        required=False,
+                        default=0,
+                        type=int,
+                        action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
@@ -32,43 +37,40 @@ if __name__ == '__main__':
     UNLABELED_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/unlabeled.json'
     PREDICTION_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/prediction.json'
     SELECTED_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/selected.json'
-    LABELED_MODEL_PATH = f'./datasets/core_{dataset}/{dataset}_{percent}/fold={fold}/models/labeled'
-    INTERMEDIATE_MODEL_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/inter_{iteration}'.format(
+    LABELED_MODEL_PATH = './datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models/iter={iter}/labeled'
+    LABELED_MODEL_PATH = LABELED_MODEL_PATH.format(
         method=method,
         dataset=dataset,
         percent=percent,
         fold=fold,
-        iteration='{iteration}'
+        iter='{}'
     )
-    LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
     LOG_PATH = f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/logs.txt'
 
     configs = {
         'LABELED_PATH': LABELED_PATH,
         'UNLABELED_PATH': UNLABELED_PATH,
         'PREDICTION_PATH': PREDICTION_PATH,
-        'TEMP_LABELED_PATH': TEMP_LABELED_PATH,
         'SELECTED_PATH': SELECTED_PATH,
         'LABELED_MODEL_PATH': LABELED_MODEL_PATH,
-        'INTERMEDIATE_MODEL_PATH': INTERMEDIATE_MODEL_PATH,
         'LOG_PATH': LOG_PATH
     }
+
+    # Create paths
+    os.makedirs(f'./datasets/methods/{method}/{dataset}_{percent}/fold={fold}/models', exist_ok=True)
 
     with open('configs.json', 'w') as f:
         json.dump(configs, f)
 
-    with open(configs['LOG_PATH'], 'w') as f:
-        f.write('Start training\n')
     logger = Logger(path=configs['LOG_PATH'])
 
     self_training(labeled_path=configs['LABELED_PATH'],
                   unlabeled_path=configs['UNLABELED_PATH'],
                   prediction_path=configs['PREDICTION_PATH'],
-                  temp_labeled_path=configs['TEMP_LABELED_PATH'],
                   selected_path=configs['SELECTED_PATH'],
                   labeled_model_path=configs['LABELED_MODEL_PATH'],
-                  intermediate_model_path=configs['INTERMEDIATE_MODEL_PATH'],
                   logger=logger,
-                  log_path=configs['LOG_PATH'])
+                  log_path=configs['LOG_PATH'],
+                  start_iter=args.start_iter)
 
 

@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import json
 import os
+from asp_utils import evaluate_model
 torch.manual_seed(0)
 random.seed(0)
 np.random.seed(0)
@@ -73,7 +74,8 @@ def conll04_script():
             --re_tag_vocab_size 11     --vocab_size 15000     --dropout 0.5  \
             --grad_period 1 --warm_steps 1000 \
             --model_read_ckpt {model_read_ckpt} \
-            --log_path {log_path}
+            --log_path {log_path} \
+            --test_type {test_type}
     """
     CONLL04_SCRIPT = {
         'train': train_script,
@@ -132,15 +134,33 @@ def transfer_and_subtract_two_datasets(labeled_path,
         json.dump(labeled + selected, f)
 
 
+def transfer_data(in_path1, in_path2, out_path):
+    with open(in_path1, 'r') as f:
+        data1 = json.load(f)
+    with open(in_path2, 'r') as f:
+        data2 = json.load(f)
+    with open(out_path, 'w') as f:
+        json.dump(data1 + data2, f)
+
+
+def report_f1(path, selected_indices, unlabeled_path, logger):
+    with open(path, 'r') as f:
+        preds = json.load(f)
+    with open(unlabeled_path, 'r') as f:
+        unlabeled_data = json.load(f)
+    gts = [unlabeled_data[i] for i in selected_indices]
+    evaluate_model(preds, gts, logger)
+
+
 def self_training(labeled_path,
                   unlabeled_path,
                   prediction_path,
-                  temp_labeled_path,
                   selected_path,
                   labeled_model_path,
-                  intermediate_model_path,
                   logger,
-                  log_path):
+                  log_path,
+                  start_iter,
+                  max_iteration=1):
     SCRIPT = conll04_script()
     TRAIN_SCRIPT = SCRIPT['train']
     PREDICT_SCRIPT = SCRIPT['predict']
@@ -149,8 +169,8 @@ def self_training(labeled_path,
     logger.info(f'Labeled path: {labeled_path}')
 
     # Step 1: Train on labeled data
-    if not model_exists(labeled_model_path):
-        script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path,
+    if not model_exists(labeled_model_path.format(-1)):
+        script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path.format(-1),
                                      train_path=labeled_path,
                                      log_path=log_path)
         logger.info('Train on labeled data')
@@ -158,22 +178,22 @@ def self_training(labeled_path,
     else:
         logger.info('Labeled model exists, skip training ...')
 
-    logger.info('Evaluate labeled model ...')
-    script = EVAL_SCRIPT.format(model_read_ckpt=labeled_model_path,
-                                log_path=log_path)
+    logger.info('Evaluate labeled model on valid set ...')
+    script = EVAL_SCRIPT.format(model_read_ckpt=labeled_model_path.format(-1),
+                                log_path=log_path, test_type='valid')
+    subprocess.run(script, shell=True, check=True)
+    logger.info('Evaluate labeled model on test set ...')
+    script = EVAL_SCRIPT.format(model_read_ckpt=labeled_model_path.format(-1),
+                                log_path=log_path, test_type='test')
     subprocess.run(script, shell=True, check=True)
 
-    iteration = 0
-
-    while iteration < 1:
-        formatted_intermediate_model_path = intermediate_model_path.format(iteration=iteration)
+    iteration = start_iter
+    while True:
+        if iteration >= max_iteration:
+            break
 
         # Step 2: Predict on unlabeled data
-        if iteration == 0:
-            _path = labeled_model_path
-        else:
-            _path = intermediate_model_path.format(iteration=iteration-1)
-        script = PREDICT_SCRIPT.format(model_read_ckpt=_path,
+        script = PREDICT_SCRIPT.format(model_read_ckpt=labeled_model_path.format(iteration-1),
                                        predict_input_path=unlabeled_path,
                                        predict_output_path=prediction_path)
         logger.info(f'Round #{iteration}: Predict on unlabeled data')
@@ -181,25 +201,31 @@ def self_training(labeled_path,
 
         # Step 4: Unify labeled and selected pseudo labels
         logger.info(f'Round #{iteration}: Unify labels and pseudo labels')
-        indices = range(check_size(unlabeled_path))
-        transfer_and_subtract_two_datasets(labeled_path=labeled_path,
-                                           prediction_path=prediction_path,
-                                           temp_labeled_path=temp_labeled_path,
-                                           selected_path=selected_path,
-                                           indices=indices)
+        transfer_data(in_path1=labeled_path,
+                      in_path2=prediction_path,
+                      out_path=selected_path)
         logger.info(f'Round #{iteration}: Percent match of selected set: {percentage_correct(selected_path)}')
-        logger.info(f'Round #{iteration}: Labeled size: {check_size(temp_labeled_path)}, '
-                    f'unlabeled size: {check_size(unlabeled_path)}')
+        logger.info(f'Round #{iteration}: F1 on selection')
+        selected_indices = list(range(check_size(unlabeled_path)))
+        report_f1(path=prediction_path,
+                  selected_indices=selected_indices,
+                  unlabeled_path=unlabeled_path,
+                  logger=logger)
 
         # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
-        script = TRAIN_SCRIPT.format(model_write_ckpt=formatted_intermediate_model_path,
-                                     train_path=temp_labeled_path,
+        script = TRAIN_SCRIPT.format(model_write_ckpt=labeled_model_path.format(iteration),
+                                     train_path=selected_path,
                                      log_path=log_path)
         subprocess.run(script, shell=True, check=True)
         # Eval the trained model
-        script = EVAL_SCRIPT.format(model_read_ckpt=formatted_intermediate_model_path,
-                                    log_path=log_path)
+        logger.info('Evaluate labeled model on valid set ...')
+        script = EVAL_SCRIPT.format(model_read_ckpt=labeled_model_path.format(iteration),
+                                    log_path=log_path, test_type='valid')
+        subprocess.run(script, shell=True, check=True)
+        logger.info('Evaluate labeled model on test set ...')
+        script = EVAL_SCRIPT.format(model_read_ckpt=labeled_model_path.format(iteration),
+                                    log_path=log_path, test_type='test')
         subprocess.run(script, shell=True, check=True)
 
         iteration += 1
