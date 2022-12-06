@@ -228,6 +228,7 @@ def self_training_with_asp(labeled_path,
                   selected_indices=selected_indices,
                   unlabeled_path=unlabeled_path,
                   logger=logger)
+        exit()
 
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
         # Step 5: Retrain on labeled and pseudo-labeled data
