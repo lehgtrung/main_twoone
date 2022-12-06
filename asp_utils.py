@@ -315,11 +315,6 @@ def convert_one_answersets_to_file_form(unlabeled_path,
         choice = random.choice(range(len(all_answersets)))
         tokens_list.append(unlabeled_data[i]['tokens'])
         selected_answersets.append(all_answersets[choice])
-        print(all_answersets)
-        print(choice)
-        print(all_answersets[choice])
-        print('=====================')
-        input()
     preds = convert_atoms_to_file_form(tokens_list, selected_answersets)
     with open(out_path, 'w') as f:
         json.dump(preds, f)

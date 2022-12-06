@@ -213,8 +213,9 @@ def self_training_with_asp(labeled_path,
         convert_one_answersets_to_file_form(unlabeled_path=unlabeled_path,
                                             iter_number=iteration,
                                             model_number=0,
-                                            out_path=prediction_path,
+                                            out_path=prediction_path + '.2',
                                             configs=configs)
+        exit()
 
         # Step 4: Unify labeled and selected pseudo labels
         logger.info(f'Round #{iteration}: Unify labels and pseudo labels')
