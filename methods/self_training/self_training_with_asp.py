@@ -210,11 +210,17 @@ def self_training_with_asp(labeled_path,
 
         # Step 3: Convert answersets back to training format
         logger.info(f'Round #{iteration}: Convert answersets back to data')
-        convert_one_answersets_to_file_form(unlabeled_path=unlabeled_path,
-                                            iter_number=iteration,
-                                            model_number=0,
-                                            out_path=prediction_path + '.2',
-                                            configs=configs)
+        selected_indices = convert_one_answersets_to_file_form(
+            unlabeled_path=unlabeled_path,
+            iter_number=iteration,
+            model_number=0,
+            out_path=prediction_path,
+            configs=configs)
+        logger.info(f'Round #{iteration}: F1 on selection')
+        report_f1(path=prediction_path,
+                  selected_indices=selected_indices,
+                  unlabeled_path=unlabeled_path,
+                  logger=logger)
         exit()
 
         # Step 4: Unify labeled and selected pseudo labels
@@ -223,13 +229,6 @@ def self_training_with_asp(labeled_path,
                       in_path2=prediction_path,
                       out_path=selected_path)
         # logger.info(f'Round #{iteration}: Percent match of selected set: {percentage_correct(selected_path)}')
-        logger.info(f'Round #{iteration}: F1 on selection')
-        selected_indices = list(range(check_size(unlabeled_path)))
-        report_f1(path=prediction_path,
-                  selected_indices=selected_indices,
-                  unlabeled_path=unlabeled_path,
-                  logger=logger)
-        exit()
 
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
         # Step 5: Retrain on labeled and pseudo-labeled data

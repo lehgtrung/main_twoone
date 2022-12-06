@@ -199,7 +199,6 @@ def self_training(labeled_path,
                                        predict_output_path=prediction_path)
         logger.info(f'Round #{iteration}: Predict on unlabeled data')
         subprocess.run(script, shell=True, check=True)
-        exit()
 
         # Step 4: Unify labeled and selected pseudo labels
         logger.info(f'Round #{iteration}: Unify labels and pseudo labels')
