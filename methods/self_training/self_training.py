@@ -212,6 +212,7 @@ def self_training(labeled_path,
                   selected_indices=selected_indices,
                   unlabeled_path=unlabeled_path,
                   logger=logger)
+        exit()
 
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
 
