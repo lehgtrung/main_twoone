@@ -1,0 +1,98 @@
+12/06/2022 12:56:42
+Labeled path: ./datasets/core_conll04/conll04_30/fold=1/labeled.json
+
+12/06/2022 12:56:42
+Labeled model exists, skip training ...
+
+12/06/2022 12:56:42
+Evaluate labeled model on valid set ...
+
+12/06/2022 12:57:01
+>> ret: {'entity_p': 0.841216216206743, 'entity_r': 0.8365061590051903, 'entity_f1': 0.8388545825531274, 'relation_p': 0.6545961002603177, 'relation_r': 0.6851311953153023, 'relation_f1': 0.6695156772605336, 'relation_p_wNER': 0.6545961002603177, 'relation_r_wNER': 0.6851311953153023, 'relation_f1_wNER': 0.6695156772605336}
+
+12/06/2022 12:57:01
+Evaluate labeled model on test set ...
+
+12/06/2022 12:57:20
+>> ret: {'entity_p': 0.8476454293550542, 'entity_r': 0.8507877664425322, 'entity_f1': 0.849213697413186, 'relation_p': 0.6555023923288157, 'relation_r': 0.6492890995106804, 'relation_f1': 0.6523809602376417, 'relation_p_wNER': 0.6507177033337149, 'relation_r_wNER': 0.6445497630179017, 'relation_f1_wNER': 0.6476190555068027}
+
+12/06/2022 12:57:21
+Round #0: Predict on unlabeled data
+
+12/06/2022 12:59:38
+Round #0: Convert raw prediction to answersets
+
+12/06/2022 12:59:47
+Round #0: Convert answersets back to data
+
+12/06/2022 12:59:47
+Round #0: F1 on selection
+
+12/06/2022 12:59:47
+>> entity prec:0.8266, rec:0.8386, f1:0.8325
+>> relation prec:0.6122, rec:0.6550, f1:0.6329
+
+
+12/06/2022 12:59:47
+Round #0: Unify labels and pseudo labels
+
+12/06/2022 12:59:47
+Round #0: Retrain on selected pseudo labels
+
+12/06/2022 13:08:06
+Latest model at: Epoch: 4, global_step: 500
+
+12/06/2022 13:08:06
+>> test ret: {'entity_p': 0.7861751152001275, 'entity_r': 0.7905468025876687, 'entity_f1': 0.7883549052216877, 'relation_p': 0.5224586288292563, 'relation_r': 0.523696682452045, 'relation_f1': 0.5230769316965092, 'relation_p_wNER': 0.5130023640540661, 'relation_r_wNER': 0.5142180094664878, 'relation_f1_wNER': 0.5136094761245055}
+
+12/06/2022 13:08:06
+>> valid ret: {'entity_p': 0.7856328392156712, 'entity_r': 0.7715565509432076, 'entity_f1': 0.7785310804077946, 'relation_p': 0.5702702702548575, 'relation_r': 0.6151603498362926, 'relation_f1': 0.5918653658899735, 'relation_p_wNER': 0.5648648648495982, 'relation_r_wNER': 0.6093294460463752, 'relation_f1_wNER': 0.5862552677464598}
+
+12/06/2022 13:18:21
+Latest model at: Epoch: 8, global_step: 1000
+
+12/06/2022 13:18:21
+>> test ret: {'entity_p': 0.8488372092941004, 'entity_r': 0.8118628359516974, 'entity_f1': 0.829938424364569, 'relation_p': 0.6235011990258154, 'relation_r': 0.6161137440612295, 'relation_f1': 0.6197854669445294, 'relation_p_wNER': 0.6163069544216713, 'relation_r_wNER': 0.6090047393220615, 'relation_f1_wNER': 0.612634096309387}
+
+12/06/2022 13:18:21
+>> valid ret: {'entity_p': 0.8256227757909179, 'entity_r': 0.7793952967437917, 'entity_f1': 0.8018433247566442, 'relation_p': 0.5955056179608004, 'relation_r': 0.6180758017312514, 'relation_f1': 0.6065808379031971, 'relation_p_wNER': 0.5926966291968343, 'relation_r_wNER': 0.6151603498362926, 'relation_f1_wNER': 0.6037196075915522}
+
+12/06/2022 13:28:36
+Latest model at: Epoch: 12, global_step: 1500
+
+12/06/2022 13:28:36
+>> test ret: {'entity_p': 0.8511235954976487, 'entity_r': 0.8424467099087819, 'entity_f1': 0.8467629314189816, 'relation_p': 0.6035242290615964, 'relation_r': 0.6492890995106804, 'relation_f1': 0.6255707842980756, 'relation_p_wNER': 0.6013215858898388, 'relation_r_wNER': 0.646919431264291, 'relation_f1_wNER': 0.623287679289553}
+
+12/06/2022 13:28:36
+>> valid ret: {'entity_p': 0.828538550048003, 'entity_r': 0.8062709966315087, 'entity_f1': 0.81725312810596, 'relation_p': 0.5942408376807791, 'relation_r': 0.6618075801556325, 'relation_f1': 0.626206904602711, 'relation_p_wNER': 0.5890052355866753, 'relation_r_wNER': 0.655976676365715, 'relation_f1_wNER': 0.62068966325795}
+
+12/06/2022 13:49:04
+Latest model at: Epoch: 21, global_step: 2500
+
+12/06/2022 13:49:04
+>> test ret: {'entity_p': 0.857142857134854, 'entity_r': 0.8507877664425322, 'entity_f1': 0.8539534947181051, 'relation_p': 0.6474654377730998, 'relation_r': 0.6658767772354057, 'relation_f1': 0.6565420639061544, 'relation_p_wNER': 0.6474654377730998, 'relation_r_wNER': 0.6658767772354057, 'relation_f1_wNER': 0.6565420639061544}
+
+12/06/2022 13:49:04
+>> valid ret: {'entity_p': 0.8421658986078091, 'entity_r': 0.8185890257467123, 'entity_f1': 0.8302101144395848, 'relation_p': 0.6460674157121891, 'relation_r': 0.6705539358405086, 'relation_f1': 0.6580829834988057, 'relation_p_wNER': 0.6432584269482231, 'relation_r_wNER': 0.6676384839455499, 'relation_f1_wNER': 0.6552217531886345}
+
+12/06/2022 14:18:25
+Latest model at: Epoch: 34, global_step: 4000
+
+12/06/2022 14:18:25
+>> test ret: {'entity_p': 0.8558139534804111, 'entity_r': 0.8526413345611433, 'entity_f1': 0.8542247045794441, 'relation_p': 0.6970509383191139, 'relation_r': 0.6161137440612295, 'relation_f1': 0.6540880581968436, 'relation_p_wNER': 0.6970509383191139, 'relation_r_wNER': 0.6161137440612295, 'relation_f1_wNER': 0.6540880581968436}
+
+12/06/2022 14:18:25
+>> valid ret: {'entity_p': 0.8411428571332441, 'entity_r': 0.8241881298899867, 'entity_f1': 0.8325791920460398, 'relation_p': 0.7236842105025104, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6800618315050561, 'relation_p_wNER': 0.720394736818408, 'relation_r_wNER': 0.6384839649959626, 'relation_f1_wNER': 0.6769706414179341}
+
+12/06/2022 18:55:06
+Evaluate labeled model on valid set ...
+
+12/06/2022 18:55:26
+>> ret: {'entity_p': 0.8411428571332441, 'entity_r': 0.8241881298899867, 'entity_f1': 0.8325791920460398, 'relation_p': 0.7236842105025104, 'relation_r': 0.6413994168909213, 'relation_f1': 0.6800618315050561, 'relation_p_wNER': 0.720394736818408, 'relation_r_wNER': 0.6384839649959626, 'relation_f1_wNER': 0.6769706414179341}
+
+12/06/2022 18:55:27
+Evaluate labeled model on test set ...
+
+12/06/2022 18:55:48
+>> ret: {'entity_p': 0.8558139534804111, 'entity_r': 0.8526413345611433, 'entity_f1': 0.8542247045794441, 'relation_p': 0.6970509383191139, 'relation_r': 0.6161137440612295, 'relation_f1': 0.6540880581968436, 'relation_p_wNER': 0.6970509383191139, 'relation_r_wNER': 0.6161137440612295, 'relation_f1_wNER': 0.6540880581968436}
+
