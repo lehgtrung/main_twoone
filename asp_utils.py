@@ -22,7 +22,7 @@ GLOBAL_ANSWERSET_OUTPUT_PATH = './datasets/methods/{method}/{dataset}_{percent}/
 
 
 
-def solve(command, sent_number):
+def solve(command, sent_number, maximal=True):
     # Write the program to a file
     process = subprocess.Popen(command.format(sent_number=sent_number).split(),
                                stdin=subprocess.PIPE,
@@ -30,6 +30,9 @@ def solve(command, sent_number):
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
     result = [e.split() for e in output.decode().split('\n')[:-2]]
+    if maximal:
+        max_len = max(len(e) for e in result)
+        result = [e for e in result if len(e) == max_len]
     return result
 
 
