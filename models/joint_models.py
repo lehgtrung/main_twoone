@@ -18,6 +18,9 @@ from data import *
 from .base import *
 
 import copy
+torch.manual_seed(0)
+random.seed(0)
+np.random.seed(0)
 
 
 class TabEncoding(nn.Module):
