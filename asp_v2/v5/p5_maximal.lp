@@ -158,20 +158,20 @@ nOfAtoms(N) :- N = #count{1,X : ok(X)}.
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 
-%rule(locatedIn(P1,P2), orgbasedIn(O,P1), orgbasedIn(O, P2)):-
-%	atom(locatedIn(P1,P2),1), atom(orgbasedIn(O,P1),1), P1 != P2.
+rule(locatedIn(P1,P2), orgbasedIn(O,P1), orgbasedIn(O, P2)):-
+	atom(locatedIn(P1,P2),1), atom(orgbasedIn(O,P1),1), P1 != P2.
 
-%rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
-%	atom(locatedIn(P1,P2),1), atom(locatedIn(P2,P3),1), P1 != P2, P2 != P3.
+rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
+	atom(locatedIn(P1,P2),1), atom(locatedIn(P2,P3),1), P1 != P2, P2 != P3.
 
-%rule(liveIn(X,P1), locatedIn(P1,P2), liveIn(X,P2)):-
-%	atom(liveIn(X,P1),1), atom(locatedIn(P1,P2),1), P1!=P2.
+rule(liveIn(X,P1), locatedIn(P1,P2), liveIn(X,P2)):-
+	atom(liveIn(X,P1),1), atom(locatedIn(P1,P2),1), P1!=P2.
 
-%rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
-%	atom(workFor(X,O),1), atom(orgbasedIn(O,P),1).
+rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
+	atom(workFor(X,O),1), atom(orgbasedIn(O,P),1).
 
-%rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):-
-%	atom(liveIn(X,P),1), atom(workFor(X,O),1).
+rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):-
+	atom(liveIn(X,P),1), atom(workFor(X,O),1).
 
 
 
